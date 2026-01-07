@@ -775,7 +775,7 @@ export default function Index() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className={`p-5 bg-gradient-to-br ${cat.color} relative min-h-[80px] flex items-center justify-center`}>
+                <div className={`p-5 bg-gradient-to-br ${cat.color} relative min-h-[80px] flex items-center justify-center border-t-2 border-gray-200`}>
                   <h3 className="text-xl font-heading font-bold text-center text-foreground">{cat.name}</h3>
                 </div>
               </Card>
