@@ -17,15 +17,6 @@ export default function Index() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   const [expandedSubcategories, setExpandedSubcategories] = useState<string[]>([]);
-  const [orderForm, setOrderForm] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    city: '',
-    products: '',
-    distance: '0',
-    comment: ''
-  });
   const [deliveryCost, setDeliveryCost] = useState(0);
 
   const filteredProducts = selectedCategory && selectedSubSubcategory
@@ -215,20 +206,6 @@ export default function Index() {
     URL.revokeObjectURL(url);
   };
 
-  const calculateDelivery = (distance: string) => {
-    const dist = parseInt(distance) || 0;
-    if (dist === 0) return 0;
-    if (dist <= 50) return 2000;
-    if (dist <= 100) return 4000;
-    if (dist <= 200) return 7000;
-    return 10000;
-  };
-
-  const handleDistanceChange = (distance: string) => {
-    setOrderForm({ ...orderForm, distance });
-    setDeliveryCost(calculateDelivery(distance));
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-muted/20">
       <Header
@@ -275,12 +252,7 @@ export default function Index() {
         }}
       />
 
-      <ContentSections
-        orderForm={orderForm}
-        setOrderForm={setOrderForm}
-        deliveryCost={deliveryCost}
-        handleDistanceChange={handleDistanceChange}
-      />
+      <ContentSections />
     </div>
   );
 }
