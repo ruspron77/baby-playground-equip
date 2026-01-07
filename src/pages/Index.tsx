@@ -128,7 +128,7 @@ const categories = [
     icon: 'Trees',
     color: 'from-accent/20 to-accent/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/files/_____.jpg',
+    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/839bbc18-ef11-4c12-a1b5-d71174e7aba3.jpg',
     subcategories: [
       { name: 'Скамейки', image: '🪑' },
       { name: 'Урны', image: '🗑️' },
