@@ -607,7 +607,7 @@ export default function Index() {
 
       <section className="relative py-20 overflow-hidden">
         <div 
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/_____.jpg)' }}
         >
           <div className="absolute inset-0 bg-black/20"></div>
