@@ -32,8 +32,8 @@ export const categories = [
         image: '🎢', 
         hasChildren: true,
         children: [
-          { name: 'КЛАССИК', image: '🏛️' },
-          { name: 'ЭКО', image: '🌿' }
+          { name: 'Серия "URBAN"', image: '🏛️' },
+          { name: 'Серия "ECO"', image: '🌿' }
         ]
       },
       { name: 'БАЛАНСИРЫ', image: '⚖️' },
