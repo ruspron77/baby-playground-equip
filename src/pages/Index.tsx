@@ -38,7 +38,7 @@ const categories = [
     icon: 'Smile',
     color: 'from-primary/20 to-primary/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/files/_____.jpg',
+    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/36b0f7ad-5c28-44e5-b81f-fb98be7e976d.jpg',
     subcategories: [
       { name: 'Качалки-балансиры', image: '⚖️' },
       { name: 'Веранды (теневые навесы)', image: '⛱️' },
@@ -88,7 +88,7 @@ const categories = [
     icon: 'Dumbbell',
     color: 'from-secondary/20 to-secondary/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/files/48.jpg',
+    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/26273b6e-6fe2-46a0-b6d6-984543c26e84.jpg',
     subcategories: [
       { name: 'Workout', image: '💪' },
       { name: 'Ворота, стойки, щиты', image: '🥅' },
@@ -128,7 +128,7 @@ const categories = [
     icon: 'Trees',
     color: 'from-accent/20 to-accent/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/839bbc18-ef11-4c12-a1b5-d71174e7aba3.jpg',
+    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/9d99d4b8-d9de-407f-bfc7-1123990a73cc.jpg',
     subcategories: [
       { name: 'Скамейки', image: '🪑' },
       { name: 'Урны', image: '🗑️' },
@@ -143,7 +143,7 @@ const categories = [
     icon: 'Flower2',
     color: 'from-primary/20 to-primary/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/98fa23f0-e44e-4b54-86b3-8b43cf022492.jpg',
+    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/b14b9230-a299-4b20-a13a-70735ad4db24.jpg',
     subcategories: [
       { name: 'Клумбы', image: '🌷' },
       { name: 'Газоны', image: '🌿' },
@@ -158,7 +158,7 @@ const categories = [
     icon: 'Shield',
     color: 'from-secondary/20 to-secondary/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/files/figura-iz-rezinovoy-kroshki-sfera-038-foto-38e7.jpg',
+    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/5e4ba9b3-8f91-47da-a40a-a4a09ae4b6f2.jpg',
     subcategories: [
       { name: 'Резиновое покрытие', image: '🟦' },
       { name: 'Наливное покрытие', image: '🟩' },
@@ -172,7 +172,7 @@ const categories = [
     icon: 'Grid3x3',
     color: 'from-accent/20 to-accent/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/files/1c96c1-1024x1024.jpg',
+    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/127859f3-014f-42ab-8da6-6dbb11e3ccbd.jpg',
     subcategories: [
       { name: 'Заборы', image: '🔲' },
       { name: 'Ворота', image: '🚪' },
@@ -763,21 +763,21 @@ export default function Index() {
             {categories.map((cat) => (
               <Card
                 key={cat.id}
-                className={`cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-2 overflow-hidden group ${
+                className={`cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-2 overflow-hidden group bg-gray-50 ${
                   selectedCategory === cat.id ? 'ring-2 ring-primary' : ''
                 }`}
                 onClick={() => handleCategoryClick(cat)}
               >
-                <div className={`aspect-[16/9] bg-gradient-to-br ${cat.color} flex items-center justify-center relative overflow-hidden`}>
+                <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
                   <img 
                     src={cat.bgImage} 
                     alt={cat.name}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                  <h3 className="relative z-10 text-2xl font-heading font-bold text-white drop-shadow-lg px-4 text-center">{cat.name}</h3>
                 </div>
-
+                <div className="p-4 bg-white">
+                  <h3 className="text-lg font-heading font-bold text-center text-foreground">{cat.name}</h3>
+                </div>
               </Card>
             ))}
           </div>
