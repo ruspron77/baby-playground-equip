@@ -284,6 +284,258 @@ export const products = [
   },
   {
     id: 15,
+    name: 'Горка 0100',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '125 550',
+    description: '2785х900х1915, h-1.0',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 16,
+    name: 'Горка 0100/1',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '179 800',
+    description: '4055х900х2410, h-1.5',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 17,
+    name: 'Горка 0101',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '120 900',
+    description: '2460х930х1510, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 18,
+    name: 'Горка 0101/1',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '164 300',
+    description: '3570х930х1930, h-1.0',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 19,
+    name: 'Горка 0101/2',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '224 750',
+    description: '4800х930х2410, h-1.5',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 20,
+    name: 'Горка 0102',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '158 100',
+    description: '2455х1150х2480, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 21,
+    name: 'Горка 0102/1',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '196 850',
+    description: '3570х1150х3030, h-1.0',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 22,
+    name: 'Горка 0102/2',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '258 850',
+    description: '4800х1150х3630, h-1.5',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 23,
+    name: 'Горка 0103',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '125 550',
+    description: '3300х680х1790, h-1.0',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 24,
+    name: 'Горка 0104',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '210 800',
+    description: '2980х2925х1930, h-1.0',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 25,
+    name: 'Горка 0105',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '158 100',
+    description: '3295х680х2130, h-1.0',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 26,
+    name: 'Горка 0106',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '187 550',
+    description: '3570х930х1920, h-1.0',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 27,
+    name: 'Горка 0107',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '137 950',
+    description: '3215х680х1875, h-1.0',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 28,
+    name: 'Горка 0108',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '310 000',
+    description: 'h-1.0',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 29,
+    name: 'Горка 0109',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '257 300',
+    description: '3400х1310х2520, h-1.0',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 30,
+    name: 'Горка 0110',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '97 650',
+    description: '2050х700х1200, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 31,
+    name: 'Горка 0111',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '86 800',
+    description: '2155х740х1440, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 32,
+    name: 'Горка 0112',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '83 700',
+    description: '2055х695х1680, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 33,
+    name: 'Горка 0113',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '206 150',
+    description: '2735х1310х2390, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 34,
+    name: 'Горка 0114',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '105 400',
+    description: '2080х680х1340, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 35,
+    name: 'Горка 0115',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '116 250',
+    description: '1200х2320х700, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 36,
+    name: 'Горка 0116',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '106 950',
+    description: '2000х680х1605, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 37,
+    name: 'Горка 0117',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '147 250',
+    description: '2755х1085х1830, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 38,
+    name: 'Горка 0118',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '97 650',
+    description: 'h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 39,
+    name: 'Горка 0119',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '93 000',
+    description: '2365х675х1700, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 40,
+    name: 'Горка 0120',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '116 250',
+    description: '2575х715х1400, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 41,
+    name: 'Горка 0121',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '97 650',
+    description: '2155х770х1330, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 42,
+    name: 'Горка 0122',
+    category: 'playground',
+    subcategory: 'Горки',
+    price: '105 400',
+    description: '2400х680х1260, h-0.6',
+    image: 'https://cdn.poehali.dev/files/121212.png'
+  },
+  {
+    id: 43,
     name: 'Скамейка парковая',
     category: 'park',
     subcategory: 'Скамейки',
