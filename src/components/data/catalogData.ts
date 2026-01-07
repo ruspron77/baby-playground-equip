@@ -389,7 +389,7 @@ export const products = [
     subcategory: 'Игровые комплексы',
     price: '291 400',
     description: '3340х4410х3030',
-    image: '🎢'
+    image: 'https://cdn.poehali.dev/files/205.png'
   },
   {
     id: 206,
@@ -398,7 +398,7 @@ export const products = [
     subcategory: 'Игровые комплексы',
     price: '277 450',
     description: '4380х1830х3030',
-    image: '🎢'
+    image: 'https://cdn.poehali.dev/files/206.png'
   },
   {
     id: 207,
@@ -407,7 +407,7 @@ export const products = [
     subcategory: 'Игровые комплексы',
     price: '263 500',
     description: '2585х3575х3030',
-    image: '🎢'
+    image: 'https://cdn.poehali.dev/files/207.png'
   },
   {
     id: 208,
@@ -416,7 +416,7 @@ export const products = [
     subcategory: 'Игровые комплексы',
     price: '308 450',
     description: '4400х4390х3030',
-    image: '🎢'
+    image: 'https://cdn.poehali.dev/files/208.png'
   },
   {
     id: 209,
@@ -425,7 +425,7 @@ export const products = [
     subcategory: 'Игровые комплексы',
     price: '345 650',
     description: '3815х3080х3030',
-    image: '🎢'
+    image: 'https://cdn.poehali.dev/files/209.png'
   },
   {
     id: 210,
