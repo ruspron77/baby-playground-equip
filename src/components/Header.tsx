@@ -33,7 +33,7 @@ export function Header({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img 
-              src="https://cdn.poehali.dev/files/photo_2026-01-05_09-32-44.png" 
+              src="https://cdn.poehali.dev/files/photo_643632026-01-05_09-32-44.png" 
               alt="Urban Play"
               className="h-24 w-auto"
             />
