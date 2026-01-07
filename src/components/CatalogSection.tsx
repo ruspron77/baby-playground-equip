@@ -396,21 +396,21 @@ export function CatalogSection({
                       <span className="text-5xl">{product.image}</span>
                     )}
                   </div>
-                  <CardContent className="p-3 space-y-0">
-                    <div className="min-h-[3rem]">
+                  <CardContent className="p-3">
+                    <div className="min-h-[3rem] leading-tight">
                       {product.name.includes('\n') ? (
-                        <div>
-                          <p className="text-xs text-muted-foreground">{product.name.split('\n')[0]}</p>
-                          <h3 className="text-sm font-heading font-bold line-clamp-2">{product.name.split('\n')[1]}</h3>
+                        <div className="space-y-0">
+                          <p className="text-xs text-muted-foreground leading-tight">{product.name.split('\n')[0]}</p>
+                          <h3 className="text-sm font-heading font-bold line-clamp-2 leading-tight">{product.name.split('\n')[1]}</h3>
                         </div>
                       ) : (
                         <h3 className="text-sm font-heading font-bold line-clamp-2">{product.name}</h3>
                       )}
                     </div>
                     {product.description && (
-                      <p className="text-xs text-muted-foreground line-clamp-1">{product.description}</p>
+                      <p className="text-xs text-muted-foreground line-clamp-1 leading-tight">{product.description}</p>
                     )}
-                    <p className="text-lg font-bold text-primary">{product.price} ₽</p>
+                    <p className="text-lg font-bold text-primary mt-2">{product.price} ₽</p>
                     <Button 
                       size="sm"
                       className="w-full"
