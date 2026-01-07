@@ -153,9 +153,7 @@ export function CatalogSection({
                       }`}
                       onClick={() => handleTreeCategorySelect(cat.id, cat)}
                     >
-                      <span className="text-xl">{cat.image}</span>
-                      <Icon name={cat.icon as any} size={20} className="shrink-0" />
-                      <span className="text-sm flex-1">{cat.name}</span>
+                      <span className="text-base flex-1">{cat.name}</span>
                     </button>
                   </div>
                   
@@ -182,7 +180,7 @@ export function CatalogSection({
                                 </Button>
                               )}
                               <button
-                                className={`flex-1 text-left px-2 py-1.5 rounded text-sm hover:bg-muted transition-colors flex items-center gap-2 bg-white ${
+                                className={`flex-1 text-left px-2 py-1.5 rounded text-base hover:bg-muted transition-colors flex items-center gap-2 bg-white ${
                                   !sub.hasChildren ? 'ml-6' : ''
                                 } ${
                                   selectedCategory === cat.id && selectedSubcategory === sub.name && !selectedSubSubcategory 
@@ -191,11 +189,6 @@ export function CatalogSection({
                                 }`}
                                 onClick={() => handleTreeSubcategorySelect(cat.id, cat, sub.name, sub)}
                               >
-                                {sub.image.startsWith('http') ? (
-                                  <img src={sub.image} alt={sub.name} className="w-5 h-5 object-contain" />
-                                ) : (
-                                  <span className="text-lg">{sub.image}</span>
-                                )}
                                 <span className="flex-1">{sub.name}</span>
                               </button>
                             </div>
@@ -205,7 +198,7 @@ export function CatalogSection({
                                 {sub.children.map((subSub) => (
                                   <button
                                     key={subSub.name}
-                                    className={`w-full text-left px-2 py-1.5 rounded text-xs hover:bg-muted transition-colors flex items-center gap-2 bg-white ${
+                                    className={`w-full text-left px-2 py-1.5 rounded text-sm hover:bg-muted transition-colors flex items-center gap-2 bg-white ${
                                       selectedCategory === cat.id && 
                                       selectedSubcategory === sub.name && 
                                       selectedSubSubcategory === subSub.name
@@ -214,7 +207,6 @@ export function CatalogSection({
                                     }`}
                                     onClick={() => handleTreeSubSubcategorySelect(cat.id, cat, sub.name, subSub.name)}
                                   >
-                                    <span>{subSub.image}</span>
                                     <span className="flex-1">{subSub.name}</span>
                                   </button>
                                 ))}
