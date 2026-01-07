@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import Icon from '@/components/ui/icon';
 
 interface CartItem {
@@ -261,6 +262,9 @@ export default function Index() {
   const [currentSubcategory, setCurrentSubcategory] = useState<Subcategory | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
+  const [expandedSubcategories, setExpandedSubcategories] = useState<string[]>([]);
   const [orderForm, setOrderForm] = useState({
     name: '',
     phone: '',
@@ -307,6 +311,56 @@ export default function Index() {
       setSelectedSubSubcategory(subSubName);
       setIsSubSubcategoryDialogOpen(false);
     }
+  };
+
+  const handleTreeCategorySelect = (categoryId: string, categoryData: typeof categories[0]) => {
+    setSelectedCategory(categoryId);
+    setSelectedSubcategory(null);
+    setSelectedSubSubcategory(null);
+    setCurrentCategory(categoryData);
+    setIsSideMenuOpen(false);
+    const catalogSection = document.getElementById('catalog');
+    if (catalogSection) {
+      catalogSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleTreeSubcategorySelect = (categoryId: string, categoryData: typeof categories[0], subName: string, sub: Subcategory) => {
+    if (sub.hasChildren) {
+      const key = `${categoryId}-${subName}`;
+      setExpandedSubcategories(prev => 
+        prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]
+      );
+    } else {
+      setSelectedCategory(categoryId);
+      setSelectedSubcategory(subName);
+      setSelectedSubSubcategory(null);
+      setCurrentCategory(categoryData);
+      setIsSideMenuOpen(false);
+      const catalogSection = document.getElementById('catalog');
+      if (catalogSection) {
+        catalogSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleTreeSubSubcategorySelect = (categoryId: string, categoryData: typeof categories[0], subName: string, subSubName: string) => {
+    setSelectedCategory(categoryId);
+    setSelectedSubcategory(subName);
+    setSelectedSubSubcategory(subSubName);
+    setCurrentCategory(categoryData);
+    setCurrentSubcategory(categoryData.subcategories.find(s => s.name === subName) || null);
+    setIsSideMenuOpen(false);
+    const catalogSection = document.getElementById('catalog');
+    if (catalogSection) {
+      catalogSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories(prev => 
+      prev.includes(categoryId) ? prev.filter(id => id !== categoryId) : [...prev, categoryId]
+    );
   };
 
   const addToCart = (product: typeof products[0]) => {
@@ -431,6 +485,15 @@ export default function Index() {
               <a href="#contacts" className="text-foreground hover:text-primary transition-colors font-medium">Контакты</a>
             </nav>
             <div className="flex items-center gap-3">
+              <Button 
+                variant="outline" 
+                size="icon"
+                onClick={() => setIsSideMenuOpen(true)}
+                className="md:hidden"
+              >
+                <Icon name="Menu" size={20} />
+              </Button>
+              
               <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
                 <SheetTrigger asChild>
                   <Button variant="outline" className="relative">
@@ -564,9 +627,123 @@ export default function Index() {
         </div>
       </section>
 
+      <Sheet open={isSideMenuOpen} onOpenChange={setIsSideMenuOpen}>
+        <SheetContent side="left" className="w-80 overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle className="text-2xl font-heading">Каталог</SheetTitle>
+          </SheetHeader>
+          
+          <div className="mt-6 space-y-2">
+            {categories.map((cat) => {
+              const isExpanded = expandedCategories.includes(cat.id);
+              return (
+                <div key={cat.id}>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="w-8 h-8 p-0"
+                      onClick={() => toggleCategory(cat.id)}
+                    >
+                      <Icon 
+                        name={isExpanded ? "ChevronDown" : "ChevronRight"} 
+                        size={16} 
+                      />
+                    </Button>
+                    <button
+                      className={`flex-1 text-left px-3 py-2 rounded-lg hover:bg-muted transition-colors flex items-center gap-2 ${
+                        selectedCategory === cat.id && !selectedSubcategory ? 'bg-primary/10 text-primary font-semibold' : ''
+                      }`}
+                      onClick={() => handleTreeCategorySelect(cat.id, cat)}
+                    >
+                      <span className="text-2xl">{cat.image}</span>
+                      <span className="text-sm flex-1">{cat.name}</span>
+                    </button>
+                  </div>
+                  
+                  {isExpanded && (
+                    <div className="ml-10 mt-1 space-y-1">
+                      {cat.subcategories.map((sub) => {
+                        const subKey = `${cat.id}-${sub.name}`;
+                        const isSubExpanded = expandedSubcategories.includes(subKey);
+                        
+                        return (
+                          <div key={sub.name}>
+                            <div className="flex items-center gap-1">
+                              {sub.hasChildren && (
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="w-6 h-6 p-0"
+                                  onClick={() => handleTreeSubcategorySelect(cat.id, cat, sub.name, sub)}
+                                >
+                                  <Icon 
+                                    name={isSubExpanded ? "ChevronDown" : "ChevronRight"} 
+                                    size={14} 
+                                  />
+                                </Button>
+                              )}
+                              <button
+                                className={`flex-1 text-left px-2 py-1.5 rounded text-sm hover:bg-muted transition-colors flex items-center gap-2 ${
+                                  !sub.hasChildren ? 'ml-6' : ''
+                                } ${
+                                  selectedCategory === cat.id && selectedSubcategory === sub.name && !selectedSubSubcategory 
+                                    ? 'bg-primary/10 text-primary font-semibold' 
+                                    : ''
+                                }`}
+                                onClick={() => handleTreeSubcategorySelect(cat.id, cat, sub.name, sub)}
+                              >
+                                <span className="text-lg">{sub.image}</span>
+                                <span className="flex-1">{sub.name}</span>
+                              </button>
+                            </div>
+                            
+                            {isSubExpanded && sub.children && (
+                              <div className="ml-8 mt-1 space-y-1">
+                                {sub.children.map((subSub) => (
+                                  <button
+                                    key={subSub.name}
+                                    className={`w-full text-left px-2 py-1.5 rounded text-xs hover:bg-muted transition-colors flex items-center gap-2 ${
+                                      selectedCategory === cat.id && 
+                                      selectedSubcategory === sub.name && 
+                                      selectedSubSubcategory === subSub.name
+                                        ? 'bg-primary/10 text-primary font-semibold' 
+                                        : ''
+                                    }`}
+                                    onClick={() => handleTreeSubSubcategorySelect(cat.id, cat, sub.name, subSub.name)}
+                                  >
+                                    <span>{subSub.image}</span>
+                                    <span className="flex-1">{subSub.name}</span>
+                                  </button>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </SheetContent>
+      </Sheet>
+
       <section id="catalog" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 animate-slide-up">
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => setIsSideMenuOpen(true)}
+                className="hidden md:flex"
+              >
+                <Icon name="Menu" size={20} className="mr-2" />
+                Открыть меню категорий
+              </Button>
+            </div>
             <h2 className="text-4xl font-heading font-bold mb-4">Каталог продукции</h2>
             <p className="text-lg text-muted-foreground">Широкий ассортимент оборудования для детских площадок и парков</p>
           </div>
