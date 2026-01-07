@@ -36,7 +36,7 @@ interface Product {
   subsubcategory?: string;
   price: string;
   image: string;
-  tags: string[];
+  description?: string;
 }
 
 interface CatalogSectionProps {
@@ -394,13 +394,6 @@ export function CatalogSection({
                   </div>
                   <CardContent className="p-6">
                     <h3 className="text-xl font-heading font-bold mb-2">{product.name}</h3>
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {product.tags.map((tag, i) => (
-                        <Badge key={i} variant="secondary" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
                     <div className="flex items-center justify-between">
                       <p className="text-2xl font-bold text-primary">{product.price}</p>
                       <Button 
