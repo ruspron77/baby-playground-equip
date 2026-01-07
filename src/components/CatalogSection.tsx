@@ -311,135 +311,129 @@ export function CatalogSection({
           </Dialog>
 
           {(selectedCategory || selectedSubcategory || selectedSubSubcategory) && (
-            <div id="products" className="mb-8 space-y-4">
-              <div className="flex items-center justify-between">
-                <Breadcrumb>
-                  <BreadcrumbList>
-                    <BreadcrumbItem>
-                      <BreadcrumbLink href="#" onClick={(e) => { e.preventDefault(); handleResetFilters(); }}>
-                        Все категории
-                      </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    {selectedCategory && (
-                      <>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                          {selectedSubcategory ? (
-                            <BreadcrumbLink href="#" onClick={(e) => { 
-                              e.preventDefault(); 
-                              const cat = categories.find(c => c.id === selectedCategory);
-                              if (cat) handleTreeCategorySelect(cat.id, cat);
-                            }}>
-                              {categories.find(c => c.id === selectedCategory)?.name}
-                            </BreadcrumbLink>
-                          ) : (
-                            <BreadcrumbPage>
-                              {categories.find(c => c.id === selectedCategory)?.name}
-                            </BreadcrumbPage>
-                          )}
-                        </BreadcrumbItem>
-                      </>
-                    )}
-                    {selectedSubcategory && (
-                      <>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                          {selectedSubSubcategory ? (
-                            <BreadcrumbLink href="#" onClick={(e) => { 
-                              e.preventDefault(); 
-                              const cat = categories.find(c => c.id === selectedCategory);
-                              const sub = cat?.subcategories.find(s => s.name === selectedSubcategory);
-                              if (cat && sub) handleTreeSubcategorySelect(cat.id, cat, sub.name, sub);
-                            }}>
-                              {selectedSubcategory}
-                            </BreadcrumbLink>
-                          ) : (
-                            <BreadcrumbPage>{selectedSubcategory}</BreadcrumbPage>
-                          )}
-                        </BreadcrumbItem>
-                      </>
-                    )}
-                    {selectedSubSubcategory && (
-                      <>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                          <BreadcrumbPage>{selectedSubSubcategory}</BreadcrumbPage>
-                        </BreadcrumbItem>
-                      </>
-                    )}
-                  </BreadcrumbList>
-                </Breadcrumb>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={handleResetFilters}
-                >
-                  <Icon name="X" size={16} className="mr-2" />
-                  Сбросить фильтры
-                </Button>
-              </div>
-            </div>
-          )}
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((product) => (
-                <Card key={product.id} className="overflow-hidden hover:shadow-xl transition-all group">
-                  <div className="aspect-[4/3] relative overflow-hidden bg-white flex items-center justify-center">
-                    {product.image.startsWith('http') ? (
-                      <img 
-                        src={product.image} 
-                        alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <span className="text-5xl">{product.image}</span>
-                    )}
-                  </div>
-                  <CardContent className="p-3">
-                    <div className="leading-tight space-y-0">
-                      {product.name.includes('\n') ? (
+            <>
+              <div id="products" className="mb-8 space-y-4">
+                <div className="flex items-center justify-between">
+                  <Breadcrumb>
+                    <BreadcrumbList>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#" onClick={(e) => { e.preventDefault(); handleResetFilters(); }}>
+                          Все категории
+                        </BreadcrumbLink>
+                      </BreadcrumbItem>
+                      {selectedCategory && (
                         <>
-                          <p className="text-xs text-muted-foreground leading-tight">{product.name.split('\n')[0]}</p>
-                          <h3 className="text-sm font-heading font-bold line-clamp-2 leading-tight">{product.name.split('\n')[1]}</h3>
+                          <BreadcrumbSeparator />
+                          <BreadcrumbItem>
+                            {selectedSubcategory ? (
+                              <BreadcrumbLink href="#" onClick={(e) => { 
+                                e.preventDefault(); 
+                                const cat = categories.find(c => c.id === selectedCategory);
+                                if (cat) handleTreeCategorySelect(cat.id, cat);
+                              }}>
+                                {categories.find(c => c.id === selectedCategory)?.name}
+                              </BreadcrumbLink>
+                            ) : (
+                              <BreadcrumbPage>
+                                {categories.find(c => c.id === selectedCategory)?.name}
+                              </BreadcrumbPage>
+                            )}
+                          </BreadcrumbItem>
                         </>
-                      ) : (
-                        <h3 className="text-sm font-heading font-bold line-clamp-2">{product.name}</h3>
                       )}
-                      {product.description && (
-                        <p className="text-xs text-muted-foreground line-clamp-1 leading-tight">{product.description}</p>
+                      {selectedSubcategory && (
+                        <>
+                          <BreadcrumbSeparator />
+                          <BreadcrumbItem>
+                            {selectedSubSubcategory ? (
+                              <BreadcrumbLink href="#" onClick={(e) => { 
+                                e.preventDefault(); 
+                                const cat = categories.find(c => c.id === selectedCategory);
+                                const sub = cat?.subcategories.find(s => s.name === selectedSubcategory);
+                                if (cat && sub) handleTreeSubcategorySelect(cat.id, cat, sub.name, sub);
+                              }}>
+                                {selectedSubcategory}
+                              </BreadcrumbLink>
+                            ) : (
+                              <BreadcrumbPage>{selectedSubcategory}</BreadcrumbPage>
+                            )}
+                          </BreadcrumbItem>
+                        </>
                       )}
-                    </div>
-                    <p className="text-lg font-bold text-primary mt-2">{product.price} ₽</p>
-                    <Button 
-                      size="sm"
-                      className="w-full"
-                      onClick={() => handleAddToCart(product)}
-                    >
-                      <Icon name="ShoppingCart" size={14} className="mr-1" />
-                      В корзину
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))
-            ) : (
-              <div className="col-span-full text-center py-12">
-                <Icon name="Package" size={48} className="mx-auto mb-4 text-muted-foreground" />
-                <h3 className="text-xl font-semibold mb-2">Товары не найдены</h3>
-                <p className="text-muted-foreground mb-4">
-                  {selectedCategory || selectedSubcategory || selectedSubSubcategory 
-                    ? 'В выбранной категории пока нет товаров'
-                    : 'Выберите категорию для просмотра товаров'
-                  }
-                </p>
-                {(selectedCategory || selectedSubcategory || selectedSubSubcategory) && (
-                  <Button variant="outline" onClick={handleResetFilters}>
-                    Показать все товары
+                      {selectedSubSubcategory && (
+                        <>
+                          <BreadcrumbSeparator />
+                          <BreadcrumbItem>
+                            <BreadcrumbPage>{selectedSubSubcategory}</BreadcrumbPage>
+                          </BreadcrumbItem>
+                        </>
+                      )}
+                    </BreadcrumbList>
+                  </Breadcrumb>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={handleResetFilters}
+                  >
+                    <Icon name="X" size={16} className="mr-2" />
+                    Сбросить фильтры
                   </Button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                {filteredProducts.length > 0 ? (
+                  filteredProducts.map((product) => (
+                    <Card key={product.id} className="overflow-hidden hover:shadow-xl transition-all group">
+                      <div className="aspect-[4/3] relative overflow-hidden bg-white flex items-center justify-center">
+                        {product.image.startsWith('http') ? (
+                          <img 
+                            src={product.image} 
+                            alt={product.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        ) : (
+                          <span className="text-5xl">{product.image}</span>
+                        )}
+                      </div>
+                      <CardContent className="p-3">
+                        <div className="leading-tight space-y-0">
+                          {product.name.includes('\n') ? (
+                            <>
+                              <p className="text-xs text-muted-foreground leading-tight">{product.name.split('\n')[0]}</p>
+                              <h3 className="text-sm font-heading font-bold line-clamp-2 leading-tight">{product.name.split('\n')[1]}</h3>
+                            </>
+                          ) : (
+                            <h3 className="text-sm font-heading font-bold line-clamp-2">{product.name}</h3>
+                          )}
+                          {product.description && (
+                            <p className="text-xs text-muted-foreground line-clamp-1 leading-tight">{product.description}</p>
+                          )}
+                        </div>
+                        <p className="text-lg font-bold text-primary mt-2">{product.price} ₽</p>
+                        <Button 
+                          size="sm"
+                          className="w-full"
+                          onClick={() => handleAddToCart(product)}
+                        >
+                          <Icon name="ShoppingCart" size={14} className="mr-1" />
+                          В корзину
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12">
+                    <Icon name="Package" size={48} className="mx-auto mb-4 text-muted-foreground" />
+                    <h3 className="text-xl font-semibold mb-2">Товары не найдены</h3>
+                    <p className="text-muted-foreground mb-4">
+                      В выбранной категории пока нет товаров
+                    </p>
+                  </div>
                 )}
               </div>
-            )}
-          </div>
+            </>
+          )}
 
         </div>
       </section>
