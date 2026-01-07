@@ -181,7 +181,7 @@ export const products = [
     subcategory: 'Балансиры',
     price: '67 500',
     description: '2700х350х850',
-    image: '⚖️'
+    image: 'https://cdn.poehali.dev/files/66.png'
   },
   {
     id: 4,
