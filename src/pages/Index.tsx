@@ -609,7 +609,11 @@ export default function Index() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl animate-fade-in">
-            <h2 className="text-5xl md:text-6xl font-heading font-bold mb-6 text-foreground">
+            <h1 className="text-7xl md:text-8xl font-heading font-black mb-6 leading-tight">
+              <span className="text-primary">Urban</span>{' '}
+              <span className="text-secondary">Play</span>
+            </h1>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6 text-foreground">
               Создаём пространство <span className="text-primary">для игры и спорта</span>
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
@@ -1232,7 +1236,7 @@ export default function Index() {
                 <img 
                   src="https://cdn.poehali.dev/files/photo_2026-01-05_09-32-44.png" 
                   alt="Urban Play"
-                  className="h-12 w-auto brightness-0 invert"
+                  className="h-12 w-auto"
                 />
               </div>
               <p className="text-sm text-background/70">
