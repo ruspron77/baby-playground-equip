@@ -737,7 +737,7 @@ export default function Index() {
         </SheetContent>
       </Sheet>
 
-      <section id="catalog" className="py-16 bg-white">
+      <section id="catalog" className="pt-16 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 animate-slide-up">
             <h2 className="text-4xl font-heading font-bold mb-4">Каталог продукции</h2>
@@ -946,7 +946,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="services" className="py-16 bg-white">
+      <section id="services" className="pt-8 pb-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-heading font-bold mb-4">Наши услуги</h2>
