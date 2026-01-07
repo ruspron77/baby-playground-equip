@@ -353,7 +353,7 @@ export const products = [
     subsubcategory: 'Серия "URBAN"',
     price: '241 800',
     description: '3320х3000х3030',
-    image: '🎢'
+    image: 'https://cdn.poehali.dev/files/200.png'
   },
   {
     id: 201,
@@ -363,7 +363,7 @@ export const products = [
     subsubcategory: 'Серия "URBAN"',
     price: '268 150',
     description: '4400х4240х3030',
-    image: '🎢'
+    image: 'https://cdn.poehali.dev/files/201.png'
   },
   {
     id: 202,
@@ -373,7 +373,7 @@ export const products = [
     subsubcategory: 'Серия "URBAN"',
     price: '291 400',
     description: '4130х3000х3030',
-    image: '🎢'
+    image: 'https://cdn.poehali.dev/files/202.png'
   },
   {
     id: 203,
@@ -383,7 +383,7 @@ export const products = [
     subsubcategory: 'Серия "URBAN"',
     price: '257 300',
     description: '3330х1835х3030',
-    image: '🎢'
+    image: 'https://cdn.poehali.dev/files/203.png'
   },
   {
     id: 204,
@@ -393,7 +393,7 @@ export const products = [
     subsubcategory: 'Серия "URBAN"',
     price: '320 850',
     description: '3280х3800х3030',
-    image: '🎢'
+    image: 'https://cdn.poehali.dev/files/204.png'
   },
   {
     id: 205,
