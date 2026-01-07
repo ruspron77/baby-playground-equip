@@ -396,7 +396,7 @@ export function CatalogSection({
                       <span className="text-5xl">{product.image}</span>
                     )}
                   </div>
-                  <CardContent className="p-3 space-y-1">
+                  <CardContent className="p-3 space-y-0">
                     <div className="min-h-[3rem]">
                       {product.name.includes('\n') ? (
                         <div>
