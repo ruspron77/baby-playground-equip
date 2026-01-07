@@ -666,7 +666,7 @@ export default function Index() {
                       }`}
                       onClick={() => handleTreeCategorySelect(cat.id, cat)}
                     >
-                      <span className="text-2xl">{cat.image}</span>
+                      <Icon name={cat.icon as any} size={20} className="shrink-0" />
                       <span className="text-sm flex-1">{cat.name}</span>
                     </button>
                   </div>
