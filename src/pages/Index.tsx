@@ -20,7 +20,7 @@ export default function Index() {
   const [deliveryCost, setDeliveryCost] = useState(0);
 
   const filteredProducts = selectedCategory && selectedSubSubcategory
-    ? products.filter(p => p.category === selectedCategory && p.subcategory === selectedSubSubcategory)
+    ? products.filter(p => p.category === selectedCategory && p.subsubcategory === selectedSubSubcategory)
     : selectedCategory && selectedSubcategory
     ? products.filter(p => p.category === selectedCategory && p.subcategory === selectedSubcategory)
     : selectedCategory
