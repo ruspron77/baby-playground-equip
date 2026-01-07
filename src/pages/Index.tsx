@@ -610,12 +610,9 @@ export default function Index() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl animate-fade-in">
-            <h1 className="text-7xl md:text-8xl font-heading font-black mb-6 leading-tight">
-              <span className="text-primary">Urban</span>{' '}
-              <span className="text-secondary">Play</span>
-            </h1>
-            <h2 className="text-2xl md:text-3xl font-heading font-bold mb-6 text-foreground">
-              Создаём пространство для игры и спорта
+            <h2 className="text-2xl md:text-3xl font-heading font-bold mb-6">
+              <span className="text-lime-500">Создаём пространство</span>{' '}
+              <span className="text-purple-500">для игры и спорта</span>
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
               Производим качественное детское игровое, спортивное и парковое оборудование. 
