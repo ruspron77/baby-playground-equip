@@ -52,6 +52,12 @@ export default function Index() {
         setSelectedSubcategory(sub.name);
         setSelectedSubSubcategory(null);
         setIsCategoryDialogOpen(false);
+        setTimeout(() => {
+          const catalogSection = document.getElementById('catalog');
+          if (catalogSection) {
+            catalogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
       }
     }
   };
@@ -62,6 +68,12 @@ export default function Index() {
       setSelectedSubcategory(currentSubcategory?.name || null);
       setSelectedSubSubcategory(subSubName);
       setIsSubSubcategoryDialogOpen(false);
+      setTimeout(() => {
+        const catalogSection = document.getElementById('catalog');
+        if (catalogSection) {
+          catalogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     }
   };
 
