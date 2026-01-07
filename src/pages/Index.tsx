@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import Icon from '@/components/ui/icon';
 
 interface CartItem {
@@ -665,6 +666,60 @@ export default function Index() {
 
           {selectedCategory && (selectedSubcategory || selectedSubSubcategory) && (
             <div className="space-y-6">
+              <Breadcrumb className="mb-4">
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink 
+                      className="cursor-pointer hover:text-primary"
+                      onClick={() => {
+                        setSelectedCategory(null);
+                        setSelectedSubcategory(null);
+                        setSelectedSubSubcategory(null);
+                      }}
+                    >
+                      Каталог
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbLink 
+                      className="cursor-pointer hover:text-primary"
+                      onClick={() => {
+                        setSelectedSubcategory(null);
+                        setSelectedSubSubcategory(null);
+                      }}
+                    >
+                      {currentCategory?.name}
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  {selectedSubcategory && (
+                    <>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        {selectedSubSubcategory ? (
+                          <BreadcrumbLink 
+                            className="cursor-pointer hover:text-primary"
+                            onClick={() => setSelectedSubSubcategory(null)}
+                          >
+                            {selectedSubcategory}
+                          </BreadcrumbLink>
+                        ) : (
+                          <BreadcrumbPage>{selectedSubcategory}</BreadcrumbPage>
+                        )}
+                      </BreadcrumbItem>
+                    </>
+                  )}
+                  {selectedSubSubcategory && (
+                    <>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>{selectedSubSubcategory}</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </>
+                  )}
+                </BreadcrumbList>
+              </Breadcrumb>
+              
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-2xl font-heading font-bold">
