@@ -114,4 +114,8 @@
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
   }
+
+  html {
+    scroll-padding-top: 120px;
+  }
 }
