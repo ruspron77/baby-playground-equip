@@ -37,7 +37,7 @@ export const categories = [
         ]
       },
       { name: 'Балансиры', image: 'https://cdn.poehali.dev/files/мишкаа.png' },
-      { name: 'Горки', image: 'https://cdn.poehali.dev/files/121212.png' },
+      { name: 'Горки', image: 'https://cdn.poehali.dev/files/0100.png' },
       { name: 'Домики', image: '🏠' },
       { name: 'Качели', image: '🎪' },
       { name: 'Карусели', image: '🎠' },
