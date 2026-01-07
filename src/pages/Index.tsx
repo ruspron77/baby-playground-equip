@@ -614,7 +614,7 @@ export default function Index() {
               <span className="text-secondary">Play</span>
             </h1>
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6 text-secondary">
-              Создаём пространство <span className="text-accent">для игры и спорта</span>
+              Создаём пространство <span className="text-primary">для игры и спорта</span>
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
               Производим качественное детское игровое, спортивное и парковое оборудование. 
