@@ -485,8 +485,8 @@ export default function Index() {
             </div>
             <nav className="hidden md:flex gap-6">
               <a href="#catalog" className="text-foreground hover:text-primary transition-colors font-medium">Каталог</a>
-              <a href="#about" className="text-foreground hover:text-primary transition-colors font-medium">О компании</a>
               <a href="#services" className="text-foreground hover:text-primary transition-colors font-medium">Услуги</a>
+              <a href="#about" className="text-foreground hover:text-primary transition-colors font-medium">О компании</a>
               <a href="#certificates" className="text-foreground hover:text-primary transition-colors font-medium">Сертификаты</a>
               <a href="#contacts" className="text-foreground hover:text-primary transition-colors font-medium">Контакты</a>
             </nav>
@@ -961,6 +961,33 @@ export default function Index() {
         </div>
       </section>
 
+      <section id="services" className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-heading font-bold mb-4">Наши услуги</h2>
+            <p className="text-lg text-muted-foreground">Полный цикл работ от проектирования до установки</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: 'Ruler', title: 'Проектирование', desc: 'Разработка индивидуальных проектов детских площадок' },
+              { icon: 'Factory', title: 'Производство', desc: 'Собственное производство из качественных материалов' },
+              { icon: 'Truck', title: 'Доставка', desc: 'Доставка по всей России в удобное время' },
+              { icon: 'Wrench', title: 'Монтаж', desc: 'Профессиональная установка и гарантия качества' }
+            ].map((service, idx) => (
+              <Card key={idx} className="text-center hover:shadow-lg transition-shadow animate-scale-in" style={{ animationDelay: `${idx * 0.15}s` }}>
+                <CardHeader>
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon name={service.icon as any} size={32} className="text-primary" />
+                  </div>
+                  <CardTitle>{service.title}</CardTitle>
+                  <CardDescription className="text-base">{service.desc}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="about" className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -995,33 +1022,6 @@ export default function Index() {
               <div className="aspect-square bg-gradient-to-br from-accent/20 to-accent/5 rounded-lg flex items-center justify-center text-7xl">🛝</div>
               <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg flex items-center justify-center text-7xl">🎠</div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="services" className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-heading font-bold mb-4">Наши услуги</h2>
-            <p className="text-lg text-muted-foreground">Полный цикл работ от проектирования до установки</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: 'Ruler', title: 'Проектирование', desc: 'Разработка индивидуальных проектов детских площадок' },
-              { icon: 'Factory', title: 'Производство', desc: 'Собственное производство из качественных материалов' },
-              { icon: 'Truck', title: 'Доставка', desc: 'Доставка по всей России в удобное время' },
-              { icon: 'Wrench', title: 'Монтаж', desc: 'Профессиональная установка и гарантия качества' }
-            ].map((service, idx) => (
-              <Card key={idx} className="text-center hover:shadow-lg transition-shadow animate-scale-in" style={{ animationDelay: `${idx * 0.15}s` }}>
-                <CardHeader>
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Icon name={service.icon as any} size={32} className="text-primary" />
-                  </div>
-                  <CardTitle>{service.title}</CardTitle>
-                  <CardDescription className="text-base">{service.desc}</CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
