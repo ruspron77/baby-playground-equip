@@ -158,51 +158,132 @@ export const categories = [
 export const products = [
   {
     id: 1,
-    name: 'Качели двойные',
+    name: 'Балансир ДКб-1',
     category: 'playground',
-    subcategory: 'Качели',
-    price: '25 000',
-    description: 'Прочные металлические качели с сиденьями из пластика',
-    image: '🎪'
+    subcategory: 'Балансиры',
+    price: '31 465',
+    description: '2030х360х635',
+    image: '⚖️'
   },
   {
     id: 2,
-    name: 'Карусель классическая',
+    name: 'Балансир ДКб-2',
     category: 'playground',
-    subcategory: 'Карусели',
-    price: '45 000',
-    description: 'Вращающаяся карусель на 6 мест, яркие цвета',
-    image: '🎠'
+    subcategory: 'Балансиры',
+    price: '29 915',
+    description: '2215х360х790',
+    image: '⚖️'
   },
   {
     id: 3,
-    name: 'Горка пластиковая',
+    name: 'Балансир ДКб-5',
     category: 'playground',
-    subcategory: 'Горки',
-    price: '35 000',
-    description: 'Безопасная горка высотой 2м с широким спуском',
-    image: '🛝'
+    subcategory: 'Балансиры',
+    price: '67 425',
+    description: '2700х350х850',
+    image: '⚖️'
   },
   {
     id: 4,
-    name: 'Турник уличный',
-    category: 'sports',
-    subcategory: 'Турники',
-    price: '15 000',
-    description: 'Металлический турник с регулируемой высотой',
-    image: '🏋️'
+    name: 'Балансир "Дельфин"',
+    category: 'playground',
+    subcategory: 'Балансиры',
+    price: '42 005',
+    description: '2215х390х790',
+    image: '🐬'
   },
   {
     id: 5,
-    name: 'Воркаут комплекс',
-    category: 'sports',
-    subcategory: 'Воркаут',
-    price: '85 000',
-    description: 'Полный комплекс для воркаута: турники, брусья, рукоходы',
-    image: '💪'
+    name: 'Балансир "Карета"',
+    category: 'playground',
+    subcategory: 'Балансиры',
+    price: '53 320',
+    description: '2215х430х770',
+    image: '🎠'
   },
   {
     id: 6,
+    name: 'Балансир "Медведь"',
+    category: 'playground',
+    subcategory: 'Балансиры',
+    price: '54 405',
+    description: '2215х315х885',
+    image: '🐻'
+  },
+  {
+    id: 7,
+    name: 'Балансир "Мишка"',
+    category: 'playground',
+    subcategory: 'Балансиры',
+    price: '39 680',
+    description: '2215х385х790',
+    image: '🧸'
+  },
+  {
+    id: 8,
+    name: 'Балансир "Мячик"',
+    category: 'playground',
+    subcategory: 'Балансиры',
+    price: '42 160',
+    description: '2215х390х790',
+    image: '⚽'
+  },
+  {
+    id: 9,
+    name: 'Балансир "Собачка"',
+    category: 'playground',
+    subcategory: 'Балансиры',
+    price: '33 635',
+    description: '2115х360х660',
+    image: '🐕'
+  },
+  {
+    id: 10,
+    name: 'Балансир "Утята"',
+    category: 'playground',
+    subcategory: 'Балансиры',
+    price: '34 565',
+    description: '2145х360х660',
+    image: '🦆'
+  },
+  {
+    id: 11,
+    name: 'Балансир "Черепаха"',
+    category: 'playground',
+    subcategory: 'Балансиры',
+    price: '46 500',
+    description: '2215х410х790',
+    image: '🐢'
+  },
+  {
+    id: 12,
+    name: 'Балансир "Якорь"',
+    category: 'playground',
+    subcategory: 'Балансиры',
+    price: '42 005',
+    description: '2215х425х790',
+    image: '⚓'
+  },
+  {
+    id: 13,
+    name: 'Балансир-вертушка "Буран"',
+    category: 'playground',
+    subcategory: 'Балансиры',
+    price: '58 435',
+    description: '2600х330х1570',
+    image: '🌪️'
+  },
+  {
+    id: 14,
+    name: 'Балансир-вертушка "Вихрь"',
+    category: 'playground',
+    subcategory: 'Балансиры',
+    price: '56 730',
+    description: '2530х170х2460',
+    image: '🌀'
+  },
+  {
+    id: 15,
     name: 'Скамейка парковая',
     category: 'park',
     subcategory: 'Скамейки',
