@@ -1002,18 +1002,10 @@ export default function Index() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-square rounded-lg overflow-hidden">
-                <img src="https://cdn.poehali.dev/files/232.png" alt="Игровой комплекс" className="w-full h-full object-cover" />
-              </div>
-              <div className="aspect-square rounded-lg overflow-hidden">
-                <img src="https://cdn.poehali.dev/files/Без 45454имени.png" alt="Спортивное оборудование" className="w-full h-full object-cover" />
-              </div>
-              <div className="aspect-square rounded-lg overflow-hidden">
-                <img src="https://cdn.poehali.dev/files/Без 2222имени.png" alt="Детская площадка" className="w-full h-full object-cover" />
-              </div>
-              <div className="aspect-square rounded-lg overflow-hidden">
-                <img src="https://cdn.poehali.dev/files/Без икукумени.png" alt="Качели" className="w-full h-full object-cover" />
-              </div>
+              <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg flex items-center justify-center text-7xl">🎪</div>
+              <div className="aspect-square bg-gradient-to-br from-secondary/20 to-secondary/5 rounded-lg flex items-center justify-center text-7xl">🏋️</div>
+              <div className="aspect-square bg-gradient-to-br from-accent/20 to-accent/5 rounded-lg flex items-center justify-center text-7xl">🛝</div>
+              <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg flex items-center justify-center text-7xl">🎠</div>
             </div>
           </div>
         </div>
