@@ -190,7 +190,7 @@ export const products = [
     subcategory: 'Балансиры',
     price: '42 000',
     description: '2215х390х790',
-    image: 'https://cdn.poehali.dev/files/дельфин.png'
+    image: 'https://cdn.poehali.dev/files/дельфинн.png'
   },
   {
     id: 5,
@@ -208,7 +208,7 @@ export const products = [
     subcategory: 'Балансиры',
     price: '54 400',
     description: '2215х315х885',
-    image: 'https://cdn.poehali.dev/files/медведь.png'
+    image: 'https://cdn.poehali.dev/files/медведбб.png'
   },
   {
     id: 7,
@@ -253,7 +253,7 @@ export const products = [
     subcategory: 'Балансиры',
     price: '46 500',
     description: '2215х410х790',
-    image: 'https://cdn.poehali.dev/files/черепаха.png'
+    image: 'https://cdn.poehali.dev/files/черепахаа.png'
   },
   {
     id: 12,
