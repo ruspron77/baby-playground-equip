@@ -480,7 +480,7 @@ export default function Index() {
               <img 
                 src="https://cdn.poehali.dev/files/photo_2026-01-05_09-32-44.png" 
                 alt="Urban Play"
-                className="h-16 w-auto"
+                className="h-24 w-auto"
               />
             </div>
             <nav className="hidden md:flex gap-6">
