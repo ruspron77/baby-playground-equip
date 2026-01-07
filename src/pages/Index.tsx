@@ -37,8 +37,8 @@ const categories = [
     name: 'Детское игровое оборудование',
     icon: 'Smile',
     color: 'from-primary/20 to-primary/5',
-    image: '🎪',
-    bgImage: 'https://cdn.poehali.dev/files/b8edd7e5-6b8e-473a-b75b-c0e7698ef5d5.jpg',
+    image: '',
+    bgImage: 'https://cdn.poehali.dev/files/f5b6cd83-3a29-4a68-b71c-d95815fb6e4c.jpg',
     subcategories: [
       { name: 'Качалки-балансиры', image: '⚖️' },
       { name: 'Веранды (теневые навесы)', image: '⛱️' },
@@ -87,7 +87,7 @@ const categories = [
     name: 'Спортивное оборудование',
     icon: 'Dumbbell',
     color: 'from-secondary/20 to-secondary/5',
-    image: '🏋️',
+    image: '',
     bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/48d85616-7da7-418d-9222-640460ebf994.jpg',
     subcategories: [
       { name: 'Workout', image: '💪' },
@@ -127,7 +127,7 @@ const categories = [
     name: 'Парковое оборудование',
     icon: 'Trees',
     color: 'from-accent/20 to-accent/5',
-    image: '🌳',
+    image: '',
     bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/6d5f6307-82d6-4d09-b985-5e08466f558b.jpg',
     subcategories: [
       { name: 'Скамейки', image: '🪑' },
@@ -142,7 +142,7 @@ const categories = [
     name: 'Благоустройство',
     icon: 'Flower2',
     color: 'from-primary/20 to-primary/5',
-    image: '🌺',
+    image: '',
     bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/84d4baf1-45b9-4866-b418-d3e8f789f081.jpg',
     subcategories: [
       { name: 'Клумбы', image: '🌷' },
@@ -157,7 +157,7 @@ const categories = [
     name: 'Травмобезопасное покрытие',
     icon: 'Shield',
     color: 'from-secondary/20 to-secondary/5',
-    image: '🟦',
+    image: '',
     bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/5f0df881-7be2-437d-984d-ec0485cf7fa6.jpg',
     subcategories: [
       { name: 'Резиновое покрытие', image: '🟦' },
@@ -171,7 +171,7 @@ const categories = [
     name: 'Ограждения',
     icon: 'Grid3x3',
     color: 'from-accent/20 to-accent/5',
-    image: '🔲',
+    image: '',
     bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/d7b1babd-5e02-4e78-bba2-dc495c0ae01d.jpg',
     subcategories: [
       { name: 'Заборы', image: '🔲' },
@@ -767,14 +767,12 @@ export default function Index() {
                   <img 
                     src={cat.bgImage} 
                     alt={cat.name}
-                    className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500"
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                  <div className="relative z-10 text-7xl drop-shadow-lg">{cat.image}</div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                  <h3 className="relative z-10 text-2xl font-heading font-bold text-white drop-shadow-lg px-4 text-center">{cat.name}</h3>
                 </div>
-                <CardHeader className="text-center pb-6">
-                  <CardTitle className="text-xl font-heading leading-tight">{cat.name}</CardTitle>
-                </CardHeader>
+
               </Card>
             ))}
           </div>
