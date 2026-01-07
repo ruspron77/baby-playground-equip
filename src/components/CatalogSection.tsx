@@ -268,7 +268,7 @@ export function CatalogSection({
                     className="cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1 overflow-hidden group border-2 border-transparent hover:border-primary"
                     onClick={() => handleSubcategoryClick(sub)}
                   >
-                    <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+                    <div className="aspect-square relative overflow-hidden bg-white flex items-center justify-center">
                       {sub.image.startsWith('http') ? (
                         <img src={sub.image} alt={sub.name} className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-300" />
                       ) : (
@@ -298,7 +298,7 @@ export function CatalogSection({
                     className="cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1 overflow-hidden group border-2 border-transparent hover:border-primary"
                     onClick={() => handleSubSubcategoryClick(subSub.name)}
                   >
-                    <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+                    <div className="aspect-square relative overflow-hidden bg-white flex items-center justify-center">
                       <span className="text-6xl group-hover:scale-110 transition-transform duration-300">{subSub.image}</span>
                     </div>
                     <div className="py-2 px-3 bg-white">
