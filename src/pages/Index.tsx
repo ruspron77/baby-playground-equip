@@ -38,7 +38,7 @@ const categories = [
     icon: 'Smile',
     color: 'from-primary/20 to-primary/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/1c003c5b-1398-47b5-b7f1-b4f98b460dd1.jpg',
+    bgImage: 'https://cdn.poehali.dev/files/_____.jpg',
     subcategories: [
       { name: 'Качалки-балансиры', image: '⚖️' },
       { name: 'Веранды (теневые навесы)', image: '⛱️' },
@@ -88,7 +88,7 @@ const categories = [
     icon: 'Dumbbell',
     color: 'from-secondary/20 to-secondary/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/48d85616-7da7-418d-9222-640460ebf994.jpg',
+    bgImage: 'https://cdn.poehali.dev/files/48.jpg',
     subcategories: [
       { name: 'Workout', image: '💪' },
       { name: 'Ворота, стойки, щиты', image: '🥅' },
@@ -128,7 +128,7 @@ const categories = [
     icon: 'Trees',
     color: 'from-accent/20 to-accent/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/6d5f6307-82d6-4d09-b985-5e08466f558b.jpg',
+    bgImage: 'https://cdn.poehali.dev/files/_____.jpg',
     subcategories: [
       { name: 'Скамейки', image: '🪑' },
       { name: 'Урны', image: '🗑️' },
@@ -143,7 +143,7 @@ const categories = [
     icon: 'Flower2',
     color: 'from-primary/20 to-primary/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/84d4baf1-45b9-4866-b418-d3e8f789f081.jpg',
+    bgImage: 'https://cdn.poehali.dev/files/_____.jpg',
     subcategories: [
       { name: 'Клумбы', image: '🌷' },
       { name: 'Газоны', image: '🌿' },
@@ -158,7 +158,7 @@ const categories = [
     icon: 'Shield',
     color: 'from-secondary/20 to-secondary/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/5f0df881-7be2-437d-984d-ec0485cf7fa6.jpg',
+    bgImage: 'https://cdn.poehali.dev/files/figura-iz-rezinovoy-kroshki-sfera-038-foto-38e7.jpg',
     subcategories: [
       { name: 'Резиновое покрытие', image: '🟦' },
       { name: 'Наливное покрытие', image: '🟩' },
@@ -172,7 +172,7 @@ const categories = [
     icon: 'Grid3x3',
     color: 'from-accent/20 to-accent/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/files/d7b1babd-5e02-4e78-bba2-dc495c0ae01d.jpg',
+    bgImage: 'https://cdn.poehali.dev/files/1c96c1-1024x1024.jpg',
     subcategories: [
       { name: 'Заборы', image: '🔲' },
       { name: 'Ворота', image: '🚪' },
