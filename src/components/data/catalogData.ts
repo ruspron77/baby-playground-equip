@@ -346,6 +346,576 @@ export const products = [
     image: 'https://cdn.poehali.dev/files/105.png'
   },
   {
+    id: 200,
+    name: 'Арт. 0200\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '241 800',
+    description: '3320х3000х3030',
+    image: '🎢'
+  },
+  {
+    id: 201,
+    name: 'Арт. 0201\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '268 150',
+    description: '4400х4240х3030',
+    image: '🎢'
+  },
+  {
+    id: 202,
+    name: 'Арт. 0202\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '291 400',
+    description: '4130х3000х3030',
+    image: '🎢'
+  },
+  {
+    id: 203,
+    name: 'Арт. 0203\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '257 300',
+    description: '3330х1835х3030',
+    image: '🎢'
+  },
+  {
+    id: 204,
+    name: 'Арт. 0204\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '320 850',
+    description: '3280х3800х3030',
+    image: '🎢'
+  },
+  {
+    id: 205,
+    name: 'Арт. 0205\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '291 400',
+    description: '3340х4410х3030',
+    image: '🎢'
+  },
+  {
+    id: 206,
+    name: 'Арт. 0206\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '277 450',
+    description: '4380х1830х3030',
+    image: '🎢'
+  },
+  {
+    id: 207,
+    name: 'Арт. 0207\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '263 500',
+    description: '2585х3575х3030',
+    image: '🎢'
+  },
+  {
+    id: 208,
+    name: 'Арт. 0208\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '308 450',
+    description: '4400х4390х3030',
+    image: '🎢'
+  },
+  {
+    id: 209,
+    name: 'Арт. 0209\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '345 650',
+    description: '3815х3080х3030',
+    image: '🎢'
+  },
+  {
+    id: 210,
+    name: 'Арт. 0210\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '291 400',
+    description: '4820х3000х2410',
+    image: '🎢'
+  },
+  {
+    id: 211,
+    name: 'Арт. 0211\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '227 850',
+    description: '2940х3560х2160',
+    image: '🎢'
+  },
+  {
+    id: 212,
+    name: 'Арт. 0212\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '277 450',
+    description: '4470х3570х2160',
+    image: '🎢'
+  },
+  {
+    id: 213,
+    name: 'Арт. 0213\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '393 700',
+    description: '7445х1950х2410',
+    image: '🎢'
+  },
+  {
+    id: 214,
+    name: 'Арт. 0214\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '299 150',
+    description: '4940х2715х3030',
+    image: '🎢'
+  },
+  {
+    id: 215,
+    name: 'Арт. 0215\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '227 850',
+    description: '3590х2910х2160',
+    image: '🎢'
+  },
+  {
+    id: 216,
+    name: 'Арт. 0216\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '246 450',
+    description: '3560х3510х2695',
+    image: '🎢'
+  },
+  {
+    id: 217,
+    name: 'Арт. 0217\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '485 150',
+    description: '5400х2815х3630',
+    image: '🎢'
+  },
+  {
+    id: 218,
+    name: 'Арт. 0218\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '323 950',
+    description: '3570х3440х3030',
+    image: '🎢'
+  },
+  {
+    id: 219,
+    name: 'Арт. 0219\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '458 800',
+    description: '5475х3420х3030',
+    image: '🎢'
+  },
+  {
+    id: 220,
+    name: 'Арт. 0220\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '319 300',
+    description: '3565х2630х3030',
+    image: '🎢'
+  },
+  {
+    id: 221,
+    name: 'Арт. 0221\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '485 150',
+    description: '5475х3540х3030',
+    image: '🎢'
+  },
+  {
+    id: 222,
+    name: 'Арт. 0222\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '385 950',
+    description: '6390х3080х3030',
+    image: '🎢'
+  },
+  {
+    id: 223,
+    name: 'Арт. 0223\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '323 950',
+    description: '3570х3420х3030',
+    image: '🎢'
+  },
+  {
+    id: 224,
+    name: 'Арт. 0224\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '313 100',
+    description: '5310х1380х3030',
+    image: '🎢'
+  },
+  {
+    id: 225,
+    name: 'Арт. 0225\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '365 800',
+    description: '6020х3570х3030',
+    image: '🎢'
+  },
+  {
+    id: 226,
+    name: 'Арт. 0226\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '384 400',
+    description: '6020х3565х3030',
+    image: '🎢'
+  },
+  {
+    id: 227,
+    name: 'Арт. 0227\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '434 000',
+    description: '4780х3555х3030',
+    image: '🎢'
+  },
+  {
+    id: 228,
+    name: 'Арт. 0228\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '342 550',
+    description: '4395х3440х3030',
+    image: '🎢'
+  },
+  {
+    id: 229,
+    name: 'Арт. 0229\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '336 350',
+    description: '3960х3440х3030',
+    image: '🎢'
+  },
+  {
+    id: 230,
+    name: 'Арт. 0230\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '654 100',
+    description: '8750х5590х3030',
+    image: '🎢'
+  },
+  {
+    id: 231,
+    name: 'Арт. 0231\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '401 450',
+    description: '5770х3330х3030',
+    image: '🎢'
+  },
+  {
+    id: 232,
+    name: 'Арт. 0232\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '401 450',
+    description: '4105х4395х3030',
+    image: '🎢'
+  },
+  {
+    id: 233,
+    name: 'Арт. 0233\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '373 550',
+    description: '4390х3415х3030',
+    image: '🎢'
+  },
+  {
+    id: 234,
+    name: 'Арт. 0234\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '595 200',
+    description: '5685х3550х3030',
+    image: '🎢'
+  },
+  {
+    id: 235,
+    name: 'Арт. 0235\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '612 250',
+    description: '6245х5475х3030',
+    image: '🎢'
+  },
+  {
+    id: 236,
+    name: 'Арт. 0236\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '575 050',
+    description: '5970х5720х3030',
+    image: '🎢'
+  },
+  {
+    id: 237,
+    name: 'Арт. 0237\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '607 600',
+    description: '6795х4085х3030',
+    image: '🎢'
+  },
+  {
+    id: 238,
+    name: 'Арт. 0238\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '506 850',
+    description: '5340х4780х2685',
+    image: '🎢'
+  },
+  {
+    id: 239,
+    name: 'Арт. 0239\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '472 750',
+    description: '5340х4450х3030',
+    image: '🎢'
+  },
+  {
+    id: 240,
+    name: 'Арт. 0240\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '647 900',
+    description: '5525х3320х2710',
+    image: '🎢'
+  },
+  {
+    id: 241,
+    name: 'Арт. 0241\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '866 450',
+    description: '9970х4750х3030',
+    image: '🎢'
+  },
+  {
+    id: 242,
+    name: 'Арт. 0242\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '1 041 600',
+    description: '11570х4865х3030',
+    image: '🎢'
+  },
+  {
+    id: 243,
+    name: 'Арт. 0243\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '1 088 100',
+    description: '7845х6765х3030',
+    image: '🎢'
+  },
+  {
+    id: 244,
+    name: 'Арт. 0244\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '982 700',
+    description: '8260х6640х3620',
+    image: '🎢'
+  },
+  {
+    id: 245,
+    name: 'Арт. 0245\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '2 343 600',
+    description: '11885х10400х3630',
+    image: '🎢'
+  },
+  {
+    id: 246,
+    name: 'Арт. 0246\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '1 309 750',
+    description: '12040х7060х3630',
+    image: '🎢'
+  },
+  {
+    id: 247,
+    name: 'Арт. 0247\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '457 250',
+    description: '4690х3530х3890',
+    image: '🎢'
+  },
+  {
+    id: 248,
+    name: 'Арт. 0248\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '947 050',
+    description: '7095х6015х3890',
+    image: '🎢'
+  },
+  {
+    id: 249,
+    name: 'Арт. 0249\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '1 240 000',
+    description: '7680х7490х3890',
+    image: '🎢'
+  },
+  {
+    id: 250,
+    name: 'Арт. 0250\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '872 650',
+    description: '7780х6470х3890',
+    image: '🎢'
+  },
+  {
+    id: 251,
+    name: 'Арт. 0251\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '1 297 350',
+    description: '9425х9330х3890',
+    image: '🎢'
+  },
+  {
+    id: 252,
+    name: 'Арт. 0252\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '1 782 500',
+    description: '10455х9705х3890',
+    image: '🎢'
+  },
+  {
+    id: 253,
+    name: 'Арт. 0253\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '1 240 000',
+    description: '8520х6675х3890',
+    image: '🎢'
+  },
+  {
+    id: 254,
+    name: 'Арт. 0254\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '482 050',
+    description: '5105х3300х3565',
+    image: '🎢'
+  },
+  {
+    id: 255,
+    name: 'Арт. 0255\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '610 700',
+    description: '6685х4330х3560',
+    image: '🎢'
+  },
+  {
+    id: 256,
+    name: 'Арт. 0256\nИгровой комплекс',
+    category: 'playground',
+    subcategory: 'Игровые комплексы',
+    subsubcategory: 'Серия "URBAN"',
+    price: '1 023 000',
+    description: '8555х6210х3560',
+    image: '🎢'
+  },
+  {
     id: 43,
     name: 'Скамейка парковая',
     category: 'park',
@@ -355,7 +925,7 @@ export const products = [
     image: '🪑'
   },
   {
-    id: 200,
+    id: 300,
     name: 'Резиновое покрытие',
     category: 'coating',
     subcategory: 'Резиновое покрытие',
@@ -364,7 +934,7 @@ export const products = [
     image: '🟦'
   },
   {
-    id: 201,
+    id: 301,
     name: 'Забор декоративный',
     category: 'fencing',
     subcategory: 'Заборы',
