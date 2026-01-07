@@ -763,20 +763,20 @@ export default function Index() {
             {categories.map((cat) => (
               <Card
                 key={cat.id}
-                className={`cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-2 overflow-hidden group bg-gray-50 ${
-                  selectedCategory === cat.id ? 'ring-2 ring-primary' : ''
+                className={`cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-2 overflow-hidden group border-2 ${
+                  selectedCategory === cat.id ? 'border-primary' : 'border-transparent'
                 }`}
                 onClick={() => handleCategoryClick(cat)}
               >
-                <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
+                <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                   <img 
                     src={cat.bgImage} 
                     alt={cat.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-4 bg-white">
-                  <h3 className="text-lg font-heading font-bold text-center text-foreground">{cat.name}</h3>
+                <div className={`p-5 bg-gradient-to-br ${cat.color} relative`}>
+                  <h3 className="text-xl font-heading font-bold text-center text-foreground">{cat.name}</h3>
                 </div>
               </Card>
             ))}
