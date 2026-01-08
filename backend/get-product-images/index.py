@@ -49,13 +49,14 @@ def handler(event: dict, context) -> dict:
         conn = psycopg2.connect(dsn)
         cursor = conn.cursor()
         
-        cursor.execute("""
+        article_escaped = article.replace("'", "''")
+        cursor.execute(f"""
             SELECT pi.image_url, pi.sort_order
-            FROM t_p92226548_baby_playground_equi.product_images pi
-            JOIN t_p92226548_baby_playground_equi.products p ON p.id = pi.product_id
-            WHERE p.article = %s
+            FROM product_images pi
+            JOIN products p ON p.id = pi.product_id
+            WHERE p.article = '{article_escaped}'
             ORDER BY pi.sort_order ASC
-        """, (article,))
+        """)
         
         results = cursor.fetchall()
         
