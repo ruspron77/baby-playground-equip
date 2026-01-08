@@ -53,7 +53,8 @@ export default function Index() {
             article: p.article,
             name: `Арт. ${p.article}\n${p.name}`,
             category: categoryMap[p.category] || p.category,
-            subcategory: p.name.includes('Качели') ? 'Качели' : 
+            subcategory: p.name.includes('Сиденье') ? 'Качели' :
+                        p.name.includes('Качели') ? 'Качели' : 
                         p.name.includes('Балансир') ? 'Балансиры' :
                         p.name.includes('Горка') ? 'Горки' :
                         p.name.includes('Игровой комплекс') ? 'Игровые комплексы' :
