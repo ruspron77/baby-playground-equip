@@ -18,14 +18,26 @@ export default function Index() {
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   const [expandedSubcategories, setExpandedSubcategories] = useState<string[]>([]);
   const [deliveryCost, setDeliveryCost] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredProducts = selectedCategory && selectedSubSubcategory
-    ? products.filter(p => p.category === selectedCategory && p.subsubcategory === selectedSubSubcategory)
-    : selectedCategory && selectedSubcategory
-    ? products.filter(p => p.category === selectedCategory && p.subcategory === selectedSubcategory)
-    : selectedCategory
-    ? products.filter(p => p.category === selectedCategory)
-    : products;
+  const filteredProducts = (() => {
+    let filtered = selectedCategory && selectedSubSubcategory
+      ? products.filter(p => p.category === selectedCategory && p.subsubcategory === selectedSubSubcategory)
+      : selectedCategory && selectedSubcategory
+      ? products.filter(p => p.category === selectedCategory && p.subcategory === selectedSubcategory)
+      : selectedCategory
+      ? products.filter(p => p.category === selectedCategory)
+      : products;
+    
+    if (searchQuery.trim()) {
+      filtered = filtered.filter(p => 
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.id.toString().includes(searchQuery)
+      );
+    }
+    
+    return filtered;
+  })();
 
   const handleCategoryClick = (cat: typeof categories[0]) => {
     setCurrentCategory(cat);
@@ -251,10 +263,13 @@ export default function Index() {
         expandedSubcategories={expandedSubcategories}
         filteredProducts={filteredProducts}
         handleAddToCart={addToCart}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
         handleResetFilters={() => {
           setSelectedCategory(null);
           setSelectedSubcategory(null);
           setSelectedSubSubcategory(null);
+          setSearchQuery('');
         }}
       />
 

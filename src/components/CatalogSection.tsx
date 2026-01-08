@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import { Input } from '@/components/ui/input';
 import Icon from '@/components/ui/icon';
 
 interface SubSubcategory {
@@ -64,6 +65,8 @@ interface CatalogSectionProps {
   handleSubSubcategoryClick: (subSubName: string) => void;
   filteredProducts: Product[];
   handleAddToCart: (product: Product) => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
   handleResetFilters: () => void;
 }
 
@@ -92,6 +95,8 @@ export function CatalogSection({
   handleSubSubcategoryClick,
   filteredProducts,
   handleAddToCart,
+  searchQuery,
+  setSearchQuery,
   handleResetFilters,
 }: CatalogSectionProps) {
   return (
@@ -310,10 +315,128 @@ export function CatalogSection({
             </DialogContent>
           </Dialog>
 
-          {(selectedCategory || selectedSubcategory || selectedSubSubcategory) && (
-            <>
-              <div id="products" className="mb-8 space-y-4">
-                <div className="flex items-center justify-between">
+          <div id="products" className="flex gap-6">
+            <aside className="w-72 flex-shrink-0 bg-white rounded-lg shadow-sm p-4 sticky top-24 self-start max-h-[calc(100vh-120px)] overflow-y-auto">
+              <h3 className="text-lg font-heading font-bold mb-4">Категории</h3>
+              <div className="space-y-2">
+                {categories.map((cat) => {
+                  const isExpanded = expandedCategories.includes(cat.id);
+                  return (
+                    <div key={cat.id}>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="w-8 h-8 p-0"
+                          onClick={() => toggleCategory(cat.id)}
+                        >
+                          <Icon 
+                            name={isExpanded ? "ChevronDown" : "ChevronRight"} 
+                            size={16} 
+                          />
+                        </Button>
+                        <button
+                          className={`flex-1 text-left px-3 py-2 rounded-lg hover:bg-muted transition-colors flex items-center gap-2 ${
+                            selectedCategory === cat.id && !selectedSubcategory ? 'bg-primary/10 text-primary font-semibold' : ''
+                          }`}
+                          onClick={() => handleTreeCategorySelect(cat.id, cat)}
+                        >
+                          <span className="text-sm flex-1">{cat.name}</span>
+                        </button>
+                      </div>
+                      
+                      {isExpanded && (
+                        <div className="ml-10 mt-1 space-y-1">
+                          {cat.subcategories.map((sub) => {
+                            const subKey = `${cat.id}-${sub.name}`;
+                            const isSubExpanded = expandedSubcategories.includes(subKey);
+                            
+                            return (
+                              <div key={sub.name}>
+                                <div className="flex items-center gap-1">
+                                  {sub.hasChildren && (
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      className="w-6 h-6 p-0"
+                                      onClick={() => handleTreeSubcategorySelect(cat.id, cat, sub.name, sub)}
+                                    >
+                                      <Icon 
+                                        name={isSubExpanded ? "ChevronDown" : "ChevronRight"} 
+                                        size={14} 
+                                      />
+                                    </Button>
+                                  )}
+                                  <button
+                                    className={`flex-1 text-left px-2 py-1.5 rounded text-sm hover:bg-muted transition-colors ${
+                                      !sub.hasChildren ? 'ml-6' : ''
+                                    } ${
+                                      selectedCategory === cat.id && selectedSubcategory === sub.name && !selectedSubSubcategory 
+                                        ? 'bg-primary/10 text-primary font-semibold' 
+                                        : ''
+                                    }`}
+                                    onClick={() => handleTreeSubcategorySelect(cat.id, cat, sub.name, sub)}
+                                  >
+                                    <span className="flex-1">{sub.name}</span>
+                                  </button>
+                                </div>
+                                
+                                {isSubExpanded && sub.children && (
+                                  <div className="ml-8 mt-1 space-y-1">
+                                    {sub.children.map((subSub) => (
+                                      <button
+                                        key={subSub.name}
+                                        className={`w-full text-left px-2 py-1.5 rounded text-xs hover:bg-muted transition-colors ${
+                                          selectedCategory === cat.id && 
+                                          selectedSubcategory === sub.name && 
+                                          selectedSubSubcategory === subSub.name
+                                            ? 'bg-primary/10 text-primary font-semibold' 
+                                            : ''
+                                        }`}
+                                        onClick={() => handleTreeSubSubcategorySelect(cat.id, cat, sub.name, subSub.name)}
+                                      >
+                                        {subSub.name}
+                                      </button>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </aside>
+
+            <div className="flex-1">
+              <div className="mb-6 space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="flex-1 relative">
+                    <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                    <Input 
+                      type="text"
+                      placeholder="Поиск по артикулу или названию..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-10"
+                    />
+                  </div>
+                  {(selectedCategory || selectedSubcategory || selectedSubSubcategory || searchQuery) && (
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={handleResetFilters}
+                    >
+                      <Icon name="X" size={16} className="mr-2" />
+                      Сбросить
+                    </Button>
+                  )}
+                </div>
+
+                {(selectedCategory || selectedSubcategory || selectedSubSubcategory) && (
                   <Breadcrumb>
                     <BreadcrumbList>
                       <BreadcrumbItem>
@@ -370,18 +493,10 @@ export function CatalogSection({
                       )}
                     </BreadcrumbList>
                   </Breadcrumb>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={handleResetFilters}
-                  >
-                    <Icon name="X" size={16} className="mr-2" />
-                    Сбросить фильтры
-                  </Button>
-                </div>
+                )}
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                 {filteredProducts.length > 0 ? (
                   filteredProducts.map((product) => (
                     <Card key={product.id} className="overflow-hidden hover:shadow-xl transition-all group">
@@ -432,8 +547,8 @@ export function CatalogSection({
                   </div>
                 )}
               </div>
-            </>
-          )}
+            </div>
+          </div>
 
         </div>
       </section>
