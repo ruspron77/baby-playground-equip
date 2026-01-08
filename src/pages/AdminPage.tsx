@@ -3,16 +3,61 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 
+const swingImages = [
+  'https://cdn.poehali.dev/files/111.png',
+  'https://cdn.poehali.dev/files/112.png',
+  'https://cdn.poehali.dev/files/113.png',
+  'https://cdn.poehali.dev/files/114.png',
+  'https://cdn.poehali.dev/files/115.png',
+];
+
 export default function AdminPage() {
   const [loading, setLoading] = useState(false);
+  const [uploadingImages, setUploadingImages] = useState(false);
   const [result, setResult] = useState<{ success: boolean; message: string } | null>(null);
+
+  const uploadSwingImages = async () => {
+    setUploadingImages(true);
+    setResult(null);
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/e02bd312-25b6-4983-990b-110af1ed4e52', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'upload_images',
+          images: swingImages,
+          product_code: 'КСО-212',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error('Ошибка загрузки изображений: ' + data.error);
+      }
+
+      setResult({
+        success: true,
+        message: `Загружено ${swingImages.length} изображений для качелей`,
+      });
+    } catch (error) {
+      setResult({
+        success: false,
+        message: error instanceof Error ? error.message : 'Неизвестная ошибка',
+      });
+    } finally {
+      setUploadingImages(false);
+    }
+  };
 
   const loadCatalog = async () => {
     setLoading(true);
     setResult(null);
 
     try {
-      // Шаг 1: Получаем данные из Excel
       const parseResponse = await fetch('https://functions.poehali.dev/996892ec-cd18-4c4d-9dfb-c83d04015e2e');
       const parseData = await parseResponse.json();
 
@@ -20,7 +65,6 @@ export default function AdminPage() {
         throw new Error('Ошибка парсинга Excel: ' + parseData.error);
       }
 
-      // Шаг 2: Загружаем в базу данных
       const loadResponse = await fetch('https://functions.poehali.dev/e02bd312-25b6-4983-990b-110af1ed4e52', {
         method: 'POST',
         headers: {
@@ -57,53 +101,95 @@ export default function AdminPage() {
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-8">Панель администратора</h1>
 
-        <Card className="p-6">
-          <div className="space-y-4">
-            <div>
-              <h2 className="text-xl font-semibold mb-2">Загрузка каталога</h2>
-              <p className="text-muted-foreground mb-4">
-                Загрузить товары из файла "Спорт 26.xls" в базу данных
-              </p>
-            </div>
-
-            <Button
-              onClick={loadCatalog}
-              disabled={loading}
-              size="lg"
-              className="w-full"
-            >
-              {loading ? (
-                <>
-                  <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
-                  Загрузка...
-                </>
-              ) : (
-                <>
-                  <Icon name="Download" className="mr-2 h-4 w-4" />
-                  Загрузить каталог
-                </>
-              )}
-            </Button>
-
-            {result && (
-              <div
-                className={`p-4 rounded-lg ${
-                  result.success
-                    ? 'bg-green-50 text-green-800 border border-green-200'
-                    : 'bg-red-50 text-red-800 border border-red-200'
-                }`}
-              >
-                <div className="flex items-start gap-2">
-                  <Icon
-                    name={result.success ? 'CheckCircle' : 'XCircle'}
-                    className="h-5 w-5 mt-0.5"
-                  />
-                  <p>{result.message}</p>
+        <div className="space-y-6">
+          <Card className="p-6">
+            <div className="space-y-4">
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Загрузка изображений</h2>
+                <p className="text-muted-foreground mb-4">
+                  Добавить фотографии качелей в товар КСО-212
+                </p>
+                <div className="grid grid-cols-5 gap-2 mb-4">
+                  {swingImages.map((img, idx) => (
+                    <img
+                      key={idx}
+                      src={img}
+                      alt={`Качели ${idx + 1}`}
+                      className="w-full aspect-square object-cover rounded border"
+                    />
+                  ))}
                 </div>
               </div>
-            )}
-          </div>
-        </Card>
+
+              <Button
+                onClick={uploadSwingImages}
+                disabled={uploadingImages}
+                size="lg"
+                className="w-full"
+              >
+                {uploadingImages ? (
+                  <>
+                    <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
+                    Загрузка изображений...
+                  </>
+                ) : (
+                  <>
+                    <Icon name="Image" className="mr-2 h-4 w-4" />
+                    Загрузить 5 фото качелей
+                  </>
+                )}
+              </Button>
+            </div>
+          </Card>
+
+          <Card className="p-6">
+            <div className="space-y-4">
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Загрузка каталога</h2>
+                <p className="text-muted-foreground mb-4">
+                  Загрузить товары из файла "Спорт 26.xls" в базу данных
+                </p>
+              </div>
+
+              <Button
+                onClick={loadCatalog}
+                disabled={loading}
+                size="lg"
+                className="w-full"
+              >
+                {loading ? (
+                  <>
+                    <Icon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
+                    Загрузка...
+                  </>
+                ) : (
+                  <>
+                    <Icon name="Download" className="mr-2 h-4 w-4" />
+                    Загрузить каталог
+                  </>
+                )}
+              </Button>
+            </div>
+          </Card>
+
+          {result && (
+            <div
+              className={`p-4 rounded-lg ${
+                result.success
+                  ? 'bg-green-50 text-green-800 border border-green-200'
+                  : 'bg-red-50 text-red-800 border border-red-200'
+              }`}
+            >
+              <div className="flex items-start gap-2">
+                <Icon
+                  name={result.success ? 'CheckCircle' : 'XCircle'}
+                  className="h-5 w-5 mt-0.5"
+                />
+                <p>{result.message}</p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
