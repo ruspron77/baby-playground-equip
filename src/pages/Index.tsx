@@ -209,9 +209,9 @@ export default function Index() {
     kpText += `- Принимаем наличные, безналичный расчёт, карты\n`;
     kpText += `- Гарантия 2 года на всё оборудование\n\n`;
     kpText += `Контакты:\n`;
-    kpText += `Телефон: 8 (800) 123-45-67\n`;
-    kpText += `Email: info@urbanplay.ru\n`;
-    kpText += `Адрес: г. Москва, ул. Примерная, д. 1\n`;
+    kpText += `Телефон: +7 (918) 115-15-51\n`;
+    kpText += `Email: info@urban-play.ru\n`;
+    kpText += `Адрес: г. Краснодар, ул. Кореновская д. 57 оф 7\n`;
     
     const blob = new Blob([kpText], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);

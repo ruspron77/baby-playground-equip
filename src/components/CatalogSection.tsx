@@ -316,8 +316,9 @@ export function CatalogSection({
           </Dialog>
 
           <div id="products" className="flex gap-6">
-            <aside className="w-72 flex-shrink-0 bg-white rounded-lg shadow-sm p-4 sticky top-24 self-start max-h-[calc(100vh-120px)] overflow-y-auto">
-              <h3 className="text-lg font-heading font-bold mb-4">Категории</h3>
+            <aside className="w-72 flex-shrink-0 bg-white rounded-lg shadow-sm sticky top-[120px] self-start h-[calc(100vh-140px)] flex flex-col">
+              <h3 className="text-lg font-heading font-bold p-4 pb-2">Категории</h3>
+              <div className="flex-1 overflow-y-auto px-4 pb-4">
               <div className="space-y-2">
                 {categories.map((cat) => {
                   const isExpanded = expandedCategories.includes(cat.id);
@@ -409,10 +410,11 @@ export function CatalogSection({
                   );
                 })}
               </div>
+              </div>
             </aside>
 
             <div className="flex-1">
-              <div className="mb-6 space-y-4">
+              <div className="sticky top-[120px] bg-white z-10 pb-4 mb-2">
                 <div className="flex items-center gap-4">
                   <div className="flex-1 relative">
                     <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />

@@ -104,7 +104,7 @@ export function ContentSections() {
                   <Icon name="Phone" size={32} className="text-primary" />
                 </div>
                 <h3 className="font-bold mb-2">Телефон</h3>
-                <a href="tel:88001234567" className="text-primary hover:underline">8 (800) 123-45-67</a>
+                <a href="tel:+79181151551" className="text-primary hover:underline">+7 (918) 115-15-51</a>
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
@@ -113,7 +113,7 @@ export function ContentSections() {
                   <Icon name="Mail" size={32} className="text-secondary" />
                 </div>
                 <h3 className="font-bold mb-2">Email</h3>
-                <a href="mailto:info@urbanplay.ru" className="text-secondary hover:underline">info@urbanplay.ru</a>
+                <a href="mailto:info@urban-play.ru" className="text-secondary hover:underline">info@urban-play.ru</a>
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
@@ -122,7 +122,7 @@ export function ContentSections() {
                   <Icon name="MapPin" size={32} className="text-accent" />
                 </div>
                 <h3 className="font-bold mb-2">Адрес</h3>
-                <p className="text-muted-foreground">г. Москва, ул. Примерная, д. 1</p>
+                <p className="text-muted-foreground">г. Краснодар, ул. Кореновская д. 57 оф 7</p>
               </CardContent>
             </Card>
           </div>
