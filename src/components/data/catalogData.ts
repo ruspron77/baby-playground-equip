@@ -111,7 +111,7 @@ export const categories = [
     icon: 'Leaf',
     color: 'from-emerald-500/20 to-emerald-500/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/files/экоспорт2.png',
+    bgImage: 'https://cdn.poehali.dev/files/экоспорт3.png',
     order: 5,
     subcategories: [
       { name: 'Workout', image: '🌳' },
