@@ -20,7 +20,7 @@ export default function Index() {
   const [expandedSubcategories, setExpandedSubcategories] = useState<string[]>([]);
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
-  const { data: dbProducts, isLoading } = useProducts(selectedSubcategory || undefined);
+  const { data: dbProducts, isLoading } = useProducts();
   const [allProducts, setAllProducts] = useState(staticProducts);
 
   useEffect(() => {
