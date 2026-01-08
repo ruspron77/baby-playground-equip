@@ -149,6 +149,168 @@ export const categories = [
 
 export const products = [
   {
+    id: 110,
+    name: 'Арт. 0110\nКачели',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '52 100',
+    description: '1885х1100х1990',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 111,
+    name: 'Арт. 0111\nКачели',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '52 100',
+    description: '1540х1240х2010',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 112,
+    name: 'Арт. 0112\nКачели двойные',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '71 150',
+    description: '2640х1100х1990',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 113,
+    name: 'Арт. 0113\nКачели двойные',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '71 150',
+    description: '2645х1240х2010',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 114,
+    name: 'Арт. 0114\nКачели двойные',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '89 600',
+    description: '3015х1100х1985',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 115,
+    name: 'Арт. 0115\nКачели "Гнездо"',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '144 500',
+    description: '1885х1100х1990',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 116,
+    name: 'Арт. 0116\nКачели на брусе',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '84 300',
+    description: '1645х1300х2110',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 117,
+    name: 'Арт. 0117\nКачели на брусе двойные',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '103 850',
+    description: '2745х1300х2110',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 118,
+    name: 'Арт. 0118\nКачели на брусе двойные',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '226 400',
+    description: '4250х1300х2110',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 119,
+    name: 'Арт. 0119\nКачели "Штурвал"',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '109 750',
+    description: '2740х1300х2110',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 120,
+    name: 'Арт. 0120\nКачели "Гнездо"',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '172 300',
+    description: '2740х1300х2110',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 121,
+    name: 'Арт. 0121\nКачели на брусе',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '73 900',
+    description: '1645х1300х2110',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 122,
+    name: 'Арт. 0122\nКачели на брусе двойные',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '83 400',
+    description: '2745х1300х2110',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 123,
+    name: 'Арт. 0123\nСиденье качели',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '10 250',
+    description: '380х400х310',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 124,
+    name: 'Арт. 0124\nСиденье гибкое без спинки',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '8 400',
+    description: '670х140х8',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 125,
+    name: 'Арт. 0125\nСиденье прорезиненное',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '8 700',
+    description: '450х180х27',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 126,
+    name: 'Арт. 0126\nСиденье пластиковое "Люлька"',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '22 500',
+    description: '320х260х190',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
+    id: 127,
+    name: 'Арт. 0127\nСиденье прорезиненное "Люлька"',
+    category: 'playground',
+    subcategory: 'Качели',
+    price: '28 900',
+    description: '440х290х230',
+    image: 'https://cdn.poehali.dev/files/image.png'
+  },
+  {
     id: 1,
     name: 'Арт. 0130\nБалансир "Металл"',
     category: 'playground',
