@@ -266,8 +266,8 @@ export function CatalogSection({
           </div>
 
           <div className="space-y-8 mb-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {categories.filter(cat => [1, 2, 3, 4].includes(cat.order || 0)).map((cat) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {categories.filter(cat => [1, 2, 3].includes(cat.order || 0)).map((cat) => (
                 <Card
                   key={cat.id}
                   className={`cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-2 overflow-hidden group border-2 ${
@@ -289,8 +289,8 @@ export function CatalogSection({
               ))}
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {categories.filter(cat => [5, 6, 7, 8].includes(cat.order || 0)).map((cat) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {categories.filter(cat => [4, 5, 6].includes(cat.order || 0)).map((cat) => (
                 <Card
                   key={cat.id}
                   className={`cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-2 overflow-hidden group border-2 ${

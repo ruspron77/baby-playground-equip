@@ -95,7 +95,7 @@ export const categories = [
     color: 'from-green-500/20 to-green-500/5',
     image: '',
     bgImage: 'https://cdn.poehali.dev/files/экоигра12.png',
-    order: 3,
+    order: 4,
     subcategories: [
       { name: 'Игровые комплексы', image: '🌳' },
       { name: 'Балансиры', image: '🪵' },
@@ -112,7 +112,7 @@ export const categories = [
     color: 'from-emerald-500/20 to-emerald-500/5',
     image: '',
     bgImage: 'https://cdn.poehali.dev/files/экоспорт2.png',
-    order: 4,
+    order: 5,
     subcategories: [
       { name: 'Workout', image: '🌳' },
       { name: 'Спортивные комплексы', image: '🪵' },
@@ -127,7 +127,7 @@ export const categories = [
     color: 'from-accent/20 to-accent/5',
     image: '',
     bgImage: 'https://cdn.poehali.dev/files/урбанпарк (1).png',
-    order: 5,
+    order: 3,
     subcategories: [
       { name: 'Скамейки', image: '🪑' },
       { name: 'Урны', image: '🗑️' },
@@ -137,50 +137,18 @@ export const categories = [
     ]
   },
   {
-    id: 'landscaping',
-    name: 'Благоустройство',
-    icon: 'Flower2',
-    color: 'from-primary/20 to-primary/5',
-    image: '',
-    bgImage: 'https://cdn.poehali.dev/files/благоустройство.png',
-    order: 6,
-    subcategories: [
-      { name: 'Клумбы', image: '🌷' },
-      { name: 'Газоны', image: '🌿' },
-      { name: 'Дорожки', image: '🛤️' },
-      { name: 'Освещение', image: '💡' },
-      { name: 'Озеленение', image: '🌱' }
-    ]
-  },
-  {
     id: 'coating',
     name: 'Травмобезопасное покрытие',
     icon: 'Shield',
     color: 'from-secondary/20 to-secondary/5',
     image: '',
     bgImage: 'https://cdn.poehali.dev/files/резинка.png',
-    order: 7,
+    order: 6,
     subcategories: [
       { name: 'Резиновое покрытие', image: '🟦' },
       { name: 'Наливное покрытие', image: '🟩' },
       { name: 'Модульная плитка', image: '🟨' },
       { name: 'Искусственная трава', image: '🟢' }
-    ]
-  },
-  {
-    id: 'fencing',
-    name: 'Ограждения',
-    icon: 'Grid3x3',
-    color: 'from-accent/20 to-accent/5',
-    image: '',
-    bgImage: 'https://cdn.poehali.dev/files/ограждение .png',
-    order: 8,
-    subcategories: [
-      { name: 'Заборы', image: '🔲' },
-      { name: 'Ворота', image: '🚪' },
-      { name: 'Калитки', image: '🚧' },
-      { name: 'Сетки', image: '🕸️' },
-      { name: 'Столбики', image: '⬜' }
     ]
   }
 ];
