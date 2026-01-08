@@ -155,7 +155,7 @@ export const products = [
     subcategory: 'Качели',
     price: '52 100',
     description: '1885х1100х1990',
-    image: 'https://cdn.poehali.dev/files/image.png'
+    image: 'https://cdn.poehali.dev/files/кач.png'
   },
   {
     id: 111,
