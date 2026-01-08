@@ -41,11 +41,23 @@ export default function Index() {
         const response = await fetch('https://functions.poehali.dev/6f221f1d-5b1c-4e9c-afc2-b4a2876203a1');
         const data = await response.json();
         if (data.success) {
+          const categoryMap: Record<string, string> = {
+            'playground': 'playground-urban',
+            'Workout': 'sports-urban',
+            'park': 'park',
+            'coating': 'coating'
+          };
+          
           setProducts(data.products.map((p: any) => ({
             id: p.id,
             article: p.article,
             name: `Арт. ${p.article}\n${p.name}`,
-            category: p.category,
+            category: categoryMap[p.category] || p.category,
+            subcategory: p.name.includes('Качели') ? 'Качели' : 
+                        p.name.includes('Балансир') ? 'Балансиры' :
+                        p.name.includes('Горка') ? 'Горки' :
+                        p.name.includes('Игровой комплекс') ? 'Игровые комплексы' :
+                        p.name.includes('Воркаут') ? 'Workout' : undefined,
             price: p.price?.toString() || '0',
             image: p.image,
             description: p.description,
