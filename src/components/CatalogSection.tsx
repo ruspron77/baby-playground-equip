@@ -243,7 +243,7 @@ export function CatalogSection({
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 animate-slide-up">
             <h2 className="text-4xl font-heading font-bold mb-4">Каталог продукции</h2>
-            <p className="text-lg text-muted-foreground">Широкий ассортимент оборудования для детских площадок и парков</p>
+            <p className="text-lg text-muted-foreground">Широкий ассортимент детского игрового и спортивного оборудования </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
