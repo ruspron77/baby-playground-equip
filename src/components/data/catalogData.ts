@@ -25,7 +25,7 @@ export const categories = [
     icon: 'Smile',
     color: 'from-primary/20 to-primary/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/files/_____.jpg',
+    bgImage: 'https://cdn.poehali.dev/files/урбанигра.png',
     subcategories: [
       { name: 'Игровые комплексы', image: 'https://cdn.poehali.dev/files/237.png' },
       { name: 'Балансиры', image: 'https://cdn.poehali.dev/files/мишкаа.png' },
@@ -52,7 +52,7 @@ export const categories = [
     icon: 'Dumbbell',
     color: 'from-secondary/20 to-secondary/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/files/48.jpg',
+    bgImage: 'https://cdn.poehali.dev/files/урбан спрот1.png',
     subcategories: [
       { name: 'Workout', image: '💪' },
       { name: 'Ворота, стойки, щиты', image: '🥅' },
@@ -92,7 +92,7 @@ export const categories = [
     icon: 'Trees',
     color: 'from-accent/20 to-accent/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/files/29934.0x340.jpg',
+    bgImage: 'https://cdn.poehali.dev/files/урбанпарк (1).png',
     subcategories: [
       { name: 'Скамейки', image: '🪑' },
       { name: 'Урны', image: '🗑️' },
@@ -122,7 +122,7 @@ export const categories = [
     icon: 'Shield',
     color: 'from-secondary/20 to-secondary/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/files/i (1).png',
+    bgImage: 'https://cdn.poehali.dev/files/резинка.png',
     subcategories: [
       { name: 'Резиновое покрытие', image: '🟦' },
       { name: 'Наливное покрытие', image: '🟩' },
