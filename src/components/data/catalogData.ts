@@ -26,6 +26,7 @@ export const categories = [
     color: 'from-primary/20 to-primary/5',
     image: '',
     bgImage: 'https://cdn.poehali.dev/files/урбанигра.png',
+    order: 1,
     subcategories: [
       { name: 'Игровые комплексы', image: 'https://cdn.poehali.dev/files/237.png' },
       { name: 'Балансиры', image: 'https://cdn.poehali.dev/files/мишкаа.png' },
@@ -53,6 +54,7 @@ export const categories = [
     color: 'from-secondary/20 to-secondary/5',
     image: '',
     bgImage: 'https://cdn.poehali.dev/files/урбан спрот1.png',
+    order: 2,
     subcategories: [
       { name: 'Workout', image: '💪' },
       { name: 'Ворота, стойки, щиты', image: '🥅' },
@@ -87,27 +89,13 @@ export const categories = [
     ]
   },
   {
-    id: 'park',
-    name: 'Парковое оборудование',
-    icon: 'Trees',
-    color: 'from-accent/20 to-accent/5',
-    image: '',
-    bgImage: 'https://cdn.poehali.dev/files/урбанпарк (1).png',
-    subcategories: [
-      { name: 'Скамейки', image: '🪑' },
-      { name: 'Урны', image: '🗑️' },
-      { name: 'Беседки', image: '🏡' },
-      { name: 'Навесы', image: '⛱️' },
-      { name: 'МАФ', image: '🎨' }
-    ]
-  },
-  {
     id: 'playground-eco',
     name: 'Игровое оборудование "Eco"',
     icon: 'TreePine',
     color: 'from-green-500/20 to-green-500/5',
     image: '',
     bgImage: 'https://cdn.poehali.dev/files/экоигра12.png',
+    order: 3,
     subcategories: [
       { name: 'Игровые комплексы', image: '🌳' },
       { name: 'Балансиры', image: '🪵' },
@@ -124,6 +112,7 @@ export const categories = [
     color: 'from-emerald-500/20 to-emerald-500/5',
     image: '',
     bgImage: 'https://cdn.poehali.dev/files/экоспорт2.png',
+    order: 4,
     subcategories: [
       { name: 'Workout', image: '🌳' },
       { name: 'Спортивные комплексы', image: '🪵' },
@@ -132,19 +121,19 @@ export const categories = [
     ]
   },
   {
-    id: 'thematic',
-    name: 'Тематическое оборудование',
-    icon: 'Castle',
-    color: 'from-purple-500/20 to-purple-500/5',
+    id: 'park',
+    name: 'Парковое оборудование',
+    icon: 'Trees',
+    color: 'from-accent/20 to-accent/5',
     image: '',
-    bgImage: 'https://cdn.poehali.dev/files/урбанигра.png',
+    bgImage: 'https://cdn.poehali.dev/files/урбанпарк (1).png',
+    order: 5,
     subcategories: [
-      { name: 'Замки и крепости', image: '🏰' },
-      { name: 'Корабли и пираты', image: '🚢' },
-      { name: 'Космос', image: '🚀' },
-      { name: 'Динозавры', image: '🦕' },
-      { name: 'Сказки', image: '📖' },
-      { name: 'Транспорт', image: '🚂' }
+      { name: 'Скамейки', image: '🪑' },
+      { name: 'Урны', image: '🗑️' },
+      { name: 'Беседки', image: '🏡' },
+      { name: 'Навесы', image: '⛱️' },
+      { name: 'МАФ', image: '🎨' }
     ]
   },
   {
@@ -154,6 +143,7 @@ export const categories = [
     color: 'from-primary/20 to-primary/5',
     image: '',
     bgImage: 'https://cdn.poehali.dev/files/благоустройство.png',
+    order: 6,
     subcategories: [
       { name: 'Клумбы', image: '🌷' },
       { name: 'Газоны', image: '🌿' },
@@ -169,6 +159,7 @@ export const categories = [
     color: 'from-secondary/20 to-secondary/5',
     image: '',
     bgImage: 'https://cdn.poehali.dev/files/резинка.png',
+    order: 7,
     subcategories: [
       { name: 'Резиновое покрытие', image: '🟦' },
       { name: 'Наливное покрытие', image: '🟩' },
@@ -183,6 +174,7 @@ export const categories = [
     color: 'from-accent/20 to-accent/5',
     image: '',
     bgImage: 'https://cdn.poehali.dev/files/ограждение .png',
+    order: 8,
     subcategories: [
       { name: 'Заборы', image: '🔲' },
       { name: 'Ворота', image: '🚪' },

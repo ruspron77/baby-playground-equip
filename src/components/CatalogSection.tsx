@@ -29,6 +29,7 @@ interface Category {
   image: string;
   bgImage: string;
   subcategories: Subcategory[];
+  order?: number;
 }
 
 interface Product {
@@ -264,27 +265,52 @@ export function CatalogSection({
             <p className="text-lg text-muted-foreground">Широкий ассортимент детского игрового и спортивного оборудования </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {categories.map((cat) => (
-              <Card
-                key={cat.id}
-                className={`cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-2 overflow-hidden group border-2 ${
-                  selectedCategory === cat.id ? 'border-primary' : 'border-transparent'
-                }`}
-                onClick={() => handleCategoryClick(cat)}
-              >
-                <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
-                  <img 
-                    src={cat.bgImage} 
-                    alt={cat.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className={`py-3 px-4 bg-gradient-to-br ${cat.color} relative flex items-center justify-center border-t-2 border-gray-200`}>
-                  <h3 className="text-lg font-heading font-bold text-center text-foreground leading-tight">{cat.name}</h3>
-                </div>
-              </Card>
-            ))}
+          <div className="space-y-8 mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {categories.filter(cat => [1, 2, 3, 4].includes(cat.order || 0)).map((cat) => (
+                <Card
+                  key={cat.id}
+                  className={`cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-2 overflow-hidden group border-2 ${
+                    selectedCategory === cat.id ? 'border-primary' : 'border-transparent'
+                  }`}
+                  onClick={() => handleCategoryClick(cat)}
+                >
+                  <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                    <img 
+                      src={cat.bgImage} 
+                      alt={cat.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className={`py-3 px-4 bg-gradient-to-br ${cat.color} relative flex items-center justify-center border-t-2 border-gray-200`}>
+                    <h3 className="text-base font-heading font-bold text-center text-foreground leading-tight">{cat.name}</h3>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {categories.filter(cat => [5, 6, 7, 8].includes(cat.order || 0)).map((cat) => (
+                <Card
+                  key={cat.id}
+                  className={`cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-2 overflow-hidden group border-2 ${
+                    selectedCategory === cat.id ? 'border-primary' : 'border-transparent'
+                  }`}
+                  onClick={() => handleCategoryClick(cat)}
+                >
+                  <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                    <img 
+                      src={cat.bgImage} 
+                      alt={cat.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className={`py-3 px-4 bg-gradient-to-br ${cat.color} relative flex items-center justify-center border-t-2 border-gray-200`}>
+                    <h3 className="text-base font-heading font-bold text-center text-foreground leading-tight">{cat.name}</h3>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
 
           <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
