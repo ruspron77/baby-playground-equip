@@ -48,22 +48,41 @@ export default function Index() {
             'coating': 'coating'
           };
           
-          setProducts(data.products.map((p: any) => ({
-            id: p.id,
-            article: p.article,
-            name: `Арт. ${p.article}\n${p.name}`,
-            category: categoryMap[p.category] || p.category,
-            subcategory: p.name.includes('Сиденье') ? 'Качели' :
-                        p.name.includes('Качели') ? 'Качели' : 
-                        p.name.includes('Балансир') ? 'Балансиры' :
-                        p.name.includes('Горка') ? 'Горки' :
-                        p.name.includes('Игровой комплекс') ? 'Игровые комплексы' :
-                        p.name.includes('Воркаут') ? 'Workout' : undefined,
-            price: p.price?.toString() || '0',
-            image: p.image,
-            description: p.description,
-            dimensions: p.dimensions
-          })));
+          setProducts(data.products.map((p: any) => {
+            const mappedCategory = categoryMap[p.category] || p.category;
+            let subcategory = undefined;
+            let subsubcategory = undefined;
+            
+            if (p.name.includes('Сиденье') || p.name.includes('Качели')) {
+              subcategory = 'Серия "Classic"';
+              subsubcategory = 'Качели';
+            } else if (p.name.includes('Балансир')) {
+              subcategory = 'Серия "Classic"';
+              subsubcategory = 'Балансиры';
+            } else if (p.name.includes('Горка')) {
+              subcategory = 'Серия "Classic"';
+              subsubcategory = 'Горки';
+            } else if (p.name.includes('Игровой комплекс')) {
+              subcategory = 'Серия "Classic"';
+              subsubcategory = 'Игровые комплексы';
+            } else if (p.name.includes('Воркаут')) {
+              subcategory = 'Серия "Classic Sport"';
+              subsubcategory = 'Workout';
+            }
+            
+            return {
+              id: p.id,
+              article: p.article,
+              name: `Арт. ${p.article}\n${p.name}`,
+              category: mappedCategory,
+              subcategory,
+              subsubcategory,
+              price: p.price?.toString() || '0',
+              image: p.image,
+              description: p.description,
+              dimensions: p.dimensions
+            };
+          }));
         }
       } catch (error) {
         console.error('Failed to load products:', error);
