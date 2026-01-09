@@ -35,6 +35,34 @@ export default function Index() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoadingProducts, setIsLoadingProducts] = useState(true);
   const [selectedSeries, setSelectedSeries] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    if (savedFavorites) {
+      setFavorites(JSON.parse(savedFavorites));
+    }
+  }, []);
+
+  const addToFavorites = (product: Product) => {
+    const newFavorites = [...favorites, product];
+    setFavorites(newFavorites);
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+  };
+
+  const removeFromFavorites = (id: number) => {
+    const newFavorites = favorites.filter(item => item.id !== id);
+    setFavorites(newFavorites);
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+  };
+
+  const toggleFavorite = (product: Product) => {
+    if (favorites.some(item => item.id === product.id)) {
+      removeFromFavorites(product.id);
+    } else {
+      addToFavorites(product);
+    }
+  };
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -335,6 +363,7 @@ export default function Index() {
         calculateTotal={calculateTotal}
         deliveryCost={deliveryCost}
         generateKP={generateKP}
+        favoritesCount={favorites.length}
       />
 
       <CatalogSection
@@ -375,6 +404,8 @@ export default function Index() {
         selectedSeries={selectedSeries}
         setSelectedSeries={setSelectedSeries}
         availableCategories={availableCategories}
+        favorites={favorites}
+        toggleFavorite={toggleFavorite}
       />
 
       <ContentSections />

@@ -76,6 +76,8 @@ interface CatalogSectionProps {
   selectedSeries: string | null;
   setSelectedSeries: (series: string | null) => void;
   availableCategories: string[];
+  favorites: Product[];
+  toggleFavorite: (product: Product) => void;
 }
 
 export function CatalogSection({
@@ -110,6 +112,8 @@ export function CatalogSection({
   selectedSeries,
   setSelectedSeries,
   availableCategories,
+  favorites,
+  toggleFavorite,
 }: CatalogSectionProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProductDialogOpen, setIsProductDialogOpen] = useState(false);
@@ -636,10 +640,10 @@ export function CatalogSection({
                   </Button>
                   <Button 
                     size="lg"
-                    variant="outline"
-                    onClick={() => setIsProductDialogOpen(false)}
+                    variant={favorites.some(f => f.id === selectedProduct.id) ? "default" : "outline"}
+                    onClick={() => toggleFavorite(selectedProduct)}
                   >
-                    <Icon name="Heart" size={20} />
+                    <Icon name="Heart" size={20} className={favorites.some(f => f.id === selectedProduct.id) ? "fill-current" : ""} />
                   </Button>
                 </div>
 

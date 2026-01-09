@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import Icon from '@/components/ui/icon';
 import { CartItem } from './data/catalogData';
+import { Link } from 'react-router-dom';
 
 interface HeaderProps {
   cart: CartItem[];
@@ -14,6 +15,7 @@ interface HeaderProps {
   calculateTotal: () => number;
   deliveryCost: number;
   generateKP: () => void;
+  favoritesCount?: number;
 }
 
 export function Header({
@@ -25,7 +27,8 @@ export function Header({
   removeFromCart,
   calculateTotal,
   deliveryCost,
-  generateKP
+  generateKP,
+  favoritesCount = 0
 }: HeaderProps) {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50 border-b">
@@ -62,6 +65,17 @@ export function Header({
             >
               <Icon name="Menu" size={20} />
             </Button>
+
+            <Link to="/favorites">
+              <Button variant="outline" className="relative">
+                <Icon name="Heart" size={20} />
+                {favoritesCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold">
+                    {favoritesCount}
+                  </span>
+                )}
+              </Button>
+            </Link>
             
             <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
               <SheetTrigger asChild>
