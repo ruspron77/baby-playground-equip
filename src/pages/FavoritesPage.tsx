@@ -39,7 +39,7 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
                 className="h-16 w-auto"
               />
             </Link>
-            <Link to="/">
+            <Link to="/#catalog">
               <Button variant="outline">
                 <Icon name="ArrowLeft" size={20} className="mr-2" />
                 Назад к каталогу
@@ -59,7 +59,7 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
             <p className="text-muted-foreground mb-6">
               Добавляйте товары в избранное, нажимая на сердечко в карточке товара
             </p>
-            <Link to="/">
+            <Link to="/#catalog">
               <Button>
                 <Icon name="ShoppingCart" size={20} className="mr-2" />
                 Перейти к каталогу
