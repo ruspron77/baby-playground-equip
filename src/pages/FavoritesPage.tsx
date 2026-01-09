@@ -39,12 +39,12 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
                 className="h-16 w-auto"
               />
             </Link>
-            <Link to="/#catalog">
-              <Button variant="outline">
-                <Icon name="ArrowLeft" size={20} className="mr-2" />
-                Назад к каталогу
-              </Button>
-            </Link>
+            <Button variant="outline" onClick={() => {
+              window.location.href = '/#catalog';
+            }}>
+              <Icon name="ArrowLeft" size={20} className="mr-2" />
+              Назад к каталогу
+            </Button>
           </div>
         </div>
       </header>
@@ -59,12 +59,12 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
             <p className="text-muted-foreground mb-6">
               Добавляйте товары в избранное, нажимая на сердечко в карточке товара
             </p>
-            <Link to="/#catalog">
-              <Button>
-                <Icon name="ShoppingCart" size={20} className="mr-2" />
-                Перейти к каталогу
-              </Button>
-            </Link>
+            <Button onClick={() => {
+              window.location.href = '/#catalog';
+            }}>
+              <Icon name="ShoppingCart" size={20} className="mr-2" />
+              Перейти к каталогу
+            </Button>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
