@@ -528,7 +528,6 @@ export function CatalogSection({
               </div>
             </div>
           </div>
-          )}
 
         </div>
       </section>
