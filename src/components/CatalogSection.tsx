@@ -535,9 +535,6 @@ export function CatalogSection({
                           ) : (
                             <h3 className="text-sm font-heading font-bold line-clamp-2">{product.name}</h3>
                           )}
-                          {product.dimensions && (
-                            <p className="text-xs text-muted-foreground line-clamp-1 leading-tight">{product.dimensions}</p>
-                          )}
                         </div>
                         <p className="text-lg font-bold text-primary mt-2">{formatPrice(product.price)} ₽</p>
                         <Button 
