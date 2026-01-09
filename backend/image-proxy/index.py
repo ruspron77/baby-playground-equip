@@ -1,5 +1,6 @@
 import json
 import urllib.request
+import urllib.parse
 import base64
 
 def handler(event: dict, context) -> dict:
@@ -35,7 +36,18 @@ def handler(event: dict, context) -> dict:
         }
     
     try:
-        with urllib.request.urlopen(url) as response:
+        parsed_url = urllib.parse.urlparse(url)
+        encoded_path = urllib.parse.quote(parsed_url.path.encode('utf-8'), safe='/:%')
+        safe_url = urllib.parse.urlunparse((
+            parsed_url.scheme,
+            parsed_url.netloc,
+            encoded_path,
+            parsed_url.params,
+            parsed_url.query,
+            parsed_url.fragment
+        ))
+        
+        with urllib.request.urlopen(safe_url) as response:
             image_data = response.read()
             image_base64 = base64.b64encode(image_data).decode('utf-8')
             
