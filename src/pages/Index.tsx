@@ -44,8 +44,8 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
   const [isLoadingProducts, setIsLoadingProducts] = useState(true);
   const [selectedSeries, setSelectedSeries] = useState<string | null>(null);
   const [isExcelSettingsOpen, setIsExcelSettingsOpen] = useState(false);
-  const [imageColumnWidth, setImageColumnWidth] = useState(27);
-  const [imageRowHeight, setImageRowHeight] = useState(198);
+  const [imageColumnWidth, setImageColumnWidth] = useState(30);
+  const [imageRowHeight, setImageRowHeight] = useState(130);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -462,8 +462,8 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
           });
           
           worksheet.addImage(imageId, {
-            tl: { col: 2.1, row: currentRow - 0.9 },
-            br: { col: 2.9, row: currentRow - 0.1 },
+            tl: { col: 2.15, row: currentRow - 0.85 },
+            br: { col: 2.85, row: currentRow - 0.15 },
             editAs: 'oneCell'
           });
         } catch (error) {
