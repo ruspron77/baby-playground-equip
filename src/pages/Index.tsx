@@ -260,62 +260,17 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     
     worksheet.columns = [
       { width: 5 },
-      { width: 20 },
-      { width: 40 },
+      { width: 15 },
+      { width: 45 },
       { width: 15 },
       { width: 12 },
       { width: 15 }
     ];
     
-    const loadImageAsBase64 = async (url: string): Promise<ArrayBuffer | null> => {
-      try {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        
-        return new Promise((resolve) => {
-          img.onload = () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext('2d');
-            if (ctx) {
-              ctx.drawImage(img, 0, 0);
-              canvas.toBlob((blob) => {
-                if (blob) {
-                  blob.arrayBuffer().then(resolve);
-                } else {
-                  resolve(null);
-                }
-              }, 'image/png');
-            } else {
-              resolve(null);
-            }
-          };
-          img.onerror = () => resolve(null);
-          img.src = url;
-        });
-      } catch (error) {
-        console.error('Failed to load image:', error);
-        return null;
-      }
-    };
-    
-    const logoBuffer = await loadImageAsBase64('https://cdn.poehali.dev/files/photo_643632026-01-05_09-32-44.png');
-    if (logoBuffer) {
-      try {
-        const logoId = workbook.addImage({
-          buffer: logoBuffer,
-          extension: 'png',
-        });
-        
-        worksheet.addImage(logoId, {
-          tl: { col: 0.2, row: 0.2 },
-          ext: { width: 120, height: 90 }
-        });
-      } catch (error) {
-        console.error('Failed to add logo:', error);
-      }
-    }
+    worksheet.getRow(1).height = 60;
+    worksheet.getCell('A1').value = 'URBAN PLAY';
+    worksheet.getCell('A1').font = { size: 20, bold: true, color: { argb: 'FF0066CC' } };
+    worksheet.getCell('A1').alignment = { vertical: 'middle', horizontal: 'left' };
     
     worksheet.getCell('D2').value = 'ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ';
     worksheet.getCell('D2').font = { bold: true, size: 11 };
@@ -337,7 +292,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     worksheet.getCell('B10').value = `Дата: ${date}`;
     
     const headerRow = worksheet.getRow(12);
-    headerRow.values = ['', 'Фото', 'Наименование', 'Цена', 'Кол-во', 'Сумма'];
+    headerRow.values = ['', 'Артикул', 'Наименование', 'Цена', 'Кол-во', 'Сумма'];
     headerRow.font = { bold: true };
     headerRow.height = 20;
     headerRow.eachCell((cell) => {
@@ -362,28 +317,14 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       const itemTotal = price * item.quantity;
       
       const row = worksheet.getRow(currentRow);
-      row.height = 80;
+      row.height = 30;
       
-      if (item.image && item.image.startsWith('http')) {
-        const imgBuffer = await loadImageAsBase64(item.image);
-        if (imgBuffer) {
-          try {
-            const imageId = workbook.addImage({
-              buffer: imgBuffer,
-              extension: 'png',
-            });
-            
-            worksheet.addImage(imageId, {
-              tl: { col: 1.1, row: currentRow - 0.9 },
-              ext: { width: 100, height: 75 }
-            });
-          } catch (error) {
-            console.error('Failed to add product image:', error);
-          }
-        }
-      }
+      const nameParts = item.name.split('\n');
+      const article = nameParts[0] ? nameParts[0].replace('Арт. ', '') : '';
+      const productName = nameParts[1] || item.name;
       
-      row.getCell(3).value = item.name.replace('Арт. ', '').replace('\n', ' - ');
+      row.getCell(2).value = article;
+      row.getCell(3).value = productName;
       row.getCell(4).value = `${price.toLocaleString('ru-RU')} ₽`;
       row.getCell(5).value = item.quantity;
       row.getCell(6).value = `${itemTotal.toLocaleString('ru-RU')} ₽`;
