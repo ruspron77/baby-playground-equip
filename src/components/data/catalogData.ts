@@ -30,7 +30,7 @@ export const categories = [
     subcategories: [
       { 
         name: 'Серия "Classic"', 
-        image: 'https://cdn.poehali.dev/files/урбанигра.png',
+        image: 'https://cdn.poehali.dev/files/%D0%B8%D0%B3%D1%80%D0%B0%20ciassic.png',
         hasChildren: true,
         children: [
           { name: 'Игровые комплексы', image: 'https://cdn.poehali.dev/files/237.png' },
@@ -53,7 +53,7 @@ export const categories = [
       },
       { 
         name: 'Серия "Eco"', 
-        image: 'https://cdn.poehali.dev/files/экоигра12.png',
+        image: 'https://cdn.poehali.dev/files/%D0%B8%D0%B3%D1%80%D0%B0%20Eco.png',
         hasChildren: true,
         children: [
           { name: 'Игровые комплексы', image: '🌳' },
@@ -77,7 +77,7 @@ export const categories = [
     subcategories: [
       { 
         name: 'Серия "Classic Sport"', 
-        image: 'https://cdn.poehali.dev/files/урбан спрот1.png',
+        image: 'https://cdn.poehali.dev/files/%D1%81%D0%BF%D0%BE%D1%80%D1%82%20Classic.png',
         hasChildren: true,
         children: [
           { name: 'Workout', image: '💪' },
@@ -94,7 +94,7 @@ export const categories = [
       },
       { 
         name: 'Серия "Eco Sport"', 
-        image: 'https://cdn.poehali.dev/files/экоспорт3.png',
+        image: 'https://cdn.poehali.dev/files/%D1%81%D0%BF%D0%BE%D1%80%D1%82%20Eco.png',
         hasChildren: true,
         children: [
           { name: 'Workout', image: '🌳' },
