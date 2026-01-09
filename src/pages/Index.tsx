@@ -3,8 +3,6 @@ import { Header } from '@/components/Header';
 import { CatalogSection } from '@/components/CatalogSection';
 import { ContentSections } from '@/components/ContentSections';
 import { categories, CartItem, Subcategory } from '@/components/data/catalogData';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 interface Product {
   id: number;
@@ -253,128 +251,6 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
   };
 
   const generateKP = async () => {
-    const total = calculateTotal();
-    const montageDelivery = Math.round(total * 0.2);
-    const grandTotal = total + montageDelivery;
-    const date = new Date().toLocaleDateString('ru-RU');
-    const kpNumber = `0001 от ${date}`;
-    
-    // Создаем временный HTML элемент для PDF
-    const tempDiv = document.createElement('div');
-    tempDiv.style.position = 'absolute';
-    tempDiv.style.left = '-9999px';
-    tempDiv.style.width = '210mm';
-    tempDiv.style.padding = '20mm';
-    tempDiv.style.backgroundColor = 'white';
-    tempDiv.style.fontFamily = 'Arial, sans-serif';
-    
-    tempDiv.innerHTML = `
-      <div style="margin-bottom: 30px;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
-          <div style="width: 200px;">
-            <img src="https://cdn.poehali.dev/files/photo_2026-01-05_09-32-44.png" style="width: 180px; height: auto;" />
-          </div>
-          <div style="text-align: right; font-size: 10px;">
-            <div style="font-weight: bold; margin-bottom: 3px;">ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ</div>
-            <div>ИНН 110209455200 ОГРНИП 32377460012482</div>
-            <div>350005, г. Краснодар, ул. Кореновская, д. 57 оф.7</div>
-            <div>тел: +7 918 115 15 51 e-mail: info@urban-play.ru</div>
-            <div style="color: blue; text-decoration: underline;">www.urban-play.ru</div>
-          </div>
-        </div>
-        <div style="height: 3px; background: linear-gradient(to right, #6B21A8, #A855F7); margin: 20px 0;"></div>
-      </div>
-      
-      <h1 style="text-align: center; font-size: 18px; margin-bottom: 20px;">Коммерческое предложение № ${kpNumber}</h1>
-      
-      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
-        <thead>
-          <tr style="background-color: #E0E0E0;">
-            <th style="border: 1px solid #999; padding: 8px; text-align: center; width: 30px;">№</th>
-            <th style="border: 1px solid #999; padding: 8px; text-align: center;">Наименование</th>
-            <th style="border: 1px solid #999; padding: 8px; text-align: center; width: 120px;">Рисунок</th>
-            <th style="border: 1px solid #999; padding: 8px; text-align: center; width: 60px;">Кол-во</th>
-            <th style="border: 1px solid #999; padding: 8px; text-align: center; width: 60px;">Ед.изм</th>
-            <th style="border: 1px solid #999; padding: 8px; text-align: center; width: 100px;">Цена, руб</th>
-            <th style="border: 1px solid #999; padding: 8px; text-align: center; width: 100px;">Сумма, руб</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${cart.map((item, i) => {
-            const price = parseInt(item.price.replace(/\s/g, '').split('/')[0]);
-            const itemTotal = price * item.quantity;
-            const nameParts = item.name.split('\n');
-            const productName = nameParts[1] || item.name;
-            
-            return `
-              <tr>
-                <td style="border: 1px solid #999; padding: 8px; text-align: center;">${i + 1}</td>
-                <td style="border: 1px solid #999; padding: 8px;">${productName}</td>
-                <td style="border: 1px solid #999; padding: 4px; text-align: center;">
-                  ${item.image.startsWith('http') 
-                    ? `<img src="${item.image}" style="max-width: 100px; max-height: 80px; object-fit: contain;" />`
-                    : `<div style="font-size: 40px;">${item.image}</div>`
-                  }
-                </td>
-                <td style="border: 1px solid #999; padding: 8px; text-align: center;">${item.quantity}</td>
-                <td style="border: 1px solid #999; padding: 8px; text-align: center;">шт</td>
-                <td style="border: 1px solid #999; padding: 8px; text-align: center;">${price.toLocaleString('ru-RU')}</td>
-                <td style="border: 1px solid #999; padding: 8px; text-align: center;">${itemTotal.toLocaleString('ru-RU')}</td>
-              </tr>
-            `;
-          }).join('')}
-          <tr>
-            <td style="border: 1px solid #999; padding: 8px; text-align: center;">${cart.length + 1}</td>
-            <td style="border: 1px solid #999; padding: 8px;">Монтаж + доставка</td>
-            <td style="border: 1px solid #999; padding: 8px;"></td>
-            <td style="border: 1px solid #999; padding: 8px; text-align: center;">1</td>
-            <td style="border: 1px solid #999; padding: 8px; text-align: center;">усл</td>
-            <td style="border: 1px solid #999; padding: 8px; text-align: center;">${montageDelivery.toLocaleString('ru-RU')}</td>
-            <td style="border: 1px solid #999; padding: 8px; text-align: center;">${montageDelivery.toLocaleString('ru-RU')}</td>
-          </tr>
-          <tr style="font-weight: bold;">
-            <td colspan="5" style="border: 1px solid #999; padding: 8px;"></td>
-            <td style="border: 1px solid #999; padding: 8px; text-align: right;">Итого:</td>
-            <td style="border: 1px solid #999; padding: 8px; text-align: center;">${grandTotal.toLocaleString('ru-RU')}</td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <div style="font-size: 10px; margin-top: 30px; line-height: 1.6;">
-        <div>Оборудование имеет сертификат соответствия ТС ЕАЭС 042-2017</div>
-        <div>Срок действия коммерческого предложения 15 дней</div>
-        <div>Срок изготовления оборудования 30 дней</div>
-      </div>
-      
-      <div style="display: flex; justify-content: space-between; margin-top: 40px; font-size: 11px;">
-        <div>Индивидуальный предприниматель</div>
-        <div style="font-style: italic;">/Пронин Р.О./</div>
-      </div>
-    `;
-    
-    document.body.appendChild(tempDiv);
-    
-    try {
-      const canvas = await html2canvas(tempDiv, {
-        scale: 2,
-        useCORS: true,
-        allowTaint: true,
-        logging: false
-      });
-      
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`КП_${kpNumber.replace(/[\/\s]/g, '_')}.pdf`);
-    } finally {
-      document.body.removeChild(tempDiv);
-    }
-  };
-
-  const oldGenerateKPExcel = async () => {
     const total = calculateTotal();
     const montageDelivery = Math.round(total * 0.2);
     const grandTotal = total + montageDelivery;
