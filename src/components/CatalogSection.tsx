@@ -141,9 +141,9 @@ export function CatalogSection({
       <section className="relative py-20 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/_____.jpg)' }}
+          style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/основная страница.png)' }}
         >
-          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="absolute inset-0 bg-black/30"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -381,9 +381,13 @@ export function CatalogSection({
             </DialogContent>
           </Dialog>
 
-          <div id="products" className="container mx-auto px-4">
-            <div>
-              <div className="sticky top-[120px] bg-white z-10 pb-4 mb-2 pt-4">
+          {selectedCategory && (
+            <div id="products" className="container mx-auto px-4">
+              <div>
+                <h2 className="text-3xl font-heading font-bold mb-4 mt-8">
+                  {categories.find(c => c.id === selectedCategory)?.name}
+                </h2>
+                <div className="sticky top-[120px] bg-white z-10 pb-4 mb-2 pt-4">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="flex-1 relative">
                     <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -550,6 +554,7 @@ export function CatalogSection({
               </div>
             </div>
           </div>
+          )}
 
         </div>
       </section>
