@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import Icon from '@/components/ui/icon';
 import { CartItem } from './data/catalogData';
 import { Link } from 'react-router-dom';
+import { OrderForm, OrderFormData } from './OrderForm';
 
 const formatPrice = (price: string | number): string => {
   const numPrice = typeof price === 'string' ? parseInt(price.replace(/\s/g, '')) : price;
@@ -37,6 +38,7 @@ export function Header({
   favoritesCount = 0
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showOrderForm, setShowOrderForm] = useState(false);
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50 border-b">
@@ -209,43 +211,66 @@ export function Header({
                       ))}
                     </div>
                     
-                    <div className="border-t pt-4 space-y-3">
-                      <div className="flex justify-between text-lg font-semibold">
-                        <span>Итого:</span>
-                        <span className="text-primary">{calculateTotal().toLocaleString('ru-RU')} ₽</span>
+                    {showOrderForm ? (
+                      <div className="mt-4">
+                        <OrderForm
+                          total={calculateTotal()}
+                          deliveryCost={deliveryCost}
+                          onSubmit={(formData: OrderFormData) => {
+                            console.log('Order submitted:', formData);
+                          }}
+                          onCancel={() => setShowOrderForm(false)}
+                        />
                       </div>
-                      
-                      {deliveryCost > 0 && (
-                        <div className="flex justify-between text-sm text-muted-foreground">
-                          <span>Доставка:</span>
-                          <span>{deliveryCost.toLocaleString('ru-RU')} ₽</span>
+                    ) : (
+                      <div className="border-t pt-4 space-y-3">
+                        <div className="flex justify-between text-lg font-semibold">
+                          <span>Итого:</span>
+                          <span className="text-primary">{calculateTotal().toLocaleString('ru-RU')} ₽</span>
                         </div>
-                      )}
-                      
-                      <Button 
-                        className="w-full" 
-                        size="lg"
-                        onClick={() => {
-                          generateKP();
-                          setIsCartOpen(false);
-                        }}
-                      >
-                        <Icon name="FileText" size={20} className="mr-2" />
-                        Скачать коммерческое предложение
-                      </Button>
-                      
-                      <Button 
-                        variant="outline" 
-                        className="w-full" 
-                        size="lg"
-                        asChild
-                      >
-                        <a href="tel:+79181151551">
-                          <Icon name="Phone" size={16} className="mr-2" />
-                          +7 (918) 115-15-51
-                        </a>
-                      </Button>
-                    </div>
+                        
+                        {deliveryCost > 0 && (
+                          <div className="flex justify-between text-sm text-muted-foreground">
+                            <span>Доставка:</span>
+                            <span>{deliveryCost.toLocaleString('ru-RU')} ₽</span>
+                          </div>
+                        )}
+                        
+                        <Button 
+                          className="w-full" 
+                          size="lg"
+                          onClick={() => setShowOrderForm(true)}
+                        >
+                          <Icon name="ShoppingBag" size={20} className="mr-2" />
+                          Оформить заказ
+                        </Button>
+                        
+                        <Button 
+                          variant="outline"
+                          className="w-full" 
+                          size="lg"
+                          onClick={() => {
+                            generateKP();
+                            setIsCartOpen(false);
+                          }}
+                        >
+                          <Icon name="FileText" size={20} className="mr-2" />
+                          Скачать коммерческое предложение
+                        </Button>
+                        
+                        <Button 
+                          variant="outline" 
+                          className="w-full" 
+                          size="lg"
+                          asChild
+                        >
+                          <a href="tel:+79181151551">
+                            <Icon name="Phone" size={16} className="mr-2" />
+                            +7 (918) 115-15-51
+                          </a>
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </SheetContent>
