@@ -413,18 +413,18 @@ export function CatalogSection({
                 
                 <div className="flex gap-2 mb-3">
                   <Button
-                    variant={selectedSeries === 'Серия "Classic"' ? 'default' : 'outline'}
+                    variant={(selectedSeries === 'Серия "Classic"' || selectedSeries === 'Серия "Classic Sport"') ? 'default' : 'outline'}
                     size="sm"
-                    onClick={() => setSelectedSeries(selectedSeries === 'Серия "Classic"' ? null : 'Серия "Classic"')}
-                    className={selectedSeries === 'Серия "Classic"' ? 'bg-secondary hover:bg-secondary/90' : ''}
+                    onClick={() => setSelectedSeries((selectedSeries === 'Серия "Classic"' || selectedSeries === 'Серия "Classic Sport"') ? null : 'Серия "Classic"')}
+                    className={(selectedSeries === 'Серия "Classic"' || selectedSeries === 'Серия "Classic Sport"') ? 'bg-secondary hover:bg-secondary/90' : ''}
                   >
                     Classic
                   </Button>
                   <Button
-                    variant={selectedSeries === 'Серия "Eco"' ? 'default' : 'outline'}
+                    variant={(selectedSeries === 'Серия "Eco"' || selectedSeries === 'Серия "Eco Sport"') ? 'default' : 'outline'}
                     size="sm"
-                    onClick={() => setSelectedSeries(selectedSeries === 'Серия "Eco"' ? null : 'Серия "Eco"')}
-                    className={selectedSeries === 'Серия "Eco"' ? 'bg-accent hover:bg-accent/90' : ''}
+                    onClick={() => setSelectedSeries((selectedSeries === 'Серия "Eco"' || selectedSeries === 'Серия "Eco Sport"') ? null : 'Серия "Eco"')}
+                    className={(selectedSeries === 'Серия "Eco"' || selectedSeries === 'Серия "Eco Sport"') ? 'bg-accent hover:bg-accent/90' : ''}
                   >
                     Eco
                   </Button>
