@@ -71,8 +71,8 @@ export const categories = [
     name: 'Спорт',
     icon: 'Dumbbell',
     color: 'from-secondary/20 to-secondary/5',
-    image: '',
-    bgImage: '',
+    image: 'https://cdn.poehali.dev/files/%D1%81%D0%BF%D0%BE%D1%80%D1%82.png',
+    bgImage: 'https://cdn.poehali.dev/files/%D1%81%D0%BF%D0%BE%D1%80%D1%82.png',
     order: 2,
     subcategories: [
       { 
