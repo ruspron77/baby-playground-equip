@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const formatPrice = (price: string | number): string => {
   const numPrice = typeof price === 'string' ? parseInt(price.replace(/\s/g, '')) : price;
@@ -27,6 +27,18 @@ interface FavoritesPageProps {
 }
 
 export default function FavoritesPage({ favorites, removeFromFavorites, addToCart }: FavoritesPageProps) {
+  const navigate = useNavigate();
+
+  const handleNavigateToCatalog = () => {
+    navigate('/');
+    setTimeout(() => {
+      const element = document.getElementById('catalog');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <header className="bg-white shadow-sm sticky top-0 z-50 border-b">
@@ -39,9 +51,7 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
                 className="h-16 w-auto"
               />
             </Link>
-            <Button variant="outline" onClick={() => {
-              window.location.href = '/#catalog';
-            }}>
+            <Button variant="outline" onClick={handleNavigateToCatalog}>
               <Icon name="ArrowLeft" size={20} className="mr-2" />
               Назад к каталогу
             </Button>
@@ -59,9 +69,7 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
             <p className="text-muted-foreground mb-6">
               Добавляйте товары в избранное, нажимая на сердечко в карточке товара
             </p>
-            <Button onClick={() => {
-              window.location.href = '/#catalog';
-            }}>
+            <Button onClick={handleNavigateToCatalog}>
               <Icon name="ShoppingCart" size={20} className="mr-2" />
               Перейти к каталогу
             </Button>
