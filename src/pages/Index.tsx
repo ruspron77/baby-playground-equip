@@ -150,6 +150,7 @@ export default function Index() {
         setSelectedCategory(currentCategory.id);
         setSelectedSubcategory(sub.name);
         setSelectedSubSubcategory(null);
+        setSelectedSeries(sub.name);
         setIsCategoryDialogOpen(false);
         setTimeout(() => {
           const productsSection = document.getElementById('products');
@@ -166,6 +167,7 @@ export default function Index() {
       setSelectedCategory(currentCategory.id);
       setSelectedSubcategory(currentSubcategory?.name || null);
       setSelectedSubSubcategory(subSubName);
+      setSelectedSeries(currentSubcategory?.name || null);
       setIsSubSubcategoryDialogOpen(false);
       setTimeout(() => {
         const productsSection = document.getElementById('products');
