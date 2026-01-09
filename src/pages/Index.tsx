@@ -3,6 +3,7 @@ import { Header } from '@/components/Header';
 import { CatalogSection } from '@/components/CatalogSection';
 import { ContentSections } from '@/components/ContentSections';
 import { categories, CartItem, Subcategory } from '@/components/data/catalogData';
+import ExcelJS from 'exceljs';
 
 interface Product {
   id: number;
@@ -251,7 +252,6 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
   };
 
   const generateKP = async () => {
-    const ExcelJS = (await import('exceljs')).default;
     const total = calculateTotal();
     const date = new Date().toLocaleDateString('ru-RU');
     
