@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Icon from '@/components/ui/icon';
 
 interface OrderFormProps {
@@ -18,6 +19,7 @@ export interface OrderFormData {
   phone: string;
   email: string;
   address: string;
+  legalStatus: string;
   comment: string;
 }
 
@@ -27,6 +29,7 @@ export function OrderForm({ total, deliveryCost, onSubmit, onCancel }: OrderForm
     phone: '',
     email: '',
     address: '',
+    legalStatus: '',
     comment: ''
   });
 
@@ -53,6 +56,10 @@ export function OrderForm({ total, deliveryCost, onSubmit, onCancel }: OrderForm
 
     if (!formData.address.trim()) {
       newErrors.address = 'Введите адрес доставки';
+    }
+
+    if (!formData.legalStatus) {
+      newErrors.legalStatus = 'Выберите правовой статус';
     }
 
     setErrors(newErrors);
@@ -137,6 +144,26 @@ export function OrderForm({ total, deliveryCost, onSubmit, onCancel }: OrderForm
           </div>
 
           <div>
+            <Label htmlFor="legalStatus">Правовой статус *</Label>
+            <Select 
+              value={formData.legalStatus} 
+              onValueChange={(value) => handleChange('legalStatus', value)}
+            >
+              <SelectTrigger className={errors.legalStatus ? 'border-red-500' : ''}>
+                <SelectValue placeholder="Выберите правовой статус" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="individual">Физическое лицо</SelectItem>
+                <SelectItem value="entrepreneur">Индивидуальный предприниматель</SelectItem>
+                <SelectItem value="legal">Юридическое лицо</SelectItem>
+                <SelectItem value="government">Государственная организация</SelectItem>
+                <SelectItem value="education">Образовательное учреждение</SelectItem>
+              </SelectContent>
+            </Select>
+            {errors.legalStatus && <p className="text-sm text-red-500 mt-1">{errors.legalStatus}</p>}
+          </div>
+
+          <div>
             <Label htmlFor="comment">Комментарий к заказу</Label>
             <Textarea
               id="comment"
@@ -148,17 +175,9 @@ export function OrderForm({ total, deliveryCost, onSubmit, onCancel }: OrderForm
           </div>
 
           <div className="border-t pt-4 space-y-2">
-            <div className="flex justify-between text-lg">
-              <span>Товары:</span>
-              <span className="font-semibold">{total.toLocaleString('ru-RU')} ₽</span>
-            </div>
-            <div className="flex justify-between text-lg">
-              <span>Доставка и монтаж:</span>
-              <span className="font-semibold">{deliveryCost.toLocaleString('ru-RU')} ₽</span>
-            </div>
-            <div className="flex justify-between text-xl font-bold border-t pt-2">
-              <span>Итого к оплате:</span>
-              <span className="text-primary">{grandTotal.toLocaleString('ru-RU')} ₽</span>
+            <div className="flex justify-between text-xl font-bold">
+              <span>Сумма заказа:</span>
+              <span className="text-primary">{total.toLocaleString('ru-RU')} ₽</span>
             </div>
           </div>
 
@@ -167,8 +186,8 @@ export function OrderForm({ total, deliveryCost, onSubmit, onCancel }: OrderForm
               Отмена
             </Button>
             <Button type="submit" className="flex-1">
-              <Icon name="CreditCard" size={18} className="mr-2" />
-              Перейти к оплате
+              <Icon name="ShoppingCart" size={18} className="mr-2" />
+              Оформить заказ
             </Button>
           </div>
         </form>
