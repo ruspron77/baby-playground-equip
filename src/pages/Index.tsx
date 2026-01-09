@@ -97,6 +97,17 @@ export default function Index() {
     loadProducts();
   }, []);
 
+  const availableCategories = (() => {
+    let filtered = products;
+    
+    if (selectedSeries) {
+      filtered = filtered.filter(p => p.subcategory === selectedSeries);
+    }
+    
+    const categories = new Set(filtered.map(p => p.subsubcategory).filter(Boolean));
+    return Array.from(categories);
+  })();
+
   const filteredProducts = (() => {
     let filtered = products;
     
@@ -354,6 +365,7 @@ export default function Index() {
         }}
         selectedSeries={selectedSeries}
         setSelectedSeries={setSelectedSeries}
+        availableCategories={availableCategories}
       />
 
       <ContentSections />

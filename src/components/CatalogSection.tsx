@@ -75,6 +75,7 @@ interface CatalogSectionProps {
   handleResetFilters: () => void;
   selectedSeries: string | null;
   setSelectedSeries: (series: string | null) => void;
+  availableCategories: string[];
 }
 
 export function CatalogSection({
@@ -108,6 +109,7 @@ export function CatalogSection({
   handleResetFilters,
   selectedSeries,
   setSelectedSeries,
+  availableCategories,
 }: CatalogSectionProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProductDialogOpen, setIsProductDialogOpen] = useState(false);
@@ -425,54 +427,66 @@ export function CatalogSection({
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  <Button
-                    variant={selectedSubSubcategory === 'Игровые комплексы' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Игровые комплексы' ? null : 'Игровые комплексы')}
-                    className={selectedSubSubcategory === 'Игровые комплексы' ? 'bg-primary hover:bg-primary/90' : ''}
-                  >
-                    Комплексы
-                  </Button>
-                  <Button
-                    variant={selectedSubSubcategory === 'Качели' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Качели' ? null : 'Качели')}
-                    className={selectedSubSubcategory === 'Качели' ? 'bg-primary hover:bg-primary/90' : ''}
-                  >
-                    Качели
-                  </Button>
-                  <Button
-                    variant={selectedSubSubcategory === 'Карусели' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Карусели' ? null : 'Карусели')}
-                    className={selectedSubSubcategory === 'Карусели' ? 'bg-primary hover:bg-primary/90' : ''}
-                  >
-                    Карусели
-                  </Button>
-                  <Button
-                    variant={selectedSubSubcategory === 'Балансиры' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Балансиры' ? null : 'Балансиры')}
-                    className={selectedSubSubcategory === 'Балансиры' ? 'bg-primary hover:bg-primary/90' : ''}
-                  >
-                    Балансиры
-                  </Button>
-                  <Button
-                    variant={selectedSubSubcategory === 'Горки' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Горки' ? null : 'Горки')}
-                    className={selectedSubSubcategory === 'Горки' ? 'bg-primary hover:bg-primary/90' : ''}
-                  >
-                    Горки
-                  </Button>
-                  <Button
-                    variant={selectedSubSubcategory === 'Workout' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Workout' ? null : 'Workout')}
-                    className={selectedSubSubcategory === 'Workout' ? 'bg-primary hover:bg-primary/90' : ''}
-                  >
-                    Workout
-                  </Button>
+                  {availableCategories.includes('Игровые комплексы') && (
+                    <Button
+                      variant={selectedSubSubcategory === 'Игровые комплексы' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Игровые комплексы' ? null : 'Игровые комплексы')}
+                      className={selectedSubSubcategory === 'Игровые комплексы' ? 'bg-primary hover:bg-primary/90' : ''}
+                    >
+                      Комплексы
+                    </Button>
+                  )}
+                  {availableCategories.includes('Качели') && (
+                    <Button
+                      variant={selectedSubSubcategory === 'Качели' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Качели' ? null : 'Качели')}
+                      className={selectedSubSubcategory === 'Качели' ? 'bg-primary hover:bg-primary/90' : ''}
+                    >
+                      Качели
+                    </Button>
+                  )}
+                  {availableCategories.includes('Карусели') && (
+                    <Button
+                      variant={selectedSubSubcategory === 'Карусели' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Карусели' ? null : 'Карусели')}
+                      className={selectedSubSubcategory === 'Карусели' ? 'bg-primary hover:bg-primary/90' : ''}
+                    >
+                      Карусели
+                    </Button>
+                  )}
+                  {availableCategories.includes('Балансиры') && (
+                    <Button
+                      variant={selectedSubSubcategory === 'Балансиры' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Балансиры' ? null : 'Балансиры')}
+                      className={selectedSubSubcategory === 'Балансиры' ? 'bg-primary hover:bg-primary/90' : ''}
+                    >
+                      Балансиры
+                    </Button>
+                  )}
+                  {availableCategories.includes('Горки') && (
+                    <Button
+                      variant={selectedSubSubcategory === 'Горки' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Горки' ? null : 'Горки')}
+                      className={selectedSubSubcategory === 'Горки' ? 'bg-primary hover:bg-primary/90' : ''}
+                    >
+                      Горки
+                    </Button>
+                  )}
+                  {availableCategories.includes('Workout') && (
+                    <Button
+                      variant={selectedSubSubcategory === 'Workout' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Workout' ? null : 'Workout')}
+                      className={selectedSubSubcategory === 'Workout' ? 'bg-primary hover:bg-primary/90' : ''}
+                    >
+                      Workout
+                    </Button>
+                  )}
                 </div>
               </div>
 
