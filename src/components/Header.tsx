@@ -153,9 +153,11 @@ export function Header({
                 </Button>
               </SheetTrigger>
               <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
-                <SheetHeader>
-                  <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
-                </SheetHeader>
+                {!showOrderForm && (
+                  <SheetHeader>
+                    <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
+                  </SheetHeader>
+                )}
                 
                 {cart.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-12 text-center">
@@ -163,7 +165,7 @@ export function Header({
                     <p className="text-lg text-muted-foreground">Корзина пуста</p>
                   </div>
                 ) : (
-                  <div className="mt-6 space-y-6">
+                  <div className={showOrderForm ? "" : "mt-6 space-y-6"}>
                     {showOrderForm ? (
                       <div>
                         <OrderForm
