@@ -267,16 +267,44 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       { width: 15 }
     ];
     
-    worksheet.mergeCells('B2:F2');
-    const titleCell = worksheet.getCell('B2');
+    try {
+      const logoResponse = await fetch('https://cdn.poehali.dev/files/photo_643632026-01-05_09-32-44.png');
+      const logoBlob = await logoResponse.blob();
+      const logoArrayBuffer = await logoBlob.arrayBuffer();
+      
+      const logoId = workbook.addImage({
+        buffer: logoArrayBuffer,
+        extension: 'png',
+      });
+      
+      worksheet.addImage(logoId, {
+        tl: { col: 0.2, row: 0.2 },
+        ext: { width: 120, height: 90 }
+      });
+    } catch (error) {
+      console.error('Failed to load logo:', error);
+    }
+    
+    worksheet.getCell('D2').value = 'ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ';
+    worksheet.getCell('D2').font = { bold: true, size: 11 };
+    worksheet.getCell('D3').value = 'ИНН 110209455200  ОГРНИП 32377460012482';
+    worksheet.getCell('D3').font = { size: 9 };
+    worksheet.getCell('D4').value = '350005, г. Краснодар, ул. Кореновская, д. 57 оф.7';
+    worksheet.getCell('D4').font = { size: 9 };
+    worksheet.getCell('D5').value = 'тел: +7 918 115 15 51  e-mail: info@urban-play.ru';
+    worksheet.getCell('D5').font = { size: 9 };
+    worksheet.getCell('D6').value = 'www.urban-play.ru';
+    worksheet.getCell('D6').font = { size: 9, color: { argb: 'FF0000FF' }, underline: true };
+    
+    worksheet.mergeCells('B8:F8');
+    const titleCell = worksheet.getCell('B8');
     titleCell.value = 'КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ';
     titleCell.font = { size: 16, bold: true };
     titleCell.alignment = { horizontal: 'center', vertical: 'middle' };
     
-    worksheet.getCell('B4').value = `Дата: ${date}`;
-    worksheet.getCell('B5').value = 'От: Urban Play';
+    worksheet.getCell('B10').value = `Дата: ${date}`;
     
-    const headerRow = worksheet.getRow(7);
+    const headerRow = worksheet.getRow(12);
     headerRow.values = ['', 'Фото', 'Наименование', 'Цена', 'Кол-во', 'Сумма'];
     headerRow.font = { bold: true };
     headerRow.height = 20;
@@ -295,7 +323,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       cell.alignment = { horizontal: 'center', vertical: 'middle' };
     });
     
-    let currentRow = 8;
+    let currentRow = 13;
     
     for (const item of cart) {
       const price = parseInt(item.price.replace(/\s/g, '').split('/')[0]);
@@ -304,23 +332,25 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       const row = worksheet.getRow(currentRow);
       row.height = 80;
       
-      if (item.image.startsWith('http')) {
+      if (item.image && item.image.startsWith('http')) {
         try {
-          const response = await fetch(item.image);
-          const blob = await response.blob();
-          const arrayBuffer = await blob.arrayBuffer();
-          
-          const imageId = workbook.addImage({
-            buffer: arrayBuffer,
-            extension: 'png',
-          });
-          
-          worksheet.addImage(imageId, {
-            tl: { col: 1.1, row: currentRow - 0.9 },
-            ext: { width: 100, height: 75 }
-          });
+          const imgResponse = await fetch(item.image, { mode: 'cors' });
+          if (imgResponse.ok) {
+            const imgBlob = await imgResponse.blob();
+            const imgArrayBuffer = await imgBlob.arrayBuffer();
+            
+            const imageId = workbook.addImage({
+              buffer: imgArrayBuffer,
+              extension: 'png',
+            });
+            
+            worksheet.addImage(imageId, {
+              tl: { col: 1.1, row: currentRow - 0.9 },
+              ext: { width: 100, height: 75 }
+            });
+          }
         } catch (error) {
-          console.error('Failed to load image:', error);
+          console.error('Failed to load product image:', error);
         }
       }
       
@@ -369,23 +399,13 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     worksheet.getCell(`B${currentRow}`).value = 'Условия оплаты:';
     worksheet.getCell(`B${currentRow}`).font = { bold: true };
     currentRow++;
-    worksheet.getCell(`B${currentRow}`).value = '• Предоплата 50% после согласования заказа';
+    worksheet.getCell(`B${currentRow}`).value = '• Предоплата 70% после согласования заказа';
     currentRow++;
-    worksheet.getCell(`B${currentRow}`).value = '• Оплата оставшихся 50% после доставки';
+    worksheet.getCell(`B${currentRow}`).value = '• Оплата оставшихся 30% перед отгрузкой оборудования';
     currentRow++;
-    worksheet.getCell(`B${currentRow}`).value = '• Принимаем наличные, безналичный расчёт, карты';
+    worksheet.getCell(`B${currentRow}`).value = '• Принимаем наличные, безналичный расчёт';
     currentRow++;
-    worksheet.getCell(`B${currentRow}`).value = '• Гарантия 2 года на всё оборудование';
-    
-    currentRow += 2;
-    worksheet.getCell(`B${currentRow}`).value = 'Контакты:';
-    worksheet.getCell(`B${currentRow}`).font = { bold: true };
-    currentRow++;
-    worksheet.getCell(`B${currentRow}`).value = 'Телефон: +7 (918) 115-15-51';
-    currentRow++;
-    worksheet.getCell(`B${currentRow}`).value = 'Email: info@urban-play.ru';
-    currentRow++;
-    worksheet.getCell(`B${currentRow}`).value = 'Адрес: г. Краснодар, ул. Кореновская, д. 57 оф. 7';
+    worksheet.getCell(`B${currentRow}`).value = '• Гарантия 12 месяцев на всё оборудование';
     
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
