@@ -262,14 +262,22 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     const worksheet = workbook.addWorksheet('Коммерческое предложение');
     
     worksheet.columns = [
-      { width: 5 },
-      { width: 30 },
-      { width: 20 },
-      { width: 12 },
-      { width: 10 },
+      { width: 4 },
+      { width: 28 },
       { width: 15 },
-      { width: 15 }
+      { width: 8 },
+      { width: 8 },
+      { width: 12 },
+      { width: 12 }
     ];
+    
+    worksheet.pageSetup = {
+      paperSize: 9,
+      orientation: 'portrait',
+      fitToPage: true,
+      fitToWidth: 1,
+      fitToHeight: 0
+    };
     
     // Загрузка логотипа через прокси
     try {
@@ -284,18 +292,18 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
           extension: 'png',
         });
         
-        worksheet.mergeCells('A1:B5');
+        worksheet.mergeCells('A1:B4');
         worksheet.addImage(logoImageId, {
           tl: { col: 0, row: 0 },
-          ext: { width: 150, height: 120 }
+          ext: { width: 100, height: 70 }
         });
       }
     } catch (error) {
       console.error('Failed to load logo:', error);
-      worksheet.mergeCells('A1:B5');
+      worksheet.mergeCells('A1:B4');
       const logoCell = worksheet.getCell('A1');
       logoCell.value = 'Urban\nPlay';
-      logoCell.font = { size: 24, bold: true, color: { argb: 'FF6B21A8' } };
+      logoCell.font = { size: 18, bold: true, color: { argb: 'FF6B21A8' } };
       logoCell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
       logoCell.fill = {
         type: 'pattern',
@@ -311,16 +319,30 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     }
     
     // Шапка справа
+    worksheet.mergeCells('D1:G1');
     worksheet.getCell('D1').value = 'ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ';
-    worksheet.getCell('D1').font = { bold: true, size: 10 };
+    worksheet.getCell('D1').font = { bold: true, size: 9 };
+    worksheet.getCell('D1').alignment = { horizontal: 'right', vertical: 'top' };
+    
+    worksheet.mergeCells('D2:G2');
     worksheet.getCell('D2').value = 'ИНН 110209455200 ОГРНИП 32377460012482';
-    worksheet.getCell('D2').font = { size: 9 };
+    worksheet.getCell('D2').font = { size: 8 };
+    worksheet.getCell('D2').alignment = { horizontal: 'right', vertical: 'top' };
+    
+    worksheet.mergeCells('D3:G3');
     worksheet.getCell('D3').value = '350005, г. Краснодар, ул. Кореновская, д. 57 оф.7';
-    worksheet.getCell('D3').font = { size: 9 };
+    worksheet.getCell('D3').font = { size: 8 };
+    worksheet.getCell('D3').alignment = { horizontal: 'right', vertical: 'top', wrapText: true };
+    
+    worksheet.mergeCells('D4:G4');
     worksheet.getCell('D4').value = 'тел: +7 918 115 15 51 e-mail: info@urban-play.ru';
-    worksheet.getCell('D4').font = { size: 9 };
+    worksheet.getCell('D4').font = { size: 8 };
+    worksheet.getCell('D4').alignment = { horizontal: 'right', vertical: 'top' };
+    
+    worksheet.mergeCells('D5:G5');
     worksheet.getCell('D5').value = 'www.urban-play.ru';
-    worksheet.getCell('D5').font = { size: 9, color: { argb: 'FF0000FF' }, underline: true };
+    worksheet.getCell('D5').font = { size: 8, color: { argb: 'FF0000FF' }, underline: true };
+    worksheet.getCell('D5').alignment = { horizontal: 'right', vertical: 'top' };
     
     // Линия-разделитель
     worksheet.mergeCells('A6:G6');
@@ -367,7 +389,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       const itemTotal = price * item.quantity;
       
       const row = worksheet.getRow(currentRow);
-      row.height = 80;
+      row.height = 100;
       
       const nameParts = item.name.split('\n');
       const article = nameParts[0] ? nameParts[0].replace('Арт. ', '') : '';
@@ -391,7 +413,8 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
             
             worksheet.addImage(imageId, {
               tl: { col: 2, row: currentRow - 1 },
-              ext: { width: 100, height: 70 }
+              ext: { width: 110, height: 90 },
+              editAs: 'oneCell'
             });
           }
         } catch (error) {
