@@ -328,27 +328,27 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     // Шапка справа
     worksheet.mergeCells('D1:G1');
     worksheet.getCell('D1').value = 'ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ';
-    worksheet.getCell('D1').font = { bold: true, size: 9 };
+    worksheet.getCell('D1').font = { name: 'Times New Roman', bold: true, size: 11 };
     worksheet.getCell('D1').alignment = { horizontal: 'right', vertical: 'top' };
     
     worksheet.mergeCells('D2:G2');
     worksheet.getCell('D2').value = 'ИНН 110209455200 ОГРНИП 32377460012482';
-    worksheet.getCell('D2').font = { size: 8 };
+    worksheet.getCell('D2').font = { name: 'Times New Roman', size: 11 };
     worksheet.getCell('D2').alignment = { horizontal: 'right', vertical: 'top' };
     
     worksheet.mergeCells('D3:G3');
     worksheet.getCell('D3').value = '350005, г. Краснодар, ул. Кореновская, д. 57 оф.7';
-    worksheet.getCell('D3').font = { size: 8 };
+    worksheet.getCell('D3').font = { name: 'Times New Roman', size: 11 };
     worksheet.getCell('D3').alignment = { horizontal: 'right', vertical: 'top', wrapText: true };
     
     worksheet.mergeCells('D4:G4');
     worksheet.getCell('D4').value = 'тел: +7 918 115 15 51 e-mail: info@urban-play.ru';
-    worksheet.getCell('D4').font = { size: 8 };
+    worksheet.getCell('D4').font = { name: 'Times New Roman', size: 11 };
     worksheet.getCell('D4').alignment = { horizontal: 'right', vertical: 'top' };
     
     worksheet.mergeCells('D5:G5');
     worksheet.getCell('D5').value = 'www.urban-play.ru';
-    worksheet.getCell('D5').font = { size: 8, color: { argb: 'FF0000FF' }, underline: true };
+    worksheet.getCell('D5').font = { name: 'Times New Roman', size: 11, color: { argb: 'FF0000FF' }, underline: true };
     worksheet.getCell('D5').alignment = { horizontal: 'right', vertical: 'top' };
     
     // Линия-разделитель
@@ -364,14 +364,14 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     worksheet.mergeCells('A8:G8');
     const titleCell = worksheet.getCell('A8');
     titleCell.value = `Коммерческое предложение № ${kpNumber}`;
-    titleCell.font = { size: 14, bold: true };
+    titleCell.font = { name: 'Times New Roman', size: 14, bold: true };
     titleCell.alignment = { horizontal: 'center', vertical: 'middle' };
     
     // Адрес объекта
     worksheet.mergeCells('A9:G9');
     const addressCell = worksheet.getCell('A9');
     addressCell.value = 'Адрес объекта: _______________________________________________';
-    addressCell.font = { size: 10 };
+    addressCell.font = { name: 'Times New Roman', size: 11 };
     addressCell.alignment = { horizontal: 'left', vertical: 'middle' };
     worksheet.getRow(9).height = 20;
     
@@ -484,7 +484,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       row.getCell(7).numFmt = '#,##0.00';
       
       row.eachCell((cell) => {
-        cell.font = { name: 'Times New Roman', size: 12 };
+        cell.font = { name: 'Times New Roman', size: 11 };
         cell.border = {
           top: { style: 'thin' },
           left: { style: 'thin' },
@@ -522,7 +522,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     // Итого
     const totalRow = worksheet.getRow(currentRow);
     totalRow.values = ['', '', '', '', '', 'Итого:', grandTotal];
-    totalRow.font = { name: 'Times New Roman', bold: true, size: 12 };
+    totalRow.font = { name: 'Times New Roman', bold: true, size: 11 };
     totalRow.height = 25;
     totalRow.getCell(6).border = {
       top: { style: 'thin' },
@@ -544,21 +544,21 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     
     // Нижний текст
     worksheet.getCell(`A${currentRow}`).value = 'Оборудование имеет сертификат соответствия ТС ЕАЭС 042-2017';
-    worksheet.getCell(`A${currentRow}`).font = { name: 'Times New Roman', size: 12 };
+    worksheet.getCell(`A${currentRow}`).font = { name: 'Times New Roman', size: 11 };
     currentRow++;
     worksheet.getCell(`A${currentRow}`).value = 'Срок действия коммерческого предложения 15 дней';
-    worksheet.getCell(`A${currentRow}`).font = { name: 'Times New Roman', size: 12 };
+    worksheet.getCell(`A${currentRow}`).font = { name: 'Times New Roman', size: 11 };
     currentRow++;
     worksheet.getCell(`A${currentRow}`).value = 'Срок изготовления оборудования 30 дней';
-    worksheet.getCell(`A${currentRow}`).font = { name: 'Times New Roman', size: 12 };
+    worksheet.getCell(`A${currentRow}`).font = { name: 'Times New Roman', size: 11 };
     
     currentRow += 2;
     
     // Подписи
     worksheet.getCell(`A${currentRow}`).value = 'Индивидуальный предприниматель';
-    worksheet.getCell(`A${currentRow}`).font = { name: 'Times New Roman', size: 12 };
+    worksheet.getCell(`A${currentRow}`).font = { name: 'Times New Roman', size: 11 };
     worksheet.getCell(`E${currentRow}`).value = '/Пронин Р.О./';
-    worksheet.getCell(`E${currentRow}`).font = { name: 'Times New Roman', size: 12, italic: true };
+    worksheet.getCell(`E${currentRow}`).font = { name: 'Times New Roman', size: 11, italic: true };
     
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
