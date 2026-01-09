@@ -118,4 +118,8 @@
   html {
     scroll-padding-top: 120px;
   }
+
+  button {
+    @apply active:scale-95 transition-transform duration-150;
+  }
 }
