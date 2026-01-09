@@ -278,8 +278,8 @@ export function CatalogSection({
               {categories.filter(cat => [1, 2, 3].includes(cat.order || 0)).map((cat) => (
                 <Card
                   key={cat.id}
-                  className={`cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-2 overflow-hidden group border-2 ${
-                    selectedCategory === cat.id ? 'border-primary' : 'border-transparent'
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 overflow-hidden group border-2 ${
+                    selectedCategory === cat.id ? 'border-primary shadow-xl' : 'border-transparent hover:border-primary/20'
                   }`}
                   onClick={() => handleCategoryClick(cat)}
                 >
@@ -287,11 +287,12 @@ export function CatalogSection({
                     <img 
                       src={cat.bgImage} 
                       alt={cat.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                   </div>
-                  <div className={`py-3 px-4 bg-gradient-to-br ${cat.color} relative flex items-center justify-center border-t-2 border-gray-200`}>
-                    <h3 className="text-base font-heading font-bold text-center text-foreground leading-tight">{cat.name}</h3>
+                  <div className={`py-3 px-4 bg-gradient-to-br ${cat.color} relative flex items-center justify-center border-t-2 border-gray-200 group-hover:border-primary/30 transition-colors`}>
+                    <h3 className="text-base font-heading font-bold text-center text-foreground leading-tight group-hover:scale-105 transition-transform duration-300">{cat.name}</h3>
                   </div>
                 </Card>
               ))}
@@ -301,8 +302,8 @@ export function CatalogSection({
               {categories.filter(cat => [4, 5, 6].includes(cat.order || 0)).map((cat) => (
                 <Card
                   key={cat.id}
-                  className={`cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-2 overflow-hidden group border-2 ${
-                    selectedCategory === cat.id ? 'border-primary' : 'border-transparent'
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 overflow-hidden group border-2 ${
+                    selectedCategory === cat.id ? 'border-primary shadow-xl' : 'border-transparent hover:border-primary/20'
                   }`}
                   onClick={() => handleCategoryClick(cat)}
                 >
@@ -310,11 +311,12 @@ export function CatalogSection({
                     <img 
                       src={cat.bgImage} 
                       alt={cat.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                   </div>
-                  <div className={`py-3 px-4 bg-gradient-to-br ${cat.color} relative flex items-center justify-center border-t-2 border-gray-200`}>
-                    <h3 className="text-base font-heading font-bold text-center text-foreground leading-tight">{cat.name}</h3>
+                  <div className={`py-3 px-4 bg-gradient-to-br ${cat.color} relative flex items-center justify-center border-t-2 border-gray-200 group-hover:border-primary/30 transition-colors`}>
+                    <h3 className="text-base font-heading font-bold text-center text-foreground leading-tight group-hover:scale-105 transition-transform duration-300">{cat.name}</h3>
                   </div>
                 </Card>
               ))}
