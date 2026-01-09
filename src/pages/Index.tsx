@@ -215,6 +215,7 @@ export default function Index() {
     setSelectedCategory(categoryId);
     setSelectedSubcategory(subName);
     setSelectedSubSubcategory(subSubName);
+    setSelectedSeries(subName);
     setCurrentCategory(categoryData);
     setCurrentSubcategory(categoryData.subcategories.find(s => s.name === subName) || null);
     setIsSideMenuOpen(false);
@@ -363,6 +364,8 @@ export default function Index() {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         handleResetFilters={() => {
+          setSelectedCategory(null);
+          setSelectedSubcategory(null);
           setSelectedSubSubcategory(null);
           setSelectedSeries(null);
           setSearchQuery('');
