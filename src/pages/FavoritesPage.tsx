@@ -34,7 +34,9 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
     setTimeout(() => {
       const element = document.getElementById('catalog');
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const yOffset = -90;
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
       }
     }, 100);
   };
