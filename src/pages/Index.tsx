@@ -253,6 +253,8 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
 
   const generateKP = async () => {
     const total = calculateTotal();
+    const montageDelivery = Math.round(total * 0.2);
+    const grandTotal = total + montageDelivery;
     const date = new Date().toLocaleDateString('ru-RU');
     const kpNumber = `0001 от ${date}`;
     
@@ -269,23 +271,31 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       { width: 15 }
     ];
     
-    // Логотип - заглушка текстом
+    // Логотип настоящий
     worksheet.mergeCells('A1:B5');
     const logoCell = worksheet.getCell('A1');
-    logoCell.value = 'Urban\nPlay';
-    logoCell.font = { size: 24, bold: true, color: { argb: 'FF6B21A8' } };
-    logoCell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
-    logoCell.fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FFF0E6FF' }
-    };
-    logoCell.border = {
-      top: { style: 'thin' },
-      left: { style: 'thin' },
-      bottom: { style: 'thin' },
-      right: { style: 'thin' }
-    };
+    logoCell.value = '';
+    
+    try {
+      const logoResponse = await fetch('https://cdn.poehali.dev/files/photo_2026-01-05_09-32-44.png');
+      const logoBlob = await logoResponse.blob();
+      const logoBuffer = await logoBlob.arrayBuffer();
+      const logoImageId = workbook.addImage({
+        buffer: logoBuffer,
+        extension: 'png',
+      });
+      
+      worksheet.addImage(logoImageId, {
+        tl: { col: 0, row: 0 },
+        br: { col: 2, row: 5 },
+        editAs: 'oneCell'
+      });
+    } catch (error) {
+      console.log('Не удалось загрузить логотип:', error);
+      logoCell.value = 'Urban\nPlay';
+      logoCell.font = { size: 24, bold: true, color: { argb: 'FF6B21A8' } };
+      logoCell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+    }
     
     // Шапка справа
     worksheet.getCell('D1').value = 'ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ';
@@ -403,9 +413,9 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       currentRow++;
     }
     
-    // Пустая строка для монтажа
+    // Строка монтаж+доставка (20% от суммы товаров)
     const montageRow = worksheet.getRow(currentRow);
-    montageRow.values = [cart.length + 1, 'Монтаж - доставка', '', 1, 'усл', '', ''];
+    montageRow.values = [cart.length + 1, 'Монтаж + доставка', '', 1, 'усл', montageDelivery, montageDelivery];
     montageRow.height = 25;
     montageRow.eachCell((cell) => {
       cell.border = {
@@ -416,11 +426,13 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       };
       cell.alignment = { vertical: 'middle', horizontal: cell.col === 2 ? 'left' : 'center' };
     });
+    montageRow.getCell(6).numFmt = '#,##0.00';
+    montageRow.getCell(7).numFmt = '#,##0.00';
     currentRow++;
     
     // Итого
     const totalRow = worksheet.getRow(currentRow);
-    totalRow.values = ['', '', '', '', '', 'Итого:', total];
+    totalRow.values = ['', '', '', '', '', 'Итого:', grandTotal];
     totalRow.font = { bold: true, size: 11 };
     totalRow.height = 25;
     totalRow.getCell(6).border = {
