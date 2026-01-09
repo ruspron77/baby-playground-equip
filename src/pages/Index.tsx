@@ -267,22 +267,54 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       { width: 15 }
     ];
     
-    try {
-      const logoResponse = await fetch('https://cdn.poehali.dev/files/photo_643632026-01-05_09-32-44.png');
-      const logoBlob = await logoResponse.blob();
-      const logoArrayBuffer = await logoBlob.arrayBuffer();
-      
-      const logoId = workbook.addImage({
-        buffer: logoArrayBuffer,
-        extension: 'png',
-      });
-      
-      worksheet.addImage(logoId, {
-        tl: { col: 0.2, row: 0.2 },
-        ext: { width: 120, height: 90 }
-      });
-    } catch (error) {
-      console.error('Failed to load logo:', error);
+    const loadImageAsBase64 = async (url: string): Promise<ArrayBuffer | null> => {
+      try {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        
+        return new Promise((resolve) => {
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+              ctx.drawImage(img, 0, 0);
+              canvas.toBlob((blob) => {
+                if (blob) {
+                  blob.arrayBuffer().then(resolve);
+                } else {
+                  resolve(null);
+                }
+              }, 'image/png');
+            } else {
+              resolve(null);
+            }
+          };
+          img.onerror = () => resolve(null);
+          img.src = url;
+        });
+      } catch (error) {
+        console.error('Failed to load image:', error);
+        return null;
+      }
+    };
+    
+    const logoBuffer = await loadImageAsBase64('https://cdn.poehali.dev/files/photo_643632026-01-05_09-32-44.png');
+    if (logoBuffer) {
+      try {
+        const logoId = workbook.addImage({
+          buffer: logoBuffer,
+          extension: 'png',
+        });
+        
+        worksheet.addImage(logoId, {
+          tl: { col: 0.2, row: 0.2 },
+          ext: { width: 120, height: 90 }
+        });
+      } catch (error) {
+        console.error('Failed to add logo:', error);
+      }
     }
     
     worksheet.getCell('D2').value = 'ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ';
@@ -333,14 +365,11 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       row.height = 80;
       
       if (item.image && item.image.startsWith('http')) {
-        try {
-          const imgResponse = await fetch(item.image, { mode: 'cors' });
-          if (imgResponse.ok) {
-            const imgBlob = await imgResponse.blob();
-            const imgArrayBuffer = await imgBlob.arrayBuffer();
-            
+        const imgBuffer = await loadImageAsBase64(item.image);
+        if (imgBuffer) {
+          try {
             const imageId = workbook.addImage({
-              buffer: imgArrayBuffer,
+              buffer: imgBuffer,
               extension: 'png',
             });
             
@@ -348,9 +377,9 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
               tl: { col: 1.1, row: currentRow - 0.9 },
               ext: { width: 100, height: 75 }
             });
+          } catch (error) {
+            console.error('Failed to add product image:', error);
           }
-        } catch (error) {
-          console.error('Failed to load product image:', error);
         }
       }
       
