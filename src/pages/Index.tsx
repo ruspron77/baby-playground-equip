@@ -462,8 +462,8 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
           });
           
           worksheet.addImage(imageId, {
-            tl: { col: 2, row: currentRow - 1 },
-            br: { col: 3, row: currentRow },
+            tl: { col: 2.05, row: currentRow - 0.95 },
+            br: { col: 2.95, row: currentRow - 0.05 },
             editAs: 'oneCell'
           });
         } catch (error) {
@@ -472,12 +472,6 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       }
       
       row.getCell(3).value = '';
-      row.getCell(3).border = {
-        top: { style: 'thin' },
-        left: { style: 'thin' },
-        bottom: { style: 'thin' },
-        right: { style: 'thin' }
-      };
       row.getCell(4).value = item.quantity;
       row.getCell(5).value = 'шт';
       row.getCell(6).value = price;
