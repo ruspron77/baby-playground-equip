@@ -55,11 +55,11 @@ export function ContentSections() {
                   <div className="text-sm text-muted-foreground">лет на рынке</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-secondary mb-2">700+</div>
+                  <div className="text-4xl font-bold text-secondary mb-2">1000+</div>
                   <div className="text-sm text-muted-foreground">площадок</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-accent mb-2">500+</div>
+                  <div className="text-4xl font-bold text-accent mb-2">700+</div>
                   <div className="text-sm text-muted-foreground">товаров</div>
                 </div>
               </div>
