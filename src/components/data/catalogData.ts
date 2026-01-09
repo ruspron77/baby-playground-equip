@@ -24,8 +24,8 @@ export const categories = [
     name: 'Игра',
     icon: 'Smile',
     color: 'from-primary/20 to-primary/5',
-    image: '',
-    bgImage: '',
+    image: 'https://cdn.poehali.dev/files/%D0%B8%D0%B3%D1%80%D0%B0%20(2).png',
+    bgImage: 'https://cdn.poehali.dev/files/%D0%B8%D0%B3%D1%80%D0%B0%20(2).png',
     order: 1,
     subcategories: [
       { 
@@ -110,8 +110,8 @@ export const categories = [
     name: 'Парк',
     icon: 'Trees',
     color: 'from-accent/20 to-accent/5',
-    image: '',
-    bgImage: 'https://cdn.poehali.dev/files/урбанпарк (1).png',
+    image: 'https://cdn.poehali.dev/files/%D0%BF%D0%B0%D1%80%D0%BA.png',
+    bgImage: 'https://cdn.poehali.dev/files/%D0%BF%D0%B0%D1%80%D0%BA.png',
     order: 3,
     subcategories: [
       { name: 'Скамейки', image: '🪑' },
@@ -126,8 +126,8 @@ export const categories = [
     name: 'Благоустройство',
     icon: 'Hammer',
     color: 'from-blue-500/20 to-blue-500/5',
-    image: '',
-    bgImage: '',
+    image: 'https://cdn.poehali.dev/files/%D0%B1%D0%BB%D0%B0%D0%B3%D0%BE%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE.png',
+    bgImage: 'https://cdn.poehali.dev/files/%D0%B1%D0%BB%D0%B0%D0%B3%D0%BE%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE.png',
     order: 4,
     subcategories: []
   },
@@ -136,8 +136,8 @@ export const categories = [
     name: 'Покрытие',
     icon: 'Shield',
     color: 'from-purple-500/20 to-purple-500/5',
-    image: '',
-    bgImage: 'https://cdn.poehali.dev/files/резинка.png',
+    image: 'https://cdn.poehali.dev/files/%D0%BF%D0%BE%D0%BA%D1%80%D1%8B%D1%82%D0%B8%D0%B5.png',
+    bgImage: 'https://cdn.poehali.dev/files/%D0%BF%D0%BE%D0%BA%D1%80%D1%8B%D1%82%D0%B8%D0%B5.png',
     order: 5,
     subcategories: [
       { name: 'Резиновое покрытие', image: '🟦' },
@@ -151,8 +151,8 @@ export const categories = [
     name: 'Ограждения',
     icon: 'Box',
     color: 'from-gray-500/20 to-gray-500/5',
-    image: '',
-    bgImage: '',
+    image: 'https://cdn.poehali.dev/files/%D0%BE%D0%B3%D1%80%D0%B0%D0%B6%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5.png',
+    bgImage: 'https://cdn.poehali.dev/files/%D0%BE%D0%B3%D1%80%D0%B0%D0%B6%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5.png',
     order: 6,
     subcategories: []
   }
