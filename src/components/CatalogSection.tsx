@@ -141,7 +141,7 @@ export function CatalogSection({
       <section className="relative py-20 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/основная страница.png)' }}
+          style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D0%B0%D1%8F%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0.png)' }}
         >
           <div className="absolute inset-0 bg-black/30"></div>
         </div>
@@ -225,7 +225,7 @@ export function CatalogSection({
                                 className={`flex-1 text-left px-2 py-1.5 rounded text-base hover:bg-muted transition-colors flex items-center gap-2 bg-white ${
                                   !sub.hasChildren ? 'ml-6' : ''
                                 } ${
-                                  selectedSeries === sub.name || (selectedCategory === cat.id && selectedSubcategory === sub.name && !selectedSubSubcategory)
+                                  (selectedSeries && sub.name.includes(selectedSeries.replace('Серия "', '').replace('"', ''))) || (selectedCategory === cat.id && selectedSubcategory === sub.name && !selectedSubSubcategory)
                                     ? 'bg-primary/10 text-primary font-semibold' 
                                     : ''
                                 }`}
