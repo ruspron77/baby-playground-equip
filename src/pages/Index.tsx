@@ -578,10 +578,6 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         deliveryCost={deliveryCost}
         generateKP={generateKP}
         favoritesCount={favorites.length}
-        imageColumnWidth={imageColumnWidth}
-        setImageColumnWidth={setImageColumnWidth}
-        imageRowHeight={imageRowHeight}
-        setImageRowHeight={setImageRowHeight}
       />
 
       <CatalogSection
