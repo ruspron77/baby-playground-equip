@@ -419,7 +419,7 @@ export function CatalogSection({
                     <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                     <Input 
                       type="text"
-                      placeholder="Поиск по артикулу или названию..."
+                      placeholder="Поиск"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="pl-10 h-9"
