@@ -288,7 +288,7 @@ export function CatalogSection({
         </SheetContent>
       </Sheet>
 
-      <section id="catalog" className="pt-24 pb-4 bg-white">
+      <section id="catalog" className="pt-12 pb-4 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 animate-slide-up">
             <h2 className="text-4xl font-heading font-bold mb-4">Каталог продукции</h2>
