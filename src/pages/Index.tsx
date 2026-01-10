@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Header } from '@/components/Header';
+import { HeroSection } from '@/components/HeroSection';
+import { ServicesSection } from '@/components/ServicesSection';
 import { CatalogSection } from '@/components/CatalogSection';
 import { ContentSections } from '@/components/ContentSections';
 import { categories, CartItem } from '@/components/data/catalogData';
@@ -132,6 +134,10 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         setImageRowHeight={setImageRowHeight}
         products={products}
       />
+      
+      <HeroSection onOpenCatalog={() => catalogState.setIsSideMenuOpen(true)} />
+      
+      <ServicesSection />
       
       <CatalogSection
         categories={categories}
