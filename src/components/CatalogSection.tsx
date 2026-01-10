@@ -180,10 +180,7 @@ export function CatalogSection({
               Безопасность, долговечность и яркий дизайн — наши главные приоритеты.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="text-lg px-8" onClick={() => setIsSideMenuOpen(true)}>
-                <Icon name="ShoppingCart" size={20} className="mr-2" />
-                Смотреть каталог
-              </Button>
+              <Button size="lg" className="text-lg px-8" onClick={() => setIsSideMenuOpen(true)}>Выбрать оборудование</Button>
             </div>
           </div>
         </div>
