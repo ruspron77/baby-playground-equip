@@ -133,7 +133,7 @@ export function CatalogSection({
       setTimeout(() => {
         const element = productsRef.current;
         if (element) {
-          const yOffset = -250;
+          const yOffset = -300;
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
