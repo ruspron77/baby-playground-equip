@@ -86,7 +86,7 @@ export function Header({
           <div className="flex items-center gap-4">
             <a 
               href="tel:+79181151551" 
-              className="hidden lg:flex items-center gap-2 text-foreground hover:text-primary transition-colors font-semibold text-base"
+              className="hidden lg:flex items-center gap-2 text-foreground hover:text-primary transition-colors text-base font-normal"
             >
               <Icon name="Phone" size={20} className="text-primary" />
               +7 (918) 115-15-51
