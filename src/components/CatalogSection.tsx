@@ -450,7 +450,7 @@ export function CatalogSection({
                     variant={(selectedSeries?.includes('Eco')) ? 'default' : 'outline'}
                     size="sm"
                     onClick={() => setSelectedSeries(selectedSeries?.includes('Eco') ? null : 'Серия "Eco"')}
-                    className={selectedSeries?.includes('Eco') ? 'bg-accent hover:bg-accent/90' : ''}
+                    className={selectedSeries?.includes('Eco') ? 'bg-secondary hover:bg-secondary/90' : ''}
                   >
                     Eco
                   </Button>
