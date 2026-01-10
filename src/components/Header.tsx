@@ -179,84 +179,87 @@ export function Header({
               </SheetTrigger>
               <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
                 {!showOrderForm && (
-                  <SheetHeader>
-                    <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
-                  </SheetHeader>
+                  <>
+                    <SheetHeader>
+                      <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
+                    </SheetHeader>
+                    <div className="mt-6 mb-4">
+                      <div className="relative">
+                        <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                        <Input 
+                          type="text"
+                          placeholder="Поиск по каталогу..."
+                          value={cartSearchQuery}
+                          onChange={(e) => setCartSearchQuery(e.target.value)}
+                          className="pl-10"
+                        />
+                      </div>
+                    </div>
+
+                    {cartSearchQuery && filteredCatalogProducts.length > 0 && (
+                      <div className="mb-4">
+                        <h3 className="text-sm font-semibold mb-2 text-muted-foreground">Результаты поиска:</h3>
+                        <div className="space-y-2 max-h-64 overflow-y-auto">
+                          {filteredCatalogProducts.slice(0, 10).map((product) => (
+                            <Card key={product.id} className="cursor-pointer hover:bg-muted/50">
+                              <CardContent className="p-3">
+                                <div className="flex gap-3 items-center">
+                                  <div className="w-12 h-12 bg-white rounded flex items-center justify-center shrink-0 border">
+                                    {product.image.startsWith('http') ? (
+                                      <img src={product.image} alt={product.name} className="w-full h-full object-contain p-1" />
+                                    ) : (
+                                      <span className="text-2xl">{product.image}</span>
+                                    )}
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <h4 className="text-xs font-semibold line-clamp-2">{product.name}</h4>
+                                    <p className="text-xs text-muted-foreground">{formatPrice(product.price)} ₽</p>
+                                  </div>
+                                  <Button 
+                                    size="sm"
+                                    onClick={() => {
+                                      if (onAddToCart) {
+                                        onAddToCart(product);
+                                        setCartSearchQuery('');
+                                      }
+                                    }}
+                                  >
+                                    <Icon name="Plus" size={14} />
+                                  </Button>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
                 
-                {cart.length === 0 ? (
+                {!showOrderForm && cart.length === 0 && !cartSearchQuery && (
                   <div className="flex flex-col items-center justify-center py-12 text-center">
                     <Icon name="ShoppingCart" size={64} className="text-muted-foreground mb-4" />
                     <p className="text-lg text-muted-foreground">Корзина пуста</p>
                   </div>
-                ) : (
-                  <div className={showOrderForm ? "" : "mt-6 space-y-6"}>
-                    {showOrderForm ? (
-                      <div>
-                        <OrderForm
-                          total={calculateTotal()}
-                          deliveryCost={deliveryCost}
-                          onSubmit={(formData: OrderFormData) => {
-                            console.log('Order submitted:', formData);
-                          }}
-                          onCancel={() => setShowOrderForm(false)}
-                        />
-                      </div>
-                    ) : (
-                      <>
-                        <div className="mb-4">
-                          <div className="relative">
-                            <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                            <Input 
-                              type="text"
-                              placeholder="Поиск по каталогу..."
-                              value={cartSearchQuery}
-                              onChange={(e) => setCartSearchQuery(e.target.value)}
-                              className="pl-10"
-                            />
-                          </div>
-                        </div>
+                )}
 
-                        {cartSearchQuery && filteredCatalogProducts.length > 0 && (
-                          <div className="mb-4">
-                            <h3 className="text-sm font-semibold mb-2 text-muted-foreground">Результаты поиска:</h3>
-                            <div className="space-y-2 max-h-64 overflow-y-auto">
-                              {filteredCatalogProducts.slice(0, 10).map((product) => (
-                                <Card key={product.id} className="cursor-pointer hover:bg-muted/50">
-                                  <CardContent className="p-3">
-                                    <div className="flex gap-3 items-center">
-                                      <div className="w-12 h-12 bg-white rounded flex items-center justify-center shrink-0 border">
-                                        {product.image.startsWith('http') ? (
-                                          <img src={product.image} alt={product.name} className="w-full h-full object-contain p-1" />
-                                        ) : (
-                                          <span className="text-2xl">{product.image}</span>
-                                        )}
-                                      </div>
-                                      <div className="flex-1 min-w-0">
-                                        <h4 className="text-xs font-semibold line-clamp-2">{product.name}</h4>
-                                        <p className="text-xs text-muted-foreground">{formatPrice(product.price)} ₽</p>
-                                      </div>
-                                      <Button 
-                                        size="sm"
-                                        onClick={() => {
-                                          if (onAddToCart) {
-                                            onAddToCart(product);
-                                            setCartSearchQuery('');
-                                          }
-                                        }}
-                                      >
-                                        <Icon name="Plus" size={14} />
-                                      </Button>
-                                    </div>
-                                  </CardContent>
-                                </Card>
-                              ))}
-                            </div>
-                          </div>
-                        )}
+                {showOrderForm && (
+                  <div>
+                    <OrderForm
+                      total={calculateTotal()}
+                      deliveryCost={deliveryCost}
+                      onSubmit={(formData: OrderFormData) => {
+                        console.log('Order submitted:', formData);
+                      }}
+                      onCancel={() => setShowOrderForm(false)}
+                    />
+                  </div>
+                )}
 
-                        <div className="space-y-4">
-                          {cart.map((item) => (
+                {!showOrderForm && cart.length > 0 && (
+                  <>
+                    <div className="space-y-4">
+                      {cart.map((item) => (
                             <Card key={item.id}>
                               <CardContent className="p-4">
                                 <div className="flex gap-4">
@@ -299,10 +302,10 @@ export function Header({
                                 </div>
                               </CardContent>
                             </Card>
-                          ))}
-                        </div>
-                        
-                        <div className="border-t pt-4 space-y-3">
+                      ))}
+                    </div>
+                    
+                    <div className="border-t pt-4 space-y-3">
                           <div className="flex justify-between text-lg font-semibold">
                             <span>Итого:</span>
                             <span className="text-primary">{calculateTotal().toLocaleString('ru-RU')} ₽</span>
@@ -348,10 +351,8 @@ export function Header({
                               +7 (918) 115-15-51
                             </a>
                           </Button>
-                        </div>
-                      </>
-                    )}
-                  </div>
+                    </div>
+                  </>
                 )}
               </SheetContent>
             </Sheet>
