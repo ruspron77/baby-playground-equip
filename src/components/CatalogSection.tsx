@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -126,6 +126,20 @@ export function CatalogSection({
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [productImages, setProductImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const productsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (searchQuery && productsRef.current) {
+      setTimeout(() => {
+        const element = productsRef.current;
+        if (element) {
+          const yOffset = -90;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [searchQuery]);
 
   const handleProductClick = async (product: Product) => {
     setSelectedProduct(product);
@@ -506,7 +520,7 @@ export function CatalogSection({
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              <div ref={productsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {filteredProducts.length > 0 ? (
                   filteredProducts.map((product) => (
                     <Card key={product.id} className="overflow-hidden hover:shadow-xl transition-all group cursor-pointer">
