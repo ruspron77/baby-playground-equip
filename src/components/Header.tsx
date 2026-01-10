@@ -41,7 +41,6 @@ export function Header({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showOrderForm, setShowOrderForm] = useState(false);
   const [cartSearchQuery, setCartSearchQuery] = useState('');
-  const [cartSearchQuery, setCartSearchQuery] = useState('');
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50 border-b">
