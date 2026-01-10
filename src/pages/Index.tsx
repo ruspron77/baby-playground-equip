@@ -126,6 +126,17 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
   const filteredProducts = (() => {
     let filtered = products;
     
+    // Если есть поисковый запрос, ищем по всему каталогу
+    if (searchQuery.trim()) {
+      filtered = products.filter(p => 
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.id.toString().includes(searchQuery)
+      );
+      filtered = filtered.filter(p => parseInt(p.price) > 0);
+      return filtered;
+    }
+    
+    // Без поиска применяем фильтры категорий
     if (selectedSubSubcategory) {
       filtered = filtered.filter(p => p.subsubcategory === selectedSubSubcategory);
     }
@@ -135,13 +146,6 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     }
     
     filtered = filtered.filter(p => parseInt(p.price) > 0);
-    
-    if (searchQuery.trim()) {
-      filtered = filtered.filter(p => 
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.id.toString().includes(searchQuery)
-      );
-    }
     
     return filtered;
   })();
