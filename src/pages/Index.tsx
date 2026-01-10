@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Header } from '@/components/Header';
 import { CatalogSection } from '@/components/CatalogSection';
 import { ContentSections } from '@/components/ContentSections';
-import { ServicesSection } from '@/components/ServicesSection';
 import { categories, CartItem } from '@/components/data/catalogData';
 import { useCatalogState } from '@/components/hooks/useCatalogState';
 import { useProducts } from '@/components/hooks/useProducts';
@@ -132,8 +131,6 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         setImageRowHeight={setImageRowHeight}
         products={products}
       />
-      
-      <ServicesSection />
       
       <CatalogSection
         categories={categories}
