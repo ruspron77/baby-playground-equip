@@ -11,6 +11,7 @@ interface CatalogHandlersProps {
   setIsSideMenuOpen: (value: boolean) => void;
   setExpandedSubcategories: (value: string[] | ((prev: string[]) => string[])) => void;
   setSelectedSeries: (value: string | null) => void;
+  setSearchQuery: (value: string) => void;
   currentCategory: typeof categories[0] | null;
   currentSubcategory: Subcategory | null;
 }
@@ -27,6 +28,7 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
     setIsSideMenuOpen,
     setExpandedSubcategories,
     setSelectedSeries,
+    setSearchQuery,
     currentCategory,
     currentSubcategory,
   } = props;
@@ -130,6 +132,7 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
   const handleResetFilters = () => {
     setSelectedSubSubcategory(null);
     setSelectedSeries(null);
+    setSearchQuery('');
   };
 
   return {

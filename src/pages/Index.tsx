@@ -51,6 +51,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     setIsSideMenuOpen: catalogState.setIsSideMenuOpen,
     setExpandedSubcategories: catalogState.setExpandedSubcategories,
     setSelectedSeries: catalogState.setSelectedSeries,
+    setSearchQuery: catalogState.setSearchQuery,
     currentCategory: catalogState.currentCategory,
     currentSubcategory: catalogState.currentSubcategory,
   });
