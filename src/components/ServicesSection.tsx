@@ -13,12 +13,12 @@ export function ServicesSection() {
             { icon: 'Wrench', title: 'Монтаж', desc: 'Профессиональная установка и гарантия качества' }
           ].map((service, idx) => (
             <Card key={idx} className="text-center hover:shadow-lg transition-shadow animate-scale-in" style={{ animationDelay: `${idx * 0.15}s` }}>
-              <CardHeader className="py-4">
-                <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Icon name={service.icon as any} size={28} className="text-primary" />
+              <CardHeader className="py-3 px-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Icon name={service.icon as any} size={24} className="text-primary" />
                 </div>
-                <CardTitle className="text-base">{service.title}</CardTitle>
-                <CardDescription className="text-sm">{service.desc}</CardDescription>
+                <CardTitle className="text-base mb-1">{service.title}</CardTitle>
+                <CardDescription className="text-sm leading-snug">{service.desc}</CardDescription>
               </CardHeader>
             </Card>
           ))}
