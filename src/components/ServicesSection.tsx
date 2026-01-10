@@ -5,10 +5,6 @@ export function ServicesSection() {
   return (
     <section id="services" className="pt-4 pb-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-heading font-bold mb-4">Наши услуги</h2>
-          <p className="text-lg text-muted-foreground">Полный цикл работ от проектирования до установки</p>
-        </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             { icon: 'Ruler', title: 'Проектирование', desc: 'Разработка индивидуальных проектов детских площадок' },
