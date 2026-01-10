@@ -1,0 +1,47 @@
+{
+  "tests": [
+    {
+      "name": "Test order submission",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "type": "order",
+        "name": "Тестовый Клиент",
+        "phone": "+79001234567",
+        "email": "test@example.com",
+        "comment": "Тестовый заказ",
+        "items": [
+          {
+            "name": "Тестовый товар",
+            "article": "TEST-001",
+            "quantity": 2,
+            "price": 1000
+          }
+        ],
+        "total": 2000
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test callback request",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "type": "callback",
+        "name": "Тестовый Клиент",
+        "phone": "+79001234567",
+        "email": "test@example.com",
+        "comment": "Перезвоните мне"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
