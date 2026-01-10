@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import AdminPage from "./pages/AdminPage";
+import Admin from "./pages/Admin";
 import FavoritesPage from "./pages/FavoritesPage";
 import NotFound from "./pages/NotFound";
 import { useState, useEffect } from "react";
@@ -122,7 +123,8 @@ const App = () => {
                 />
               } 
             />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin-old" element={<AdminPage />} />
+            <Route path="/admin" element={<Admin />} />
             <Route 
               path="/favorites" 
               element={
