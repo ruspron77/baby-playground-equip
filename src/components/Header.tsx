@@ -243,7 +243,7 @@ export function Header({
                         <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
                         <a 
                           href="tel:+79181151551" 
-                          className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                          className="flex items-center gap-2 font-medium text-primary hover:text-primary/80 transition-colors text-base"
                         >
                           <Icon name="Phone" size={16} />
                           +7 (918) 115-15-51
