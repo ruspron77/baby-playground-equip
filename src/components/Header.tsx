@@ -82,6 +82,8 @@ export function Header({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showOrderForm, setShowOrderForm] = useState(false);
   const [cartSearchQuery, setCartSearchQuery] = useState('');
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [orderNumber, setOrderNumber] = useState<string>('');
   const [showKPDialog, setShowKPDialog] = useState(false);
   const [kpAddress, setKpAddress] = useState('');
   const [kpInstallationPercent, setKpInstallationPercent] = useState(0);
@@ -281,6 +283,10 @@ export function Header({
                       deliveryCost={deliveryCost}
                       grandTotal={calculateGrandTotal()}
                       onSubmit={(formData: OrderFormData) => {
+                        const newOrderNumber = Math.floor(1000 + Math.random() * 9000).toString();
+                        setOrderNumber(newOrderNumber);
+                        setShowOrderForm(false);
+                        setShowSuccessDialog(true);
                         console.log('Order submitted:', formData);
                       }}
                       onCancel={() => setShowOrderForm(false)}
@@ -499,6 +505,32 @@ export function Header({
             >
               <Icon name="Download" size={20} className="mr-2" />
               Скачать коммерческое предложение
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Диалог успешного оформления заказа */}
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-heading text-center">Благодарим вас за обращение в компанию «Красивый город»!</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <p className="text-base">
+              Заявка №{orderNumber} оформлена и находится на проверке. Наш менеджер в течение дня свяжется вами, чтобы проверить заказ и чтобы вы могли убедиться, что всё заказали правильно!
+            </p>
+            <p className="text-base">
+              Также все детали по Заявке №{orderNumber} были отправлены вам на электронную почту.
+            </p>
+            <Button 
+              onClick={() => {
+                setShowSuccessDialog(false);
+                setIsCartOpen(false);
+              }}
+              className="w-full"
+            >
+              Закрыть
             </Button>
           </div>
         </DialogContent>

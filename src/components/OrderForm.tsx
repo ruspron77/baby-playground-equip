@@ -36,6 +36,7 @@ export function OrderForm({ total, installationCost, deliveryCost, grandTotal, o
   });
 
   const [errors, setErrors] = useState<Partial<OrderFormData>>({});
+  const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
 
   const validateForm = () => {
     const newErrors: Partial<OrderFormData> = {};
@@ -177,10 +178,6 @@ export function OrderForm({ total, installationCost, deliveryCost, grandTotal, o
           </div>
 
           <div className="border-t pt-4 space-y-2">
-            <div className="flex justify-between text-base">
-              <span>Сумма</span>
-              <span>{total.toLocaleString('ru-RU')} ₽</span>
-            </div>
             {installationCost > 0 && (
               <div className="flex justify-between text-base text-muted-foreground">
                 <span>Монтаж:</span>
@@ -199,9 +196,31 @@ export function OrderForm({ total, installationCost, deliveryCost, grandTotal, o
             </div>
           </div>
 
+          <div className="flex items-start gap-2 pt-2">
+            <Checkbox 
+              id="privacy" 
+              checked={acceptedPrivacy}
+              onCheckedChange={(checked) => setAcceptedPrivacy(checked as boolean)}
+            />
+            <label htmlFor="privacy" className="text-sm text-muted-foreground leading-tight cursor-pointer">
+              Я согласен с обработкой моих персональных данных
+            </label>
+          </div>
+
           <div className="flex gap-3 pt-4">
             <Button type="button" variant="outline" onClick={onCancel} className="flex-1">Отменить</Button>
-            <Button type="submit" className="flex-1"> Заказать</Button>
+            <Button 
+              type="submit" 
+              className="flex-1" 
+              disabled={!acceptedPrivacy}
+              style={{
+                backgroundColor: acceptedPrivacy ? '' : '#ffffff',
+                color: acceptedPrivacy ? '' : '#999',
+                border: acceptedPrivacy ? '' : '1px solid #ddd'
+              }}
+            >
+              Заказать
+            </Button>
           </div>
         </form>
       </CardContent>
