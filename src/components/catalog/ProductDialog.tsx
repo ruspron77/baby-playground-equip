@@ -63,7 +63,7 @@ export function ProductDialog({
                     <img 
                       src={productImages[currentImageIndex]} 
                       alt={selectedProduct.name} 
-                      className="w-full h-full object-contain p-4" 
+                      className="w-full h-full object-contain p-1" 
                     />
                     {productImages.length > 1 && (
                       <>
@@ -98,7 +98,7 @@ export function ProductDialog({
                     )}
                   </>
                 ) : selectedProduct.image.startsWith('http') ? (
-                  <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-contain p-4" />
+                  <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-contain p-1" />
                 ) : (
                   <span className="text-8xl">{selectedProduct.image}</span>
                 )}
@@ -124,7 +124,7 @@ export function ProductDialog({
             <div className="space-y-6">
               <div>
                 <h2 className="font-heading mb-2 text-4xl font-semibold">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
-                <Badge variant="secondary" className="mb-4">{selectedProduct.name.split('\n')[0]}</Badge>
+                <p className="text-sm text-muted-foreground mb-4">{selectedProduct.name.split('\n')[0]}</p>
                 <p className="text-4xl font-bold text-primary mb-4">{formatPrice(selectedProduct.price)} ₽</p>
                 
                 <div className="flex gap-3">
@@ -180,7 +180,10 @@ export function ProductDialog({
                     setIsProductDialogOpen(false);
                     setIsContactDialogOpen(true);
                   }}
-                ></Button>
+                >
+                  <Icon name="Phone" size={20} className="mr-2" />
+                  Заказать звонок
+                </Button>
               </div>
             </div>
           </div>
