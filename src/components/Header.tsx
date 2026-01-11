@@ -352,53 +352,18 @@ export function Header({
                             Оформить заказ
                           </Button>
                         
-                          <div className="space-y-2">
-                            <Button 
-                              variant="outline"
-                              className="w-full" 
-                              size="lg"
-                              onClick={() => {
-                                generateKP();
-                                setIsCartOpen(false);
-                              }}
-                            >
-                              <Icon name="FileText" size={20} className="mr-2" />
-                              Скачать коммерческое предложение
-                            </Button>
-                            
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="w-full"
-                              onClick={() => setIsExcelSettingsOpen(!isExcelSettingsOpen)}
-                            >
-                              <Icon name={isExcelSettingsOpen ? "ChevronUp" : "ChevronDown"} size={16} className="mr-2" />
-                              Настройки Excel
-                            </Button>
-                            
-                            {isExcelSettingsOpen && (
-                              <div className="space-y-3 p-3 bg-muted rounded-lg">
-                                <div className="space-y-2">
-                                  <label className="text-xs font-medium">Ширина колонки с изображением:</label>
-                                  <Input
-                                    type="number"
-                                    value={imageColumnWidth}
-                                    onChange={(e) => setImageColumnWidth(Number(e.target.value))}
-                                    className="h-8 text-sm"
-                                  />
-                                </div>
-                                <div className="space-y-2">
-                                  <label className="text-xs font-medium">Высота строки с изображением:</label>
-                                  <Input
-                                    type="number"
-                                    value={imageRowHeight}
-                                    onChange={(e) => setImageRowHeight(Number(e.target.value))}
-                                    className="h-8 text-sm"
-                                  />
-                                </div>
-                              </div>
-                            )}
-                          </div>
+                          <Button 
+                            variant="outline"
+                            className="w-full" 
+                            size="lg"
+                            onClick={() => {
+                              generateKP();
+                              setIsCartOpen(false);
+                            }}
+                          >
+                            <Icon name="FileText" size={20} className="mr-2" />
+                            Скачать коммерческое предложение
+                          </Button>
                           
                           <Button 
                             variant="outline" 
