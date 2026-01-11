@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import Icon from '@/components/ui/icon';
 import { CartItem } from './data/catalogData';
-import { ContactDialog } from './ContactDialog';
 
 interface Product {
   id: number;
@@ -93,7 +92,6 @@ export function Header({
   const [kpDeliveryCost, setKpDeliveryCost] = useState(0);
   const [hideInstallationInKP, setHideInstallationInKP] = useState(false);
   const [hideDeliveryInKP, setHideDeliveryInKP] = useState(false);
-  const [isCallbackDialogOpen, setIsCallbackDialogOpen] = useState(false);
 
   // Генерация номера заказа с датой
   const getNextOrderNumber = () => {
@@ -128,13 +126,11 @@ export function Header({
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <a href="#hero">
-              <img 
-                src="https://cdn.poehali.dev/files/photo_643632026-01-05_09-32-44.png" 
-                alt="Urban Play"
-                className="h-16 w-auto object-contain rounded-0 cursor-pointer"
-              />
-            </a>
+            <img 
+              src="https://cdn.poehali.dev/files/photo_643632026-01-05_09-32-44.png" 
+              alt="Urban Play"
+              className="h-16 w-auto object-contain rounded-0"
+            />
           </div>
           <nav className="hidden md:flex gap-6">
             <a href="#about" className="text-foreground hover:text-primary transition-colors text-base font-medium">О компании</a>
@@ -151,12 +147,6 @@ export function Header({
               <Icon name="Phone" size={20} className="text-primary" />
               +7 (918) 115-15-51
             </a>
-            <Button 
-              className="hidden lg:flex"
-              onClick={() => setIsCallbackDialogOpen(true)}
-            >
-              ЗАКАЗАТЬ ЗВОНОК
-            </Button>
             <div className="flex items-center gap-3">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
@@ -432,11 +422,13 @@ export function Header({
                           
                           <Button 
                             variant="outline"
-                            className="w-full clear-cart-btn" 
+                            className="w-full" 
                             size="lg"
                             onClick={() => {
-                              if (clearCart) {
-                                clearCart();
+                              if (window.confirm('Вы уверены, что хотите очистить корзину?')) {
+                                if (clearCart) {
+                                  clearCart();
+                                }
                               }
                             }}
                           >
@@ -605,10 +597,6 @@ export function Header({
         </DialogContent>
       </Dialog>
 
-      <ContactDialog 
-        open={isCallbackDialogOpen} 
-        onOpenChange={setIsCallbackDialogOpen}
-      />
     </header>
   );
 }

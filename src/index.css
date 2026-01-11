@@ -117,75 +117,11 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 160px;
+    scroll-padding-top: 85px;
   }
 
   button {
     @apply active:scale-95 transition-transform duration-150;
-  }
-
-  /* Все остальные outline кнопки - тёмный контур и текст в обычном состоянии */
-  button[class*="outline"] {
-    border-color: hsl(220 13% 13%) !important;
-    color: hsl(220 13% 13%) !important;
-  }
-
-  /* Все остальные outline кнопки - зелёный контур при наведении */
-  button[class*="outline"]:hover {
-    background-color: transparent !important;
-    border-color: #44aa02 !important;
-    color: #44aa02 !important;
-  }
-
-  /* Кнопка "Очистить корзину" - тёмный контур и текст, при наведении красный */
-  button.clear-cart-btn {
-    border-color: hsl(220 13% 13%) !important;
-    color: hsl(220 13% 13%) !important;
-  }
-
-  button.clear-cart-btn:hover {
-    background-color: transparent !important;
-    border-color: #ef4444 !important;
-    color: #ef4444 !important;
-  }
-
-  /* Красные кнопки удаления в карточке товара - красный фон и белый текст при наведении (перезаписывает outline) */
-  button[class*="border-red-500"]:hover {
-    background-color: #ef4444 !important;
-    border-color: #ef4444 !important;
-    color: white !important;
-  }
-
-  /* Для кнопок с зелёным фоном (primary) - белый текст всегда */
-  button[class*="bg-primary"] {
-    color: white !important;
-  }
-
-  /* Для кнопок с зелёным фоном (primary) - тёмно-зелёный при наведении (самый высокий приоритет) */
-  button[class*="bg-primary"]:hover {
-    background-color: hsl(99 98% 28%) !important;
-    border-color: hsl(99 98% 28%) !important;
-    color: white !important;
-  }
-
-  /* Кнопки фильтра Classic/Eco - фиолетовый контур и текст при наведении */
-  button.series-filter:hover {
-    background-color: transparent !important;
-    border-color: hsl(289 98% 27%) !important;
-    color: hsl(289 98% 27%) !important;
-  }
-
-  /* Кнопки фильтра Classic/Eco - выбранное состояние: фиолетовый фон и белый текст */
-  button.series-filter-active {
-    background-color: hsl(289 98% 27%) !important;
-    border-color: hsl(289 98% 27%) !important;
-    color: white !important;
-  }
-
-  button.series-filter-active:hover {
-    background-color: hsl(289 98% 22%) !important;
-    border-color: hsl(289 98% 22%) !important;
-    color: white !important;
   }
 
   a[href^="tel"] {
