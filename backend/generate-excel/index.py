@@ -334,17 +334,21 @@ def handler(event, context):
         # Итого
         total_sum = equipment_total + installation_cost
         
-        ws.merge_cells(f'F{current_row}:F{current_row}')
+        # Пустые ячейки с рамками
+        for col in range(1, 6):
+            cell = ws.cell(row=current_row, column=col, value='')
+            cell.border = thin_border
+        
         cell = ws.cell(row=current_row, column=6, value='Итого:')
         cell.alignment = Alignment(horizontal='right', vertical='center')
         cell.font = Font(name='Times New Roman', bold=True, size=11)
-        cell.border = Border(top=Side(style='thin'), bottom=Side(style='thin'), left=Side(style='thin'))
+        cell.border = thin_border
         
         cell = ws.cell(row=current_row, column=7, value=total_sum)
         cell.alignment = Alignment(horizontal='right', vertical='center')
         cell.number_format = '#,##0.00\ ""'
         cell.font = Font(name='Times New Roman', bold=True, size=11)
-        cell.border = Border(top=Side(style='thin'), bottom=Side(style='thin'), right=Side(style='thin'))
+        cell.border = thin_border
         
         current_row += 2
         
