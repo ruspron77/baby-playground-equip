@@ -105,7 +105,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       const cartProducts = cart.map(item => {
         const product = products.find(p => p.id === item.id);
         return {
-          article: product?.article || '',
+          article: product?.article ? `Арт. ${product.article}` : '',
           name: product?.name.split('\n')[1] || product?.name || '',
           price: product?.price || '0',
           quantity: item.quantity,

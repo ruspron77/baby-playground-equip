@@ -239,16 +239,7 @@ export function Header({
                 {!showOrderForm && (
                   <>
                     <SheetHeader>
-                      <div className="flex items-center justify-between">
-                        <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
-                        <a 
-                          href="tel:+79181151551" 
-                          className="flex items-center gap-2 font-medium text-primary hover:text-primary/80 transition-colors text-base"
-                        >
-                          <Icon name="Phone" size={16} />
-                          +7 (918) 115-15-51
-                        </a>
-                      </div>
+                      <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
                     </SheetHeader>
                     <div className="mt-6 mb-4">
                       <div className="relative">
@@ -436,7 +427,7 @@ export function Header({
                             className="w-full clear-cart-btn" 
                             size="lg"
                             onClick={() => {
-                              if (clearCart && confirm('Вы уверены, что хотите очистить корзину?')) {
+                              if (clearCart) {
                                 clearCart();
                               }
                             }}
