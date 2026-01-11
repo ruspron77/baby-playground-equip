@@ -183,24 +183,20 @@ export function CategoryGrid({
                   </Button>
                 </div>
                 <CardContent className="p-4">
-                  <div className="mb-2">
-                    <p className="text-xs text-muted-foreground mb-2">{product.name.split('\n')[0]}</p>
-                    <h3 className="font-semibold text-base line-clamp-2 min-h-[48px]">{product.name.split('\n')[1] || product.name}</h3>
-                  </div>
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="text-xl font-bold text-primary flex-shrink-0">{formatPrice(product.price)} ₽</p>
-                    <Button 
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleAddToCart(product);
-                      }}
-                      className="gap-1"
-                    >
-                      <Icon name="ShoppingCart" size={16} />
-                      <span className="hidden sm:inline">В корзину</span>
-                    </Button>
-                  </div>
+                  <p className="text-xs text-muted-foreground mb-1">{product.name.split('\n')[0]}</p>
+                  <h3 className="font-semibold text-base line-clamp-2 mb-2">{product.name.split('\n')[1] || product.name}</h3>
+                  <p className="text-xl font-bold text-primary mb-3">{formatPrice(product.price)} ₽</p>
+                  <Button 
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAddToCart(product);
+                    }}
+                    className="gap-1 w-full"
+                  >
+                    <Icon name="ShoppingCart" size={16} />
+                    <span>В корзину</span>
+                  </Button>
                 </CardContent>
               </Card>
             );
