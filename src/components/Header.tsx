@@ -91,6 +91,19 @@ export function Header({
   const [hideInstallationInKP, setHideInstallationInKP] = useState(false);
   const [hideDeliveryInKP, setHideDeliveryInKP] = useState(false);
 
+  // Генерация номера заказа с датой
+  const getOrderNumberWithDate = () => {
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    const orderCount = parseInt(localStorage.getItem('orderCount') || '0', 10) + 1;
+    localStorage.setItem('orderCount', orderCount.toString());
+    return `${day}.${month}.${year}-${String(orderCount).padStart(4, '0')}`;
+  };
+
+  const [currentOrderNumber] = useState(() => getOrderNumberWithDate());
+
   const filteredCatalogProducts = allProducts.filter(product => 
     cartSearchQuery === '' || 
     product.name.toLowerCase().includes(cartSearchQuery.toLowerCase()) ||
@@ -215,7 +228,10 @@ export function Header({
                     <SheetHeader>
                       <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
                     </SheetHeader>
-                    <div className="mt-6 mb-4">
+                    <div className="mt-6 mb-4 space-y-3">
+                      <div className="text-sm text-muted-foreground">
+                        Заказ № <span className="font-semibold text-foreground">{currentOrderNumber}</span>
+                      </div>
                       <div className="relative">
                         <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                         <Input 

@@ -123,4 +123,18 @@
   button {
     @apply active:scale-95 transition-transform duration-150;
   }
+
+  /* Зелёный контур при наведении на все кнопки */
+  button:hover {
+    background-color: transparent !important;
+    border-color: #44aa02 !important;
+    color: #44aa02 !important;
+  }
+
+  /* Сохранить белый цвет текста для primary/destructive кнопок в нормальном состоянии */
+  button[class*="bg-primary"],
+  button[class*="bg-destructive"],
+  button[class*="bg-secondary"] {
+    color: white;
+  }
 }
