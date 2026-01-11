@@ -68,8 +68,12 @@ export function CategoryDialogs({
                     <span className="text-6xl group-hover:scale-110 transition-transform duration-300">{sub.image}</span>
                   )}
                 </div>
-                <div className="py-4 px-6 bg-white">
-                  <h4 className="font-semibold text-center text-base">{sub.name}</h4>
+                <div className="py-2 px-6" style={{
+                  backgroundColor: sub.name.includes('Classic') ? 'rgba(220, 252, 231, 0.95)' : 
+                                   sub.name.includes('Eco') ? 'rgba(243, 232, 255, 0.95)' : 
+                                   'white'
+                }}>
+                  <h4 className="font-bold text-center text-base">{sub.name}</h4>
                 </div>
               </Card>
             ))}
