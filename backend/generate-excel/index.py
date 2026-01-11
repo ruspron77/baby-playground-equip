@@ -131,13 +131,13 @@ def handler(event, context):
         current_row += 2
         
         # Настройка колонок
-        ws.column_dimensions['A'].width = 4      # №
-        ws.column_dimensions['B'].width = 17     # Наименование - 17 (138 пикселей)
-        ws.column_dimensions['C'].width = 27     # Рисунок - 27.00 (194 пикселя)
-        ws.column_dimensions['D'].width = 6.29   # Кол-во - 6.29 (49 пикселей)
-        ws.column_dimensions['E'].width = 6.29   # Ед. изм - 6.29 (49 пикселей)
-        ws.column_dimensions['F'].width = 15     # Цена руб - 15
-        ws.column_dimensions['G'].width = 15     # Сумма руб - 15
+        ws.column_dimensions['A'].width = 3      # № - 3.00 (26 пикселей)
+        ws.column_dimensions['B'].width = 23     # Наименование - 23.00 (166 пикселей)
+        ws.column_dimensions['C'].width = 17     # Рисунок - 17.00 (124 пикселя)
+        ws.column_dimensions['D'].width = 6      # Кол-во - 6.00 (47 пикселей)
+        ws.column_dimensions['E'].width = 6      # Ед. изм - 6.00 (47 пикселей)
+        ws.column_dimensions['F'].width = 13     # Цена руб - 13.00 (96 пикселей)
+        ws.column_dimensions['G'].width = 13     # Сумма руб - 13.00 (96 пикселей)
         
         # Границы
         thin_border = Border(
@@ -163,7 +163,7 @@ def handler(event, context):
         equipment_total = 0
         
         for idx, product in enumerate(products, 1):
-            ws.row_dimensions[current_row].height = 125
+            ws.row_dimensions[current_row].height = 72
             
             # №
             cell = ws.cell(row=current_row, column=1, value=idx)
