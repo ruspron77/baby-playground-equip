@@ -200,13 +200,13 @@ def handler(event, context):
             current_row += 2
         
         # Настройка колонок
-        ws.column_dimensions['A'].width = 3.00   # № - 3.00 (26 пикселей)
-        ws.column_dimensions['B'].width = 23.00  # Наименование - 23.00 (166 пикселей)
-        ws.column_dimensions['C'].width = 27.00  # Рисунок - 27.00 (194 пикселя)
-        ws.column_dimensions['D'].width = 7.00   # Кол-во - 7.00 (54 пикселя)
-        ws.column_dimensions['E'].width = 7.00   # Ед. изм - 7.00 (54 пикселя)
-        ws.column_dimensions['F'].width = 14.00  # Цена руб - 14.00 (103 пикселя)
-        ws.column_dimensions['G'].width = 16.00  # Сумма руб - 16.00 (117 пикселей)
+        ws.column_dimensions['A'].width = 6.00   # № - 6.00 (41 пикселей)
+        ws.column_dimensions['B'].width = 46.00  # Наименование - 46.00 (281 пикселей)
+        ws.column_dimensions['C'].width = 36.00  # Рисунок - 36.00 (221 пикселей)
+        ws.column_dimensions['D'].width = 9.00   # Кол-во - 9.00 (59 пикселей)
+        ws.column_dimensions['E'].width = 9.00   # Ед. изм - 9.00 (59 пикселей)
+        ws.column_dimensions['F'].width = 19.00  # Цена руб - 19.00 (119 пикселей)
+        ws.column_dimensions['G'].width = 19.00  # Сумма руб - 19.00 (119 пикселей)
         
         # Границы
         thin_border = Border(
@@ -225,7 +225,7 @@ def handler(event, context):
             cell.border = thin_border
             cell.fill = PatternFill(start_color='D3D3D3', end_color='D3D3D3', fill_type='solid')
         
-        ws.row_dimensions[current_row].height = 30
+        ws.row_dimensions[current_row].height = 16.50
         current_row += 1
         
         # Товары
@@ -241,7 +241,7 @@ def handler(event, context):
         installation_percent_multiplier = (installation_percent / 100) if (hide_installation and installation_percent > 0) else 0
         
         for idx, product in enumerate(products, 1):
-            ws.row_dimensions[current_row].height = 100.50
+            ws.row_dimensions[current_row].height = 109.00
             
             # №
             cell = ws.cell(row=current_row, column=1, value=idx)
@@ -280,9 +280,9 @@ def handler(event, context):
                         pil_img = PILImage.open(io.BytesIO(img_data))
                         original_width, original_height = pil_img.size
                         
-                        # Целевые размеры под новую ячейку
-                        target_width = 185
-                        target_height = 125
+                        # Целевые размеры под новую ячейку (36.00 width × 109.00 height)
+                        target_width = 215  # 221 пикселей - небольшой отступ
+                        target_height = 140  # 144 пикселей - небольшой отступ
                         
                         # Вычисляем финальные размеры с сохранением пропорций
                         width_ratio = target_width / original_width
@@ -304,8 +304,8 @@ def handler(event, context):
                         # Центрируем изображение в ячейке
                         from openpyxl.drawing.spreadsheet_drawing import AnchorMarker, TwoCellAnchor
                         
-                        col_width_pixels = 194  # 27.00 в Excel
-                        row_height_pixels = 134  # 100.50 в Excel
+                        col_width_pixels = 221  # 36.00 в Excel
+                        row_height_pixels = 144  # 109.00 в Excel
                         
                         offset_x = max(0, int((col_width_pixels - final_width) / 2 * 9525))
                         offset_y = max(0, int((row_height_pixels - final_height) / 2 * 9525))
@@ -467,7 +467,7 @@ def handler(event, context):
         cell.font = Font(name='Times New Roman', bold=True, size=11)
         cell.border = thin_border
         
-        current_row += 2
+        current_row += 1
         
         # Футер с условиями
         ws.merge_cells(f'A{current_row}:G{current_row}')
