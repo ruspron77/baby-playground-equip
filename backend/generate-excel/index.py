@@ -132,12 +132,12 @@ def handler(event, context):
         
         # Настройка колонок
         ws.column_dimensions['A'].width = 3      # № - 3.00 (26 пикселей)
-        ws.column_dimensions['B'].width = 23     # Наименование - 23.00 (166 пикселей)
+        ws.column_dimensions['B'].width = 24     # Наименование - 24.00 (173 пикселя)
         ws.column_dimensions['C'].width = 18     # Рисунок - 18.00 (131 пиксель)
         ws.column_dimensions['D'].width = 6      # Кол-во - 6.00 (47 пикселей)
         ws.column_dimensions['E'].width = 6      # Ед. изм - 6.00 (47 пикселей)
-        ws.column_dimensions['F'].width = 13     # Цена руб - 13.00 (96 пикселей)
-        ws.column_dimensions['G'].width = 13     # Сумма руб - 13.00 (96 пикселей)
+        ws.column_dimensions['F'].width = 12     # Цена руб - 12.00 (89 пикселей)
+        ws.column_dimensions['G'].width = 14     # Сумма руб - 14.00 (103 пикселя)
         
         # Границы
         thin_border = Border(
@@ -274,7 +274,7 @@ def handler(event, context):
             # Цена
             price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']
             cell = ws.cell(row=current_row, column=6, value=price)
-            cell.alignment = Alignment(horizontal='right', vertical='center')
+            cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.number_format = '#,##0.00\ ""'
             cell.border = thin_border
             cell.font = Font(name='Times New Roman', size=11)
@@ -283,7 +283,7 @@ def handler(event, context):
             sum_price = price * quantity
             equipment_total += sum_price
             cell = ws.cell(row=current_row, column=7, value=sum_price)
-            cell.alignment = Alignment(horizontal='right', vertical='center')
+            cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.number_format = '#,##0.00\ ""'
             cell.border = thin_border
             cell.font = Font(name='Times New Roman', size=11)
@@ -318,13 +318,13 @@ def handler(event, context):
         cell.font = Font(name='Times New Roman', size=11)
         
         cell = ws.cell(row=current_row, column=6, value=installation_cost)
-        cell.alignment = Alignment(horizontal='right', vertical='center')
+        cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.number_format = '#,##0.00\ ""'
         cell.border = thin_border
         cell.font = Font(name='Times New Roman', size=11)
         
         cell = ws.cell(row=current_row, column=7, value=installation_cost)
-        cell.alignment = Alignment(horizontal='right', vertical='center')
+        cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.number_format = '#,##0.00\ ""'
         cell.border = thin_border
         cell.font = Font(name='Times New Roman', size=11)
@@ -340,12 +340,12 @@ def handler(event, context):
             cell.border = thin_border
         
         cell = ws.cell(row=current_row, column=6, value='Итого:')
-        cell.alignment = Alignment(horizontal='right', vertical='center')
+        cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.font = Font(name='Times New Roman', bold=True, size=11)
         cell.border = thin_border
         
         cell = ws.cell(row=current_row, column=7, value=total_sum)
-        cell.alignment = Alignment(horizontal='right', vertical='center')
+        cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.number_format = '#,##0.00\ ""'
         cell.font = Font(name='Times New Roman', bold=True, size=11)
         cell.border = thin_border
