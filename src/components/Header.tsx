@@ -36,8 +36,10 @@ interface HeaderProps {
   calculateTotal: () => number;
   deliveryCost: number;
   setDeliveryCost: (cost: number) => void;
-  installationCost: number;
-  setInstallationCost: (cost: number) => void;
+  installationPercent: number;
+  setInstallationPercent: (percent: number) => void;
+  calculateInstallationCost: () => number;
+  calculateGrandTotal: () => number;
   generateKP: () => void;
   isExcelSettingsOpen: boolean;
   setIsExcelSettingsOpen: (open: boolean) => void;
@@ -60,8 +62,10 @@ export function Header({
   calculateTotal,
   deliveryCost,
   setDeliveryCost,
-  installationCost,
-  setInstallationCost,
+  installationPercent,
+  setInstallationPercent,
+  calculateInstallationCost,
+  calculateGrandTotal,
   generateKP,
   isExcelSettingsOpen,
   setIsExcelSettingsOpen,
@@ -325,25 +329,27 @@ export function Header({
                     
                     <div className="border-t pt-4 space-y-3">
                           <div className="flex justify-between text-lg font-semibold">
-                            <span>Итого:</span>
+                            <span>Сумма товаров:</span>
                             <span className="text-primary">{calculateTotal().toLocaleString('ru-RU')} ₽</span>
                           </div>
                           
                           <div className="space-y-2">
-                            <label className="text-sm font-medium">Стоимость монтажа:</label>
+                            <label className="text-sm font-medium">Монтаж (%):</label>
                             <Input
                               type="number"
                               placeholder="0"
-                              value={installationCost || ''}
-                              onChange={(e) => setInstallationCost(Number(e.target.value))}
+                              value={installationPercent || ''}
+                              onChange={(e) => setInstallationPercent(Number(e.target.value))}
                               className="w-full"
+                              min="0"
+                              max="100"
                             />
                           </div>
                           
-                          {installationCost > 0 && (
+                          {installationPercent > 0 && (
                             <div className="flex justify-between text-sm text-muted-foreground">
-                              <span>Монтаж:</span>
-                              <span>{installationCost.toLocaleString('ru-RU')} ₽</span>
+                              <span>Монтаж ({installationPercent}%):</span>
+                              <span>{calculateInstallationCost().toLocaleString('ru-RU')} ₽</span>
                             </div>
                           )}
                           
@@ -362,6 +368,13 @@ export function Header({
                             <div className="flex justify-between text-sm text-muted-foreground">
                               <span>Доставка:</span>
                               <span>{deliveryCost.toLocaleString('ru-RU')} ₽</span>
+                            </div>
+                          )}
+                          
+                          {(installationPercent > 0 || deliveryCost > 0) && (
+                            <div className="flex justify-between text-xl font-bold border-t pt-3">
+                              <span>Итого:</span>
+                              <span className="text-primary">{calculateGrandTotal().toLocaleString('ru-RU')} ₽</span>
                             </div>
                           )}
                           

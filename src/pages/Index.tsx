@@ -35,7 +35,7 @@ interface IndexProps {
 export default function Index({ favorites, toggleFavorite, cart, addToCart, removeFromCart, updateQuantity }: IndexProps) {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [deliveryCost, setDeliveryCost] = useState(0);
-  const [installationCost, setInstallationCost] = useState(0);
+  const [installationPercent, setInstallationPercent] = useState(0);
   const [isExcelSettingsOpen, setIsExcelSettingsOpen] = useState(false);
   const [imageColumnWidth, setImageColumnWidth] = useState(26);
   const [imageRowHeight, setImageRowHeight] = useState(99);
@@ -80,6 +80,15 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     }, 0);
   };
 
+  const calculateInstallationCost = () => {
+    const total = calculateTotal();
+    return Math.round(total * (installationPercent / 100));
+  };
+
+  const calculateGrandTotal = () => {
+    return calculateTotal() + calculateInstallationCost() + deliveryCost;
+  };
+
   const handleDownloadExcel = async () => {
     try {
       const cartProducts = cart.map(item => {
@@ -100,6 +109,8 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         },
         body: JSON.stringify({
           products: cartProducts,
+          installationPercent,
+          installationCost: calculateInstallationCost(),
           deliveryCost,
           imageColumnWidth,
           imageRowHeight
@@ -137,8 +148,10 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         calculateTotal={calculateTotal}
         deliveryCost={deliveryCost}
         setDeliveryCost={setDeliveryCost}
-        installationCost={installationCost}
-        setInstallationCost={setInstallationCost}
+        installationPercent={installationPercent}
+        setInstallationPercent={setInstallationPercent}
+        calculateInstallationCost={calculateInstallationCost}
+        calculateGrandTotal={calculateGrandTotal}
         generateKP={handleDownloadExcel}
         isExcelSettingsOpen={isExcelSettingsOpen}
         setIsExcelSettingsOpen={setIsExcelSettingsOpen}

@@ -57,6 +57,9 @@ def handler(event, context):
     try:
         body = json.loads(event.get('body', '{}'))
         products = body.get('products', [])
+        installation_percent = body.get('installationPercent', 0)
+        installation_cost = body.get('installationCost', 0)
+        delivery_cost = body.get('deliveryCost', 0)
         
         wb = Workbook()
         ws = wb.active
@@ -299,8 +302,91 @@ def handler(event, context):
             
             current_row += 1
         
+        # Монтаж
+        if installation_cost > 0:
+            ws.row_dimensions[current_row].height = 25
+            
+            cell = ws.cell(row=current_row, column=1, value=len(products) + 1)
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            cell = ws.cell(row=current_row, column=2, value=f'Монтаж ({installation_percent}%)')
+            cell.alignment = Alignment(horizontal='left', vertical='center')
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            cell = ws.cell(row=current_row, column=3, value='')
+            cell.border = thin_border
+            
+            cell = ws.cell(row=current_row, column=4, value=1)
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            cell = ws.cell(row=current_row, column=5, value='усл')
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            cell = ws.cell(row=current_row, column=6, value=installation_cost)
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.number_format = '#,##0.00\ ""'
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            cell = ws.cell(row=current_row, column=7, value=installation_cost)
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.number_format = '#,##0.00\ ""'
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            current_row += 1
+        
+        # Доставка
+        if delivery_cost > 0:
+            ws.row_dimensions[current_row].height = 25
+            
+            next_num = len(products) + (2 if installation_cost > 0 else 1)
+            cell = ws.cell(row=current_row, column=1, value=next_num)
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            cell = ws.cell(row=current_row, column=2, value='Доставка')
+            cell.alignment = Alignment(horizontal='left', vertical='center')
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            cell = ws.cell(row=current_row, column=3, value='')
+            cell.border = thin_border
+            
+            cell = ws.cell(row=current_row, column=4, value=1)
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            cell = ws.cell(row=current_row, column=5, value='усл')
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            cell = ws.cell(row=current_row, column=6, value=delivery_cost)
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.number_format = '#,##0.00\ ""'
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            cell = ws.cell(row=current_row, column=7, value=delivery_cost)
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.number_format = '#,##0.00\ ""'
+            cell.border = thin_border
+            cell.font = Font(name='Times New Roman', size=11)
+            
+            current_row += 1
+        
         # Итого
-        total_sum = equipment_total
+        total_sum = equipment_total + installation_cost + delivery_cost
         
         # Пустые ячейки с рамками
         for col in range(1, 6):
