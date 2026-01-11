@@ -221,7 +221,22 @@ def handler(event, context):
                         img.width = new_width
                         img.height = new_height
                         
-                        ws.add_image(img, f'C{current_row}')
+                        # Центрируем изображение в ячейке
+                        from openpyxl.drawing.spreadsheet_drawing import AnchorMarker, TwoCellAnchor
+                        
+                        col_width_pixels = 131  # ширина колонки C (18.00 в Excel)
+                        row_height_pixels = 100  # высота строки (75 в Excel)
+                        
+                        offset_x = int((col_width_pixels - new_width) / 2 * 9525)  # EMU
+                        offset_y = int((row_height_pixels - new_height) / 2 * 9525)  # EMU
+                        
+                        # Создаём якорь вручную
+                        anchor = TwoCellAnchor()
+                        anchor._from = AnchorMarker(col=2, colOff=offset_x, row=current_row-1, rowOff=offset_y)
+                        anchor.to = AnchorMarker(col=3, colOff=0, row=current_row, rowOff=0)
+                        img.anchor = anchor
+                        
+                        ws.add_image(img)
                 except Exception as e:
                     print(f'Failed to load image: {e}')
             
