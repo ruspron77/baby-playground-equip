@@ -78,37 +78,37 @@ def handler(event, context):
         
         ws.merge_cells(f'A{current_row}:B{current_row+4}')
         
-        # Шапка компании (правый верхний угол) - расширяем до колонки H для полного размещения
-        ws.merge_cells(f'D{current_row}:H{current_row}')
-        cell = ws.cell(row=current_row, column=4, value='ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ')
+        # Шапка компании (правый верхний угол) - начинаем с колонки C чтобы было левее
+        ws.merge_cells(f'C{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=3, value='ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ')
         cell.font = Font(bold=True, size=10)
         cell.alignment = Alignment(horizontal='right', vertical='center', wrap_text=True)
         current_row += 1
         
         # ИНН и ОГРНИП
-        ws.merge_cells(f'D{current_row}:H{current_row}')
-        cell = ws.cell(row=current_row, column=4, value='ИНН 110209455200 ОГРНИП 32377460012482')
+        ws.merge_cells(f'C{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=3, value='ИНН 110209455200 ОГРНИП 32377460012482')
         cell.font = Font(size=8)
         cell.alignment = Alignment(horizontal='right', vertical='center', wrap_text=True)
         current_row += 1
         
         # Адрес
-        ws.merge_cells(f'D{current_row}:H{current_row}')
-        cell = ws.cell(row=current_row, column=4, value='350005, г. Краснодар, ул. Кореновская, д. 57 оф.7')
+        ws.merge_cells(f'C{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=3, value='350005, г. Краснодар, ул. Кореновская, д. 57 оф.7')
         cell.font = Font(size=8)
         cell.alignment = Alignment(horizontal='right', vertical='center', wrap_text=True)
         current_row += 1
         
         # Телефон и email
-        ws.merge_cells(f'D{current_row}:H{current_row}')
-        cell = ws.cell(row=current_row, column=4, value='тел: +7 918 115 15 51 e-mail: info@urban-play.ru')
+        ws.merge_cells(f'C{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=3, value='тел: +7 918 115 15 51 e-mail: info@urban-play.ru')
         cell.font = Font(size=8)
         cell.alignment = Alignment(horizontal='right', vertical='center', wrap_text=True)
         current_row += 1
         
         # Сайт
-        ws.merge_cells(f'D{current_row}:H{current_row}')
-        cell = ws.cell(row=current_row, column=4, value='www.urban-play.ru')
+        ws.merge_cells(f'C{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=3, value='www.urban-play.ru')
         cell.font = Font(size=8)
         cell.alignment = Alignment(horizontal='right', vertical='center', wrap_text=True)
         current_row += 1
