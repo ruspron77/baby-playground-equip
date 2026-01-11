@@ -202,8 +202,8 @@ def handler(event, context):
         
         # Настройка колонок
         ws.column_dimensions['A'].width = 4.00   # № - 4.00
-        ws.column_dimensions['B'].width = 24.00  # Наименование - 24.00
-        ws.column_dimensions['C'].width = 22.00  # Рисунок - 22.00
+        ws.column_dimensions['B'].width = 27.00  # Наименование - 27.00
+        ws.column_dimensions['C'].width = 20.00  # Рисунок - 20.00
         ws.column_dimensions['D'].width = 7.00   # Кол-во - 7.00
         ws.column_dimensions['E'].width = 7.00   # Ед. изм - 7.00
         ws.column_dimensions['F'].width = 13.00  # Цена руб - 13.00
@@ -281,10 +281,10 @@ def handler(event, context):
                         pil_img = PILImage.open(io.BytesIO(img_data))
                         original_width, original_height = pil_img.size
                         
-                        # Целевые размеры под новую ячейку (22.00 width × 75.00 height)
-                        # 22.00 Excel units ≈ 159 pixels (7.2 pixels per unit)
+                        # Целевые размеры под новую ячейку (20.00 width × 75.00 height)
+                        # 20.00 Excel units ≈ 145 pixels (7.2 pixels per unit)
                         # 75.00 Excel height units ≈ 100 pixels (1.33 pixels per unit)
-                        col_width_pixels = 159
+                        col_width_pixels = 145
                         row_height_pixels = 100
                         
                         target_width = col_width_pixels - 10  # 149 пикселей с отступом
