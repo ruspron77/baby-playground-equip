@@ -83,23 +83,36 @@ def handler(event, context):
         
         current_row = 1
         
-        # Логотип (левый верхний угол)
+        # Логотип (левый верхний угол) - встраиваем в исходном качестве
         try:
             logo_url = 'https://cdn.poehali.dev/files/%D0%BB%D0%BE%D0%B3%D0%BE%D0%BA%D0%BF.png'
             req = urllib.request.Request(logo_url, headers={'User-Agent': 'Mozilla/5.0'})
             with urllib.request.urlopen(req, timeout=10) as response:
                 logo_data = response.read()
                 
+                # Открываем только для получения размеров
                 pil_logo = PILImage.open(io.BytesIO(logo_data))
-                pil_logo.thumbnail((180, 90), PILImage.Resampling.LANCZOS)
+                original_width, original_height = pil_logo.size
                 
-                logo_buffer = io.BytesIO()
-                pil_logo.save(logo_buffer, format='PNG')
-                logo_buffer.seek(0)
+                # Целевые размеры
+                target_width = 180
+                target_height = 90
                 
+                # Вычисляем размеры с сохранением пропорций
+                width_ratio = target_width / original_width
+                height_ratio = target_height / original_height
+                ratio = min(width_ratio, height_ratio)
+                
+                final_width = int(original_width * ratio)
+                final_height = int(original_height * ratio)
+                
+                # Создаем изображение напрямую из оригинальных байтов (без пересохранения!)
+                logo_buffer = io.BytesIO(logo_data)
                 logo_img = XLImage(logo_buffer)
-                logo_img.width = pil_logo.width
-                logo_img.height = pil_logo.height
+                
+                # Устанавливаем размеры для отображения (качество не теряется!)
+                logo_img.width = final_width
+                logo_img.height = final_height
                 
                 ws.add_image(logo_img, 'A1')
         except Exception as e:
