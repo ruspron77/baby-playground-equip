@@ -133,7 +133,7 @@ def handler(event, context):
         # Настройка колонок
         ws.column_dimensions['A'].width = 3      # № - 3.00 (26 пикселей)
         ws.column_dimensions['B'].width = 23     # Наименование - 23.00 (166 пикселей)
-        ws.column_dimensions['C'].width = 17     # Рисунок - 17.00 (124 пикселя)
+        ws.column_dimensions['C'].width = 18     # Рисунок - 18.00 (131 пиксель)
         ws.column_dimensions['D'].width = 6      # Кол-во - 6.00 (47 пикселей)
         ws.column_dimensions['E'].width = 6      # Ед. изм - 6.00 (47 пикселей)
         ws.column_dimensions['F'].width = 13     # Цена руб - 13.00 (96 пикселей)
@@ -163,7 +163,7 @@ def handler(event, context):
         equipment_total = 0
         
         for idx, product in enumerate(products, 1):
-            ws.row_dimensions[current_row].height = 72
+            ws.row_dimensions[current_row].height = 75
             
             # №
             cell = ws.cell(row=current_row, column=1, value=idx)
@@ -202,8 +202,8 @@ def handler(event, context):
                         img.height = pil_img.height
                         
                         # Центрируем изображение в ячейке
-                        col_width_pixels = 124  # ширина колонки C
-                        row_height_pixels = 72  # высота строки
+                        col_width_pixels = 131  # ширина колонки C
+                        row_height_pixels = 100  # высота строки
                         
                         offset_x = (col_width_pixels - pil_img.width) / 2
                         offset_y = (row_height_pixels - pil_img.height) / 2
