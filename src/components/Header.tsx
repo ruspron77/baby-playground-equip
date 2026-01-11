@@ -22,6 +22,7 @@ interface Product {
 }
 import { Link } from 'react-router-dom';
 import { OrderForm, OrderFormData } from './OrderForm';
+import { ContactDialog } from './ContactDialog';
 
 const formatPrice = (price: string | number): string => {
   const numPrice = typeof price === 'string' ? parseInt(price.replace(/\s/g, '')) : price;
@@ -92,6 +93,7 @@ export function Header({
   const [kpDeliveryCost, setKpDeliveryCost] = useState(0);
   const [hideInstallationInKP, setHideInstallationInKP] = useState(false);
   const [hideDeliveryInKP, setHideDeliveryInKP] = useState(false);
+  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
 
   // Генерация номера заказа с датой
   const getNextOrderNumber = () => {
@@ -140,13 +142,19 @@ export function Header({
             <a href="#contacts" className="text-foreground hover:text-primary transition-colors text-base font-medium">Контакты</a>
           </nav>
           <div className="flex items-center gap-4">
-            <a 
-              href="tel:+79181151551" 
-              className="hidden lg:flex items-center gap-2 text-foreground hover:text-primary transition-colors text-base font-medium"
-            >
-              <Icon name="Phone" size={20} className="text-primary" />
-              +7 (918) 115-15-51
-            </a>
+            <div className="hidden lg:flex items-center gap-3">
+              <a 
+                href="tel:+79181151551" 
+                className="flex items-center gap-2 text-foreground hover:text-primary transition-colors text-base font-medium"
+              >
+                <Icon name="Phone" size={20} className="text-primary" />
+                +7 (918) 115-15-51
+              </a>
+              <Button onClick={() => setIsContactDialogOpen(true)} size="sm">
+                <Icon name="Phone" size={16} className="mr-2" />
+                Заказать звонок
+              </Button>
+            </div>
             <div className="flex items-center gap-3">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
@@ -596,6 +604,11 @@ export function Header({
           </div>
         </DialogContent>
       </Dialog>
+
+      <ContactDialog 
+        open={isContactDialogOpen} 
+        onOpenChange={setIsContactDialogOpen}
+      />
 
     </header>
   );
