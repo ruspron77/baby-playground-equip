@@ -166,7 +166,7 @@ export function CategoryGrid({
                   onClick={() => handleProductClick(product)}
                 >
                   {product.image.startsWith('http') ? (
-                    <img src={product.image} alt={product.name} className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-300" />
+                    <img src={product.image} alt={product.name} className="w-full h-full object-contain p-2 group-hover:scale-110 transition-transform duration-300" />
                   ) : (
                     <span className="text-6xl group-hover:scale-110 transition-transform duration-300">{product.image}</span>
                   )}
@@ -182,10 +182,10 @@ export function CategoryGrid({
                     <Icon name="Heart" size={18} className={isFavorite ? 'fill-red-500 text-red-500' : ''} />
                   </Button>
                 </div>
-                <CardContent className="p-4">
-                  <p className="text-xs text-muted-foreground mb-1">{product.name.split('\n')[0]}</p>
-                  <h3 className="font-semibold text-base line-clamp-2 mb-2">{product.name.split('\n')[1] || product.name}</h3>
-                  <p className="text-xl font-bold text-primary mb-3">{formatPrice(product.price)} ₽</p>
+                <CardContent className="p-3">
+                  <p className="text-xs text-muted-foreground mb-0.5">{product.name.split('\n')[0]}</p>
+                  <h3 className="font-semibold text-sm line-clamp-2 mb-1.5">{product.name.split('\n')[1] || product.name}</h3>
+                  <p className="text-lg font-bold text-primary mb-2">{formatPrice(product.price)} ₽</p>
                   <Button 
                     size="sm"
                     onClick={(e) => {
