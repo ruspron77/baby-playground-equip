@@ -68,9 +68,12 @@ def handler(event, context):
     try:
         body = json.loads(event.get('body', '{}'))
         products = body.get('products', [])
+        address = body.get('address', '')
         installation_percent = body.get('installationPercent', 0)
         installation_cost = body.get('installationCost', 0)
         delivery_cost = body.get('deliveryCost', 0)
+        hide_installation = body.get('hideInstallation', False)
+        hide_delivery = body.get('hideDelivery', False)
         
         wb = Workbook()
         ws = wb.active
@@ -177,20 +180,16 @@ def handler(event, context):
         # Пустая строка для отступа
         current_row += 1
         
-        # Заголовок КП
+        # Заголовок КП с адресом
         ws.merge_cells(f'A{current_row}:G{current_row}')
         kp_number = get_next_kp_number()
-        cell = ws.cell(row=current_row, column=1, value=f'Коммерческое предложение № {kp_number:04d} от {datetime.now().strftime("%d.%m.%Y")}')
+        kp_title = f'Коммерческое предложение № {kp_number:04d} от {datetime.now().strftime("%d.%m.%Y")}'
+        if address:
+            kp_title = f'{address}\n{kp_title}'
+        cell = ws.cell(row=current_row, column=1, value=kp_title)
         cell.font = Font(bold=True, size=12)
-        cell.alignment = Alignment(horizontal='center', vertical='center')
-        ws.row_dimensions[current_row].height = 20
-        current_row += 2
-        
-        # Адрес объекта
-        ws.merge_cells(f'A{current_row}:G{current_row}')
-        cell = ws.cell(row=current_row, column=1, value='Адрес объекта:')
-        cell.font = Font(name='Times New Roman', size=11)
-        cell.alignment = Alignment(horizontal='left', vertical='center')
+        cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        ws.row_dimensions[current_row].height = 35 if address else 20
         current_row += 2
         
         # Настройка колонок
@@ -340,8 +339,8 @@ def handler(event, context):
             
             current_row += 1
         
-        # Монтаж
-        if installation_cost > 0:
+        # Монтаж (если не скрыт)
+        if installation_cost > 0 and not hide_installation:
             ws.row_dimensions[current_row].height = 25
             
             cell = ws.cell(row=current_row, column=1, value=len(products) + 1)
@@ -381,11 +380,11 @@ def handler(event, context):
             
             current_row += 1
         
-        # Доставка
-        if delivery_cost > 0:
+        # Доставка (если не скрыта)
+        if delivery_cost > 0 and not hide_delivery:
             ws.row_dimensions[current_row].height = 25
             
-            next_num = len(products) + (2 if installation_cost > 0 else 1)
+            next_num = len(products) + (2 if (installation_cost > 0 and not hide_installation) else 1)
             cell = ws.cell(row=current_row, column=1, value=next_num)
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.border = thin_border

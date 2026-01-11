@@ -89,8 +89,18 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     return calculateTotal() + calculateInstallationCost() + deliveryCost;
   };
 
-  const handleDownloadExcel = async () => {
+  const handleDownloadExcel = async (options?: { 
+    address?: string; 
+    installationPercent?: number; 
+    deliveryCost?: number; 
+    hideInstallation?: boolean; 
+    hideDelivery?: boolean 
+  }) => {
     try {
+      const finalInstallationPercent = options?.installationPercent ?? installationPercent;
+      const finalDeliveryCost = options?.deliveryCost ?? deliveryCost;
+      const finalInstallationCost = Math.round(calculateTotal() * (finalInstallationPercent / 100));
+
       const cartProducts = cart.map(item => {
         const product = products.find(p => p.id === item.id);
         return {
@@ -109,9 +119,12 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         },
         body: JSON.stringify({
           products: cartProducts,
-          installationPercent,
-          installationCost: calculateInstallationCost(),
-          deliveryCost,
+          address: options?.address || '',
+          installationPercent: finalInstallationPercent,
+          installationCost: finalInstallationCost,
+          deliveryCost: finalDeliveryCost,
+          hideInstallation: options?.hideInstallation || false,
+          hideDelivery: options?.hideDelivery || false,
           imageColumnWidth,
           imageRowHeight
         }),
@@ -125,7 +138,12 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'коммерческое_предложение.xlsx';
+      
+      // Формируем имя файла с адресом
+      const date = new Date().toLocaleDateString('ru-RU');
+      const addressPart = options?.address ? options.address.substring(0, 30).replace(/[^а-яА-Яa-zA-Z0-9\s]/g, '') : 'объект';
+      a.download = `КП_${addressPart}_${date}.xlsx`;
+      
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);

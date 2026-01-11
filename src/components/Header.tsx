@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
 import Icon from '@/components/ui/icon';
 import { CartItem } from './data/catalogData';
 
@@ -40,7 +42,7 @@ interface HeaderProps {
   setInstallationPercent: (percent: number) => void;
   calculateInstallationCost: () => number;
   calculateGrandTotal: () => number;
-  generateKP: () => void;
+  generateKP: (options?: { address?: string; installationPercent?: number; deliveryCost?: number; hideInstallation?: boolean; hideDelivery?: boolean }) => void;
   isExcelSettingsOpen: boolean;
   setIsExcelSettingsOpen: (open: boolean) => void;
   imageColumnWidth: number;
@@ -80,6 +82,12 @@ export function Header({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showOrderForm, setShowOrderForm] = useState(false);
   const [cartSearchQuery, setCartSearchQuery] = useState('');
+  const [showKPDialog, setShowKPDialog] = useState(false);
+  const [kpAddress, setKpAddress] = useState('');
+  const [kpInstallationPercent, setKpInstallationPercent] = useState(0);
+  const [kpDeliveryCost, setKpDeliveryCost] = useState(0);
+  const [hideInstallationInKP, setHideInstallationInKP] = useState(false);
+  const [hideDeliveryInKP, setHideDeliveryInKP] = useState(false);
 
   const filteredCatalogProducts = allProducts.filter(product => 
     cartSearchQuery === '' || 
@@ -330,57 +338,10 @@ export function Header({
                     </div>
                     
                     <div className="border-t pt-4 space-y-3">
-                          <div className="flex justify-between text-lg font-semibold">
+                          <div className="flex justify-between text-xl font-bold">
                             <span>Сумма товаров:</span>
                             <span className="text-primary">{calculateTotal().toLocaleString('ru-RU')} ₽</span>
                           </div>
-                          
-                          <div className="space-y-2">
-                            <label className="text-sm font-medium">Монтаж (%):</label>
-                            <Input
-                              type="number"
-                              placeholder="0"
-                              value={installationPercent || ''}
-                              onChange={(e) => setInstallationPercent(Number(e.target.value))}
-                              className="w-full"
-                              min="0"
-                              max="100"
-                              step="5"
-                            />
-                          </div>
-                          
-                          {installationPercent > 0 && (
-                            <div className="flex justify-between text-sm text-muted-foreground">
-                              <span>Монтаж ({installationPercent}%):</span>
-                              <span>{calculateInstallationCost().toLocaleString('ru-RU')} ₽</span>
-                            </div>
-                          )}
-                          
-                          <div className="space-y-2">
-                            <label className="text-sm font-medium">Стоимость доставки:</label>
-                            <Input
-                              type="number"
-                              placeholder="0"
-                              value={deliveryCost || ''}
-                              onChange={(e) => setDeliveryCost(Number(e.target.value))}
-                              className="w-full"
-                              step="1000"
-                            />
-                          </div>
-                          
-                          {deliveryCost > 0 && (
-                            <div className="flex justify-between text-sm text-muted-foreground">
-                              <span>Доставка:</span>
-                              <span>{deliveryCost.toLocaleString('ru-RU')} ₽</span>
-                            </div>
-                          )}
-                          
-                          {(installationPercent > 0 || deliveryCost > 0) && (
-                            <div className="flex justify-between text-xl font-bold border-t pt-3">
-                              <span>Итого:</span>
-                              <span className="text-primary">{calculateGrandTotal().toLocaleString('ru-RU')} ₽</span>
-                            </div>
-                          )}
                           
                           <Button 
                             className="w-full" 
@@ -396,10 +357,14 @@ export function Header({
                             className="w-full" 
                             size="lg"
                             onClick={() => {
-                              generateKP();
-                              setIsCartOpen(false);
+                              setKpInstallationPercent(installationPercent);
+                              setKpDeliveryCost(deliveryCost);
+                              setShowKPDialog(true);
                             }}
-                          >Сформировать коммерческое предложение</Button>
+                          >
+                            <Icon name="FileText" size={20} className="mr-2" />
+                            Сформировать коммерческое предложение
+                          </Button>
                           
                           <Button 
                             variant="outline" 
@@ -421,6 +386,123 @@ export function Header({
           </div>
         </div>
       </div>
+
+      {/* Диалог настроек КП */}
+      <Dialog open={showKPDialog} onOpenChange={setShowKPDialog}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-heading">Настройка коммерческого предложения</DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-6 py-4">
+            {/* Адрес объекта */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Адрес объекта:</label>
+              <Input
+                type="text"
+                placeholder="Введите адрес объекта"
+                value={kpAddress}
+                onChange={(e) => setKpAddress(e.target.value)}
+                className="w-full"
+              />
+            </div>
+
+            {/* Монтаж */}
+            <div className="space-y-3 border rounded-lg p-4">
+              <div className="flex items-center justify-between">
+                <label className="text-sm font-medium">Монтаж (%):</label>
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    id="hide-installation"
+                    checked={hideInstallationInKP}
+                    onCheckedChange={(checked) => setHideInstallationInKP(checked as boolean)}
+                  />
+                  <label htmlFor="hide-installation" className="text-sm cursor-pointer">
+                    Спрятать в цену товара
+                  </label>
+                </div>
+              </div>
+              <Input
+                type="number"
+                placeholder="0"
+                value={kpInstallationPercent || ''}
+                onChange={(e) => setKpInstallationPercent(Number(e.target.value))}
+                className="w-full"
+                min="0"
+                max="100"
+                step="5"
+              />
+              {kpInstallationPercent > 0 && (
+                <div className="flex justify-between text-sm text-muted-foreground">
+                  <span>Стоимость монтажа ({kpInstallationPercent}%):</span>
+                  <span>{Math.round(calculateTotal() * (kpInstallationPercent / 100)).toLocaleString('ru-RU')} ₽</span>
+                </div>
+              )}
+            </div>
+
+            {/* Доставка */}
+            <div className="space-y-3 border rounded-lg p-4">
+              <div className="flex items-center justify-between">
+                <label className="text-sm font-medium">Стоимость доставки:</label>
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    id="hide-delivery"
+                    checked={hideDeliveryInKP}
+                    onCheckedChange={(checked) => setHideDeliveryInKP(checked as boolean)}
+                  />
+                  <label htmlFor="hide-delivery" className="text-sm cursor-pointer">
+                    Спрятать в цену товара
+                  </label>
+                </div>
+              </div>
+              <Input
+                type="number"
+                placeholder="0"
+                value={kpDeliveryCost || ''}
+                onChange={(e) => setKpDeliveryCost(Number(e.target.value))}
+                className="w-full"
+                step="1000"
+              />
+              {kpDeliveryCost > 0 && (
+                <div className="flex justify-between text-sm text-muted-foreground">
+                  <span>Доставка:</span>
+                  <span>{kpDeliveryCost.toLocaleString('ru-RU')} ₽</span>
+                </div>
+              )}
+            </div>
+
+            {/* Итого */}
+            <div className="flex justify-between text-xl font-bold border-t pt-4">
+              <span>Итого:</span>
+              <span className="text-primary">
+                {(calculateTotal() + 
+                  Math.round(calculateTotal() * (kpInstallationPercent / 100)) + 
+                  kpDeliveryCost
+                ).toLocaleString('ru-RU')} ₽
+              </span>
+            </div>
+
+            {/* Кнопка скачать */}
+            <Button 
+              className="w-full" 
+              size="lg"
+              onClick={() => {
+                generateKP({
+                  address: kpAddress,
+                  installationPercent: kpInstallationPercent,
+                  deliveryCost: kpDeliveryCost,
+                  hideInstallation: hideInstallationInKP,
+                  hideDelivery: hideDeliveryInKP
+                });
+                setShowKPDialog(false);
+              }}
+            >
+              <Icon name="Download" size={20} className="mr-2" />
+              Скачать коммерческое предложение
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </header>
   );
 }
