@@ -50,14 +50,14 @@ export function ProductDialog({
 
   return (
     <Dialog open={isProductDialogOpen} onOpenChange={setIsProductDialogOpen}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="sr-only">Информация о товаре</DialogTitle>
         </DialogHeader>
         {selectedProduct && (
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-[2fr,1fr] gap-6">
             <div className="space-y-4">
-              <div className="relative aspect-square bg-white rounded-lg flex items-center justify-center overflow-hidden border">
+              <div className="relative aspect-square bg-white rounded-lg flex items-center justify-center overflow-hidden border p-0">
                 {productImages.length > 0 ? (
                   <>
                     <img 
