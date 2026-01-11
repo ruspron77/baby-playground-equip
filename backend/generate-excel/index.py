@@ -52,6 +52,7 @@ def get_next_kp_number():
 
 def handler(event, context):
     """Генерация Excel файла с коммерческим предложением по точному формату"""
+    # Updated: Added decorative lime and purple lines for visual design
     
     if event.get('httpMethod') == 'OPTIONS':
         return {
@@ -139,6 +140,19 @@ def handler(event, context):
         cell.font = Font(name='Times New Roman', size=11)
         cell.alignment = Alignment(horizontal='right', vertical='center', wrap_text=True)
         ws.row_dimensions[current_row].height = 15
+        current_row += 1
+        
+        # Декоративные линии (салатовая и фиолетовая)
+        ws.merge_cells(f'A{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=1)
+        cell.fill = PatternFill(start_color='9FE870', end_color='9FE870', fill_type='solid')  # Салатовый
+        ws.row_dimensions[current_row].height = 8
+        current_row += 1
+        
+        ws.merge_cells(f'A{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=1)
+        cell.fill = PatternFill(start_color='C084FC', end_color='C084FC', fill_type='solid')  # Фиолетовый
+        ws.row_dimensions[current_row].height = 8
         current_row += 1
         
         # Заголовок КП
