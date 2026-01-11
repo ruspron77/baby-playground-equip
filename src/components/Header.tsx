@@ -35,6 +35,7 @@ interface HeaderProps {
   setIsSideMenuOpen: (open: boolean) => void;
   updateQuantity: (id: number, quantity: number) => void;
   removeFromCart: (id: number) => void;
+  clearCart?: () => void;
   calculateTotal: () => number;
   deliveryCost: number;
   setDeliveryCost: (cost: number) => void;
@@ -61,6 +62,7 @@ export function Header({
   setIsSideMenuOpen,
   updateQuantity,
   removeFromCart,
+  clearCart,
   calculateTotal,
   deliveryCost,
   setDeliveryCost,
@@ -338,6 +340,11 @@ export function Header({
                         
                         setShowOrderForm(false);
                         setShowSuccessDialog(true);
+                        
+                        // Очищаем корзину после оформления заказа
+                        if (clearCart) {
+                          clearCart();
+                        }
                       }}
                       onCancel={() => setShowOrderForm(false)}
                     />

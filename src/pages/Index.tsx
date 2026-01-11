@@ -30,9 +30,10 @@ interface IndexProps {
   addToCart: (product: Product) => void;
   removeFromCart: (id: number) => void;
   updateQuantity: (id: number, quantity: number) => void;
+  clearCart: () => void;
 }
 
-export default function Index({ favorites, toggleFavorite, cart, addToCart, removeFromCart, updateQuantity }: IndexProps) {
+export default function Index({ favorites, toggleFavorite, cart, addToCart, removeFromCart, updateQuantity, clearCart }: IndexProps) {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [installationPercent, setInstallationPercent] = useState(0);
@@ -180,6 +181,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         favoritesCount={favorites.length}
         allProducts={products}
         onAddToCart={handleAddToCart}
+        clearCart={clearCart}
       />
       
       <HeroSection onOpenCatalog={() => catalogState.setIsSideMenuOpen(true)} />

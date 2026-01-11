@@ -104,6 +104,11 @@ const App = () => {
     }
   };
 
+  const clearCart = () => {
+    setCart([]);
+    localStorage.setItem('cart', JSON.stringify([]));
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -121,6 +126,7 @@ const App = () => {
                   addToCart={addToCart}
                   removeFromCart={removeFromCart}
                   updateQuantity={updateQuantity}
+                  clearCart={clearCart}
                 />
               } 
             />
