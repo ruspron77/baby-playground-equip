@@ -151,25 +151,25 @@ def handler(event, context):
         headers = ['№', 'Наименование', 'Рисунок', 'Кол-во', 'Ед. изм', 'Цена, руб', 'Сумма, руб']
         for col_num, header in enumerate(headers, 1):
             cell = ws.cell(row=current_row, column=col_num, value=header)
-            cell.font = Font(bold=True, size=9)
+            cell.font = Font(bold=True, size=11)
             cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
             cell.border = thin_border
-            cell.fill = PatternFill(start_color='E0E0E0', end_color='E0E0E0', fill_type='solid')
+            cell.fill = PatternFill(start_color='D3D3D3', end_color='D3D3D3', fill_type='solid')
         
-        ws.row_dimensions[current_row].height = 28
+        ws.row_dimensions[current_row].height = 30
         current_row += 1
         
         # Товары
         equipment_total = 0
         
         for idx, product in enumerate(products, 1):
-            ws.row_dimensions[current_row].height = 96  # 96.00 (198 пикселей)
+            ws.row_dimensions[current_row].height = 125
             
             # №
             cell = ws.cell(row=current_row, column=1, value=idx)
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.border = thin_border
-            cell.font = Font(size=9)
+            cell.font = Font(size=11)
             
             # Наименование
             article = product.get('article', '')
@@ -178,7 +178,7 @@ def handler(event, context):
             cell = ws.cell(row=current_row, column=2, value=full_name)
             cell.alignment = Alignment(horizontal='left', vertical='center', wrap_text=True)
             cell.border = thin_border
-            cell.font = Font(size=9)
+            cell.font = Font(size=11)
             
             # Рисунок
             if product.get('image') and product['image'].startswith('http'):
@@ -214,46 +214,46 @@ def handler(event, context):
             cell = ws.cell(row=current_row, column=4, value=quantity)
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.border = thin_border
-            cell.font = Font(size=9)
+            cell.font = Font(size=11)
             
             # Ед. изм
             cell = ws.cell(row=current_row, column=5, value='шт')
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.border = thin_border
-            cell.font = Font(size=9)
+            cell.font = Font(size=11)
             
             # Цена
             price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']
             cell = ws.cell(row=current_row, column=6, value=price)
             cell.alignment = Alignment(horizontal='right', vertical='center')
-            cell.number_format = '#,##0.00'
+            cell.number_format = '#,##0.00\ ""'
             cell.border = thin_border
-            cell.font = Font(size=9)
+            cell.font = Font(size=11)
             
             # Сумма
             sum_price = price * quantity
             equipment_total += sum_price
             cell = ws.cell(row=current_row, column=7, value=sum_price)
             cell.alignment = Alignment(horizontal='right', vertical='center')
-            cell.number_format = '#,##0.00'
+            cell.number_format = '#,##0.00\ ""'
             cell.border = thin_border
-            cell.font = Font(size=9)
+            cell.font = Font(size=11)
             
             current_row += 1
         
         # Монтаж + доставка
         installation_cost = equipment_total * 0.2
-        ws.row_dimensions[current_row].height = 20
+        ws.row_dimensions[current_row].height = 25
         
         cell = ws.cell(row=current_row, column=1, value=len(products) + 1)
         cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.border = thin_border
-        cell.font = Font(size=9)
+        cell.font = Font(size=11)
         
         cell = ws.cell(row=current_row, column=2, value='Монтаж + доставка')
         cell.alignment = Alignment(horizontal='left', vertical='center')
         cell.border = thin_border
-        cell.font = Font(size=9)
+        cell.font = Font(size=11)
         
         cell = ws.cell(row=current_row, column=3, value='')
         cell.border = thin_border
@@ -261,24 +261,24 @@ def handler(event, context):
         cell = ws.cell(row=current_row, column=4, value=1)
         cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.border = thin_border
-        cell.font = Font(size=9)
+        cell.font = Font(size=11)
         
         cell = ws.cell(row=current_row, column=5, value='усл')
         cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.border = thin_border
-        cell.font = Font(size=9)
+        cell.font = Font(size=11)
         
         cell = ws.cell(row=current_row, column=6, value=installation_cost)
         cell.alignment = Alignment(horizontal='right', vertical='center')
-        cell.number_format = '#,##0.00'
+        cell.number_format = '#,##0.00\ ""'
         cell.border = thin_border
-        cell.font = Font(size=9)
+        cell.font = Font(size=11)
         
         cell = ws.cell(row=current_row, column=7, value=installation_cost)
         cell.alignment = Alignment(horizontal='right', vertical='center')
-        cell.number_format = '#,##0.00'
+        cell.number_format = '#,##0.00\ ""'
         cell.border = thin_border
-        cell.font = Font(size=9)
+        cell.font = Font(size=11)
         
         current_row += 1
         
@@ -288,13 +288,13 @@ def handler(event, context):
         ws.merge_cells(f'F{current_row}:F{current_row}')
         cell = ws.cell(row=current_row, column=6, value='Итого:')
         cell.alignment = Alignment(horizontal='right', vertical='center')
-        cell.font = Font(bold=True, size=10)
+        cell.font = Font(bold=True, size=11)
         cell.border = Border(top=Side(style='thin'), bottom=Side(style='thin'), left=Side(style='thin'))
         
         cell = ws.cell(row=current_row, column=7, value=total_sum)
         cell.alignment = Alignment(horizontal='right', vertical='center')
-        cell.number_format = '#,##0.00'
-        cell.font = Font(bold=True, size=10)
+        cell.number_format = '#,##0.00\ ""'
+        cell.font = Font(bold=True, size=11)
         cell.border = Border(top=Side(style='thin'), bottom=Side(style='thin'), right=Side(style='thin'))
         
         current_row += 2
