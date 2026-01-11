@@ -281,9 +281,14 @@ def handler(event, context):
                         pil_img = PILImage.open(io.BytesIO(img_data))
                         original_width, original_height = pil_img.size
                         
-                        # Целевые размеры под новую ячейку (21.00 width × 75.00 height)
-                        target_width = 145  # 152 пикселя - небольшой отступ
-                        target_height = 93  # 100 пикселей - небольшой отступ
+                        # Целевые размеры под новую ячейку (22.00 width × 75.00 height)
+                        # 22.00 Excel units ≈ 159 pixels (7.2 pixels per unit)
+                        # 75.00 Excel height units ≈ 100 pixels (1.33 pixels per unit)
+                        col_width_pixels = 159
+                        row_height_pixels = 100
+                        
+                        target_width = col_width_pixels - 10  # 149 пикселей с отступом
+                        target_height = row_height_pixels - 10  # 90 пикселей с отступом
                         
                         # Вычисляем финальные размеры с сохранением пропорций
                         width_ratio = target_width / original_width
@@ -294,22 +299,18 @@ def handler(event, context):
                         final_height = int(original_height * ratio)
                         
                         # Создаем изображение напрямую из оригинальных байтов
-                        # Это ключевой момент - используем оригинальный файл
                         original_buffer = io.BytesIO(img_data)
                         img = XLImage(original_buffer)
                         
-                        # Устанавливаем размеры для отображения (это не меняет качество!)
+                        # Устанавливаем размеры для отображения
                         img.width = final_width
                         img.height = final_height
                         
-                        # Центрируем изображение в ячейке
+                        # Центрируем изображение в ячейке (EMU units: 1 pixel = 9525 EMU)
                         from openpyxl.drawing.spreadsheet_drawing import AnchorMarker, TwoCellAnchor
                         
-                        col_width_pixels = 152  # 21.00 в Excel
-                        row_height_pixels = 100  # 75.00 в Excel (100 пикселей)
-                        
-                        offset_x = max(0, int((col_width_pixels - final_width) / 2 * 9525))
-                        offset_y = max(0, int((row_height_pixels - final_height) / 2 * 9525))
+                        offset_x = int((col_width_pixels - final_width) / 2 * 9525)
+                        offset_y = int((row_height_pixels - final_height) / 2 * 9525)
                         
                         anchor = TwoCellAnchor()
                         anchor._from = AnchorMarker(col=2, colOff=offset_x, row=current_row-1, rowOff=offset_y)
