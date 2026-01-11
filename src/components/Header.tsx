@@ -220,7 +220,7 @@ export function Header({
             </Sheet>
 
             <Link to="/favorites">
-              <Button variant="outline" className="relative hover:border-primary hover:text-primary">
+              <Button variant="ghost" className="relative hover:border-primary hover:text-primary hover:bg-transparent">
                 <Icon name="Heart" size={20} />
                 {favoritesCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold">
@@ -232,7 +232,7 @@ export function Header({
             
             <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" className="relative">
+                <Button variant="ghost" className="relative hover:bg-transparent">
                   <Icon name="ShoppingCart" size={20} />
                   {cart.length > 0 && (
                     <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold">
@@ -245,7 +245,7 @@ export function Header({
                 {!showOrderForm && (
                   <>
                     <SheetHeader>
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
                         <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
                         <Button onClick={() => setIsContactDialogOpen(true)} size="sm">
                           <Icon name="Phone" size={16} className="mr-2" />
