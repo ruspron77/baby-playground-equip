@@ -92,17 +92,26 @@ export function Header({
   const [hideDeliveryInKP, setHideDeliveryInKP] = useState(false);
 
   // Генерация номера заказа с датой
-  const getOrderNumberWithDate = () => {
+  const getNextOrderNumber = () => {
+    const orderCount = parseInt(localStorage.getItem('orderCount') || '0', 10) + 1;
+    localStorage.setItem('orderCount', orderCount.toString());
     const now = new Date();
     const day = String(now.getDate()).padStart(2, '0');
     const month = String(now.getMonth() + 1).padStart(2, '0');
     const year = now.getFullYear();
-    const orderCount = parseInt(localStorage.getItem('orderCount') || '0', 10) + 1;
-    localStorage.setItem('orderCount', orderCount.toString());
-    return `${day}.${month}.${year}-${String(orderCount).padStart(4, '0')}`;
+    return `${String(orderCount).padStart(4, '0')} ${day}.${month}.${year}`;
   };
 
-  const [currentOrderNumber] = useState(() => getOrderNumberWithDate());
+  const getCurrentOrderNumber = () => {
+    const orderCount = parseInt(localStorage.getItem('orderCount') || '0', 10) + 1;
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    return `${String(orderCount).padStart(4, '0')} ${day}.${month}.${year}`;
+  };
+
+  const [currentOrderNumber, setCurrentOrderNumber] = useState(() => getCurrentOrderNumber());
 
   const filteredCatalogProducts = allProducts.filter(product => 
     cartSearchQuery === '' || 
@@ -299,8 +308,9 @@ export function Header({
                       deliveryCost={deliveryCost}
                       grandTotal={calculateGrandTotal()}
                       onSubmit={async (formData: OrderFormData) => {
-                        const newOrderNumber = Math.floor(1000 + Math.random() * 9000).toString();
+                        const newOrderNumber = getNextOrderNumber();
                         setOrderNumber(newOrderNumber);
+                        setCurrentOrderNumber(getCurrentOrderNumber());
                         
                         // Отправляем заказ на email
                         try {
