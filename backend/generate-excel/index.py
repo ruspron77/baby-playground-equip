@@ -282,12 +282,12 @@ def handler(event, context):
                         original_width, original_height = pil_img.size
                         
                         # Целевые размеры под новую ячейку (20.00 width × 75.00 height)
-                        # 20.00 Excel units ≈ 145 pixels (7.2 pixels per unit)
-                        # 75.00 Excel height units ≈ 100 pixels (1.33 pixels per unit)
-                        col_width_pixels = 145
+                        # Конвертация: 20.00 Excel units * 7 = 140 pixels (примерно)
+                        # 75.00 height points = 100 pixels
+                        col_width_pixels = 140
                         row_height_pixels = 100
                         
-                        target_width = col_width_pixels - 10  # 135 пикселей с отступом
+                        target_width = col_width_pixels - 10  # 130 пикселей с отступом
                         target_height = row_height_pixels - 10  # 90 пикселей с отступом
                         
                         # Вычисляем финальные размеры с сохранением пропорций
@@ -306,15 +306,17 @@ def handler(event, context):
                         img.width = final_width
                         img.height = final_height
                         
-                        # Центрируем изображение в ячейке (EMU units: 1 pixel = 9525 EMU)
+                        # Центрируем изображение (EMU: 1 px ≈ 9525 EMU)
                         from openpyxl.drawing.spreadsheet_drawing import AnchorMarker, TwoCellAnchor
                         
+                        # Рассчитываем отступы для центрирования
                         offset_x = int((col_width_pixels - final_width) / 2 * 9525)
                         offset_y = int((row_height_pixels - final_height) / 2 * 9525)
                         
+                        # Привязка к колонке C (индекс 2)
                         anchor = TwoCellAnchor()
                         anchor._from = AnchorMarker(col=2, colOff=offset_x, row=current_row-1, rowOff=offset_y)
-                        anchor.to = AnchorMarker(col=3, colOff=0, row=current_row, rowOff=0)
+                        anchor.to = AnchorMarker(col=2, colOff=offset_x + final_width * 9525, row=current_row-1, rowOff=offset_y + final_height * 9525)
                         img.anchor = anchor
                         
                         ws.add_image(img)
