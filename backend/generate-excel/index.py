@@ -142,7 +142,7 @@ def handler(event, context):
         
         # Адрес объекта
         ws.merge_cells(f'A{current_row}:G{current_row}')
-        cell = ws.cell(row=current_row, column=1, value='Адрес объекта: _________________________________')
+        cell = ws.cell(row=current_row, column=1, value='Адрес объекта:')
         cell.font = Font(name='Times New Roman', size=11)
         cell.alignment = Alignment(horizontal='left', vertical='center')
         current_row += 2
@@ -433,7 +433,7 @@ def handler(event, context):
         # Подпись
         ws.merge_cells(f'A{current_row}:G{current_row}')
         cell = ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель___________________________/Пронин Р.О./')
-        cell.alignment = Alignment(horizontal='left', vertical='center')
+        cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.font = Font(name='Times New Roman', size=11)
         
         # Сохранение
