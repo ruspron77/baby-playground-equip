@@ -239,7 +239,16 @@ export function Header({
                 {!showOrderForm && (
                   <>
                     <SheetHeader>
-                      <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
+                      <div className="flex items-center justify-between">
+                        <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
+                        <a 
+                          href="tel:+79181151551" 
+                          className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                        >
+                          <Icon name="Phone" size={16} />
+                          +7 (918) 115-15-51
+                        </a>
+                      </div>
                     </SheetHeader>
                     <div className="mt-6 mb-4">
                       <div className="relative">

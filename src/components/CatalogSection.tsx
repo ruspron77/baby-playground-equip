@@ -1,13 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-import { Input } from '@/components/ui/input';
-import Icon from '@/components/ui/icon';
 import { ContactDialog } from './ContactDialog';
+import { CatalogSideMenu } from './catalog/CatalogSideMenu';
+import { CategoryDialogs } from './catalog/CategoryDialogs';
+import { CategoryGrid } from './catalog/CategoryGrid';
+import { ProductDialog } from './catalog/ProductDialog';
 
 interface SubSubcategory {
   name: string;
@@ -80,11 +76,6 @@ interface CatalogSectionProps {
   favorites: Product[];
   toggleFavorite: (product: Product) => void;
 }
-
-const formatPrice = (price: string | number): string => {
-  const numPrice = typeof price === 'string' ? parseInt(price.replace(/\s/g, '')) : price;
-  return numPrice.toLocaleString('ru-RU');
-};
 
 export function CatalogSection({
   categories,
@@ -186,523 +177,65 @@ export function CatalogSection({
       }
     }
   };
+
   return (
     <>
-      <Sheet open={isSideMenuOpen} onOpenChange={setIsSideMenuOpen}>
-        <SheetContent side="left" className="w-80 overflow-y-auto">
-          <SheetHeader>
-            <SheetTitle className="text-2xl font-heading">Каталог</SheetTitle>
-          </SheetHeader>
-          
-          <div className="mt-6 space-y-2">
-            {categories.map((cat) => {
-              const isExpanded = expandedCategories.includes(cat.id);
-              return (
-                <div key={cat.id}>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="w-8 h-8 p-0"
-                      onClick={() => toggleCategory(cat.id)}
-                    >
-                      <Icon 
-                        name={isExpanded ? "ChevronDown" : "ChevronRight"} 
-                        size={16} 
-                      />
-                    </Button>
-                    <button
-                      className={`flex-1 text-left px-3 py-2 rounded-lg hover:bg-muted transition-colors flex items-center gap-2 bg-white ${
-                        selectedCategory === cat.id && !selectedSubcategory ? 'bg-primary/10 text-primary font-semibold' : ''
-                      }`}
-                      onClick={() => handleTreeCategorySelect(cat.id, cat)}
-                    >
-                      <span className="text-base flex-1">{cat.name}</span>
-                    </button>
-                  </div>
-                  
-                  {isExpanded && (
-                    <div className="ml-10 mt-1 space-y-1">
-                      {cat.subcategories.map((sub) => {
-                        const subKey = `${cat.id}-${sub.name}`;
-                        const isSubExpanded = expandedSubcategories.includes(subKey);
-                        
-                        return (
-                          <div key={sub.name}>
-                            <div className="flex items-center gap-1">
-                              {sub.hasChildren && (
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="w-6 h-6 p-0"
-                                  onClick={() => handleTreeSubcategorySelect(cat.id, cat, sub.name, sub)}
-                                >
-                                  <Icon 
-                                    name={isSubExpanded ? "ChevronDown" : "ChevronRight"} 
-                                    size={14} 
-                                  />
-                                </Button>
-                              )}
-                              <button
-                                className={`flex-1 text-left px-2 py-1.5 rounded text-base hover:bg-muted transition-colors flex items-center gap-2 bg-white ${
-                                  !sub.hasChildren ? 'ml-6' : ''
-                                } ${
-                                  (selectedSeries && sub.name.includes(selectedSeries.replace('Серия "', '').replace('"', ''))) || (selectedCategory === cat.id && selectedSubcategory === sub.name && !selectedSubSubcategory)
-                                    ? 'bg-primary/10 text-primary font-semibold' 
-                                    : ''
-                                }`}
-                                onClick={() => handleTreeSubcategorySelect(cat.id, cat, sub.name, sub)}
-                              >
-                                <span className="flex-1">{sub.name}</span>
-                              </button>
-                            </div>
-                            
-                            {isSubExpanded && sub.children && (
-                              <div className="ml-8 mt-1 space-y-1">
-                                {sub.children.map((subSub) => (
-                                  <button
-                                    key={subSub.name}
-                                    className={`w-full text-left px-2 py-1.5 rounded text-sm hover:bg-muted transition-colors flex items-center gap-2 bg-white ${
-                                      selectedCategory === cat.id && 
-                                      selectedSubcategory === sub.name && 
-                                      selectedSubSubcategory === subSub.name
-                                        ? 'bg-primary/10 text-primary font-semibold' 
-                                        : ''
-                                    }`}
-                                    onClick={() => handleTreeSubSubcategorySelect(cat.id, cat, sub.name, subSub.name)}
-                                  >
-                                    <span className="flex-1">{subSub.name}</span>
-                                  </button>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </SheetContent>
-      </Sheet>
+      <CatalogSideMenu
+        isSideMenuOpen={isSideMenuOpen}
+        setIsSideMenuOpen={setIsSideMenuOpen}
+        categories={categories}
+        expandedCategories={expandedCategories}
+        toggleCategory={toggleCategory}
+        selectedCategory={selectedCategory}
+        selectedSubcategory={selectedSubcategory}
+        handleTreeCategorySelect={handleTreeCategorySelect}
+        expandedSubcategories={expandedSubcategories}
+        handleTreeSubcategorySelect={handleTreeSubcategorySelect}
+        handleTreeSubSubcategorySelect={handleTreeSubSubcategorySelect}
+      />
 
-      <section id="catalog" className="pt-12 pb-4 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 animate-slide-up">
-            <h2 className="text-4xl font-heading mb-4 font-semibold">Каталог продукции</h2>
-            <p className="text-lg text-muted-foreground">Широкий ассортимент детского игрового и спортивного оборудования </p>
-          </div>
+      <CategoryDialogs
+        isCategoryDialogOpen={isCategoryDialogOpen}
+        setIsCategoryDialogOpen={setIsCategoryDialogOpen}
+        currentCategory={currentCategory}
+        handleSubcategoryClick={handleSubcategoryClick}
+        isSubSubcategoryDialogOpen={isSubSubcategoryDialogOpen}
+        setIsSubSubcategoryDialogOpen={setIsSubSubcategoryDialogOpen}
+        currentSubcategory={currentSubcategory}
+        handleSubSubcategoryClick={handleSubSubcategoryClick}
+      />
 
-          <div className="space-y-8 mb-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {categories.filter(cat => [1, 2, 3].includes(cat.order || 0)).map((cat) => (
-                <Card
-                  key={cat.id}
-                  className={`cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 overflow-hidden group border-2 ${
-                    selectedCategory === cat.id ? 'border-primary shadow-xl' : 'border-transparent hover:border-primary/20'
-                  }`}
-                  onClick={() => handleCategoryClick(cat)}
-                >
-                  <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
-                    <img 
-                      src={cat.bgImage} 
-                      alt={cat.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                  </div>
-                  <div className={`py-3 px-4 bg-gradient-to-br ${cat.color} relative flex items-center justify-center border-t-2 border-gray-200 group-hover:border-primary/30 transition-colors`}>
-                    <h3 className="font-heading text-center text-foreground leading-tight group-hover:scale-105 transition-transform duration-300 text-lg font-semibold">{cat.name}</h3>
-                  </div>
-                </Card>
-              ))}
-            </div>
+      <CategoryGrid
+        selectedCategory={selectedCategory}
+        categories={categories}
+        filtersRef={filtersRef}
+        selectedSeries={selectedSeries}
+        setSelectedSeries={setSelectedSeries}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        handleResetFilters={handleResetFilters}
+        selectedSubcategory={selectedSubcategory}
+        selectedSubSubcategory={selectedSubSubcategory}
+        productsRef={productsRef}
+        filteredProducts={filteredProducts}
+        handleProductClick={handleProductClick}
+        handleAddToCart={handleAddToCart}
+        favorites={favorites}
+        toggleFavorite={toggleFavorite}
+      />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {categories.filter(cat => [4, 5, 6].includes(cat.order || 0)).map((cat) => (
-                <Card
-                  key={cat.id}
-                  className={`cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 overflow-hidden group border-2 ${
-                    selectedCategory === cat.id ? 'border-primary shadow-xl' : 'border-transparent hover:border-primary/20'
-                  }`}
-                  onClick={() => handleCategoryClick(cat)}
-                >
-                  <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
-                    <img 
-                      src={cat.bgImage} 
-                      alt={cat.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                  </div>
-                  <div className={`py-3 px-4 bg-gradient-to-br ${cat.color} relative flex items-center justify-center border-t-2 border-gray-200 group-hover:border-primary/30 transition-colors`}>
-                    <h3 className="font-heading text-center text-foreground leading-tight group-hover:scale-105 transition-transform duration-300 text-lg font-semibold">{cat.name}</h3>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
-            <DialogContent className="sm:max-w-4xl max-h-[80vh] overflow-y-auto">
-              <DialogHeader>
-                <DialogTitle className="text-3xl font-heading text-center mb-2">
-                  {currentCategory?.name}
-                </DialogTitle>
-              </DialogHeader>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                {currentCategory?.subcategories.map((sub) => (
-                  <Card
-                    key={sub.name}
-                    className="cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1 overflow-hidden group border-2 border-transparent hover:border-primary"
-                    onClick={() => handleSubcategoryClick(sub)}
-                  >
-                    <div className="aspect-[3/2] relative overflow-hidden bg-white flex items-center justify-center">
-                      {sub.image.startsWith('http') ? (
-                        <img src={sub.image} alt={sub.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
-                      ) : (
-                        <span className="text-6xl group-hover:scale-110 transition-transform duration-300">{sub.image}</span>
-                      )}
-                    </div>
-                    <div className="py-4 px-4 bg-white">
-                      <h4 className="text-xl font-semibold text-center">{sub.name}</h4>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </DialogContent>
-          </Dialog>
-
-          <Dialog open={isSubSubcategoryDialogOpen} onOpenChange={setIsSubSubcategoryDialogOpen}>
-            <DialogContent className="sm:max-w-4xl max-h-[80vh] overflow-y-auto">
-              <DialogHeader>
-                <DialogTitle className="text-3xl font-heading text-center mb-2">
-                  {currentSubcategory?.name}
-                </DialogTitle>
-              </DialogHeader>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
-                {currentSubcategory?.children?.map((subSub) => (
-                  <Card
-                    key={subSub.name}
-                    className="cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1 overflow-hidden group border-2 border-transparent hover:border-primary"
-                    onClick={() => handleSubSubcategoryClick(subSub.name)}
-                  >
-                    <div className="aspect-square relative overflow-hidden bg-white flex items-center justify-center">
-                      {subSub.image.startsWith('http') ? (
-                        <img src={subSub.image} alt={subSub.name} className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-300" />
-                      ) : (
-                        <span className="text-6xl group-hover:scale-110 transition-transform duration-300">{subSub.image}</span>
-                      )}
-                    </div>
-                    <div className="py-2 px-3 bg-white">
-                      <h4 className="text-sm font-semibold text-center">{subSub.name}</h4>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </DialogContent>
-          </Dialog>
-
-          {selectedCategory && (
-            <div id="products" className="container mx-auto px-4 pt-2">
-              <div ref={filtersRef}>
-                <div className="sticky top-[84px] bg-white z-40 pb-3 pt-2 -mx-4 px-4">
-                <h2 className="text-4xl font-heading font-bold mb-4">
-                  {categories.find(c => c.id === selectedCategory)?.name}
-                </h2>
-                
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex gap-2">
-                    <Button
-                      variant={(selectedSeries?.includes('Classic')) ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setSelectedSeries(selectedSeries?.includes('Classic') ? null : 'Серия "Classic"')}
-                      className={selectedSeries?.includes('Classic') ? 'series-filter-active' : 'series-filter'}
-                    >
-                      Classic
-                    </Button>
-                    <Button
-                      variant={(selectedSeries?.includes('Eco')) ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setSelectedSeries(selectedSeries?.includes('Eco') ? null : 'Серия "Eco"')}
-                      className={selectedSeries?.includes('Eco') ? 'series-filter-active' : 'series-filter'}
-                    >
-                      Eco
-                    </Button>
-                  </div>
-                  <div className="relative w-80 ml-auto">
-                    <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                    <Input 
-                      type="text"
-                      placeholder="Поиск"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 h-9"
-                    />
-                  </div>
-                  {(selectedSubSubcategory || selectedSeries || searchQuery) && (
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={handleResetFilters}
-                    >
-                      <Icon name="X" size={16} className="mr-2" />
-                      Сбросить
-                    </Button>
-                  )}
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {availableCategories.includes('Игровые комплексы') && (
-                    <Button
-                      variant={selectedSubSubcategory === 'Игровые комплексы' ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Игровые комплексы' ? null : 'Игровые комплексы')}
-                      className={selectedSubSubcategory === 'Игровые комплексы' ? 'bg-primary hover:bg-primary/90' : ''}
-                    >
-                      Комплексы
-                    </Button>
-                  )}
-                  {availableCategories.includes('Качели') && (
-                    <Button
-                      variant={selectedSubSubcategory === 'Качели' ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Качели' ? null : 'Качели')}
-                      className={selectedSubSubcategory === 'Качели' ? 'bg-primary hover:bg-primary/90' : ''}
-                    >
-                      Качели
-                    </Button>
-                  )}
-                  {availableCategories.includes('Карусели') && (
-                    <Button
-                      variant={selectedSubSubcategory === 'Карусели' ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Карусели' ? null : 'Карусели')}
-                      className={selectedSubSubcategory === 'Карусели' ? 'bg-primary hover:bg-primary/90' : ''}
-                    >
-                      Карусели
-                    </Button>
-                  )}
-                  {availableCategories.includes('Балансиры') && (
-                    <Button
-                      variant={selectedSubSubcategory === 'Балансиры' ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Балансиры' ? null : 'Балансиры')}
-                      className={selectedSubSubcategory === 'Балансиры' ? 'bg-primary hover:bg-primary/90' : ''}
-                    >
-                      Балансиры
-                    </Button>
-                  )}
-                  {availableCategories.includes('Горки') && (
-                    <Button
-                      variant={selectedSubSubcategory === 'Горки' ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Горки' ? null : 'Горки')}
-                      className={selectedSubSubcategory === 'Горки' ? 'bg-primary hover:bg-primary/90' : ''}
-                    >
-                      Горки
-                    </Button>
-                  )}
-                  {availableCategories.includes('Workout') && (
-                    <Button
-                      variant={selectedSubSubcategory === 'Workout' ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setSelectedSubSubcategory(selectedSubSubcategory === 'Workout' ? null : 'Workout')}
-                      className={selectedSubSubcategory === 'Workout' ? 'bg-primary hover:bg-primary/90' : ''}
-                    >
-                      Workout
-                    </Button>
-                  )}
-                </div>
-              </div>
-
-              <div ref={productsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
-                {filteredProducts.length > 0 ? (
-                  filteredProducts.map((product) => (
-                    <Card key={product.id} className="overflow-hidden hover:shadow-xl transition-all group cursor-pointer">
-                      <div 
-                        className="aspect-[4/3] relative overflow-hidden bg-white flex items-center justify-center"
-                        onClick={() => handleProductClick(product)}
-                      >
-                        {product.image.startsWith('http') ? (
-                          <img 
-                            src={product.image} 
-                            alt={product.name}
-                            className={`w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ${product.id === 110 ? 'p-0' : 'p-4'}`}
-                            loading="lazy"
-                          />
-                        ) : (
-                          <span className="text-5xl">{product.image}</span>
-                        )}
-                      </div>
-                      <CardContent className="p-3">
-                        <div className="leading-tight space-y-0" onClick={() => handleProductClick(product)}>
-                          {product.name.includes('\n') ? (
-                            <>
-                              <p className="text-xs text-muted-foreground leading-tight">{product.name.split('\n')[0]}</p>
-                              <h3 className="text-sm font-heading font-bold line-clamp-2 leading-tight">{product.name.split('\n')[1]}</h3>
-                            </>
-                          ) : (
-                            <h3 className="text-sm font-heading font-bold line-clamp-2">{product.name}</h3>
-                          )}
-                        </div>
-                        <p className="text-lg font-bold text-primary mt-2">{formatPrice(product.price)} ₽</p>
-                        <Button 
-                          size="sm"
-                          className="w-full"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleAddToCart(product);
-                          }}
-                        >
-                          <Icon name="ShoppingCart" size={14} className="mr-1" />
-                          В корзину
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))
-                ) : (
-                  <div className="col-span-full text-center py-12">
-                    <Icon name="Package" size={48} className="mx-auto mb-4 text-muted-foreground" />
-                    <h3 className="text-xl font-semibold mb-2">Товары не найдены</h3>
-                    <p className="text-muted-foreground mb-4">
-                      В выбранной категории пока нет товаров
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-          )}
-
-        </div>
-      </section>
-
-      <Dialog open={isProductDialogOpen} onOpenChange={setIsProductDialogOpen}>
-        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
-          {selectedProduct && (
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <div className="aspect-square relative overflow-hidden bg-white rounded-lg border flex items-center justify-center">
-                  {productImages.length > 0 ? (
-                    <img 
-                      src={productImages[currentImageIndex]} 
-                      alt={selectedProduct.name}
-                      className="w-full h-full object-contain p-8"
-                      style={{ imageRendering: 'high-quality' }}
-                    />
-                  ) : selectedProduct.image.startsWith('http') ? (
-                    <img 
-                      src={selectedProduct.image} 
-                      alt={selectedProduct.name}
-                      className={`w-full h-full object-contain ${selectedProduct.id === 110 ? 'p-0' : 'p-8'}`}
-                      style={{ imageRendering: 'high-quality' }}
-                    />
-                  ) : (
-                    <span className="text-9xl">{selectedProduct.image}</span>
-                  )}
-                </div>
-                {productImages.length > 1 && (
-                  <div className="flex gap-2 overflow-x-auto pb-2">
-                    {productImages.map((img, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setCurrentImageIndex(idx)}
-                        className={`flex-shrink-0 w-20 h-20 rounded border-2 overflow-hidden ${
-                          idx === currentImageIndex ? 'border-primary' : 'border-gray-200'
-                        }`}
-                      >
-                        <img 
-                          src={img} 
-                          alt={`${selectedProduct.name} ${idx + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  {selectedProduct.name.includes('\n') ? (
-                    <>
-                      <p className="text-sm text-muted-foreground mb-1">{selectedProduct.name.split('\n')[0]}</p>
-                      <h2 className="text-3xl font-heading font-bold">{selectedProduct.name.split('\n')[1]}</h2>
-                    </>
-                  ) : (
-                    <h2 className="text-3xl font-heading font-bold">{selectedProduct.name}</h2>
-                  )}
-                </div>
-
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-primary">{formatPrice(selectedProduct.price)} ₽</span>
-                </div>
-
-                <div className="flex gap-3">
-                  <Button 
-                    size="lg"
-                    className="flex-1"
-                    onClick={() => {
-                      handleAddToCart(selectedProduct);
-                      setIsProductDialogOpen(false);
-                    }}
-                  >
-                    <Icon name="ShoppingCart" size={20} className="mr-2" />
-                    Добавить в заявку
-                  </Button>
-                  <Button 
-                    size="lg"
-                    variant={favorites.some(f => f.id === selectedProduct.id) ? "default" : "outline"}
-                    onClick={() => toggleFavorite(selectedProduct)}
-                  >
-                    <Icon name="Heart" size={20} className={favorites.some(f => f.id === selectedProduct.id) ? "fill-current" : ""} />
-                  </Button>
-                </div>
-
-                <div className="border-t pt-6">
-                  <h3 className="text-xl font-heading font-bold mb-4">Техническая информация</h3>
-                  {selectedProduct.dimensions && (
-                    <div className="grid grid-cols-3 gap-4 mb-4">
-                      {selectedProduct.dimensions.split('х').map((dim, idx) => (
-                        <div key={idx} className="bg-muted/30 p-3 rounded-lg">
-                          <p className="text-xs text-muted-foreground mb-1">
-                            {idx === 0 ? 'Ширина' : idx === 1 ? 'Длина' : 'Высота'}
-                          </p>
-                          <p className="text-lg font-bold">{dim.trim()}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {selectedProduct.description && (
-                    <p className="text-sm text-muted-foreground">{selectedProduct.description}</p>
-                  )}
-                </div>
-
-                <div className="border-t pt-6">
-                  <p className="text-muted-foreground mb-4">
-                    Если появились вопросы, вы можете получить консультацию руководителя проекта:
-                  </p>
-                  <Button 
-                    variant="outline" 
-                    size="lg" 
-                    className="w-full"
-                    onClick={() => {
-                      setIsProductDialogOpen(false);
-                      setIsContactDialogOpen(true);
-                    }}
-                  >
-                    <Icon name="Phone" size={20} className="mr-2" />
-                    Перезвоните мне
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+      <ProductDialog
+        isProductDialogOpen={isProductDialogOpen}
+        setIsProductDialogOpen={setIsProductDialogOpen}
+        selectedProduct={selectedProduct}
+        productImages={productImages}
+        currentImageIndex={currentImageIndex}
+        setCurrentImageIndex={setCurrentImageIndex}
+        handleAddToCart={handleAddToCart}
+        setIsContactDialogOpen={setIsContactDialogOpen}
+        favorites={favorites}
+        toggleFavorite={toggleFavorite}
+      />
 
       <ContactDialog 
         open={isContactDialogOpen} 
