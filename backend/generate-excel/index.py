@@ -368,11 +368,10 @@ def handler(event, context):
         current_row += 2
         
         # Подпись
-        ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель').font = Font(name='Times New Roman', size=11)
-        ws.merge_cells(f'E{current_row}:G{current_row}')
-        cell = ws.cell(row=current_row, column=5, value='Пронин Р. О.')
-        cell.alignment = Alignment(horizontal='right', vertical='center')
-        cell.font = Font(name='Times New Roman', size=11, italic=True)
+        ws.merge_cells(f'A{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель______________________________________/Пронин Р.О./')
+        cell.alignment = Alignment(horizontal='left', vertical='center')
+        cell.font = Font(name='Times New Roman', size=11)
         
         # Сохранение
         output = io.BytesIO()
