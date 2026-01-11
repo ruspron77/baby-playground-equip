@@ -172,13 +172,13 @@ def handler(event, context):
         current_row += 2
         
         # Настройка колонок
-        ws.column_dimensions['A'].width = 3      # № - 3.00 (26 пикселей)
-        ws.column_dimensions['B'].width = 24     # Наименование - 24.00 (173 пикселя)
-        ws.column_dimensions['C'].width = 18     # Рисунок - 18.00 (131 пиксель)
-        ws.column_dimensions['D'].width = 6      # Кол-во - 6.00 (47 пикселей)
-        ws.column_dimensions['E'].width = 6      # Ед. изм - 6.00 (47 пикселей)
-        ws.column_dimensions['F'].width = 12     # Цена руб - 12.00 (89 пикселей)
-        ws.column_dimensions['G'].width = 14     # Сумма руб - 14.00 (103 пикселя)
+        ws.column_dimensions['A'].width = 3.29   # № - 3.29 (28 пикселей)
+        ws.column_dimensions['B'].width = 23.29  # Наименование - 23.29 (168 пикселей)
+        ws.column_dimensions['C'].width = 25.29  # Рисунок - 25.29 (182 пикселя)
+        ws.column_dimensions['D'].width = 6.29   # Кол-во - 6.29 (48 пикселей)
+        ws.column_dimensions['E'].width = 6.29   # Ед. изм - 6.29 (48 пикселей)
+        ws.column_dimensions['F'].width = 14.29  # Цена руб - 14.29 (105 пикселей)
+        ws.column_dimensions['G'].width = 16.29  # Сумма руб - 16.29 (119 пикселей)
         
         # Границы
         thin_border = Border(
@@ -204,7 +204,7 @@ def handler(event, context):
         equipment_total = 0
         
         for idx, product in enumerate(products, 1):
-            ws.row_dimensions[current_row].height = 110
+            ws.row_dimensions[current_row].height = 99
             
             # №
             cell = ws.cell(row=current_row, column=1, value=idx)
@@ -244,9 +244,9 @@ def handler(event, context):
                         pil_img = PILImage.open(io.BytesIO(img_data))
                         original_width, original_height = pil_img.size
                         
-                        # Целевые размеры под ячейку (увеличены для лучшего качества)
-                        target_width = 200
-                        target_height = 150
+                        # Целевые размеры под ячейку (высокое качество)
+                        target_width = 170
+                        target_height = 120
                         
                         # Вычисляем пропорции
                         width_ratio = target_width / original_width
@@ -279,8 +279,8 @@ def handler(event, context):
                         # Центрируем изображение в ячейке
                         from openpyxl.drawing.spreadsheet_drawing import AnchorMarker, TwoCellAnchor
                         
-                        col_width_pixels = 131  # ширина колонки C (18.00 в Excel)
-                        row_height_pixels = 100  # высота строки (75 в Excel)
+                        col_width_pixels = 182  # ширина колонки C (25.29 в Excel)
+                        row_height_pixels = 132  # высота строки (99.00 в Excel)
                         
                         offset_x = int((col_width_pixels - new_width) / 2 * 9525)  # EMU
                         offset_y = int((row_height_pixels - new_height) / 2 * 9525)  # EMU
