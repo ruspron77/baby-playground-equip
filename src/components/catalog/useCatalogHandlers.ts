@@ -13,6 +13,7 @@ interface CatalogHandlersProps {
   setExpandedCategories: (value: string[] | ((prev: string[]) => string[])) => void;
   setSelectedSeries: (value: string | null) => void;
   setSearchQuery: (value: string) => void;
+  searchQuery: string;
   currentCategory: typeof categories[0] | null;
   currentSubcategory: Subcategory | null;
 }
@@ -31,6 +32,7 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
     setExpandedCategories,
     setSelectedSeries,
     setSearchQuery,
+    searchQuery,
     currentCategory,
     currentSubcategory,
   } = props;
@@ -135,9 +137,15 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
   };
 
   const handleResetFilters = () => {
-    setSelectedSubSubcategory(null);
-    setSelectedSeries(null);
-    setSearchQuery('');
+    if (searchQuery) {
+      setSearchQuery('');
+    } else {
+      setSelectedCategory(null);
+      setSelectedSubcategory(null);
+      setSelectedSubSubcategory(null);
+      setSelectedSeries(null);
+      setCurrentCategory(null);
+    }
   };
 
   return {
