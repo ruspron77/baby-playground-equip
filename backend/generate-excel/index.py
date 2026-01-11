@@ -56,7 +56,7 @@ def handler(event, context):
         
         # Логотип (левый верхний угол)
         try:
-            logo_url = 'https://cdn.poehali.dev/files/Рисунок1.png'
+            logo_url = 'https://cdn.poehali.dev/files/%D0%BB%D0%BE%D0%B3%D0%BE%D0%BA%D0%BF.png'
             req = urllib.request.Request(logo_url, headers={'User-Agent': 'Mozilla/5.0'})
             with urllib.request.urlopen(req, timeout=10) as response:
                 logo_data = response.read()
@@ -201,19 +201,7 @@ def handler(event, context):
                         img.width = pil_img.width
                         img.height = pil_img.height
                         
-                        # Центрируем изображение в ячейке
-                        col_width_pixels = 131  # ширина колонки C
-                        row_height_pixels = 100  # высота строки
-                        
-                        offset_x = (col_width_pixels - pil_img.width) / 2
-                        offset_y = (row_height_pixels - pil_img.height) / 2
-                        
-                        img.anchor = f'C{current_row}'
-                        # openpyxl использует EMU (English Metric Units): 1 пиксель ≈ 9525 EMU
-                        img.anchor._from.colOff = int(offset_x * 9525)
-                        img.anchor._from.rowOff = int(offset_y * 9525)
-                        
-                        ws.add_image(img)
+                        ws.add_image(img, f'C{current_row}')
                 except Exception as e:
                     print(f'Failed to load image: {e}')
             
