@@ -32,7 +32,7 @@ export function ContentSections() {
                   <div className="text-sm text-muted-foreground">площадок</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-accent mb-2">700+</div>
+                  <div className="text-4xl font-bold text-[#0284c7] mb-2">700+</div>
                   <div className="text-sm text-muted-foreground">товаров</div>
                 </div>
               </div>
@@ -104,8 +104,8 @@ export function ContentSections() {
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
               <CardContent className="p-8">
-                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon name="MapPin" size={32} className="text-accent" />
+                <div className="w-16 h-16 bg-[#0284c7]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Icon name="MapPin" size={32} className="text-[#0284c7]" />
                 </div>
                 <h3 className="font-bold mb-2">Адрес</h3>
                 <p className="text-muted-foreground">г. Краснодар,      ул. Кореновская, д. 57 оф. 7</p>
