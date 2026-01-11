@@ -139,10 +139,11 @@ def handler(event, context):
         ws.row_dimensions[current_row].height = 15
         current_row += 1
         
-        # Сайт
+        # Сайт (кликабельная ссылка)
         ws.merge_cells(f'C{current_row}:G{current_row}')
-        cell = ws.cell(row=current_row, column=3, value='www.urban-play.ru')
-        cell.font = Font(name='Times New Roman', size=11)
+        cell = ws.cell(row=current_row, column=3)
+        cell.value = '=HYPERLINK("https://www.urban-play.ru", "www.urban-play.ru")'
+        cell.font = Font(name='Times New Roman', size=11, color='0563C1', underline='single')
         cell.alignment = Alignment(horizontal='right', vertical='center', wrap_text=True)
         ws.row_dimensions[current_row].height = 15
         current_row += 1
@@ -183,8 +184,8 @@ def handler(event, context):
         ws.column_dimensions['A'].width = 3.00   # № - 3.00 (26 пикселей)
         ws.column_dimensions['B'].width = 23.00  # Наименование - 23.00 (166 пикселей)
         ws.column_dimensions['C'].width = 27.00  # Рисунок - 27.00 (194 пикселя)
-        ws.column_dimensions['D'].width = 6.00   # Кол-во - 6.00 (47 пикселей)
-        ws.column_dimensions['E'].width = 6.00   # Ед. изм - 6.00 (47 пикселей)
+        ws.column_dimensions['D'].width = 7.00   # Кол-во - 7.00 (54 пикселя)
+        ws.column_dimensions['E'].width = 7.00   # Ед. изм - 7.00 (54 пикселя)
         ws.column_dimensions['F'].width = 14.00  # Цена руб - 14.00 (103 пикселя)
         ws.column_dimensions['G'].width = 16.00  # Сумма руб - 16.00 (117 пикселей)
         
@@ -412,10 +413,9 @@ def handler(event, context):
         # Итого
         total_sum = equipment_total + installation_cost + delivery_cost
         
-        # Пустые ячейки с рамками
+        # Пустые ячейки БЕЗ рамок
         for col in range(1, 6):
             cell = ws.cell(row=current_row, column=col, value='')
-            cell.border = thin_border
         
         cell = ws.cell(row=current_row, column=6, value='Итого:')
         cell.alignment = Alignment(horizontal='center', vertical='center')
