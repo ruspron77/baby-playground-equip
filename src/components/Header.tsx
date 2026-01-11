@@ -399,10 +399,7 @@ export function Header({
                               generateKP();
                               setIsCartOpen(false);
                             }}
-                          >
-                            <Icon name="FileText" size={20} className="mr-2" />
-                            Скачать коммерческое предложение
-                          </Button>
+                          >Сформировать коммерческое предложение</Button>
                           
                           <Button 
                             variant="outline" 
