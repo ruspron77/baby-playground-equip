@@ -419,6 +419,20 @@ export function Header({
                             <Icon name="ShoppingBag" size={20} className="mr-2" />
                             Оформить заказ
                           </Button>
+                          
+                          <Button 
+                            variant="outline"
+                            className="w-full border-red-500 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500" 
+                            size="lg"
+                            onClick={() => {
+                              if (clearCart && confirm('Вы уверены, что хотите очистить корзину?')) {
+                                clearCart();
+                              }
+                            }}
+                          >
+                            <Icon name="Trash2" size={20} className="mr-2" />
+                            Очистить корзину
+                          </Button>
                         
                           <Button 
                             variant="outline"
