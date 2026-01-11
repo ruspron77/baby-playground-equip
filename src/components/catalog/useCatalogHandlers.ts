@@ -10,6 +10,7 @@ interface CatalogHandlersProps {
   setIsSubSubcategoryDialogOpen: (value: boolean) => void;
   setIsSideMenuOpen: (value: boolean) => void;
   setExpandedSubcategories: (value: string[] | ((prev: string[]) => string[])) => void;
+  setExpandedCategories: (value: string[] | ((prev: string[]) => string[])) => void;
   setSelectedSeries: (value: string | null) => void;
   setSearchQuery: (value: string) => void;
   currentCategory: typeof categories[0] | null;
@@ -27,6 +28,7 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
     setIsSubSubcategoryDialogOpen,
     setIsSideMenuOpen,
     setExpandedSubcategories,
+    setExpandedCategories,
     setSelectedSeries,
     setSearchQuery,
     currentCategory,
@@ -126,6 +128,9 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
   };
 
   const toggleCategory = (categoryId: string) => {
+    setExpandedCategories(prev => 
+      prev.includes(categoryId) ? prev.filter(id => id !== categoryId) : [...prev, categoryId]
+    );
     setExpandedSubcategories([]);
   };
 

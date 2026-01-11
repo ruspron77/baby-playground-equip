@@ -52,6 +52,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     setIsSubSubcategoryDialogOpen: catalogState.setIsSubSubcategoryDialogOpen,
     setIsSideMenuOpen: catalogState.setIsSideMenuOpen,
     setExpandedSubcategories: catalogState.setExpandedSubcategories,
+    setExpandedCategories: catalogState.setExpandedCategories,
     setSelectedSeries: catalogState.setSelectedSeries,
     setSearchQuery: catalogState.setSearchQuery,
     currentCategory: catalogState.currentCategory,
