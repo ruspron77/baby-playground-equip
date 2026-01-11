@@ -363,6 +363,7 @@ export function Header({
                               value={deliveryCost || ''}
                               onChange={(e) => setDeliveryCost(Number(e.target.value))}
                               className="w-full"
+                              step="1000"
                             />
                           </div>
                           
