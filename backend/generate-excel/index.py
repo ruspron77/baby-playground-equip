@@ -133,7 +133,7 @@ def handler(event, context):
         # Настройка колонок
         ws.column_dimensions['A'].width = 4    # №
         ws.column_dimensions['B'].width = 24   # Наименование
-        ws.column_dimensions['C'].width = 27   # Рисунок - 27.00 (194 пикселя)
+        ws.column_dimensions['C'].width = 16   # Рисунок
         ws.column_dimensions['D'].width = 7    # Кол-во
         ws.column_dimensions['E'].width = 7    # Ед. изм
         ws.column_dimensions['F'].width = 11   # Цена руб
@@ -163,7 +163,7 @@ def handler(event, context):
         equipment_total = 0
         
         for idx, product in enumerate(products, 1):
-            ws.row_dimensions[current_row].height = 96  # 96.00 (198 пикселей)
+            ws.row_dimensions[current_row].height = 75
             
             # №
             cell = ws.cell(row=current_row, column=1, value=idx)
@@ -189,8 +189,8 @@ def handler(event, context):
                         
                         pil_img = PILImage.open(io.BytesIO(img_data))
                         
-                        max_width = 180
-                        max_height = 90
+                        max_width = 100
+                        max_height = 65
                         pil_img.thumbnail((max_width, max_height), PILImage.Resampling.LANCZOS)
                         
                         img_buffer = io.BytesIO()
