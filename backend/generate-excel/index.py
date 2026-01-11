@@ -8,6 +8,7 @@ from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.drawing.image import Image as XLImage
 from openpyxl.utils import get_column_letter
 import urllib.request
+import urllib.parse
 from PIL import Image as PILImage
 
 COUNTER_FILE = '/tmp/kp_counter.txt'
@@ -182,7 +183,20 @@ def handler(event, context):
             # Рисунок
             if product.get('image') and product['image'].startswith('http'):
                 try:
-                    req = urllib.request.Request(product['image'], headers={'User-Agent': 'Mozilla/5.0'})
+                    # Энкодим URL для корректной работы с кириллицей
+                    image_url = product['image']
+                    
+                    # Парсим URL
+                    parsed = urllib.parse.urlparse(image_url)
+                    # Кодируем путь (path), оставляя / и : безопасными
+                    encoded_path = urllib.parse.quote(parsed.path, safe='/')
+                    # Собираем URL обратно
+                    safe_url = urllib.parse.urlunparse((
+                        parsed.scheme, parsed.netloc, encoded_path,
+                        parsed.params, parsed.query, parsed.fragment
+                    ))
+                    
+                    req = urllib.request.Request(safe_url, headers={'User-Agent': 'Mozilla/5.0'})
                     with urllib.request.urlopen(req, timeout=10) as response:
                         img_data = response.read()
                         
