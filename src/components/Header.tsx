@@ -447,18 +447,6 @@ export function Header({
                             <Icon name="FileText" size={20} className="mr-2" />
                             Сформировать коммерческое предложение
                           </Button>
-                          
-                          <Button 
-                            variant="outline" 
-                            className="w-full" 
-                            size="lg"
-                            asChild
-                          >
-                            <a href="tel:+79181151551">
-                              <Icon name="Phone" size={16} className="mr-2" />
-                              +7 (918) 115-15-51
-                            </a>
-                          </Button>
                     </div>
                   </>
                 )}
