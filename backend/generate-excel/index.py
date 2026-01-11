@@ -204,7 +204,7 @@ def handler(event, context):
         equipment_total = 0
         
         for idx, product in enumerate(products, 1):
-            ws.row_dimensions[current_row].height = 75
+            ws.row_dimensions[current_row].height = 110
             
             # №
             cell = ws.cell(row=current_row, column=1, value=idx)
@@ -244,9 +244,9 @@ def handler(event, context):
                         pil_img = PILImage.open(io.BytesIO(img_data))
                         original_width, original_height = pil_img.size
                         
-                        # Целевые размеры под ячейку
-                        target_width = 120
-                        target_height = 90
+                        # Целевые размеры под ячейку (увеличены для лучшего качества)
+                        target_width = 200
+                        target_height = 150
                         
                         # Вычисляем пропорции
                         width_ratio = target_width / original_width
@@ -266,10 +266,10 @@ def handler(event, context):
                         img_buffer = io.BytesIO()
                         # Сохраняем в высоком качестве
                         if pil_img.mode == 'RGBA':
-                            pil_img.save(img_buffer, format='PNG', compress_level=1)
+                            pil_img.save(img_buffer, format='PNG', compress_level=0)
                         else:
                             rgb_img = pil_img.convert('RGB')
-                            rgb_img.save(img_buffer, format='JPEG', quality=95, subsampling=0)
+                            rgb_img.save(img_buffer, format='JPEG', quality=98, subsampling=0, optimize=False)
                         img_buffer.seek(0)
                         
                         img = XLImage(img_buffer)
