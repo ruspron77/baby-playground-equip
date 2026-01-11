@@ -391,8 +391,8 @@ export function Header({
                                       </Button>
                                       <Button 
                                         size="sm" 
-                                        variant="destructive"
-                                        className="ml-auto h-7 w-7 p-0"
+                                        variant="outline"
+                                        className="ml-auto h-7 w-7 p-0 border-red-500 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500"
                                         onClick={() => removeFromCart(item.id)}
                                       >
                                         <Icon name="Trash2" size={12} />
@@ -422,7 +422,7 @@ export function Header({
                           
                           <Button 
                             variant="outline"
-                            className="w-full border-red-500 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500" 
+                            className="w-full border-[#44aa02] text-[#44aa02] hover:bg-transparent hover:text-red-500 hover:border-red-500" 
                             size="lg"
                             onClick={() => {
                               if (clearCart && confirm('Вы уверены, что хотите очистить корзину?')) {
@@ -450,7 +450,7 @@ export function Header({
                           
                           <Button 
                             variant="outline" 
-                            className="w-full" 
+                            className="w-full hover:bg-transparent hover:border-[#44aa02] hover:text-[#44aa02]" 
                             size="lg"
                             asChild
                           >
