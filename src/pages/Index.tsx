@@ -219,7 +219,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
                                     category.id === 'coating' ? 'rgba(220, 252, 231, 0.95)' :
                                     'rgba(243, 232, 255, 0.95)'
                   }}>
-                    <h3 className="text-xl font-heading font-semibold text-gray-900 text-center">{category.name}</h3>
+                    <h3 className="font-heading font-semibold text-gray-900 text-center text-base">{category.name}</h3>
                   </div>
                 </div>
               </div>
