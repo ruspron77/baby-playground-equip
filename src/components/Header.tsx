@@ -220,7 +220,7 @@ export function Header({
             </Sheet>
 
             <Link to="/favorites">
-              <Button variant="outline" className="relative hover:border-primary hover:text-primary">
+              <Button variant="outline" className="relative hover:border-primary hover:text-primary hover:bg-transparent">
                 <Icon name="Heart" size={20} />
                 {favoritesCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold">
@@ -232,7 +232,7 @@ export function Header({
             
             <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" className="relative">
+                <Button variant="outline" className="relative hover:border-primary hover:text-primary hover:bg-transparent">
                   <Icon name="ShoppingCart" size={20} />
                   {cart.length > 0 && (
                     <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold">
@@ -436,7 +436,7 @@ export function Header({
                           
                           <Button 
                             variant="outline"
-                            className="w-full hover:border-red-500 hover:text-red-500" 
+                            className="w-full hover:border-red-500 hover:text-red-500 hover:bg-transparent" 
                             size="lg"
                             onClick={() => {
                               if (window.confirm('Вы уверены, что хотите очистить корзину?')) {
@@ -452,7 +452,7 @@ export function Header({
                         
                           <Button 
                             variant="outline"
-                            className="w-full" 
+                            className="w-full hover:border-primary hover:text-primary hover:bg-transparent" 
                             size="lg"
                             onClick={() => {
                               setKpInstallationPercent(installationPercent);
