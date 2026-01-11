@@ -187,21 +187,39 @@ def handler(event, context):
                         img_data = response.read()
                         
                         pil_img = PILImage.open(io.BytesIO(img_data))
+                        original_width, original_height = pil_img.size
                         
-                        # Размеры ячейки: 131 пикселей (ширина) x 100 пикселей (высота)
-                        max_width = 120
-                        max_height = 90
+                        # Целевые размеры под ячейку
+                        target_width = 120
+                        target_height = 90
                         
-                        # Изменяем размер с сохранением пропорций и высоким качеством
-                        pil_img.thumbnail((max_width, max_height), PILImage.Resampling.LANCZOS)
+                        # Вычисляем пропорции
+                        width_ratio = target_width / original_width
+                        height_ratio = target_height / original_height
+                        ratio = min(width_ratio, height_ratio)
+                        
+                        # Новые размеры с сохранением пропорций
+                        new_width = int(original_width * ratio)
+                        new_height = int(original_height * ratio)
+                        
+                        # Resize с высоким качеством (LANCZOS для уменьшения, BICUBIC для увеличения)
+                        if ratio < 1:
+                            pil_img = pil_img.resize((new_width, new_height), PILImage.Resampling.LANCZOS)
+                        else:
+                            pil_img = pil_img.resize((new_width, new_height), PILImage.Resampling.BICUBIC)
                         
                         img_buffer = io.BytesIO()
-                        pil_img.save(img_buffer, format='PNG', quality=95, optimize=False)
+                        # Сохраняем в высоком качестве
+                        if pil_img.mode == 'RGBA':
+                            pil_img.save(img_buffer, format='PNG', compress_level=1)
+                        else:
+                            rgb_img = pil_img.convert('RGB')
+                            rgb_img.save(img_buffer, format='JPEG', quality=95, subsampling=0)
                         img_buffer.seek(0)
                         
                         img = XLImage(img_buffer)
-                        img.width = pil_img.width
-                        img.height = pil_img.height
+                        img.width = new_width
+                        img.height = new_height
                         
                         ws.add_image(img, f'C{current_row}')
                 except Exception as e:
