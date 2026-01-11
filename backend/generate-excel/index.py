@@ -189,8 +189,8 @@ def handler(event, context):
                         
                         pil_img = PILImage.open(io.BytesIO(img_data))
                         
-                        max_width = 180
-                        max_height = 90
+                        max_width = 100
+                        max_height = 60
                         pil_img.thumbnail((max_width, max_height), PILImage.Resampling.LANCZOS)
                         
                         img_buffer = io.BytesIO()
@@ -201,7 +201,19 @@ def handler(event, context):
                         img.width = pil_img.width
                         img.height = pil_img.height
                         
-                        ws.add_image(img, f'C{current_row}')
+                        # Центрируем изображение в ячейке
+                        col_width_pixels = 124  # ширина колонки C
+                        row_height_pixels = 72  # высота строки
+                        
+                        offset_x = (col_width_pixels - pil_img.width) / 2
+                        offset_y = (row_height_pixels - pil_img.height) / 2
+                        
+                        img.anchor = f'C{current_row}'
+                        # openpyxl использует EMU (English Metric Units): 1 пиксель ≈ 9525 EMU
+                        img.anchor._from.colOff = int(offset_x * 9525)
+                        img.anchor._from.rowOff = int(offset_y * 9525)
+                        
+                        ws.add_image(img)
                 except Exception as e:
                     print(f'Failed to load image: {e}')
             
