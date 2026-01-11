@@ -162,7 +162,7 @@ export function CategoryGrid({
                 className="overflow-hidden transition-all cursor-pointer group border border-gray-200 hover:border-transparent hover:shadow-xl"
               >
                 <div 
-                  className="aspect-square bg-white flex items-center justify-center relative overflow-hidden"
+                  className="aspect-[4/3] bg-white flex items-center justify-center relative overflow-hidden"
                   onClick={() => handleProductClick(product)}
                 >
                   {product.image.startsWith('http') ? (
