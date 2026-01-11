@@ -209,15 +209,15 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6" style={{
+                  <div className="absolute bottom-0 left-0 right-0 p-3" style={{
                     backgroundColor: category.id === 'playground' ? 'rgba(220, 252, 231, 0.95)' : 
                                     category.id === 'sport' ? 'rgba(243, 232, 255, 0.95)' : 
                                     category.id === 'park' ? 'rgba(224, 242, 254, 0.95)' :
-                                    category.id === 'improvement' ? 'rgba(254, 249, 195, 0.95)' :
-                                    category.id === 'coating' ? 'rgba(243, 232, 255, 0.95)' :
-                                    'rgba(243, 244, 246, 0.95)'
+                                    category.id === 'improvement' ? 'rgba(224, 242, 254, 0.95)' :
+                                    category.id === 'coating' ? 'rgba(220, 252, 231, 0.95)' :
+                                    'rgba(243, 232, 255, 0.95)'
                   }}>
-                    <h3 className="text-2xl font-heading font-bold text-gray-900 text-center">{category.name}</h3>
+                    <h3 className="text-xl font-heading font-bold text-gray-900 text-center">{category.name}</h3>
                   </div>
                 </div>
               </div>
