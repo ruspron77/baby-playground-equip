@@ -124,16 +124,10 @@
     @apply active:scale-95 transition-transform duration-150;
   }
 
-  /* Убрать синий фон у всех кнопок по умолчанию */
-  button:not([class*="bg-primary"]):not([class*="bg-destructive"]):not(
-      [class*="bg-secondary"]
-    ):hover {
-    background-color: transparent !important;
-  }
-
   /* Для кнопок с зелёным фоном (primary) - тёмно-зелёный при наведении */
   button[class*="bg-primary"]:hover {
     background-color: hsl(99 98% 28%) !important;
+    color: white !important;
   }
 
   /* Красные кнопки удаления в карточке товара - красный фон и белый текст при наведении */
@@ -143,18 +137,17 @@
     color: white !important;
   }
 
-  /* Зелёная кнопка "Очистить корзину" - красный контур и текст при наведении */
-  button[class*="border-"][class*="44aa02"]:hover {
+  /* Зелёная кнопка "Очистить корзину" с 44aa02 - красный контур и текст при наведении */
+  button[class*="44aa02"]:hover {
     background-color: transparent !important;
     border-color: #ef4444 !important;
     color: #ef4444 !important;
   }
 
-  /* Кнопка телефона и другие outline кнопки - зелёный контур при наведении */
-  button[class*="variant-outline"]:not([class*="border-red"]):not(
+  /* Все остальные outline кнопки - зелёный контур при наведении */
+  button[class*="outline"]:not([class*="border-red-500"]):not(
       [class*="44aa02"]
-    ):hover,
-  a[href^="tel"]:hover {
+    ):hover {
     background-color: transparent !important;
     border-color: #44aa02 !important;
     color: #44aa02 !important;
@@ -164,5 +157,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+  }
+
+  /* Убрать синий/accent фон у всех кнопок без специальных классов */
+  button:not([class*="bg-primary"]):not([class*="bg-destructive"]):not(
+      [class*="bg-secondary"]
+    ):not([class*="border-red-500"]):not([class*="44aa02"]):hover {
+    background-color: transparent !important;
   }
 }
