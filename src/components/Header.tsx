@@ -345,6 +345,7 @@ export function Header({
                               className="w-full"
                               min="0"
                               max="100"
+                              step="5"
                             />
                           </div>
                           
