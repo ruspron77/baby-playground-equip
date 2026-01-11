@@ -299,41 +299,46 @@ export function Header({
                     <div className="space-y-4">
                       {cart.map((item) => (
                             <Card key={item.id}>
-                              <CardContent className="p-4">
-                                <div className="flex gap-4">
-                                  <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center text-4xl shrink-0 border">
+                              <CardContent className="p-3">
+                                <div className="flex gap-3">
+                                  <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center shrink-0 border">
                                     {item.image.startsWith('http') ? (
                                       <img src={item.image} alt={item.name} className="w-full h-full object-contain p-1" />
                                     ) : (
-                                      <span>{item.image}</span>
+                                      <span className="text-2xl">{item.image}</span>
                                     )}
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <h3 className="font-semibold mb-1 truncate">{item.name}</h3>
-                                    <p className="text-sm text-muted-foreground mb-2">{formatPrice(item.price)} ₽</p>
+                                    <div className="flex justify-between items-start gap-2 mb-1">
+                                      <h3 className="font-semibold text-sm leading-tight flex-1">{item.name}</h3>
+                                      <span className="font-semibold text-sm whitespace-nowrap">{formatPrice(item.price)} ₽</span>
+                                    </div>
+                                    <p className="text-xs text-muted-foreground mb-2">Арт. {item.article || 'Н/Д'}</p>
                                     <div className="flex items-center gap-2">
                                       <Button 
                                         size="sm" 
                                         variant="outline"
+                                        className="h-7 w-7 p-0"
                                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
                                       >
-                                        <Icon name="Minus" size={14} />
+                                        <Icon name="Minus" size={12} />
                                       </Button>
-                                      <span className="w-8 text-center font-medium">{item.quantity}</span>
+                                      <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                                       <Button 
                                         size="sm" 
                                         variant="outline"
+                                        className="h-7 w-7 p-0"
                                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                       >
-                                        <Icon name="Plus" size={14} />
+                                        <Icon name="Plus" size={12} />
                                       </Button>
                                       <Button 
                                         size="sm" 
                                         variant="destructive"
-                                        className="ml-auto"
+                                        className="ml-auto h-7 w-7 p-0"
                                         onClick={() => removeFromCart(item.id)}
                                       >
-                                        <Icon name="Trash2" size={14} />
+                                        <Icon name="Trash2" size={12} />
                                       </Button>
                                     </div>
                                   </div>
