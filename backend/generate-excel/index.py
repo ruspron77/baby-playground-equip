@@ -373,7 +373,7 @@ def handler(event, context):
         
         # Подпись
         ws.merge_cells(f'A{current_row}:G{current_row}')
-        cell = ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель______________________________________/Пронин Р.О./')
+        cell = ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель___________________________/Пронин Р.О./')
         cell.alignment = Alignment(horizontal='left', vertical='center')
         cell.font = Font(name='Times New Roman', size=11)
         
