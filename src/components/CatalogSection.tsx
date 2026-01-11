@@ -419,7 +419,7 @@ export function CatalogSection({
                       variant={(selectedSeries?.includes('Classic')) ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setSelectedSeries(selectedSeries?.includes('Classic') ? null : 'Серия "Classic"')}
-                      className={selectedSeries?.includes('Classic') ? 'bg-secondary hover:bg-secondary/90' : ''}
+                      className={selectedSeries?.includes('Classic') ? 'series-filter-active' : 'series-filter'}
                     >
                       Classic
                     </Button>
@@ -427,7 +427,7 @@ export function CatalogSection({
                       variant={(selectedSeries?.includes('Eco')) ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setSelectedSeries(selectedSeries?.includes('Eco') ? null : 'Серия "Eco"')}
-                      className={selectedSeries?.includes('Eco') ? 'bg-secondary hover:bg-secondary/90' : ''}
+                      className={selectedSeries?.includes('Eco') ? 'series-filter-active' : 'series-filter'}
                     >
                       Eco
                     </Button>

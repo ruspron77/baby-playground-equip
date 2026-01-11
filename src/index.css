@@ -157,6 +157,26 @@
     color: white !important;
   }
 
+  /* Кнопки фильтра Classic/Eco - фиолетовый контур и текст при наведении */
+  button.series-filter:hover {
+    background-color: transparent !important;
+    border-color: hsl(289 98% 27%) !important;
+    color: hsl(289 98% 27%) !important;
+  }
+
+  /* Кнопки фильтра Classic/Eco - выбранное состояние: фиолетовый фон и белый текст */
+  button.series-filter-active {
+    background-color: hsl(289 98% 27%) !important;
+    border-color: hsl(289 98% 27%) !important;
+    color: white !important;
+  }
+
+  button.series-filter-active:hover {
+    background-color: hsl(289 98% 22%) !important;
+    border-color: hsl(289 98% 22%) !important;
+    color: white !important;
+  }
+
   a[href^="tel"] {
     display: flex;
     align-items: center;
