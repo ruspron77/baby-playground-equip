@@ -8,6 +8,7 @@ from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.drawing.image import Image as XLImage
 from openpyxl.utils import get_column_letter
 import urllib.request
+from PIL import Image as PILImage
 
 COUNTER_FILE = '/tmp/kp_counter.txt'
 
@@ -30,7 +31,7 @@ def get_next_kp_number():
         return 1
 
 def handler(event, context):
-    """Генерация Excel файла с коммерческим предложением"""
+    """Генерация Excel файла с коммерческим предложением по точному формату"""
     
     if event.get('httpMethod') == 'OPTIONS':
         return {
@@ -46,7 +47,6 @@ def handler(event, context):
     try:
         body = json.loads(event.get('body', '{}'))
         products = body.get('products', [])
-        delivery_cost = body.get('deliveryCost', 0)
         
         wb = Workbook()
         ws = wb.active
@@ -54,58 +54,62 @@ def handler(event, context):
         
         current_row = 1
         
-        # Заголовок компании (правый верхний угол)
+        # Лого (левый верхний угол) - добавим текст вместо картинки
+        ws.merge_cells(f'A{current_row}:B{current_row+3}')
+        
+        # Шапка компании (правый верхний угол)
         ws.merge_cells(f'E{current_row}:G{current_row}')
         cell = ws.cell(row=current_row, column=5, value='ИП ИРОНИН РУСЛАН ОЛЕГОВИЧ')
-        cell.font = Font(bold=True, size=11)
+        cell.font = Font(bold=True, size=10)
         cell.alignment = Alignment(horizontal='right', vertical='center')
         current_row += 1
         
         # ИНН и ОГРНИП
         ws.merge_cells(f'E{current_row}:G{current_row}')
         cell = ws.cell(row=current_row, column=5, value='ИНН 110290632307 ОГРНИП 321112300012852')
-        cell.font = Font(size=9)
+        cell.font = Font(size=8)
         cell.alignment = Alignment(horizontal='right', vertical='center')
         current_row += 1
         
         # Адрес
         ws.merge_cells(f'E{current_row}:G{current_row}')
         cell = ws.cell(row=current_row, column=5, value='353900, г. Новороссийск, ул. Героев-Десантников, д. 57 кв. 7')
-        cell.font = Font(size=9)
+        cell.font = Font(size=8)
         cell.alignment = Alignment(horizontal='right', vertical='center')
         current_row += 1
         
         # Телефон и email
         ws.merge_cells(f'E{current_row}:G{current_row}')
         cell = ws.cell(row=current_row, column=5, value='тел. +7 918 115 15 51, e-mail: info@urban-play.ru')
-        cell.font = Font(size=9)
+        cell.font = Font(size=8)
         cell.alignment = Alignment(horizontal='right', vertical='center')
         current_row += 2
         
-        # Заголовок КП с постоянным счетчиком
+        # Заголовок КП
         ws.merge_cells(f'A{current_row}:G{current_row}')
         kp_number = get_next_kp_number()
-        cell = ws.cell(row=current_row, column=1, value=f'Коммерческое предложение № {kp_number} от {datetime.now().strftime("%d.%m.%Y")}')
-        cell.font = Font(bold=True, size=14)
+        cell = ws.cell(row=current_row, column=1, value=f'Коммерческое предложение № {kp_number:04d} от {datetime.now().strftime("%d.%m.%Y")}')
+        cell.font = Font(bold=True, size=12)
         cell.alignment = Alignment(horizontal='center', vertical='center')
-        ws.row_dimensions[current_row].height = 25
+        ws.row_dimensions[current_row].height = 20
         current_row += 2
         
         # Адрес объекта
-        ws.cell(row=current_row, column=1, value='Адрес объекта:').font = Font(bold=True)
-        ws.cell(row=current_row, column=2, value='_' * 80)
+        ws.cell(row=current_row, column=1, value='Адрес объекта:').font = Font(size=10)
+        ws.merge_cells(f'B{current_row}:G{current_row}')
+        ws.cell(row=current_row, column=2, value='_' * 100)
         current_row += 2
         
-        # Настройка колонок для таблицы
-        ws.column_dimensions['A'].width = 4   # №
-        ws.column_dimensions['B'].width = 30  # Наименование
-        ws.column_dimensions['C'].width = 18  # Рисунок
-        ws.column_dimensions['D'].width = 8   # Кол-во
-        ws.column_dimensions['E'].width = 8   # Ед. изм
-        ws.column_dimensions['F'].width = 12  # Цена
-        ws.column_dimensions['G'].width = 14  # Сумма
+        # Настройка колонок
+        ws.column_dimensions['A'].width = 4    # №
+        ws.column_dimensions['B'].width = 24   # Наименование
+        ws.column_dimensions['C'].width = 16   # Рисунок
+        ws.column_dimensions['D'].width = 7    # Кол-во
+        ws.column_dimensions['E'].width = 7    # Ед. изм
+        ws.column_dimensions['F'].width = 11   # Цена руб
+        ws.column_dimensions['G'].width = 11   # Сумма руб
         
-        # Стили границ
+        # Границы
         thin_border = Border(
             left=Side(style='thin'),
             right=Side(style='thin'),
@@ -114,47 +118,59 @@ def handler(event, context):
         )
         
         # Заголовки таблицы
-        table_start_row = current_row
         headers = ['№', 'Наименование', 'Рисунок', 'Кол-во', 'Ед. изм', 'Цена, руб', 'Сумма, руб']
         for col_num, header in enumerate(headers, 1):
             cell = ws.cell(row=current_row, column=col_num, value=header)
-            cell.font = Font(bold=True, size=10)
+            cell.font = Font(bold=True, size=9)
             cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
             cell.border = thin_border
+            cell.fill = PatternFill(start_color='E0E0E0', end_color='E0E0E0', fill_type='solid')
         
-        ws.row_dimensions[current_row].height = 30
+        ws.row_dimensions[current_row].height = 28
         current_row += 1
         
-        # Заполнение данных
+        # Товары
         equipment_total = 0
         
         for idx, product in enumerate(products, 1):
-            row_start = current_row
-            ws.row_dimensions[current_row].height = 80
+            ws.row_dimensions[current_row].height = 75
             
-            # Номер
+            # №
             cell = ws.cell(row=current_row, column=1, value=idx)
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.border = thin_border
+            cell.font = Font(size=9)
             
-            # Наименование (артикул + название)
+            # Наименование
             article = product.get('article', '')
             name = product.get('name', '')
             full_name = f"{article}\n{name}" if article else name
             cell = ws.cell(row=current_row, column=2, value=full_name)
             cell.alignment = Alignment(horizontal='left', vertical='center', wrap_text=True)
             cell.border = thin_border
+            cell.font = Font(size=9)
             
-            # Рисунок - изображение (уменьшенный размер)
+            # Рисунок
             if product.get('image') and product['image'].startswith('http'):
                 try:
                     req = urllib.request.Request(product['image'], headers={'User-Agent': 'Mozilla/5.0'})
                     with urllib.request.urlopen(req, timeout=10) as response:
                         img_data = response.read()
-                        img = XLImage(io.BytesIO(img_data))
-                        # Уменьшенные размеры чтобы картинка не выходила за ячейку
-                        img.width = 90
-                        img.height = 75
+                        
+                        pil_img = PILImage.open(io.BytesIO(img_data))
+                        
+                        max_width = 100
+                        max_height = 65
+                        pil_img.thumbnail((max_width, max_height), PILImage.Resampling.LANCZOS)
+                        
+                        img_buffer = io.BytesIO()
+                        pil_img.save(img_buffer, format='PNG')
+                        img_buffer.seek(0)
+                        
+                        img = XLImage(img_buffer)
+                        img.width = pil_img.width
+                        img.height = pil_img.height
+                        
                         ws.add_image(img, f'C{current_row}')
                 except Exception as e:
                     print(f'Failed to load image: {e}')
@@ -163,16 +179,18 @@ def handler(event, context):
             cell.border = thin_border
             cell.alignment = Alignment(horizontal='center', vertical='center')
             
-            # Количество
+            # Кол-во
             quantity = product['quantity']
             cell = ws.cell(row=current_row, column=4, value=quantity)
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.border = thin_border
+            cell.font = Font(size=9)
             
             # Ед. изм
             cell = ws.cell(row=current_row, column=5, value='шт')
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.border = thin_border
+            cell.font = Font(size=9)
             
             # Цена
             price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']
@@ -180,6 +198,7 @@ def handler(event, context):
             cell.alignment = Alignment(horizontal='right', vertical='center')
             cell.number_format = '#,##0.00'
             cell.border = thin_border
+            cell.font = Font(size=9)
             
             # Сумма
             sum_price = price * quantity
@@ -188,19 +207,23 @@ def handler(event, context):
             cell.alignment = Alignment(horizontal='right', vertical='center')
             cell.number_format = '#,##0.00'
             cell.border = thin_border
+            cell.font = Font(size=9)
             
             current_row += 1
         
-        # Монтаж и доставка (20% от стоимости оборудования)
+        # Монтаж + доставка
         installation_cost = equipment_total * 0.2
+        ws.row_dimensions[current_row].height = 20
         
         cell = ws.cell(row=current_row, column=1, value=len(products) + 1)
         cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.border = thin_border
+        cell.font = Font(size=9)
         
-        cell = ws.cell(row=current_row, column=2, value='Монтаж и доставка')
+        cell = ws.cell(row=current_row, column=2, value='Монтаж + доставка')
         cell.alignment = Alignment(horizontal='left', vertical='center')
         cell.border = thin_border
+        cell.font = Font(size=9)
         
         cell = ws.cell(row=current_row, column=3, value='')
         cell.border = thin_border
@@ -208,62 +231,75 @@ def handler(event, context):
         cell = ws.cell(row=current_row, column=4, value=1)
         cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.border = thin_border
+        cell.font = Font(size=9)
         
         cell = ws.cell(row=current_row, column=5, value='усл')
         cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.border = thin_border
+        cell.font = Font(size=9)
         
         cell = ws.cell(row=current_row, column=6, value=installation_cost)
         cell.alignment = Alignment(horizontal='right', vertical='center')
         cell.number_format = '#,##0.00'
         cell.border = thin_border
+        cell.font = Font(size=9)
         
         cell = ws.cell(row=current_row, column=7, value=installation_cost)
         cell.alignment = Alignment(horizontal='right', vertical='center')
         cell.number_format = '#,##0.00'
         cell.border = thin_border
+        cell.font = Font(size=9)
         
         current_row += 1
         
-        # Итоговая сумма
+        # Итого
         total_sum = equipment_total + installation_cost
         
-        ws.merge_cells(f'A{current_row}:F{current_row}')
-        cell = ws.cell(row=current_row, column=1, value='Итого:')
-        cell.font = Font(bold=True, size=12)
+        ws.merge_cells(f'F{current_row}:F{current_row}')
+        cell = ws.cell(row=current_row, column=6, value='Итого:')
         cell.alignment = Alignment(horizontal='right', vertical='center')
-        cell.border = thin_border
+        cell.font = Font(bold=True, size=10)
+        cell.border = Border(top=Side(style='thin'), bottom=Side(style='thin'), left=Side(style='thin'))
         
         cell = ws.cell(row=current_row, column=7, value=total_sum)
-        cell.font = Font(bold=True, size=12)
         cell.alignment = Alignment(horizontal='right', vertical='center')
         cell.number_format = '#,##0.00'
-        cell.border = thin_border
+        cell.font = Font(bold=True, size=10)
+        cell.border = Border(top=Side(style='thin'), bottom=Side(style='thin'), right=Side(style='thin'))
         
         current_row += 2
         
-        # Условия
-        ws.cell(row=current_row, column=1, value='Оборудование имеет сертификат соответствия ТС ЕАЭС 042-2017')
+        # Футер с условиями
+        ws.merge_cells(f'A{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=1, value='Оборудование имеет сертификат соответствия ТС ЕАЭС 042-2017')
+        cell.font = Font(size=9)
+        cell.alignment = Alignment(horizontal='left', vertical='center')
         current_row += 1
         
-        ws.cell(row=current_row, column=1, value='Сроки выполнения работ: 30 рабочих дней')
+        ws.merge_cells(f'A{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=1, value='Срок действия коммерческого предложения 15 дней')
+        cell.font = Font(size=9)
+        cell.alignment = Alignment(horizontal='left', vertical='center')
         current_row += 1
         
-        ws.cell(row=current_row, column=1, value='Гарантия: 12 месяцев')
+        ws.merge_cells(f'A{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=1, value='Срок изготовления оборудования 30 дней')
+        cell.font = Font(size=9)
+        cell.alignment = Alignment(horizontal='left', vertical='center')
         current_row += 2
         
         # Подпись
-        ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель:')
-        ws.cell(row=current_row, column=5, value='Иронин Р.О.')
-        current_row += 2
-        
-        ws.cell(row=current_row, column=1, value='Дата выдачи коммерческого предложения:')
-        ws.cell(row=current_row, column=5, value=datetime.now().strftime('%d.%m.%Y'))
+        ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель').font = Font(size=9)
+        ws.merge_cells(f'E{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=5, value='Иронин Р. О.')
+        cell.alignment = Alignment(horizontal='right', vertical='center')
+        cell.font = Font(size=9, italic=True)
         
         # Сохранение
         output = io.BytesIO()
         wb.save(output)
         output.seek(0)
+        excel_data = output.read()
         
         return {
             'statusCode': 200,
@@ -272,7 +308,7 @@ def handler(event, context):
                 'Content-Disposition': 'attachment; filename="commercial_offer.xlsx"',
                 'Access-Control-Allow-Origin': '*'
             },
-            'body': base64.b64encode(output.read()).decode('utf-8'),
+            'body': base64.b64encode(excel_data).decode('utf-8'),
             'isBase64Encoded': True
         }
         
