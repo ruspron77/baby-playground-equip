@@ -180,17 +180,24 @@ def handler(event, context):
         # Пустая строка для отступа
         current_row += 1
         
-        # Заголовок КП с адресом
+        # Заголовок КП
         ws.merge_cells(f'A{current_row}:G{current_row}')
         kp_number = get_next_kp_number()
         kp_title = f'Коммерческое предложение № {kp_number:04d} от {datetime.now().strftime("%d.%m.%Y")}'
-        if address:
-            kp_title = f'{address}\n{kp_title}'
         cell = ws.cell(row=current_row, column=1, value=kp_title)
         cell.font = Font(bold=True, size=12)
-        cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
-        ws.row_dimensions[current_row].height = 35 if address else 20
+        cell.alignment = Alignment(horizontal='center', vertical='center')
+        ws.row_dimensions[current_row].height = 20
         current_row += 2
+        
+        # Адрес объекта (если указан)
+        if address:
+            ws.merge_cells(f'A{current_row}:G{current_row}')
+            cell = ws.cell(row=current_row, column=1, value=f'Адрес объекта: {address}')
+            cell.font = Font(name='Times New Roman', size=11)
+            cell.alignment = Alignment(horizontal='left', vertical='center')
+            ws.row_dimensions[current_row].height = 15
+            current_row += 2
         
         # Настройка колонок
         ws.column_dimensions['A'].width = 3.00   # № - 3.00 (26 пикселей)
@@ -224,18 +231,14 @@ def handler(event, context):
         # Товары
         equipment_total = 0
         
-        # Рассчитываем общую сумму для распределения
-        base_total = sum(
-            (int(p['price'].replace(' ', '')) if isinstance(p['price'], str) else p['price']) * p['quantity']
-            for p in products
-        )
+        # Рассчитываем общее количество товаров для равномерного распределения доставки
+        total_product_quantity = sum(p['quantity'] for p in products)
         
-        # Рассчитываем коэффициенты для распределения скрытых сумм
-        hidden_addition_per_ruble = 0
-        if hide_installation and installation_cost > 0:
-            hidden_addition_per_ruble += installation_cost / base_total if base_total > 0 else 0
-        if hide_delivery and delivery_cost > 0:
-            hidden_addition_per_ruble += delivery_cost / base_total if base_total > 0 else 0
+        # Доставка на единицу товара (равномерное распределение)
+        delivery_per_unit = (delivery_cost / total_product_quantity) if (hide_delivery and delivery_cost > 0 and total_product_quantity > 0) else 0
+        
+        # Процент монтажа для добавления к цене
+        installation_percent_multiplier = (installation_percent / 100) if (hide_installation and installation_percent > 0) else 0
         
         for idx, product in enumerate(products, 1):
             ws.row_dimensions[current_row].height = 100.50
@@ -333,15 +336,14 @@ def handler(event, context):
             cell.border = thin_border
             cell.font = Font(name='Times New Roman', size=11)
             
-            # Цена (с учетом распределения скрытых сумм)
+            # Цена (с учетом распределения)
             base_price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']
-            base_sum = base_price * quantity
             
-            # Добавляем пропорциональную часть скрытых сумм
-            hidden_addition = base_sum * hidden_addition_per_ruble
+            # Монтаж: добавляем процент к цене товара (10% → +10% к цене)
+            price_with_installation = base_price * (1 + installation_percent_multiplier)
             
-            # Финальная цена с учетом распределения
-            final_price = base_price + (hidden_addition / quantity)
+            # Доставка: добавляем равномерно на единицу товара
+            final_price = price_with_installation + delivery_per_unit
             
             cell = ws.cell(row=current_row, column=6, value=final_price)
             cell.alignment = Alignment(horizontal='center', vertical='center')
@@ -349,8 +351,8 @@ def handler(event, context):
             cell.border = thin_border
             cell.font = Font(name='Times New Roman', size=11)
             
-            # Сумма (с учетом распределения)
-            final_sum = base_sum + hidden_addition
+            # Сумма
+            final_sum = final_price * quantity
             equipment_total += final_sum
             cell = ws.cell(row=current_row, column=7, value=final_sum)
             cell.alignment = Alignment(horizontal='center', vertical='center')
