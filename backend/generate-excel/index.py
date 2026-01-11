@@ -188,12 +188,15 @@ def handler(event, context):
                         
                         pil_img = PILImage.open(io.BytesIO(img_data))
                         
-                        max_width = 100
-                        max_height = 60
+                        # Размеры ячейки: 131 пикселей (ширина) x 100 пикселей (высота)
+                        max_width = 120
+                        max_height = 90
+                        
+                        # Изменяем размер с сохранением пропорций и высоким качеством
                         pil_img.thumbnail((max_width, max_height), PILImage.Resampling.LANCZOS)
                         
                         img_buffer = io.BytesIO()
-                        pil_img.save(img_buffer, format='PNG')
+                        pil_img.save(img_buffer, format='PNG', quality=95, optimize=False)
                         img_buffer.seek(0)
                         
                         img = XLImage(img_buffer)
