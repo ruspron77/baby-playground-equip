@@ -200,13 +200,13 @@ def handler(event, context):
             current_row += 2
         
         # Настройка колонок
-        ws.column_dimensions['A'].width = 3.00   # № - 3.00 (26 пикселей)
-        ws.column_dimensions['B'].width = 24.00  # Наименование - 24.00 (173 пикселей)
-        ws.column_dimensions['C'].width = 21.00  # Рисунок - 21.00 (152 пикселей)
-        ws.column_dimensions['D'].width = 6.00   # Кол-во - 6.00 (47 пикселей)
-        ws.column_dimensions['E'].width = 6.00   # Ед. изм - 6.00 (47 пикселей)
-        ws.column_dimensions['F'].width = 13.00  # Цена руб - 13.00 (96 пикселей)
-        ws.column_dimensions['G'].width = 14.00  # Сумма руб - 14.00 (103 пикселей)
+        ws.column_dimensions['A'].width = 4.00   # № - 4.00
+        ws.column_dimensions['B'].width = 25.00  # Наименование - 25.00
+        ws.column_dimensions['C'].width = 22.00  # Рисунок - 22.00
+        ws.column_dimensions['D'].width = 7.00   # Кол-во - 7.00
+        ws.column_dimensions['E'].width = 7.00   # Ед. изм - 7.00
+        ws.column_dimensions['F'].width = 14.00  # Цена руб - 14.00
+        ws.column_dimensions['G'].width = 15.00  # Сумма руб - 15.00
         
         # Границы
         thin_border = Border(
