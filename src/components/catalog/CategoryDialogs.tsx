@@ -61,7 +61,7 @@ export function CategoryDialogs({
                 className="cursor-pointer transition-all hover:shadow-xl hover:-translate-y-2 overflow-hidden group shadow-md flex flex-col"
                 onClick={() => handleSubcategoryClick(sub)}
               >
-                <div className="py-2 px-4" style={{
+                <div className="py-2 px-4 rounded-none" style={{
                   backgroundColor: sub.name.includes('Classic') ? 'rgba(214, 236, 204, 0.95)' : 
                                    sub.name.includes('Eco') ? 'rgba(232, 222, 248, 0.95)' : 
                                    'white'
