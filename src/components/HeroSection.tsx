@@ -9,7 +9,7 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
     <section id="hero" className="relative py-16 md:py-28 overflow-hidden">
       <div 
         className="absolute inset-0 bg-cover bg-center md:bg-fixed"
-        style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/Airbrush-IMAGE-ENHANCER-1768089767504-1768089767504.jpg)' }}
+        style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/19191919.jpg)' }}
       >
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
