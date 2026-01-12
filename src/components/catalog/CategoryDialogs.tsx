@@ -54,7 +54,7 @@ export function CategoryDialogs({
               {currentCategory?.name}
             </DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-2 gap-6 px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4">
             {currentCategory?.subcategories.map((sub) => (
               <Card
                 key={sub.name}
@@ -68,12 +68,12 @@ export function CategoryDialogs({
                     <span className="text-7xl group-hover:scale-110 transition-transform duration-300">{sub.image}</span>
                   )}
                 </div>
-                <div className="py-2 px-6" style={{
+                <div className="py-3 px-6" style={{
                   backgroundColor: sub.name.includes('Classic') ? 'rgba(214, 236, 204, 0.95)' : 
                                    sub.name.includes('Eco') ? 'rgba(232, 222, 248, 0.95)' : 
                                    'white'
                 }}>
-                  <h4 className="font-bold text-center text-xs sm:text-base whitespace-nowrap">{sub.name}</h4>
+                  <h4 className="font-bold text-center text-sm sm:text-base break-words">{sub.name}</h4>
                 </div>
               </Card>
             ))}
