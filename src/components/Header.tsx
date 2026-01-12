@@ -149,7 +149,6 @@ export function Header({
                 href="tel:+79181151551" 
                 className="flex items-center gap-2 text-foreground hover:text-primary transition-colors text-base font-medium whitespace-nowrap"
               >
-                <Icon name="Phone" size={20} className="text-primary" />
                 +7 918 115-15-51
               </a>
               <Button onClick={() => setIsContactDialogOpen(true)} size="sm">
