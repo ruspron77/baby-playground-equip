@@ -179,7 +179,7 @@ export function ProductDialog({
                 )}
               </div>
 
-              <div className="border-t pt-6">
+              <div className="border-t pt-6 hidden md:block">
                 <p className="text-muted-foreground mb-4 text-sm">
                   Если появились вопросы, вы можете получить консультацию руководителя проекта:
                 </p>
