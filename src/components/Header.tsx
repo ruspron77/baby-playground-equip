@@ -147,10 +147,10 @@ export function Header({
             <div className="hidden lg:flex items-center gap-3">
               <a 
                 href="tel:+79181151551" 
-                className="flex items-center gap-2 text-foreground hover:text-primary transition-colors text-base font-medium"
+                className="flex items-center gap-2 text-foreground hover:text-primary transition-colors text-base font-medium whitespace-nowrap"
               >
                 <Icon name="Phone" size={20} className="text-primary" />
-                +7 (918) 115-15-51
+                +7 918 115-15-51
               </a>
               <Button onClick={() => setIsContactDialogOpen(true)} size="sm">
                 <Icon name="Phone" size={16} className="mr-2" />
@@ -220,7 +220,7 @@ export function Header({
                       className="flex items-center gap-2 text-lg font-semibold hover:text-primary transition-colors"
                     >
                       <Icon name="Phone" size={20} className="text-primary" />
-                      +7 (918) 115-15-51
+                      +7 918 115-15-51
                     </a>
                   </div>
                 </nav>
