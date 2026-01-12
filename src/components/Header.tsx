@@ -179,18 +179,18 @@ export function Header({
                     О компании
                   </a>
                   <a 
-                    href="#services" 
-                    className="text-base hover:text-primary transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Услуги
-                  </a>
-                  <a 
                     href="#catalog" 
                     className="text-base hover:text-primary transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Каталог
+                  </a>
+                  <a 
+                    href="#services" 
+                    className="text-base hover:text-primary transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Услуги
                   </a>
                   <a 
                     href="#certificates" 
