@@ -173,9 +173,9 @@ export function Header({
                 <Button 
                   variant="outline" 
                   size="icon"
-                  className="md:hidden"
+                  className="md:hidden hover:border-primary hover:text-primary hover:bg-transparent"
                 >
-                  <Icon name="Menu" size={20} />
+                  <Icon name="Menu" size={24} />
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-80">
