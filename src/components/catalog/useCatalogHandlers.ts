@@ -84,6 +84,7 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
     setSelectedCategory(categoryId);
     setSelectedSubcategory(null);
     setSelectedSubSubcategory(null);
+    setSelectedSeries(null);
     setCurrentCategory(categoryData);
     setIsSideMenuOpen(false);
     setTimeout(() => {
@@ -104,6 +105,7 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
       setSelectedCategory(categoryId);
       setSelectedSubcategory(subName);
       setSelectedSubSubcategory(null);
+      setSelectedSeries(subName);
       setCurrentCategory(categoryData);
       setIsSideMenuOpen(false);
       setTimeout(() => {
@@ -119,6 +121,7 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
     setSelectedCategory(categoryId);
     setSelectedSubcategory(subName);
     setSelectedSubSubcategory(subSubName);
+    setSelectedSeries(subName);
     setCurrentCategory(categoryData);
     setIsSideMenuOpen(false);
     setTimeout(() => {
