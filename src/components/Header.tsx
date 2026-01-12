@@ -145,8 +145,8 @@ export function Header({
                 e.preventDefault();
                 const catalogSection = document.getElementById('catalog');
                 if (catalogSection) {
-                  const headerHeight = 100;
-                  const targetPosition = catalogSection.offsetTop - headerHeight;
+                  const offset = 250;
+                  const targetPosition = catalogSection.offsetTop + offset;
                   window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                 }
               }}
@@ -200,8 +200,8 @@ export function Header({
                       setIsMobileMenuOpen(false);
                       const catalogSection = document.getElementById('catalog');
                       if (catalogSection) {
-                        const headerHeight = 100;
-                        const targetPosition = catalogSection.offsetTop - headerHeight;
+                        const offset = 250;
+                        const targetPosition = catalogSection.offsetTop + offset;
                         window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                       }
                     }}
