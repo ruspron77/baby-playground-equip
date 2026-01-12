@@ -125,7 +125,7 @@ export function ProductDialog({
               <div>
                 <p className="text-sm mb-2 text-[#5a098c]">{selectedProduct.name.split('\n')[0]}</p>
                 <h2 className="font-heading mb-4 font-semibold text-3xl">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
-                <p className="font-bold text-primary mb-4 text-2xl">{formatPrice(selectedProduct.price)} ₽</p>
+                <p className="font-bold text-primary mb-4 text-3xl">{formatPrice(selectedProduct.price)} ₽</p>
                 
                 <div className="flex gap-3">
                   <Button 
