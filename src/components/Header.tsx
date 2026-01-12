@@ -162,9 +162,9 @@ export function Header({
                 <Button 
                   variant="outline" 
                   size="icon"
-                  className="md:hidden hover:border-primary hover:text-primary hover:bg-transparent"
+                  className="md:hidden hover:border-primary hover:text-primary hover:bg-transparent w-10 h-10"
                 >
-                  <Icon name="Menu" size={24} />
+                  <Icon name="Menu" size={20} />
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-80">
@@ -226,8 +226,18 @@ export function Header({
               </SheetContent>
             </Sheet>
 
+            <Button 
+              asChild
+              className="md:hidden bg-primary text-white hover:bg-primary/90 w-10 h-10"
+              size="icon"
+            >
+              <a href="tel:+79181151551">
+                <Icon name="Phone" size={20} />
+              </a>
+            </Button>
+
             <Link to="/favorites">
-              <Button variant="outline" className="relative hover:border-primary hover:text-primary hover:bg-transparent">
+              <Button variant="outline" className="relative hover:border-primary hover:text-primary hover:bg-transparent w-10 h-10">
                 <Icon name="Heart" size={20} />
                 {favoritesCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold">
