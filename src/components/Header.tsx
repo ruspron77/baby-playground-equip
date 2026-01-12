@@ -161,7 +161,8 @@ export function Header({
               <SheetTrigger asChild>
                 <Button 
                   variant="outline" 
-                  className="md:hidden hover:border-primary hover:text-primary hover:bg-transparent h-10 px-4 active:scale-95 transition-transform"
+                  size="icon"
+                  className="md:hidden hover:border-primary hover:text-primary hover:bg-transparent w-10 h-10 active:scale-95 transition-transform"
                 >
                   <Icon name="Menu" size={20} />
                 </Button>
@@ -238,7 +239,7 @@ export function Header({
             </div>
 
             <Link to="/favorites">
-              <Button variant="outline" className="relative hover:border-primary hover:text-primary hover:bg-transparent w-10 h-10 active:scale-95 transition-transform">
+              <Button variant="outline" size="icon" className="relative hover:border-primary hover:text-primary hover:bg-transparent w-10 h-10 active:scale-95 transition-transform">
                 <Icon name="Heart" size={20} />
                 {favoritesCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold">
@@ -250,7 +251,7 @@ export function Header({
             
             <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" className="relative hover:border-primary hover:text-primary hover:bg-transparent active:scale-95 transition-transform">
+                <Button variant="outline" size="icon" className="relative hover:border-primary hover:text-primary hover:bg-transparent w-10 h-10 active:scale-95 transition-transform">
                   <Icon name="ShoppingCart" size={20} />
                   {cart.length > 0 && (
                     <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold">
