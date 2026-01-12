@@ -163,30 +163,30 @@ export function CategoryGrid({
                 className="overflow-hidden transition-all cursor-pointer group border border-gray-200 hover:border-transparent hover:shadow-xl"
               >
                 <div 
-                  className="aspect-[4/3] bg-white flex items-center justify-center relative overflow-hidden"
+                  className="aspect-square bg-white flex items-center justify-center relative overflow-hidden"
                   onClick={() => handleProductClick(product)}
                 >
                   {product.image.startsWith('http') ? (
-                    <img src={product.image} alt={product.name} className="w-full h-full object-contain p-2 group-hover:scale-110 transition-transform duration-300" />
+                    <img src={product.image} alt={product.name} className="w-full h-full object-contain p-1 group-hover:scale-110 transition-transform duration-300" />
                   ) : (
-                    <span className="text-6xl group-hover:scale-110 transition-transform duration-300">{product.image}</span>
+                    <span className="text-4xl group-hover:scale-110 transition-transform duration-300">{product.image}</span>
                   )}
                   <Button
                     variant="outline"
                     size="icon"
-                    className="absolute top-2 right-2 bg-white/90 hover:bg-white z-10 border-0"
+                    className="absolute top-1 right-1 bg-white/90 hover:bg-white z-10 border-0 h-7 w-7"
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleFavorite(product);
                     }}
                   >
-                    <Icon name="Heart" size={18} className={isFavorite ? 'fill-red-500 text-red-500' : ''} />
+                    <Icon name="Heart" size={14} className={isFavorite ? 'fill-red-500 text-red-500' : ''} />
                   </Button>
                 </div>
-                <CardContent className="p-2">
-                  <p className="text-xs text-muted-foreground mb-0.5 leading-tight">{product.name.split('\n')[0]}</p>
-                  <h3 className="font-semibold text-sm line-clamp-1 mb-1 leading-tight">{product.name.split('\n')[1] || product.name}</h3>
-                  <p className="text-base font-bold text-primary mb-1.5">{formatPrice(product.price)} ₽</p>
+                <CardContent className="p-1.5">
+                  <p className="text-[10px] text-muted-foreground mb-0.5 leading-tight">{product.name.split('\n')[0]}</p>
+                  <h3 className="font-semibold text-xs line-clamp-1 mb-0.5 leading-tight">{product.name.split('\n')[1] || product.name}</h3>
+                  <p className="text-sm font-bold text-primary mb-1">{formatPrice(product.price)} ₽</p>
                   <Button 
                     size="sm"
                     variant="outline"
@@ -194,9 +194,9 @@ export function CategoryGrid({
                       e.stopPropagation();
                       handleAddToCart(product);
                     }}
-                    className="gap-1 w-full h-8 text-xs hover:border-primary hover:text-primary hover:bg-transparent"
+                    className="gap-1 w-full h-7 text-[10px] hover:border-primary hover:text-primary hover:bg-transparent"
                   >
-                    <Icon name="ShoppingCart" size={14} />
+                    <Icon name="ShoppingCart" size={12} />
                     <span>В корзину</span>
                   </Button>
                 </CardContent>
