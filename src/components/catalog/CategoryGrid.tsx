@@ -99,18 +99,18 @@ export function CategoryGrid({
           <div className="flex items-center gap-3 mb-4">
             <div className="flex gap-2">
               <Button
-                variant={(selectedSeries?.includes('Classic')) ? 'default' : 'outline'}
+                variant={(selectedSeries?.includes('Classic')) ? 'secondary' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedSeries(selectedSeries?.includes('Classic') ? null : 'Серия "Classic"')}
-                className={selectedSeries?.includes('Classic') ? 'series-filter-active' : 'series-filter'}
+                className={selectedSeries?.includes('Classic') ? 'bg-secondary text-white hover:bg-secondary/90' : 'hover:border-secondary hover:text-secondary hover:bg-transparent'}
               >
                 Classic
               </Button>
               <Button
-                variant={(selectedSeries?.includes('Eco')) ? 'default' : 'outline'}
+                variant={(selectedSeries?.includes('Eco')) ? 'secondary' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedSeries(selectedSeries?.includes('Eco') ? null : 'Серия "Eco"')}
-                className={selectedSeries?.includes('Eco') ? 'series-filter-active' : 'series-filter'}
+                className={selectedSeries?.includes('Eco') ? 'bg-secondary text-white hover:bg-secondary/90' : 'hover:border-secondary hover:text-secondary hover:bg-transparent'}
               >
                 Eco
               </Button>
@@ -147,6 +147,7 @@ export function CategoryGrid({
               variant="outline"
               size="sm"
               onClick={handleReset}
+              className="hover:border-primary hover:text-primary hover:bg-transparent"
             >
               Сбросить
             </Button>

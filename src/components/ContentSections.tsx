@@ -86,7 +86,7 @@ export function ContentSections() {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="w-full"
+                  className="w-full hover:border-primary hover:text-primary hover:bg-transparent"
                   onClick={() => setIsContactDialogOpen(true)}
                 >
                   Перезвоните мне
