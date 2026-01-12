@@ -161,7 +161,7 @@ export function ProductDialog({
               </div>
 
               <div className="border-t pt-6">
-                <h3 className="font-heading mb-4 font-semibold text-base">Техническая информация</h3>
+                <h3 className="font-heading mb-2 font-semibold text-base">Техническая информация</h3>
                 {selectedProduct.dimensions && (
                   <div className="grid grid-cols-3 gap-4 mb-4">
                     {selectedProduct.dimensions.split('х').map((dim, idx) => (
