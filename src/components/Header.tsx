@@ -155,12 +155,6 @@ export function Header({
                 Заказать звонок
               </Button>
             </div>
-            <a 
-              href="tel:+79181151551" 
-              className="flex lg:hidden items-center gap-2 text-foreground hover:text-primary transition-colors"
-            >
-              <Icon name="Phone" size={20} className="text-primary" />
-            </a>
             <div className="flex items-center gap-3">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
