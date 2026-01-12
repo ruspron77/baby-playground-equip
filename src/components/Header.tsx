@@ -156,6 +156,18 @@ export function Header({
               </Button>
             </div>
             <div className="flex items-center gap-3">
+            <a 
+              href="tel:+79181151551" 
+              className="flex lg:hidden"
+            >
+              <Button 
+                variant="outline" 
+                size="icon"
+                className="hover:border-primary hover:text-primary hover:bg-transparent"
+              >
+                <Icon name="Phone" size={20} />
+              </Button>
+            </a>
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button 
