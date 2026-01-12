@@ -149,6 +149,7 @@ export function Header({
                 href="tel:+79181151551" 
                 className="flex items-center gap-2 text-foreground hover:text-primary transition-colors text-base font-medium whitespace-nowrap"
               >
+                <Icon name="Phone" size={20} className="text-primary" />
                 +7 918 115-15-51
               </a>
               <Button onClick={() => setIsContactDialogOpen(true)} size="sm">
@@ -156,18 +157,6 @@ export function Header({
               </Button>
             </div>
             <div className="flex items-center gap-3">
-            <a 
-              href="tel:+79181151551" 
-              className="flex lg:hidden"
-            >
-              <Button 
-                variant="outline" 
-                size="icon"
-                className="hover:border-primary hover:text-primary hover:bg-transparent"
-              >
-                <Icon name="Phone" size={20} />
-              </Button>
-            </a>
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button 
