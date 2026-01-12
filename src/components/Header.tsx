@@ -405,7 +405,7 @@ export function Header({
                                       <Button 
                                         size="sm" 
                                         variant="outline"
-                                        className="h-7 w-7 p-0"
+                                        className="h-7 w-7 p-0 hover:border-primary hover:text-primary hover:bg-transparent"
                                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
                                       >
                                         <Icon name="Minus" size={12} />
@@ -414,7 +414,7 @@ export function Header({
                                       <Button 
                                         size="sm" 
                                         variant="outline"
-                                        className="h-7 w-7 p-0"
+                                        className="h-7 w-7 p-0 hover:border-primary hover:text-primary hover:bg-transparent"
                                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                       >
                                         <Icon name="Plus" size={12} />
