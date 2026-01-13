@@ -83,7 +83,7 @@ export function CategoryDialogs({
                                    sub.name.includes('Eco') ? 'rgba(232, 222, 248, 0.95)' : 
                                    'white'
                 }}>
-                  <h4 className="font-semibold text-center text-xs sm:text-sm break-words leading-tight">{sub.name}</h4>
+                  <h4 className="font-semibold text-center text-xs sm:text-base break-words leading-tight">{sub.name}</h4>
                 </div>
               </Card>
             ))}
