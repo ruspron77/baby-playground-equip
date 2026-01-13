@@ -202,9 +202,12 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
                 onClick={() => handlers.handleCategoryClick(category)}
                 className="group cursor-pointer"
               >
-                <div className={`relative overflow-hidden rounded-md bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 aspect-[4/3] border-2 ${
-                  catalogState.selectedCategory === category.id ? 'border-green-600' : 'border-gray-200 hover:border-gray-200'
-                }`}>
+                <div 
+                  className={`relative overflow-hidden rounded-md bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 aspect-[4/3] border-2 ${
+                    catalogState.selectedCategory === category.id ? '' : 'border-gray-200 hover:border-gray-200'
+                  }`}
+                  style={catalogState.selectedCategory === category.id ? { borderColor: '#3eaa03' } : {}}
+                >
                   <div className="absolute inset-0">
                     <img 
                       src={category.image} 

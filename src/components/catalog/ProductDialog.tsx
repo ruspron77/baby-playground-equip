@@ -159,7 +159,8 @@ export function ProductDialog({
                     size="lg"
                     variant="outline"
                     asChild
-                    className="hover:bg-green-600 hover:text-white border-green-600 text-green-600 bg-transparent h-12 w-12 p-0 transition-colors"
+                    className="border-2 bg-transparent h-12 w-12 p-0 transition-colors hover:bg-[#3eaa03] hover:text-white"
+                    style={{ borderColor: '#3eaa03', color: '#3eaa03' }}
                   >
                     <a href="tel:+79181151551">
                       <Icon name="Phone" size={22} />
@@ -194,7 +195,8 @@ export function ProductDialog({
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="w-full border-2 border-green-600 text-green-600 bg-transparent hover:bg-green-600 hover:text-white transition-colors h-10 sm:h-11"
+                  className="w-full border-2 bg-transparent transition-colors h-10 sm:h-11 hover:bg-[#3eaa03] hover:text-white"
+                  style={{ borderColor: '#3eaa03', color: '#3eaa03' }}
                   onClick={() => {
                     setIsProductDialogOpen(false);
                     setIsContactDialogOpen(true);

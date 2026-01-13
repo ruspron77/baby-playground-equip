@@ -164,8 +164,9 @@ export function CategoryGrid({
               <Card 
                 key={product.id} 
                 className={`overflow-hidden transition-all cursor-pointer group border-2 hover:shadow-xl rounded-md ${
-                  isSelected ? 'border-green-600' : 'border-gray-200 hover:border-transparent'
+                  isSelected ? 'border-gray-200 hover:border-transparent' : 'border-gray-200 hover:border-transparent'
                 }`}
+                style={isSelected ? { borderColor: '#3eaa03' } : {}}
               >
                 <div 
                   className="aspect-[4/3] bg-white flex items-center justify-center relative overflow-hidden"
