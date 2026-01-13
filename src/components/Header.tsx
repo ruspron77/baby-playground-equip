@@ -226,6 +226,17 @@ export function Header({
               </SheetContent>
             </Sheet>
 
+            <div className="lg:hidden">
+              <Button 
+                asChild
+                className="bg-green-600 text-white hover:bg-green-700 active:scale-95 transition-all h-9 px-4"
+              >
+                <a href="tel:+79181151551">
+                  Позвонить
+                </a>
+              </Button>
+            </div>
+
             <Link to="/favorites">
               <Button variant="outline" size="icon" className="relative hover:border-primary hover:text-primary hover:bg-transparent w-10 h-10 active:scale-95 transition-transform">
                 <Icon name="Heart" size={20} />
@@ -488,17 +499,6 @@ export function Header({
                 )}
               </SheetContent>
             </Sheet>
-
-            <div className="lg:hidden">
-              <Button 
-                asChild
-                className="bg-green-600 text-white hover:bg-green-700 active:scale-95 transition-all h-9 px-4"
-              >
-                <a href="tel:+79181151551">
-                  Позвонить
-                </a>
-              </Button>
-            </div>
             </div>
           </div>
         </div>
