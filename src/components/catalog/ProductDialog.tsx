@@ -179,14 +179,14 @@ export function ProductDialog({
                 )}
               </div>
 
-              <div className="border-t hidden md:block py-3 mx-0 my-[1px]">
-                <p className="text-muted-foreground text-sm py-0 my-[18px]">
+              <div className="border-t py-3 mx-0 my-[1px]">
+                <p className="text-muted-foreground text-sm py-0 my-[18px] hidden md:block">
                   Если появились вопросы, вы можете получить консультацию руководителя проекта:
                 </p>
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="w-full border-primary text-primary bg-transparent hover:bg-primary hover:text-white"
+                  className="w-full border-2 border-green-600 text-green-600 bg-transparent hover:bg-green-600 hover:text-white transition-colors"
                   onClick={() => {
                     setIsProductDialogOpen(false);
                     setIsContactDialogOpen(true);
