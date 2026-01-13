@@ -106,7 +106,7 @@ export function ProductDialog({
                     )}
                   </>
                 ) : selectedProduct.image.startsWith('http') ? (
-                  <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-contain p-1" />
+                  <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-contain p-1 px-0" />
                 ) : (
                   <span className="text-8xl">{selectedProduct.image}</span>
                 )}
@@ -131,9 +131,9 @@ export function ProductDialog({
 
             <div className="flex flex-col justify-center space-y-3 md:space-y-4">
               <div>
-                <p className="sm:text-sm mb-1 sm:mb-2 text-[#5a098c] text-lg">{selectedProduct.name.split('\n')[0]}</p>
-                <h2 className="font-heading mb-2 sm:mb-4 font-semibold text-xl sm:text-3xl">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
-                <p className="font-bold text-primary mb-2 sm:mb-4 text-2xl sm:text-3xl">{formatPrice(selectedProduct.price)} ₽</p>
+                <p className="sm:text-sm sm:mb-2 text-[#5a098c] text-lg my-0">{selectedProduct.name.split('\n')[0]}</p>
+                <h2 className="font-heading sm:mb-4 font-semibold text-xl sm:text-3xl my-9">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
+                <p className="font-bold text-primary sm:mb-4 text-2xl sm:text-3xl py-2.5 my-0">{formatPrice(selectedProduct.price)} ₽</p>
                 
                 <div className="flex gap-2 sm:gap-3 justify-start">
                   <Button 
@@ -168,7 +168,7 @@ export function ProductDialog({
                 </div>
               </div>
 
-              <div className="border-t py-2 sm:py-[5px]">
+              <div className="border-t py-2 sm:py-[5px] my-2.5">
                 <h3 className="font-heading mb-1.5 sm:mb-2 font-semibold text-sm sm:text-base">Техническая информация</h3>
                 {selectedProduct.dimensions && (
                   <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-2 sm:mb-4">
