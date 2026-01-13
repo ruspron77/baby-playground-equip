@@ -260,12 +260,20 @@ export function Header({
                 </Button>
               </SheetTrigger>
               <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute left-4 top-4 sm:hidden z-50"
+                  onClick={() => setIsCartOpen(false)}
+                >
+                  <Icon name="ArrowLeft" size={24} />
+                </Button>
                 {!showOrderForm && (
                   <>
                     <SheetHeader>
                       <div className="flex items-center justify-between">
                         <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
-                        <Button onClick={() => setIsContactDialogOpen(true)} size="sm">
+                        <Button onClick={() => setIsContactDialogOpen(true)} size="sm" className="hidden sm:flex">
                           <Icon name="Phone" size={16} className="mr-2" />
                           Заказать звонок
                         </Button>
