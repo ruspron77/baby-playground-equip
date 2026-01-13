@@ -50,7 +50,7 @@ export function ProductDialog({
 
   return (
     <Dialog open={isProductDialogOpen} onOpenChange={setIsProductDialogOpen}>
-      <DialogContent className="max-w-4xl max-h-[85vh] sm:max-h-[85vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[85vh] overflow-y-auto p-3 sm:p-6">
         <Button
           variant="ghost"
           size="icon"
@@ -63,9 +63,9 @@ export function ProductDialog({
           <DialogTitle className="sr-only">Информация о товаре</DialogTitle>
         </DialogHeader>
         {selectedProduct && (
-          <div className="grid md:grid-cols-[2fr,1fr] gap-3 md:gap-6">
+          <div className="grid md:grid-cols-[2fr,1fr] gap-2 md:gap-6">
             <div>
-              <div className="relative aspect-square bg-white rounded-lg flex items-center justify-center overflow-hidden border p-0">
+              <div className="relative aspect-square bg-white rounded-lg flex items-center justify-center overflow-hidden border p-0 mb-2">
                 {productImages.length > 0 ? (
                   <>
                     <img 
@@ -129,11 +129,11 @@ export function ProductDialog({
               )}
             </div>
 
-            <div className="flex flex-col justify-center space-y-3 md:space-y-4 px-0 mx-0">
+            <div className="flex flex-col justify-center space-y-2 md:space-y-4 px-0 mx-0">
               <div>
-                <p className="sm:text-sm sm:mb-2 text-[#5a098c] my-0 text-lg">{selectedProduct.name.split('\n')[0]}</p>
-                <h2 className="font-heading sm:mb-4 font-semibold text-xl sm:text-3xl my-0">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
-                <p className="font-bold text-primary sm:mb-4 text-2xl sm:text-3xl my-0 py-1">{formatPrice(selectedProduct.price)} ₽</p>
+                <p className="sm:text-sm sm:mb-2 text-[#5a098c] my-0 text-base">{selectedProduct.name.split('\n')[0]}</p>
+                <h2 className="font-heading sm:mb-4 font-semibold text-lg sm:text-3xl my-0">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
+                <p className="font-bold text-primary sm:mb-4 text-xl sm:text-3xl my-0 py-1">{formatPrice(selectedProduct.price)} ₽</p>
                 
                 <div className="flex gap-2 sm:gap-3 justify-start">
                   <Button 
@@ -169,16 +169,16 @@ export function ProductDialog({
                 </div>
               </div>
 
-              <div className="border-t py-2 sm:py-[5px] my-2.5">
-                <h3 className="font-heading mb-1.5 sm:mb-2 font-semibold text-sm sm:text-base">Техническая информация</h3>
+              <div className="border-t py-1.5 sm:py-[5px] my-1.5">
+                <h3 className="font-heading mb-1 sm:mb-2 font-semibold text-sm sm:text-base">Техническая информация</h3>
                 {selectedProduct.dimensions && (
-                  <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-2 sm:mb-4">
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-1.5 sm:mb-4">
                     {selectedProduct.dimensions.split('х').map((dim, idx) => (
-                      <div key={idx} className="bg-muted/30 p-2 sm:p-3 rounded-lg">
-                        <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
+                      <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg">
+                        <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
                           {idx === 0 ? 'Ширина' : idx === 1 ? 'Длина' : 'Высота'}
                         </p>
-                        <p className="font-semibold text-sm sm:text-base">{dim.trim()}</p>
+                        <p className="font-semibold text-xs sm:text-base">{dim.trim()}</p>
                       </div>
                     ))}
                   </div>
@@ -188,7 +188,7 @@ export function ProductDialog({
                 )}
               </div>
 
-              <div className="border-t py-2 sm:py-3 mx-0 my-[1px]">
+              <div className="border-t py-1.5 sm:py-3 mx-0 my-[1px]">
                 <p className="text-muted-foreground text-sm py-0 my-[18px] hidden md:block">
                   Если появились вопросы, вы можете получить консультацию руководителя проекта:
                 </p>
