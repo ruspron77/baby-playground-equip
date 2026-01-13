@@ -168,11 +168,11 @@ export function CategoryGrid({
                 }`}
               >
                 <div 
-                  className="aspect-[4/3] bg-white flex items-center justify-center relative overflow-hidden p-0"
+                  className="aspect-[4/3] bg-white flex items-center justify-center relative overflow-hidden"
                   onClick={() => handleProductClick(product)}
                 >
                   {product.image.startsWith('http') ? (
-                    <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 scale-110" />
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                   ) : (
                     <span className="text-6xl group-hover:scale-110 transition-transform duration-300">{product.image}</span>
                   )}
@@ -188,7 +188,7 @@ export function CategoryGrid({
                     <Icon name="Heart" size={18} className={isFavorite ? 'fill-red-500 text-red-500' : ''} />
                   </Button>
                 </div>
-                <CardContent className="p-2 sm:p-3 -mt-px">
+                <CardContent className="py-1.5 px-2 sm:p-3">
                   <p className="mb-0.5 leading-tight text-xs text-[#5a098c]">{product.name.split('\n')[0]}</p>
                   <h3 className="font-semibold line-clamp-1 mb-1 leading-tight text-sm sm:text-base">{product.name.split('\n')[1] || product.name}</h3>
                   <p className="text-sm sm:text-base font-bold text-primary mb-1.5">{formatPrice(product.price)} ₽</p>

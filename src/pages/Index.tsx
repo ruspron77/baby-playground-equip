@@ -202,8 +202,8 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
                 onClick={() => handlers.handleCategoryClick(category)}
                 className="group cursor-pointer"
               >
-                <div className={`relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 aspect-[4/3] ${
-                  catalogState.selectedCategory === category.id ? 'ring-2 ring-primary' : ''
+                <div className={`relative overflow-hidden rounded-[2px] bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 aspect-[4/3] border-2 ${
+                  catalogState.selectedCategory === category.id ? 'border-green-600' : 'border-gray-200 hover:border-transparent'
                 }`}>
                   <div className="absolute inset-0">
                     <img 
@@ -212,7 +212,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 py-2 px-3" style={{
+                  <div className="absolute bottom-0 left-0 right-0 py-1.5 px-2 -mb-px" style={{
                     backgroundColor: category.id === 'playground' ? 'rgba(214, 236, 204, 0.95)' : 
                                     category.id === 'sport' ? 'rgba(232, 222, 248, 0.95)' : 
                                     category.id === 'park' ? 'rgba(224, 242, 254, 0.95)' :
@@ -221,7 +221,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
                                     category.id === 'fencing' ? 'rgba(232, 222, 248, 0.95)' :
                                     'rgba(243, 232, 255, 0.95)'
                   }}>
-                    <h3 className="font-heading font-semibold text-gray-900 text-center text-base">{category.name}</h3>
+                    <h3 className="font-heading font-semibold text-gray-900 text-center text-sm sm:text-base leading-tight">{category.name}</h3>
                   </div>
                 </div>
               </div>
