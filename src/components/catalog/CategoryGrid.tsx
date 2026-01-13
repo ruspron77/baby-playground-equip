@@ -48,6 +48,7 @@ interface CategoryGridProps {
   favorites: Product[];
   toggleFavorite: (product: Product) => void;
   setSelectedSubSubcategory: (value: string | null) => void;
+  selectedProduct: Product | null;
 }
 
 const formatPrice = (price: string | number): string => {
@@ -73,6 +74,7 @@ export function CategoryGrid({
   favorites,
   toggleFavorite,
   setSelectedSubSubcategory,
+  selectedProduct,
 }: CategoryGridProps) {
   if (!selectedCategory) return null;
 
@@ -102,7 +104,7 @@ export function CategoryGrid({
                 variant={(selectedSeries?.includes('Classic')) ? 'secondary' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedSeries(selectedSeries?.includes('Classic') ? null : 'Серия "Classic"')}
-                className={selectedSeries?.includes('Classic') ? 'bg-secondary text-white hover:bg-secondary/90' : 'hover:border-secondary hover:text-secondary hover:bg-transparent'}
+                className={selectedSeries?.includes('Classic') ? 'bg-secondary text-white hover:bg-secondary/90' : 'bg-white hover:border-secondary hover:text-secondary hover:bg-white'}
               >
                 Classic
               </Button>
@@ -110,7 +112,7 @@ export function CategoryGrid({
                 variant={(selectedSeries?.includes('Eco')) ? 'secondary' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedSeries(selectedSeries?.includes('Eco') ? null : 'Серия "Eco"')}
-                className={selectedSeries?.includes('Eco') ? 'bg-secondary text-white hover:bg-secondary/90' : 'hover:border-secondary hover:text-secondary hover:bg-transparent'}
+                className={selectedSeries?.includes('Eco') ? 'bg-secondary text-white hover:bg-secondary/90' : 'bg-white hover:border-secondary hover:text-secondary hover:bg-white'}
               >
                 Eco
               </Button>
@@ -157,10 +159,13 @@ export function CategoryGrid({
         <div ref={productsRef} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 py-6">
           {filteredProducts.map((product) => {
             const isFavorite = favorites.some(f => f.id === product.id);
+            const isSelected = selectedProduct?.id === product.id;
             return (
               <Card 
                 key={product.id} 
-                className="overflow-hidden transition-all cursor-pointer group border border-gray-200 hover:border-transparent hover:shadow-xl"
+                className={`overflow-hidden transition-all cursor-pointer group border-2 hover:shadow-xl ${
+                  isSelected ? 'border-green-600' : 'border-gray-200 hover:border-transparent'
+                }`}
               >
                 <div 
                   className="aspect-[4/3] bg-white flex items-center justify-center relative overflow-hidden"

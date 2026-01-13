@@ -223,6 +223,7 @@ export function CatalogSection({
         handleAddToCart={handleAddToCart}
         favorites={favorites}
         toggleFavorite={toggleFavorite}
+        selectedProduct={selectedProduct}
       />
 
       <ProductDialog
