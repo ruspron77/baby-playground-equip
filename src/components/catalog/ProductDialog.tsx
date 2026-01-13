@@ -63,7 +63,7 @@ export function ProductDialog({
           <DialogTitle className="sr-only">Информация о товаре</DialogTitle>
         </DialogHeader>
         {selectedProduct && (
-          <div className="grid md:grid-cols-[2fr,1fr] gap-2 md:gap-6">
+          <div className="grid md:grid-cols-[1fr,1fr] gap-2 md:gap-6">
             <div>
               <div className="relative aspect-square bg-white rounded-lg flex items-center justify-center overflow-hidden border p-0 mb-2">
                 {productImages.length > 0 ? (
@@ -151,19 +151,19 @@ export function ProductDialog({
                     size="lg"
                     variant="outline"
                     onClick={() => toggleFavorite(selectedProduct)}
-                    className="hover:border-primary hover:text-primary hover:bg-transparent h-10 w-10 sm:h-12 sm:w-12 p-0"
+                    className="hover:border-primary hover:text-primary hover:bg-transparent h-10 w-10 p-0"
                   >
-                    <Icon name="Heart" size={20} className={`sm:w-[22px] sm:h-[22px] ${isFavorite ? 'fill-red-500 text-red-500' : ''}`} />
+                    <Icon name="Heart" size={20} className={isFavorite ? 'fill-red-500 text-red-500' : ''} />
                   </Button>
                   <Button
                     size="lg"
                     variant="outline"
                     asChild
-                    className="border-2 bg-transparent h-10 w-10 sm:h-12 sm:w-12 p-0 transition-colors hover:bg-[#3eaa03] hover:text-white"
+                    className="border-2 bg-transparent h-10 w-10 p-0 transition-colors hover:bg-[#3eaa03] hover:text-white"
                     style={{ borderColor: '#3eaa03', color: '#3eaa03' }}
                   >
                     <a href="tel:+79181151551">
-                      <Icon name="Phone" size={20} className="sm:w-[22px] sm:h-[22px]" />
+                      <Icon name="Phone" size={20} />
                     </a>
                   </Button>
                 </div>
