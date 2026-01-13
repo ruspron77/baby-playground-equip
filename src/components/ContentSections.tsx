@@ -75,18 +75,18 @@ export function ContentSections() {
             <h2 className="text-4xl font-heading mb-4 font-semibold">Контакты</h2>
             <p className="text-lg text-muted-foreground">Свяжитесь с нами любым удобным способом</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-6 max-w-4xl mx-auto">
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-4 md:p-8">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-4">
-                  <Icon name="Phone" size={20} className="text-primary md:w-8 md:h-8" />
+              <CardContent className="p-2 md:p-8">
+                <div className="w-8 h-8 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
+                  <Icon name="Phone" size={16} className="text-primary md:w-8 md:h-8" />
                 </div>
-                <h3 className="text-sm md:text-base font-bold mb-1 md:mb-2">Телефон</h3>
-                <a href="tel:+79181151551" className="text-xs md:text-base text-primary hover:underline block mb-2 md:mb-3">+7 (918) 115-15-51</a>
+                <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Телефон</h3>
+                <a href="tel:+79181151551" className="text-[10px] md:text-base text-primary hover:underline block break-words mb-1 md:mb-3">+7 (918) 115-15-51</a>
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="w-full hover:border-primary hover:text-primary hover:bg-transparent"
+                  className="w-full text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 hover:border-primary hover:text-primary hover:bg-transparent"
                   onClick={() => setIsContactDialogOpen(true)}
                 >
                   Перезвоните мне
@@ -94,21 +94,21 @@ export function ContentSections() {
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-4 md:p-8">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-4">
-                  <Icon name="Mail" size={20} className="text-secondary md:w-8 md:h-8" />
+              <CardContent className="p-2 md:p-8">
+                <div className="w-8 h-8 md:w-16 md:h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
+                  <Icon name="Mail" size={16} className="text-secondary md:w-8 md:h-8" />
                 </div>
-                <h3 className="text-sm md:text-base font-bold mb-1 md:mb-2">Email</h3>
-                <a href="mailto:info@urban-play.ru" className="text-xs md:text-base text-secondary hover:underline">info@urban-play.ru</a>
+                <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Email</h3>
+                <a href="mailto:info@urban-play.ru" className="text-[10px] md:text-base text-secondary hover:underline break-words">info@urban-play.ru</a>
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-4 md:p-8">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-[#0284c7]/10 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-4">
-                  <Icon name="MapPin" size={20} className="text-[#0284c7] md:w-8 md:h-8" />
+              <CardContent className="p-2 md:p-8">
+                <div className="w-8 h-8 md:w-16 md:h-16 bg-[#0284c7]/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
+                  <Icon name="MapPin" size={16} className="text-[#0284c7] md:w-8 md:h-8" />
                 </div>
-                <h3 className="text-sm md:text-base font-bold mb-1 md:mb-2">Адрес</h3>
-                <p className="text-xs md:text-base text-muted-foreground">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+                <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Адрес</h3>
+                <p className="text-[10px] md:text-base text-muted-foreground break-words">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
               </CardContent>
             </Card>
           </div>

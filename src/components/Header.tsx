@@ -493,11 +493,11 @@ export function Header({
               <Button 
                 asChild
                 variant="outline"
-                className="border-2 border-primary text-primary hover:bg-primary hover:text-white w-12 h-12 active:scale-95 transition-all"
-                size="icon"
+                className="border-2 border-primary text-primary hover:bg-primary hover:text-white active:scale-95 transition-all"
+                size="sm"
               >
                 <a href="tel:+79181151551">
-                  <Icon name="Phone" size={24} />
+                  Позвонить
                 </a>
               </Button>
             </div>
