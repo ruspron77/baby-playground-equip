@@ -59,7 +59,7 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
               className="hover:border-primary hover:text-primary hover:bg-transparent"
             >
               <Icon name="ArrowLeft" size={20} className="mr-2" />
-              Назад к каталогу
+              Назад в каталог
             </Button>
           </div>
         </div>
