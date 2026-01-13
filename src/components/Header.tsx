@@ -260,25 +260,27 @@ export function Header({
                 </Button>
               </SheetTrigger>
               <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
-                <Button
-                  variant="outline"
-                  className="absolute left-4 top-4 sm:hidden z-50 hover:border-primary hover:text-primary hover:bg-transparent h-9 px-3"
-                  onClick={() => {
-                    setIsCartOpen(false);
-                    setTimeout(() => {
-                      const element = document.getElementById('catalog');
-                      if (element) {
-                        const yOffset = -90;
-                        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                        window.scrollTo({ top: y, behavior: 'smooth' });
-                      }
-                    }, 100);
-                  }}
-                >
-                  Назад в каталог
-                </Button>
                 {!showOrderForm && (
                   <>
+                    <div className="mb-4 sm:hidden">
+                      <Button
+                        variant="outline"
+                        className="hover:border-primary hover:text-primary hover:bg-transparent h-9 px-3"
+                        onClick={() => {
+                          setIsCartOpen(false);
+                          setTimeout(() => {
+                            const element = document.getElementById('catalog');
+                            if (element) {
+                              const yOffset = -90;
+                              const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                              window.scrollTo({ top: y, behavior: 'smooth' });
+                            }
+                          }, 100);
+                        }}
+                      >
+                        Назад в каталог
+                      </Button>
+                    </div>
                     <SheetHeader>
                       <div className="flex items-center justify-between">
                         <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
