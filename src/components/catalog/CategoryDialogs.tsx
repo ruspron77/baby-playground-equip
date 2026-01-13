@@ -68,7 +68,7 @@ export function CategoryDialogs({
             {currentCategory?.subcategories.map((sub) => (
               <Card
                 key={sub.name}
-                className="cursor-pointer transition-all hover:shadow-xl hover:-translate-y-2 overflow-hidden group flex flex-col border-2 border-gray-200 hover:border-transparent rounded-md"
+                className="cursor-pointer transition-all hover:shadow-xl hover:-translate-y-2 overflow-hidden group flex flex-col border-2 border-gray-200 hover:border-gray-200 rounded-md"
                 onClick={() => handleSubcategoryClick(sub)}
               >
                 <div className="aspect-[4/3] relative overflow-hidden bg-white flex items-center justify-center p-0 flex-1">
@@ -110,7 +110,7 @@ export function CategoryDialogs({
             {currentSubcategory?.children?.map((subSub) => (
               <Card
                 key={subSub.name}
-                className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group border-2 border-gray-200 hover:border-transparent rounded-md"
+                className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group border-2 border-gray-200 hover:border-gray-200 rounded-md"
                 onClick={() => handleSubSubcategoryClick(subSub.name)}
               >
                 <div className="aspect-square relative overflow-hidden bg-white flex items-center justify-center p-0">
