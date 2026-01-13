@@ -492,9 +492,7 @@ export function Header({
             <div className="lg:hidden">
               <Button 
                 asChild
-                variant="outline"
-                className="border-2 border-primary text-primary hover:bg-primary hover:text-white active:scale-95 transition-all"
-                size="sm"
+                className="bg-green-600 text-white hover:bg-green-700 active:scale-95 transition-all h-9 px-4"
               >
                 <a href="tel:+79181151551">
                   Позвонить
