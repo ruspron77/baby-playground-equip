@@ -194,15 +194,12 @@ export function ProductDialog({
                 )}
               </div>
 
-              <div className="border-t sm:py-3 mx-0 my-0 py-0">
-                <p className="text-muted-foreground text-sm hidden md:block my-0 py-[5px]">
-                  Если появились вопросы, вы можете получить консультацию руководителя проекта:
-                </p>
+              <div className="border-t pt-3 mx-0 my-0 py-0 block md:hidden">
                 <Button 
                   variant="outline" 
                   size="lg" 
                   asChild
-                  className="w-full border-2 transition-colors h-10 bg-[#3eaa03] text-white hover:bg-[#2d8902] md:hidden"
+                  className="w-full border-2 transition-colors h-10 bg-[#3eaa03] text-white hover:bg-[#2d8902]"
                   style={{ borderColor: '#3eaa03' }}
                 >
                   <a href="tel:+79181151551">
@@ -210,10 +207,15 @@ export function ProductDialog({
                     <span className="text-sm">Позвонить</span>
                   </a>
                 </Button>
+              </div>
+              <div className="border-t sm:py-3 mx-0 my-0 py-0 hidden md:block">
+                <p className="text-muted-foreground text-sm my-0 py-[5px]">
+                  Если появились вопросы, вы можете получить консультацию руководителя проекта:
+                </p>
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="w-full border-2 transition-colors h-10 sm:h-11 bg-[#3eaa03] text-white hover:bg-[#2d8902] hover:text-white hidden md:flex"
+                  className="w-full border-2 transition-colors h-11 bg-[#3eaa03] text-white hover:bg-[#2d8902] hover:text-white"
                   style={{ borderColor: '#3eaa03' }}
                   onClick={() => {
                     setIsProductDialogOpen(false);
