@@ -616,7 +616,7 @@ export function Header({
                 });
                 setShowKPDialog(false);
               }}
-            >Создать коммерческое предложение</Button>
+            >Скачать коммерческое предложение</Button>
           </div>
         </DialogContent>
       </Dialog>
