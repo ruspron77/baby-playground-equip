@@ -308,7 +308,7 @@ export function Header({
                     }}
                   >
                     <Icon name="ArrowLeft" size={18} className="mr-1" />
-                    Назад к каталогу
+                    Назад
                   </Button>
                   <SheetHeader>
                     <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
@@ -392,7 +392,7 @@ export function Header({
                                         variant="ghost"
                                         size="icon"
                                         onClick={() => removeFromCart(item.id)}
-                                        className="h-8 w-8 flex-shrink-0 hover:text-destructive"
+                                        className="h-8 w-8 flex-shrink-0 hover:text-destructive hover:bg-transparent"
                                       >
                                         <Icon name="Trash2" size={16} />
                                       </Button>
