@@ -202,8 +202,8 @@ export function ProductDialog({
                   variant="outline" 
                   size="lg" 
                   asChild
-                  className="w-full border-2 bg-transparent transition-colors h-10 sm:h-11 hover:bg-[#3eaa03] hover:text-white"
-                  style={{ borderColor: '#3eaa03', color: '#3eaa03' }}
+                  className="w-full border-2 transition-colors h-10 sm:h-11 bg-[#3eaa03] text-white sm:bg-transparent sm:text-[#3eaa03] hover:bg-[#3eaa03] hover:text-white"
+                  style={{ borderColor: '#3eaa03' }}
                 >
                   <a href="tel:+79181151551">
                     <Icon name="Phone" size={18} className="mr-2" />
