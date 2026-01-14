@@ -88,7 +88,7 @@ export function ProductDialog({
                     <img 
                       src={productImages[currentImageIndex]} 
                       alt={selectedProduct.name} 
-                      className="w-full h-full p-1 object-contain" 
+                      className="w-full h-full p-1 object-contain py-0 px-0" 
                     />
                     {productImages.length > 1 && (
                       <>
@@ -205,7 +205,7 @@ export function ProductDialog({
                 )}
               </div>
 
-              <div className="border-t sm:py-3 mx-0 py-0 my-0">
+              <div className="border-t sm:py-3 mx-0 my-0 py-0">
                 <p className="text-muted-foreground text-sm py-0 hidden md:block my-0">
                   Если появились вопросы, вы можете получить консультацию руководителя проекта:
                 </p>
