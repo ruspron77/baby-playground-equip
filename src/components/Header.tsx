@@ -517,7 +517,19 @@ export function Header({
               />
             </div>
             <div>
-              <label className="text-sm font-medium mb-2 block">Процент за монтаж (%)</label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-sm font-medium">Процент за монтаж (%)</label>
+                <div className="flex items-center space-x-2">
+                  <Checkbox 
+                    id="hide-installation"
+                    checked={hideInstallationInKP}
+                    onCheckedChange={(checked) => setHideInstallationInKP(checked as boolean)}
+                  />
+                  <label htmlFor="hide-installation" className="text-sm cursor-pointer">
+                    Скрыть монтаж в КП
+                  </label>
+                </div>
+              </div>
               <Input
                 type="number"
                 value={kpInstallationPercent || ''}
@@ -526,33 +538,25 @@ export function Header({
               />
             </div>
             <div>
-              <label className="text-sm font-medium mb-2 block">Стоимость доставки (₽)</label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-sm font-medium">Стоимость доставки (₽)</label>
+                <div className="flex items-center space-x-2">
+                  <Checkbox 
+                    id="hide-delivery"
+                    checked={hideDeliveryInKP}
+                    onCheckedChange={(checked) => setHideDeliveryInKP(checked as boolean)}
+                  />
+                  <label htmlFor="hide-delivery" className="text-sm cursor-pointer">
+                    Скрыть доставку в КП
+                  </label>
+                </div>
+              </div>
               <Input
                 type="number"
                 value={kpDeliveryCost || ''}
                 onChange={(e) => setKpDeliveryCost(Number(e.target.value) || 0)}
                 placeholder="0"
               />
-            </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox 
-                id="hide-installation"
-                checked={hideInstallationInKP}
-                onCheckedChange={(checked) => setHideInstallationInKP(checked as boolean)}
-              />
-              <label htmlFor="hide-installation" className="text-sm cursor-pointer">
-                Скрыть монтаж в КП
-              </label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox 
-                id="hide-delivery"
-                checked={hideDeliveryInKP}
-                onCheckedChange={(checked) => setHideDeliveryInKP(checked as boolean)}
-              />
-              <label htmlFor="hide-delivery" className="text-sm cursor-pointer">
-                Скрыть доставку в КП
-              </label>
             </div>
             <Button 
               className="w-full" 
