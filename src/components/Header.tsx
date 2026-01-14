@@ -293,7 +293,8 @@ export function Header({
                 <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
                   <Button
                     variant="outline"
-                    className="absolute right-4 top-4 sm:hidden z-50 hover:border-primary hover:text-primary hover:bg-transparent h-9 px-3"
+                    size="icon"
+                    className="absolute right-4 top-4 sm:hidden z-50 hover:border-primary hover:text-primary hover:bg-transparent w-9 h-9"
                     onClick={() => {
                       setIsCartOpen(false);
                       setTimeout(() => {
@@ -307,8 +308,7 @@ export function Header({
                       }, 300);
                     }}
                   >
-                    <Icon name="ArrowLeft" size={18} className="mr-1" />
-                    Назад
+                    <Icon name="ArrowLeft" size={18} />
                   </Button>
                   <SheetHeader>
                     <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
