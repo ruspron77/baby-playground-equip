@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
 import Icon from '@/components/ui/icon';
 import { CartItem } from './data/catalogData';
 import { Link } from 'react-router-dom';
 import { OrderForm, OrderFormData } from './OrderForm';
 import { ContactDialog } from './ContactDialog';
-import { MobileMenu } from './header/MobileMenu';
-import { CartSheet } from './header/CartSheet';
-import { KPDialog } from './header/KPDialog';
-import { ExcelSettingsDialog } from './header/ExcelSettingsDialog';
 
 interface Product {
   id: number;
@@ -51,6 +51,11 @@ interface HeaderProps {
   onAddToCart?: (product: Product) => void;
 }
 
+const formatPrice = (price: string | number): string => {
+  const numPrice = typeof price === 'string' ? parseInt(price.replace(/\s/g, '')) : price;
+  return numPrice.toLocaleString('ru-RU');
+};
+
 export function Header({
   cart,
   isCartOpen,
@@ -88,6 +93,13 @@ export function Header({
   const [hideInstallationInKP, setHideInstallationInKP] = useState(false);
   const [hideDeliveryInKP, setHideDeliveryInKP] = useState(false);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+  const [cartSearchQuery, setCartSearchQuery] = useState('');
+
+  const filteredCatalogProducts = allProducts.filter(product => 
+    cartSearchQuery === '' || 
+    product.name.toLowerCase().includes(cartSearchQuery.toLowerCase()) ||
+    (product.article && product.article.toLowerCase().includes(cartSearchQuery.toLowerCase()))
+  );
 
   const getNextOrderNumber = () => {
     const now = new Date();
@@ -176,10 +188,74 @@ export function Header({
               </Button>
             </div>
             <div className="flex items-center gap-3">
-              <MobileMenu 
-                isMobileMenuOpen={isMobileMenuOpen}
-                setIsMobileMenuOpen={setIsMobileMenuOpen}
-              />
+              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    size="icon"
+                    className="md:hidden hover:border-primary hover:text-primary hover:bg-transparent w-10 h-10 active:scale-95 transition-transform"
+                  >
+                    <Icon name="Menu" size={20} />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-80">
+                  <SheetHeader>
+                    <SheetTitle className="text-2xl font-heading">Меню</SheetTitle>
+                  </SheetHeader>
+                  <nav className="flex flex-col gap-4 mt-6">
+                    <a 
+                      href="#about" 
+                      className="text-base hover:text-primary transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      О компании
+                    </a>
+                    <a 
+                      href="#catalog" 
+                      className="text-base hover:text-primary transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Каталог
+                    </a>
+                    <a 
+                      href="#services" 
+                      className="text-base hover:text-primary transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Услуги
+                    </a>
+                    <a 
+                      href="#certificates" 
+                      className="text-base hover:text-primary transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Сертификаты
+                    </a>
+                    <a 
+                      href="#contacts" 
+                      className="text-base hover:text-primary transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Контакты
+                    </a>
+                    <div className="border-t pt-4 mt-2">
+                      <Button 
+                        asChild
+                        className="w-full bg-primary text-white hover:bg-primary/90"
+                        size="lg"
+                      >
+                        <a 
+                          href="tel:+79181151551" 
+                          className="flex items-center gap-2"
+                        >
+                          <Icon name="Phone" size={20} />
+                          +7 918 115-15-51
+                        </a>
+                      </Button>
+                    </div>
+                  </nav>
+                </SheetContent>
+              </Sheet>
 
               <div className="lg:hidden">
                 <Button 
@@ -203,27 +279,197 @@ export function Header({
                 </Button>
               </Link>
               
-              <CartSheet
-                cart={cart}
-                isCartOpen={isCartOpen}
-                setIsCartOpen={setIsCartOpen}
-                updateQuantity={updateQuantity}
-                removeFromCart={removeFromCart}
-                clearCart={clearCart}
-                calculateTotal={calculateTotal}
-                deliveryCost={deliveryCost}
-                setDeliveryCost={setDeliveryCost}
-                installationPercent={installationPercent}
-                setInstallationPercent={setInstallationPercent}
-                calculateInstallationCost={calculateInstallationCost}
-                calculateGrandTotal={calculateGrandTotal}
-                setShowOrderForm={setShowOrderForm}
-                setShowKPDialog={setShowKPDialog}
-                setIsExcelSettingsOpen={setIsExcelSettingsOpen}
-                allProducts={allProducts}
-                onAddToCart={onAddToCart}
-                setIsSideMenuOpen={setIsSideMenuOpen}
-              />
+              <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="outline" size="icon" className="relative hover:border-primary hover:text-primary hover:bg-transparent w-10 h-10 active:scale-95 transition-transform">
+                    <Icon name="ShoppingCart" size={20} />
+                    {cart.length > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold">
+                        {cart.length}
+                      </span>
+                    )}
+                  </Button>
+                </SheetTrigger>
+                <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
+                  <Button
+                    variant="outline"
+                    className="absolute right-4 top-4 sm:hidden z-50 hover:border-primary hover:text-primary hover:bg-transparent h-9 px-3"
+                    onClick={() => {
+                      setIsCartOpen(false);
+                      setTimeout(() => {
+                        const element = document.getElementById('catalog');
+                        if (element) {
+                          const yOffset = -90;
+                          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                          window.scrollTo({ top: y, behavior: 'smooth' });
+                        }
+                        setIsSideMenuOpen(true);
+                      }, 300);
+                    }}
+                  >
+                    <Icon name="ArrowLeft" size={18} className="mr-1" />
+                    Назад к каталогу
+                  </Button>
+                  <SheetHeader>
+                    <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
+                  </SheetHeader>
+                  <div className="mt-6 space-y-4">
+                    {cart.length === 0 ? (
+                      <div className="text-center py-8">
+                        <Icon name="ShoppingCart" size={64} className="mx-auto text-muted-foreground mb-4" />
+                        <p className="text-muted-foreground mb-4">Корзина пуста</p>
+                        <div className="space-y-3">
+                          <div className="relative">
+                            <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground z-10" />
+                            <Input 
+                              type="text"
+                              placeholder="Поиск по товарам..."
+                              value={cartSearchQuery}
+                              onChange={(e) => setCartSearchQuery(e.target.value)}
+                              className="pl-10"
+                            />
+                          </div>
+                          {cartSearchQuery && filteredCatalogProducts.length > 0 && (
+                            <div className="max-h-96 overflow-y-auto space-y-2 border rounded-lg p-2">
+                              {filteredCatalogProducts.map(product => (
+                                <Card key={product.id} className="overflow-hidden">
+                                  <CardContent className="p-3">
+                                    <div className="flex gap-3">
+                                      <div className="w-16 h-16 flex-shrink-0 bg-white rounded flex items-center justify-center">
+                                        {product.image.startsWith('http') ? (
+                                          <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
+                                        ) : (
+                                          <span className="text-2xl">{product.image}</span>
+                                        )}
+                                      </div>
+                                      <div className="flex-1 min-w-0">
+                                        <p className="text-xs text-[#5a098c] mb-1">{product.name.split('\n')[0]}</p>
+                                        <p className="font-semibold text-sm line-clamp-2 mb-1">{product.name.split('\n')[1] || product.name}</p>
+                                        <p className="text-sm font-bold text-primary mb-2">{formatPrice(product.price)} ₽</p>
+                                        <Button 
+                                          size="sm"
+                                          onClick={() => {
+                                            if (onAddToCart) {
+                                              onAddToCart(product);
+                                              setCartSearchQuery('');
+                                            }
+                                          }}
+                                          className="w-full h-7 text-xs"
+                                        >
+                                          <Icon name="Plus" size={14} className="mr-1" />
+                                          Добавить
+                                        </Button>
+                                      </div>
+                                    </div>
+                                  </CardContent>
+                                </Card>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="space-y-3">
+                          {cart.map((item) => (
+                            <Card key={item.id} className="overflow-hidden">
+                              <CardContent className="p-3">
+                                <div className="flex gap-3">
+                                  <div className="w-20 h-20 flex-shrink-0 bg-white rounded flex items-center justify-center">
+                                    {item.image.startsWith('http') ? (
+                                      <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
+                                    ) : (
+                                      <span className="text-3xl">{item.image}</span>
+                                    )}
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex justify-between gap-2">
+                                      <div className="flex-1 min-w-0">
+                                        <p className="text-xs text-[#5a098c] mb-1">{item.name.split('\n')[0]}</p>
+                                        <p className="font-semibold text-sm line-clamp-2">{item.name.split('\n')[1] || item.name}</p>
+                                      </div>
+                                      <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        onClick={() => removeFromCart(item.id)}
+                                        className="h-8 w-8 flex-shrink-0 hover:text-destructive"
+                                      >
+                                        <Icon name="Trash2" size={16} />
+                                      </Button>
+                                    </div>
+                                    <div className="flex items-center justify-between mt-2">
+                                      <div className="flex items-center gap-2">
+                                        <Button
+                                          variant="outline"
+                                          size="icon"
+                                          onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                                          className="h-8 w-8"
+                                        >
+                                          <Icon name="Minus" size={16} />
+                                        </Button>
+                                        <span className="w-8 text-center font-semibold">{item.quantity}</span>
+                                        <Button
+                                          variant="outline"
+                                          size="icon"
+                                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                          className="h-8 w-8"
+                                        >
+                                          <Icon name="Plus" size={16} />
+                                        </Button>
+                                      </div>
+                                      <p className="text-sm font-bold text-primary">
+                                        {formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </div>
+                        <div className="space-y-3 border-t pt-4">
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-lg font-bold">
+                              <span>Итого:</span>
+                              <span className="text-primary">{formatPrice(calculateTotal())} ₽</span>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <Button 
+                              className="w-full" 
+                              size="lg"
+                              onClick={() => {
+                                setIsCartOpen(false);
+                                setShowOrderForm(true);
+                              }}
+                            >
+                              Оформить заказ
+                            </Button>
+                            <Button 
+                              variant="outline" 
+                              className="w-full"
+                              onClick={() => {
+                                setShowKPDialog(true);
+                              }}
+                            >
+                              Сформировать коммерческое предложение
+                            </Button>
+                            {clearCart && (
+                              <Button 
+                                variant="outline" 
+                                className="w-full"
+                                onClick={clearCart}
+                              >
+                                Очистить корзину
+                              </Button>
+                            )}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </div>
@@ -255,30 +501,115 @@ export function Header({
         </DialogContent>
       </Dialog>
 
-      <KPDialog
-        showKPDialog={showKPDialog}
-        setShowKPDialog={setShowKPDialog}
-        kpAddress={kpAddress}
-        setKpAddress={setKpAddress}
-        kpInstallationPercent={kpInstallationPercent}
-        setKpInstallationPercent={setKpInstallationPercent}
-        kpDeliveryCost={kpDeliveryCost}
-        setKpDeliveryCost={setKpDeliveryCost}
-        hideInstallationInKP={hideInstallationInKP}
-        setHideInstallationInKP={setHideInstallationInKP}
-        hideDeliveryInKP={hideDeliveryInKP}
-        setHideDeliveryInKP={setHideDeliveryInKP}
-        generateKP={generateKP}
-      />
+      <Dialog open={showKPDialog} onOpenChange={setShowKPDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Параметры коммерческого предложения</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="text-sm font-medium mb-2 block">Адрес доставки</label>
+              <Input
+                type="text"
+                value={kpAddress}
+                onChange={(e) => setKpAddress(e.target.value)}
+                placeholder="Введите адрес"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-2 block">Процент за монтаж (%)</label>
+              <Input
+                type="number"
+                value={kpInstallationPercent || ''}
+                onChange={(e) => setKpInstallationPercent(Number(e.target.value) || 0)}
+                placeholder="0"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-2 block">Стоимость доставки (₽)</label>
+              <Input
+                type="number"
+                value={kpDeliveryCost || ''}
+                onChange={(e) => setKpDeliveryCost(Number(e.target.value) || 0)}
+                placeholder="0"
+              />
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox 
+                id="hide-installation"
+                checked={hideInstallationInKP}
+                onCheckedChange={(checked) => setHideInstallationInKP(checked as boolean)}
+              />
+              <label htmlFor="hide-installation" className="text-sm cursor-pointer">
+                Скрыть монтаж в КП
+              </label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox 
+                id="hide-delivery"
+                checked={hideDeliveryInKP}
+                onCheckedChange={(checked) => setHideDeliveryInKP(checked as boolean)}
+              />
+              <label htmlFor="hide-delivery" className="text-sm cursor-pointer">
+                Скрыть доставку в КП
+              </label>
+            </div>
+            <Button 
+              className="w-full" 
+              onClick={() => {
+                generateKP({ 
+                  address: kpAddress, 
+                  installationPercent: kpInstallationPercent,
+                  deliveryCost: kpDeliveryCost,
+                  hideInstallation: hideInstallationInKP,
+                  hideDelivery: hideDeliveryInKP
+                });
+                setShowKPDialog(false);
+              }}
+            >
+              Создать КП
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
-      <ExcelSettingsDialog
-        isExcelSettingsOpen={isExcelSettingsOpen}
-        setIsExcelSettingsOpen={setIsExcelSettingsOpen}
-        imageColumnWidth={imageColumnWidth}
-        setImageColumnWidth={setImageColumnWidth}
-        imageRowHeight={imageRowHeight}
-        setImageRowHeight={setImageRowHeight}
-      />
+      <Dialog open={isExcelSettingsOpen} onOpenChange={setIsExcelSettingsOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Настройки изображений Excel</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="text-sm font-medium mb-2 block">Ширина столбца с изображением</label>
+              <Input
+                type="number"
+                value={imageColumnWidth}
+                onChange={(e) => setImageColumnWidth(Number(e.target.value))}
+                min={10}
+                max={50}
+              />
+              <p className="text-xs text-muted-foreground mt-1">Рекомендуемое значение: 20</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-2 block">Высота строки с изображением</label>
+              <Input
+                type="number"
+                value={imageRowHeight}
+                onChange={(e) => setImageRowHeight(Number(e.target.value))}
+                min={50}
+                max={200}
+              />
+              <p className="text-xs text-muted-foreground mt-1">Рекомендуемое значение: 100</p>
+            </div>
+            <Button 
+              className="w-full" 
+              onClick={() => setIsExcelSettingsOpen(false)}
+            >
+              Сохранить
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <ContactDialog
         open={isContactDialogOpen}
