@@ -104,7 +104,7 @@ export function CategoryGrid({
                 variant="outline"
                 size="sm"
                 onClick={() => setSelectedSeries(selectedSeries?.includes('Classic') ? null : 'Серия "Classic"')}
-                className={selectedSeries?.includes('Classic') ? 'bg-white text-[#5a098c] border-2 border-[#3eaa03] hover:bg-white hover:text-[#5a098c]' : 'bg-white hover:border-secondary hover:text-secondary hover:bg-white'}
+                className={selectedSeries?.includes('Classic') ? 'bg-white text-[#5a098c] border-2 border-[#5a098c] hover:bg-white hover:text-[#5a098c]' : 'bg-white hover:border-secondary hover:text-secondary hover:bg-white'}
               >
                 Classic
               </Button>
@@ -112,7 +112,7 @@ export function CategoryGrid({
                 variant="outline"
                 size="sm"
                 onClick={() => setSelectedSeries(selectedSeries?.includes('Eco') ? null : 'Серия "Eco"')}
-                className={selectedSeries?.includes('Eco') ? 'bg-white text-[#5a098c] border-2 border-[#3eaa03] hover:bg-white hover:text-[#5a098c]' : 'bg-white hover:border-secondary hover:text-secondary hover:bg-white'}
+                className={selectedSeries?.includes('Eco') ? 'bg-white text-[#5a098c] border-2 border-[#5a098c] hover:bg-white hover:text-[#5a098c]' : 'bg-white hover:border-secondary hover:text-secondary hover:bg-white'}
               >
                 Eco
               </Button>
@@ -122,7 +122,7 @@ export function CategoryGrid({
                 value={selectedSubSubcategory || 'all'}
                 onValueChange={(value) => setSelectedSubSubcategory(value === 'all' ? null : value)}
               >
-                <SelectTrigger className={`w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white ${selectedSubSubcategory ? 'text-[#3eaa03]' : ''}`}>
+                <SelectTrigger className={`w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white ${selectedSubSubcategory ? 'text-[#1d2025]' : ''}`}>
                   <SelectValue placeholder="Все категории" />
                 </SelectTrigger>
                 <SelectContent>
