@@ -202,13 +202,26 @@ export function ProductDialog({
                   variant="outline" 
                   size="lg" 
                   asChild
-                  className="w-full border-2 transition-colors h-10 sm:h-11 bg-[#3eaa03] text-white sm:bg-transparent sm:text-[#3eaa03] hover:bg-[#3eaa03] hover:text-white"
+                  className="w-full border-2 transition-colors h-10 sm:h-11 bg-[#3eaa03] text-white sm:bg-transparent sm:text-[#3eaa03] hover:bg-[#3eaa03] hover:text-white sm:hidden"
                   style={{ borderColor: '#3eaa03' }}
                 >
                   <a href="tel:+79181151551">
                     <Icon name="Phone" size={18} className="mr-2" />
                     <span className="text-sm sm:text-base">Позвонить</span>
                   </a>
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full border-2 transition-colors h-10 sm:h-11 bg-transparent hover:bg-[#3eaa03] hover:text-white hidden sm:flex"
+                  style={{ borderColor: '#3eaa03', color: '#3eaa03' }}
+                  onClick={() => {
+                    setIsProductDialogOpen(false);
+                    setIsContactDialogOpen(true);
+                  }}
+                >
+                  <Icon name="Phone" size={18} className="mr-2" />
+                  <span className="text-sm sm:text-base">Заказать звонок</span>
                 </Button>
               </div>
             </div>
