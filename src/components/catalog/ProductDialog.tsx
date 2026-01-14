@@ -209,7 +209,7 @@ export function ProductDialog({
                 </Button>
               </div>
               <div className="border-t sm:py-3 mx-0 my-0 py-0 hidden md:block">
-                <p className="text-muted-foreground text-sm my-0 py-[5px]">
+                <p className="text-muted-foreground text-sm py-[5px] my-[17px]">
                   Если появились вопросы, вы можете получить консультацию руководителя проекта:
                 </p>
                 <Button 
