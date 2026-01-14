@@ -525,9 +525,7 @@ export function Header({
                     checked={hideInstallationInKP}
                     onCheckedChange={(checked) => setHideInstallationInKP(checked as boolean)}
                   />
-                  <label htmlFor="hide-installation" className="text-sm cursor-pointer">
-                    Скрыть монтаж в КП
-                  </label>
+                  <label htmlFor="hide-installation" className="text-sm cursor-pointer">и</label>
                 </div>
               </div>
               <Input
