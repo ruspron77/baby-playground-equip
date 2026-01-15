@@ -164,7 +164,7 @@ export function CategoryGrid({
               <Card 
                 key={product.id} 
                 className={`overflow-hidden transition-all cursor-pointer group border-2 hover:shadow-xl rounded-md ${
-                  isSelected ? 'border-gray-200 hover:border-transparent' : 'border-gray-200 hover:border-transparent'
+                  isSelected ? 'border-gray-200 hover:border-gray-200' : 'border-gray-200 hover:border-gray-200'
                 }`}
                 style={isSelected ? { borderColor: '#3eaa03' } : {}}
               >
