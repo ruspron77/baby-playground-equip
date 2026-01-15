@@ -108,7 +108,7 @@ export function OrderForm({ open, onOpenChange, cart, calculateTotal, deliveryCo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[95vh] overflow-hidden">
         <div className="absolute top-4 left-4 sm:hidden z-50">
           <Button
             variant="outline"
@@ -119,72 +119,72 @@ export function OrderForm({ open, onOpenChange, cart, calculateTotal, deliveryCo
             <Icon name="ArrowLeft" size={20} />
           </Button>
         </div>
-        <DialogHeader>
-          <DialogTitle className="text-xl font-heading flex items-center gap-2">
-            <Icon name="FileText" size={20} />
+        <DialogHeader className="pb-2">
+          <DialogTitle className="text-lg font-heading flex items-center gap-2">
+            <Icon name="FileText" size={18} />
             Оформление заказа
           </DialogTitle>
         </DialogHeader>
     <Card className="w-full border-0 shadow-none">
-      <CardContent className="pt-4">
-        <form onSubmit={handleSubmit} className="space-y-2.5">
+      <CardContent className="pt-2 pb-0">
+        <form onSubmit={handleSubmit} className="space-y-2">
           <div>
-            <Label htmlFor="name" className="text-sm">Ваше имя *</Label>
+            <Label htmlFor="name" className="text-xs">Ваше имя *</Label>
             <Input
               id="name"
               value={formData.name}
               onChange={(e) => handleChange('name', e.target.value)}
               placeholder="Иван Иванов"
-              className={`h-9 ${errors.name ? 'border-red-500' : ''}`}
+              className={`h-8 text-sm ${errors.name ? 'border-red-500' : ''}`}
             />
             {errors.name && <p className="text-xs text-red-500 mt-0.5">{errors.name}</p>}
           </div>
 
           <div>
-            <Label htmlFor="phone" className="text-sm">Телефон *</Label>
+            <Label htmlFor="phone" className="text-xs">Телефон *</Label>
             <Input
               id="phone"
               value={formData.phone}
               onChange={(e) => handleChange('phone', e.target.value)}
               placeholder="+7 (918) 123-45-67"
-              className={`h-9 ${errors.phone ? 'border-red-500' : ''}`}
+              className={`h-8 text-sm ${errors.phone ? 'border-red-500' : ''}`}
             />
             {errors.phone && <p className="text-xs text-red-500 mt-0.5">{errors.phone}</p>}
           </div>
 
           <div>
-            <Label htmlFor="email" className="text-sm">Email *</Label>
+            <Label htmlFor="email" className="text-xs">Email *</Label>
             <Input
               id="email"
               type="email"
               value={formData.email}
               onChange={(e) => handleChange('email', e.target.value)}
               placeholder="example@mail.ru"
-              className={`h-9 ${errors.email ? 'border-red-500' : ''}`}
+              className={`h-8 text-sm ${errors.email ? 'border-red-500' : ''}`}
             />
             {errors.email && <p className="text-xs text-red-500 mt-0.5">{errors.email}</p>}
           </div>
 
           <div>
-            <Label htmlFor="address" className="text-sm">Адрес доставки *</Label>
+            <Label htmlFor="address" className="text-xs">Адрес доставки *</Label>
             <Textarea
               id="address"
               value={formData.address}
               onChange={(e) => handleChange('address', e.target.value)}
               placeholder="Город, улица, дом, квартира"
-              className={`min-h-[50px] ${errors.address ? 'border-red-500' : ''}`}
+              className={`min-h-[40px] text-sm ${errors.address ? 'border-red-500' : ''}`}
               rows={2}
             />
             {errors.address && <p className="text-xs text-red-500 mt-0.5">{errors.address}</p>}
           </div>
 
           <div>
-            <Label htmlFor="legalStatus" className="text-sm">Правовой статус *</Label>
+            <Label htmlFor="legalStatus" className="text-xs">Правовой статус *</Label>
             <Select 
               value={formData.legalStatus} 
               onValueChange={(value) => handleChange('legalStatus', value)}
             >
-              <SelectTrigger className={`h-9 ${errors.legalStatus ? 'border-red-500' : ''}`}>
+              <SelectTrigger className={`h-8 text-sm ${errors.legalStatus ? 'border-red-500' : ''}`}>
                 <SelectValue placeholder="Выберите правовой статус" />
               </SelectTrigger>
               <SelectContent>
@@ -199,18 +199,18 @@ export function OrderForm({ open, onOpenChange, cart, calculateTotal, deliveryCo
           </div>
 
           <div>
-            <Label htmlFor="comment" className="text-sm">Комментарий к заказу</Label>
+            <Label htmlFor="comment" className="text-xs">Комментарий к заказу</Label>
             <Textarea
               id="comment"
               value={formData.comment}
               onChange={(e) => handleChange('comment', e.target.value)}
               placeholder="Дополнительная информация"
-              className="min-h-[50px]"
+              className="min-h-[40px] text-sm"
               rows={2}
             />
           </div>
 
-          <div className="border-t pt-2 space-y-1">
+          <div className="border-t pt-1.5 space-y-0.5">
             {installationCost > 0 && (
               <div className="flex justify-between text-sm text-muted-foreground">
                 <span>Монтаж:</span>
@@ -223,19 +223,20 @@ export function OrderForm({ open, onOpenChange, cart, calculateTotal, deliveryCo
                 <span>{deliveryCost.toLocaleString('ru-RU')} ₽</span>
               </div>
             )}
-            <div className="flex justify-between text-base font-bold border-t pt-1">
+            <div className="flex justify-between text-sm font-bold border-t pt-1">
               <span>Сумма товаров:</span>
               <span className="text-primary">{grandTotal.toLocaleString('ru-RU')} ₽</span>
             </div>
           </div>
 
-          <div className="flex items-start gap-2 pt-1">
+          <div className="flex items-start gap-2 pt-0.5">
             <Checkbox 
               id="privacy" 
               checked={acceptedPrivacy}
               onCheckedChange={(checked) => setAcceptedPrivacy(checked as boolean)}
+              className="mt-0.5"
             />
-            <label htmlFor="privacy" className="text-xs text-muted-foreground leading-tight cursor-pointer">
+            <label htmlFor="privacy" className="text-[11px] text-muted-foreground leading-tight cursor-pointer">
               Я согласен с обработкой{' '}
               <span 
                 className="text-[#44aa02] underline cursor-pointer hover:text-[#44aa02]/80"
@@ -249,7 +250,7 @@ export function OrderForm({ open, onOpenChange, cart, calculateTotal, deliveryCo
             </label>
           </div>
 
-          <div className="flex gap-2 pt-2">
+          <div className="flex gap-2 pt-1.5">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="flex-1 h-9 hover:border-primary hover:text-primary hover:bg-transparent">Отменить</Button>
             <Button 
               type="submit" 
