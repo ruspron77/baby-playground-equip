@@ -82,15 +82,17 @@ export function ContentSections() {
                   <Icon name="Phone" size={16} className="text-primary md:w-8 md:h-8" />
                 </div>
                 <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Телефон</h3>
-                <a href="tel:+79181151551" className="text-[10px] md:text-base text-primary hover:underline block break-words md:mb-3 my-[25px]">+7 (918) 115-15-51</a>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 border-[#3eaa03] text-[#3eaa03] hover:bg-[#3eaa03] hover:text-white hover:border-[#3eaa03] active:bg-[#3eaa03] active:text-white"
-                  onClick={() => setIsContactDialogOpen(true)}
-                >
-                  Перезвоните мне
-                </Button>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 md:mb-3 my-[13px]">
+                  <a href="tel:+79181151551" className="text-[10px] md:text-base text-primary hover:underline break-words">+7 (918) 115-15-51</a>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 border-[#3eaa03] text-[#3eaa03] hover:bg-[#3eaa03] hover:text-white hover:border-[#3eaa03] active:bg-[#3eaa03] active:text-white whitespace-nowrap"
+                    onClick={() => setIsContactDialogOpen(true)}
+                  >
+                    Перезвоните мне
+                  </Button>
+                </div>
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
@@ -99,17 +101,19 @@ export function ContentSections() {
                   <Icon name="Mail" size={16} className="text-secondary md:w-8 md:h-8" />
                 </div>
                 <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Email</h3>
-                <a href="mailto:info@urban-play.ru" className="text-[10px] md:text-base text-secondary hover:underline break-words block md:mb-3 my-[25px]">info@urban-play.ru</a>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 border-secondary text-secondary hover:bg-secondary hover:text-white hover:border-secondary active:bg-secondary active:text-white"
-                  asChild
-                >
-                  <a href="mailto:info@urban-play.ru">
-                    Написать письмо
-                  </a>
-                </Button>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 md:mb-3 my-[13px]">
+                  <a href="mailto:info@urban-play.ru" className="text-[10px] md:text-base text-secondary hover:underline break-words">info@urban-play.ru</a>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 border-secondary text-secondary hover:bg-secondary hover:text-white hover:border-secondary active:bg-secondary active:text-white whitespace-nowrap"
+                    asChild
+                  >
+                    <a href="mailto:info@urban-play.ru">
+                      Написать письмо
+                    </a>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
@@ -118,17 +122,19 @@ export function ContentSections() {
                   <Icon name="MapPin" size={16} className="text-[#0284c7] md:w-8 md:h-8" />
                 </div>
                 <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Адрес</h3>
-                <p className="md:text-base text-muted-foreground break-words md:mb-3 text-base my-[13px]">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 border-[#0284c7] text-[#0284c7] hover:bg-[#0284c7] hover:text-white hover:border-[#0284c7] active:bg-[#0284c7] active:text-white"
-                  asChild
-                >
-                  <a href="https://yandex.ru/maps/?ll=39.034425,45.057162&mode=routes&rtext=~45.057162,39.034425&rtt=auto&z=17" target="_blank" rel="noopener noreferrer">
-                    Как добраться
-                  </a>
-                </Button>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 md:mb-3 my-[13px]">
+                  <p className="text-[10px] md:text-base text-muted-foreground break-words m-0">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 border-[#0284c7] text-[#0284c7] hover:bg-[#0284c7] hover:text-white hover:border-[#0284c7] active:bg-[#0284c7] active:text-white whitespace-nowrap"
+                    asChild
+                  >
+                    <a href="https://yandex.ru/maps/?ll=39.034425,45.057162&mode=routes&rtext=~45.057162,39.034425&rtt=auto&z=17" target="_blank" rel="noopener noreferrer">
+                      Как добраться
+                    </a>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
