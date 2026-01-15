@@ -68,7 +68,7 @@ export function CategoryDialogs({
     <>
       <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
         <DialogContent className="sm:max-w-4xl max-h-[80vh] sm:max-h-[80vh] h-full sm:h-auto overflow-y-auto m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full">
-          <DialogHeader className="hidden sm:block">
+          <DialogHeader>
             <DialogTitle className="text-2xl sm:text-4xl font-heading font-semibold text-center mb-2 sm:mb-4">
               {currentCategory?.name}
             </DialogTitle>
@@ -87,8 +87,8 @@ export function CategoryDialogs({
                     <span className="text-7xl group-hover:scale-110 transition-transform duration-300">{sub.image}</span>
                   )}
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 py-3 px-2 bg-gradient-to-t from-black/60 to-transparent">
-                  <h4 className="font-heading text-white text-base sm:text-xl leading-tight font-medium text-center">{sub.name}</h4>
+                <div className="absolute bottom-0 left-0 right-0 py-1 px-2 bg-black/20">
+                  <h4 className="font-heading text-white text-sm sm:text-xl leading-tight font-light text-center">{sub.name}</h4>
                 </div>
               </div>
             ))}
