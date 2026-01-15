@@ -72,7 +72,7 @@ export function ContentSections() {
             <h2 className="text-4xl font-heading mb-4 font-semibold">Контакты</h2>
             <p className="text-lg text-muted-foreground">Свяжитесь с нами любым удобным способом</p>
           </div>
-          <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6 max-w-5xl mx-auto">
             <Card className="text-center hover:shadow-lg transition-shadow">
               <CardContent className="p-2 md:p-6 flex flex-col h-full">
                 <div className="w-8 h-8 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
