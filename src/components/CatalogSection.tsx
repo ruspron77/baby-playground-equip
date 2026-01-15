@@ -203,6 +203,9 @@ export function CatalogSection({
         setIsSubSubcategoryDialogOpen={setIsSubSubcategoryDialogOpen}
         currentSubcategory={currentSubcategory}
         handleSubSubcategoryClick={handleSubSubcategoryClick}
+        onBackFromSubSubcategory={() => {
+          setIsCategoryDialogOpen(true);
+        }}
       />
 
       <CategoryGrid

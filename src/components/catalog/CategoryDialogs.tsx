@@ -35,6 +35,8 @@ interface CategoryDialogsProps {
   setIsSubSubcategoryDialogOpen: (open: boolean) => void;
   currentSubcategory: Subcategory | null;
   handleSubSubcategoryClick: (subSubName: string) => void;
+  onBackFromSubcategory?: () => void;
+  onBackFromSubSubcategory?: () => void;
 }
 
 export function CategoryDialogs({
@@ -46,7 +48,22 @@ export function CategoryDialogs({
   setIsSubSubcategoryDialogOpen,
   currentSubcategory,
   handleSubSubcategoryClick,
+  onBackFromSubcategory,
+  onBackFromSubSubcategory,
 }: CategoryDialogsProps) {
+  const handleBackFromSubcategory = () => {
+    setIsCategoryDialogOpen(false);
+    if (onBackFromSubcategory) {
+      onBackFromSubcategory();
+    }
+  };
+
+  const handleBackFromSubSubcategory = () => {
+    setIsSubSubcategoryDialogOpen(false);
+    if (onBackFromSubSubcategory) {
+      onBackFromSubSubcategory();
+    }
+  };
   return (
     <>
       <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
@@ -56,7 +73,7 @@ export function CategoryDialogs({
               variant="outline"
               size="icon"
               className="border-[#1d2025] text-[#1d2025] hover:bg-transparent hover:border-[#3eaa03] hover:text-[#3eaa03] h-9 w-9"
-              onClick={() => setIsCategoryDialogOpen(false)}
+              onClick={handleBackFromSubcategory}
             >
               <Icon name="ArrowLeft" size={20} />
             </Button>
@@ -108,7 +125,7 @@ export function CategoryDialogs({
               variant="outline"
               size="icon"
               className="border-[#1d2025] text-[#1d2025] hover:bg-transparent hover:border-[#3eaa03] hover:text-[#3eaa03] h-9 w-9"
-              onClick={() => setIsSubSubcategoryDialogOpen(false)}
+              onClick={handleBackFromSubSubcategory}
             >
               <Icon name="ArrowLeft" size={20} />
             </Button>
