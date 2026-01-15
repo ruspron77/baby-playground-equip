@@ -50,10 +50,10 @@ export function ContentSections() {
             <h2 className="text-4xl font-heading mb-4 font-semibold">Сертификаты</h2>
             <p className="text-lg text-muted-foreground">Вся продукция сертифицирована и соответствует стандартам качества</p>
           </div>
-          <div className="grid grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
             {['ГОСТ Р', 'ТР ТС', 'ISO 9001'].map((cert, idx) => (
               <Card key={idx} className="text-center hover:shadow-lg transition-shadow animate-scale-in" style={{ animationDelay: `${idx * 0.1}s` }}>
-                <CardContent className="p-3 md:p-8">
+                <CardContent className="p-3 md:p-6">
                   <div className="w-12 h-12 md:w-24 md:h-24 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-4">
                     <Icon name="Award" size={24} className="text-primary md:w-12 md:h-12" />
                   </div>
@@ -72,9 +72,9 @@ export function ContentSections() {
             <h2 className="text-4xl font-heading mb-4 font-semibold">Контакты</h2>
             <p className="text-lg text-muted-foreground">Свяжитесь с нами любым удобным способом</p>
           </div>
-          <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-6 max-w-5xl mx-auto">
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-2 md:p-8">
+              <CardContent className="p-2 md:p-6">
                 <div className="w-8 h-8 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
                   <Icon name="Phone" size={16} className="text-primary md:w-8 md:h-8" />
                 </div>
@@ -91,7 +91,7 @@ export function ContentSections() {
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-2 md:p-8">
+              <CardContent className="p-2 md:p-6">
                 <div className="w-8 h-8 md:w-16 md:h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
                   <Icon name="Mail" size={16} className="text-secondary md:w-8 md:h-8" />
                 </div>
@@ -108,7 +108,7 @@ export function ContentSections() {
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-2 md:p-8">
+              <CardContent className="p-2 md:p-6">
                 <div className="w-8 h-8 md:w-16 md:h-16 bg-[#0284c7]/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
                   <Icon name="MapPin" size={16} className="text-[#0284c7] md:w-8 md:h-8" />
                 </div>
