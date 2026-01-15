@@ -92,7 +92,7 @@ export function ProductDialog({
         {selectedProduct && (
           <div className="grid md:grid-cols-[1.2fr,0.8fr] gap-2 md:gap-6">
             <div>
-              <div className="relative aspect-square bg-white rounded-lg flex items-center justify-center overflow-hidden border p-0 mb-2">
+              <div className="relative aspect-square bg-white rounded-lg flex items-center justify-center overflow-hidden border md:border border-0 p-0 mb-2">
                 {productImages.length > 0 ? (
                   <>
                     <img 
@@ -162,7 +162,7 @@ export function ProductDialog({
                 <h2 className="font-heading sm:mb-4 font-semibold text-lg sm:text-3xl my-0">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
                 <p className="font-bold text-primary sm:mb-4 text-xl sm:text-3xl my-0 py-1 mt-3">{formatPrice(selectedProduct.price)} ₽</p>
                 
-                <div className="flex gap-2 sm:gap-3 justify-start">
+                <div className="flex gap-2 sm:gap-3 justify-start items-center">
                   <Button 
                     size="lg" 
                     className="h-11 px-6"
@@ -181,6 +181,16 @@ export function ProductDialog({
                     className="hover:border-primary hover:text-primary hover:bg-transparent h-11 w-11 p-0"
                   >
                     <Icon name="Heart" size={20} className={isFavorite ? 'fill-red-500 text-red-500' : ''} />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    asChild
+                    className="md:hidden border-[#3eaa03] text-[#3eaa03] bg-transparent hover:bg-[#3eaa03] hover:text-white h-11 w-11 p-0 ml-auto"
+                  >
+                    <a href="tel:+79181151551">
+                      <Icon name="Phone" size={20} />
+                    </a>
                   </Button>
                 </div>
               </div>
@@ -204,20 +214,7 @@ export function ProductDialog({
                 )}
               </div>
 
-              <div className="border-t pt-3 mx-0 my-0 py-0 block md:hidden">
-                <Button 
-                  variant="outline" 
-                  size="lg" 
-                  asChild
-                  className="w-full border-2 transition-colors h-10 bg-[#3eaa03] text-white hover:bg-[#2d8902]"
-                  style={{ borderColor: '#3eaa03' }}
-                >
-                  <a href="tel:+79181151551">
-                    <Icon name="Phone" size={18} className="mr-2" />
-                    <span className="text-sm">Позвонить</span>
-                  </a>
-                </Button>
-              </div>
+
               <div className="border-t sm:py-3 mx-0 my-0 py-0 hidden md:block">
                 <p className="text-muted-foreground text-sm py-[5px] my-[17px]">
                   Если появились вопросы, вы можете получить консультацию руководителя проекта:
