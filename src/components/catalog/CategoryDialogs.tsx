@@ -77,18 +77,18 @@ export function CategoryDialogs({
             {currentCategory?.subcategories.map((sub) => (
               <div
                 key={sub.name}
-                className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group rounded-md relative"
+                className="cursor-pointer transition-all hover:shadow-xl group rounded-md relative"
                 onClick={() => handleSubcategoryClick(sub)}
               >
-                <div className="aspect-[4/3] relative overflow-hidden flex items-center justify-center">
+                <div className="aspect-[4/3] relative flex items-center justify-center">
                   {sub.image.startsWith('http') ? (
-                    <img src={sub.image} alt={sub.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                    <img src={sub.image} alt={sub.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   ) : (
                     <span className="text-7xl group-hover:scale-110 transition-transform duration-300">{sub.image}</span>
                   )}
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 py-1 px-2">
-                  <h4 className="font-heading text-white text-sm sm:text-xl leading-tight font-light text-center drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] py-[7px]">{sub.name}</h4>
+                  <div className="absolute bottom-0 left-0 right-0 py-1 px-2">
+                    <h4 className="font-heading text-white text-sm sm:text-xl leading-tight font-light text-center drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] py-[7px]">{sub.name}</h4>
+                  </div>
                 </div>
               </div>
             ))}
