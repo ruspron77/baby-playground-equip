@@ -170,7 +170,7 @@ export function ProductDialog({
                     size="icon"
                     variant="outline"
                     onClick={() => toggleFavorite(selectedProduct)}
-                    className="hover:border-primary hover:text-primary hover:bg-transparent h-11 w-11 p-0"
+                    className="hover:border-primary hover:text-primary hover:bg-transparent h-11 w-11 p-0 flex-shrink-0"
                   >
                     <Icon name="Heart" size={20} className={isFavorite ? 'fill-red-500 text-red-500' : ''} />
                   </Button>
@@ -178,7 +178,7 @@ export function ProductDialog({
                     variant="outline"
                     size="lg"
                     asChild
-                    className="md:hidden border-[#3eaa03] text-[#3eaa03] bg-transparent hover:bg-[#3eaa03] hover:text-white h-11 px-4 ml-auto"
+                    className="md:hidden border-[#3eaa03] text-[#3eaa03] bg-transparent hover:bg-[#3eaa03] hover:text-white h-11 px-4 ml-auto flex-shrink-0"
                   >
                     <a href="tel:+79181151551" className="flex items-center gap-2">
                       <Icon name="Phone" size={18} />
@@ -207,7 +207,24 @@ export function ProductDialog({
                 )}
               </div>
 
-
+              <div className="border-t sm:py-3 mx-0 my-0 py-0 hidden md:block">
+                <p className="text-muted-foreground text-sm py-[5px] my-[17px]">
+                  Если появились вопросы, вы можете получить консультацию руководителя проекта:
+                </p>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full border-2 transition-colors h-11 bg-[#3eaa03] text-white hover:bg-[#2d8902] hover:text-white"
+                  style={{ borderColor: '#3eaa03' }}
+                  onClick={() => {
+                    setIsProductDialogOpen(false);
+                    setIsContactDialogOpen(true);
+                  }}
+                >
+                  <Icon name="Phone" size={18} className="mr-2" />
+                  <span className="text-sm sm:text-base">Заказать звонок</span>
+                </Button>
+              </div>
 
             </div>
           </div>
