@@ -107,7 +107,7 @@ export function CategoryDialogs({
             {currentSubcategory?.children?.map((subSub) => (
               <Card
                 key={subSub.name}
-                className="cursor-pointer transition-all hover:shadow-xl hover:-translate-y-2 overflow-hidden group flex flex-col border-2 border-gray-200 hover:border-gray-200 rounded-md relative"
+                className="cursor-pointer transition-all hover:shadow-xl hover:-translate-y-2 overflow-hidden group flex flex-col border-2 border-gray-200 hover:border-gray-200 rounded-md"
                 onClick={() => handleSubSubcategoryClick(subSub.name)}
               >
                 <div className="aspect-square relative overflow-hidden bg-white flex items-center justify-center p-0 flex-1">
