@@ -110,15 +110,15 @@ export function CategoryDialogs({
                 className="cursor-pointer transition-all hover:shadow-xl hover:-translate-y-2 overflow-hidden group border-2 border-gray-200 hover:border-gray-200 rounded-md"
                 onClick={() => handleSubSubcategoryClick(subSub.name)}
               >
-                <div className="aspect-square relative overflow-hidden bg-white flex items-center justify-center p-0">
+                <div className="aspect-square overflow-hidden bg-white flex items-center justify-center p-0">
                   {subSub.image.startsWith('http') ? (
                     <img src={subSub.image} alt={subSub.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300 scale-110" />
                   ) : (
                     <span className="text-7xl group-hover:scale-110 transition-transform duration-300">{subSub.image}</span>
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 bg-white py-1 sm:py-2 px-2 sm:px-4">
-                    <h4 className="font-semibold text-center text-xs sm:text-base break-words leading-tight">{subSub.name}</h4>
-                  </div>
+                </div>
+                <div className="bg-white py-1 sm:py-2 px-2 sm:px-4 border-t">
+                  <h4 className="font-semibold text-center text-xs sm:text-base break-words leading-tight">{subSub.name}</h4>
                 </div>
               </Card>
             ))}
