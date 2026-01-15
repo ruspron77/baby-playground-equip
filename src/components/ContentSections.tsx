@@ -74,57 +74,30 @@ export function ContentSections() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6 max-w-5xl mx-auto">
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-2 md:p-6 flex flex-col h-full">
-                <div className="w-8 h-8 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
-                  <Icon name="Phone" size={16} className="text-primary md:w-8 md:h-8" />
+              <CardContent className="p-4 md:p-6">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                  <Icon name="Phone" size={24} className="text-primary md:w-8 md:h-8" />
                 </div>
-                <h3 className="text-sm md:text-base font-bold mb-0.5 md:mb-2">Телефон</h3>
-                <a href="tel:+79181151551" className="text-xs md:text-base text-primary hover:underline break-words block mb-2 md:mb-3">+7 (918) 115-15-51</a>
-                <Button 
-                  size="sm" 
-                  className="text-xs md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#22c55e] text-white hover:bg-[#4ade80] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
-                  onClick={() => setIsContactDialogOpen(true)}
-                >
-                  <span className="block md:hidden">Позвонить</span>
-                  <span className="hidden md:block">Перезвоните мне</span>
-                </Button>
+                <h3 className="text-base md:text-base font-bold mb-2 md:mb-2">Телефон</h3>
+                <a href="tel:+79181151551" className="text-sm md:text-base text-primary hover:underline break-words block">+7 (918) 115-15-51</a>
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-2 md:p-6 flex flex-col h-full">
-                <div className="w-8 h-8 md:w-16 md:h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
-                  <Icon name="Mail" size={16} className="text-secondary md:w-8 md:h-8" />
+              <CardContent className="p-4 md:p-6">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                  <Icon name="Mail" size={24} className="text-secondary md:w-8 md:h-8" />
                 </div>
-                <h3 className="text-sm md:text-base font-bold mb-0.5 md:mb-2">Email</h3>
-                <a href="mailto:info@urban-play.ru" className="text-xs md:text-base text-secondary hover:underline break-words block mb-2 md:mb-3">info@urban-play.ru</a>
-                <Button 
-                  size="sm" 
-                  className="text-xs md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#a855f7] text-white hover:bg-[#c084fc] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
-                  asChild
-                >
-                  <a href="mailto:info@urban-play.ru">
-                    <span className="block md:hidden">Написать</span>
-                    <span className="hidden md:block">Написать нам</span>
-                  </a>
-                </Button>
+                <h3 className="text-base md:text-base font-bold mb-2 md:mb-2">Email</h3>
+                <a href="mailto:info@urban-play.ru" className="text-sm md:text-base text-secondary hover:underline break-words block">info@urban-play.ru</a>
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-2 md:p-6 flex flex-col h-full">
-                <div className="w-8 h-8 md:w-16 md:h-16 bg-[#0284c7]/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
-                  <Icon name="MapPin" size={16} className="text-[#0284c7] md:w-8 md:h-8" />
+              <CardContent className="p-4 md:p-6">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-[#0284c7]/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                  <Icon name="MapPin" size={24} className="text-[#0284c7] md:w-8 md:h-8" />
                 </div>
-                <h3 className="text-sm md:text-base font-bold mb-0.5 md:mb-2">Адрес</h3>
-                <p className="text-xs md:text-base text-muted-foreground break-words mb-1 md:mb-3">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
-                <Button 
-                  size="sm" 
-                  className="text-xs md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#0284c7] text-white hover:bg-[#38bdf8] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
-                  asChild
-                >
-                  <a href="https://yandex.ru/maps/?ll=38.989757,45.082358&mode=search&sll=38.989757,45.082358&text=Краснодар%2C%20ул.%20Кореновская%2C%2057&z=17" target="_blank" rel="noopener noreferrer">
-                    Как добраться
-                  </a>
-                </Button>
+                <h3 className="text-base md:text-base font-bold mb-2 md:mb-2">Адрес</h3>
+                <p className="text-sm md:text-base text-muted-foreground break-words">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
               </CardContent>
             </Card>
           </div>
