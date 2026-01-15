@@ -295,7 +295,7 @@ export function Header({
                     <Button
                       variant="outline"
                       size="icon"
-                      className="border-[#1d2025] text-[#1d2025] hover:bg-transparent hover:border-[#3eaa03] hover:text-[#3eaa03] h-9 w-9"
+                      className="hover:border-primary hover:text-primary hover:bg-transparent h-9 w-9"
                       onClick={() => {
                         setIsCartOpen(false);
                         setTimeout(() => {
@@ -313,7 +313,7 @@ export function Header({
                     <Button
                       variant="outline"
                       size="icon"
-                      className="border-[#1d2025] text-[#1d2025] hover:bg-transparent hover:border-[#3eaa03] hover:text-[#3eaa03] h-9 w-9"
+                      className="hover:border-primary hover:text-primary hover:bg-transparent h-9 w-9"
                       onClick={() => setIsCartOpen(false)}
                     >
                       <Icon name="X" size={20} />
