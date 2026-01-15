@@ -113,8 +113,8 @@ export function CategoryDialogs({
                     <span className="text-7xl group-hover:scale-110 transition-transform duration-300">{subSub.image}</span>
                   )}
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 py-2 px-2 sm:px-4 bg-white/90 sm:bg-transparent">
-                  <h4 className="font-semibold text-center text-xs sm:text-base break-words leading-tight text-[#1d2025] sm:text-white sm:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{subSub.name}</h4>
+                <div className="absolute bottom-0 left-0 right-0 py-2 px-2 sm:px-4 bg-white/90">
+                  <h4 className="font-semibold text-center text-xs sm:text-base break-words leading-tight text-[#1d2025]">{subSub.name}</h4>
                 </div>
               </div>
             ))}
