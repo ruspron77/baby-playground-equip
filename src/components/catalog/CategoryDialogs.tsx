@@ -87,7 +87,7 @@ export function CategoryDialogs({
             {currentCategory?.subcategories.map((sub) => (
               <Card
                 key={sub.name}
-                className="cursor-pointer transition-all hover:shadow-xl hover:-translate-y-2 overflow-hidden group flex flex-col border-2 border-gray-200 hover:border-gray-200 rounded-md"
+                className="cursor-pointer transition-all hover:shadow-xl hover:-translate-y-2 overflow-hidden group flex flex-col border-0 rounded-md"
                 onClick={() => handleSubcategoryClick(sub)}
               >
                 <div className="aspect-[4/3] relative overflow-hidden bg-white flex items-center justify-center p-0 flex-1">
@@ -102,7 +102,7 @@ export function CategoryDialogs({
                                    sub.name.includes('Eco') ? 'rgba(232, 222, 248, 0.95)' : 
                                    'white'
                 }}>
-                  <h4 className="font-semibold text-center text-xs sm:text-base break-words leading-tight">{sub.name}</h4>
+                  <h4 className="font-semibold text-center text-xs sm:text-base break-words leading-tight text-white">{sub.name}</h4>
                 </div>
               </Card>
             ))}
@@ -131,7 +131,7 @@ export function CategoryDialogs({
             {currentSubcategory?.children?.map((subSub) => (
               <Card
                 key={subSub.name}
-                className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group border-2 border-gray-200 hover:border-gray-200 rounded-md"
+                className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group border-0 rounded-md"
                 onClick={() => handleSubSubcategoryClick(subSub.name)}
               >
                 <div className="aspect-square relative overflow-hidden bg-white flex items-center justify-center p-0">
@@ -142,7 +142,7 @@ export function CategoryDialogs({
                   )}
                 </div>
                 <div className="py-1 sm:py-3 px-2 sm:px-4 bg-white -mt-px">
-                  <h4 className="text-xs sm:text-base font-semibold text-center leading-tight">{subSub.name}</h4>
+                  <h4 className="text-xs sm:text-base font-semibold text-center leading-tight text-white">{subSub.name}</h4>
                 </div>
               </Card>
             ))}
