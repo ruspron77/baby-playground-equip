@@ -34,7 +34,7 @@ export const categories = [
         image: 'https://cdn.poehali.dev/files/%D0%B8%D0%B3%D1%80%D0%B0%20ciassic.png',
         hasChildren: true,
         children: [
-          { name: 'Игровые комплексы', image: 'https://cdn.poehali.dev/files/237.png' },
+          { name: 'Игровые комплексы', image: 'https://cdn.poehali.dev/files/ененпре.png' },
           { name: 'Балансиры', image: 'https://cdn.poehali.dev/files/мишкаа.png' },
           { name: 'Горки', image: 'https://cdn.poehali.dev/files/0100.png' },
           { name: 'Домики', image: 'https://cdn.poehali.dev/files/домик 2.png' },
