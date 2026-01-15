@@ -130,7 +130,7 @@ export function ContentSections() {
                     className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 border-[#0284c7] text-[#0284c7] hover:bg-[#0284c7] hover:text-white hover:border-[#0284c7] active:bg-[#0284c7] active:text-white whitespace-nowrap"
                     asChild
                   >
-                    <a href="https://yandex.ru/maps/?ll=39.034425,45.057162&mode=routes&rtext=~45.057162,39.034425&rtt=auto&z=17" target="_blank" rel="noopener noreferrer">
+                    <a href="https://yandex.ru/maps/?ll=38.989757,45.082358&mode=search&sll=38.989757,45.082358&text=Краснодар%2C%20ул.%20Кореновская%2C%2057&z=17" target="_blank" rel="noopener noreferrer">
                       Как добраться
                     </a>
                   </Button>
