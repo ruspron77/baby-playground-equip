@@ -79,7 +79,7 @@ export function ContentSections() {
                   <Icon name="Phone" size={24} className="text-primary md:w-8 md:h-8" />
                 </div>
                 <h3 className="text-base md:text-base font-bold mb-2 md:mb-2">Телефон</h3>
-                <a href="tel:+79181151551" className="text-sm md:text-base text-primary hover:underline break-words block">+7 (918) 115-15-51</a>
+                <a href="tel:+79181151551" className="text-base md:text-base text-primary hover:underline break-words block">+7 (918) 115-15-51</a>
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
@@ -88,7 +88,7 @@ export function ContentSections() {
                   <Icon name="Mail" size={24} className="text-secondary md:w-8 md:h-8" />
                 </div>
                 <h3 className="text-base md:text-base font-bold mb-2 md:mb-2">Email</h3>
-                <a href="mailto:info@urban-play.ru" className="text-sm md:text-base text-secondary hover:underline break-words block">info@urban-play.ru</a>
+                <a href="mailto:info@urban-play.ru" className="text-base md:text-base text-secondary hover:underline break-words block">info@urban-play.ru</a>
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
@@ -97,7 +97,7 @@ export function ContentSections() {
                   <Icon name="MapPin" size={24} className="text-[#0284c7] md:w-8 md:h-8" />
                 </div>
                 <h3 className="text-base md:text-base font-bold mb-2 md:mb-2">Адрес</h3>
-                <p className="text-sm md:text-base text-muted-foreground break-words">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+                <p className="text-base md:text-base text-muted-foreground break-words">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
               </CardContent>
             </Card>
           </div>
