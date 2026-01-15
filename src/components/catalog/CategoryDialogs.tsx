@@ -69,7 +69,7 @@ export function CategoryDialogs({
       <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
         <DialogContent className="sm:max-w-4xl max-h-[80vh] sm:max-h-[80vh] h-full sm:h-auto overflow-y-auto m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full">
           <DialogHeader>
-            <DialogTitle className="text-4xl font-heading font-semibold text-center mb-2 sm:mb-4">
+            <DialogTitle className="text-2xl sm:text-4xl font-heading font-semibold text-center mb-2 sm:mb-4">
               {currentCategory?.name}
             </DialogTitle>
           </DialogHeader>
@@ -105,16 +105,16 @@ export function CategoryDialogs({
           </DialogHeader>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
             {currentSubcategory?.children?.map((subSub) => (
-              <div key={subSub.name} className="cursor-pointer transition-all hover:shadow-xl hover:-translate-y-2 overflow-hidden group border-2 border-gray-200 hover:border-gray-200 rounded-md bg-white flex flex-col" onClick={() => handleSubSubcategoryClick(subSub.name)}>
-                <div className="aspect-square overflow-hidden bg-white flex items-center justify-center p-0">
+              <div key={subSub.name} className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group rounded-md flex flex-col relative" onClick={() => handleSubSubcategoryClick(subSub.name)}>
+                <div className="aspect-square overflow-hidden flex items-center justify-center p-0">
                   {subSub.image.startsWith('http') ? (
-                    <img src={subSub.image} alt={subSub.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300 scale-110" />
+                    <img src={subSub.image} alt={subSub.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   ) : (
                     <span className="text-7xl group-hover:scale-110 transition-transform duration-300">{subSub.image}</span>
                   )}
                 </div>
-                <div className="py-2 px-2 sm:px-4 bg-white">
-                  <h4 className="font-semibold text-center text-xs sm:text-base break-words leading-tight">{subSub.name}</h4>
+                <div className="absolute bottom-0 left-0 right-0 py-2 px-2 sm:px-4">
+                  <h4 className="font-semibold text-center text-xs sm:text-base break-words leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{subSub.name}</h4>
                 </div>
               </div>
             ))}
