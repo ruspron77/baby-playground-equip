@@ -176,8 +176,9 @@ export function ProductDialog({
                   </Button>
                   <Button
                     size="lg"
+                    variant="outline"
                     onClick={() => window.location.href = 'tel:+79181151551'}
-                    className="sm:hidden h-11 px-6 flex-shrink-0 ml-auto bg-primary text-white hover:bg-primary/90"
+                    className="sm:hidden h-11 px-6 flex-shrink-0 ml-auto bg-transparent border-primary text-primary hover:bg-primary hover:text-white"
                   >
                     <Icon name="Phone" size={18} className="mr-2" />
                     <span className="text-sm">Позвонить</span>
