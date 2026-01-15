@@ -174,6 +174,14 @@ export function ProductDialog({
                   >
                     <Icon name="Heart" size={20} className={isFavorite ? 'fill-red-500 text-red-500' : ''} />
                   </Button>
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    onClick={() => window.location.href = 'tel:+79181151551'}
+                    className="sm:hidden hover:border-primary hover:text-primary hover:bg-transparent h-11 w-11 p-0 flex-shrink-0 ml-auto border-primary text-primary"
+                  >
+                    <Icon name="Phone" size={20} />
+                  </Button>
                 </div>
               </div>
 
