@@ -82,7 +82,7 @@ export function ContentSections() {
                   <Icon name="Phone" size={16} className="text-primary md:w-8 md:h-8" />
                 </div>
                 <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Телефон</h3>
-                <a href="tel:+79181151551" className="text-[10px] md:text-base text-primary hover:underline block break-words mb-1 md:mb-3">+7 (918) 115-15-51</a>
+                <a href="tel:+79181151551" className="text-[10px] md:text-base text-primary hover:underline block break-words md:mb-3 my-[25px]">+7 (918) 115-15-51</a>
                 <Button 
                   variant="outline" 
                   size="sm" 
@@ -99,7 +99,7 @@ export function ContentSections() {
                   <Icon name="Mail" size={16} className="text-secondary md:w-8 md:h-8" />
                 </div>
                 <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Email</h3>
-                <a href="mailto:info@urban-play.ru" className="text-[10px] md:text-base text-secondary hover:underline break-words block mb-1 md:mb-3">info@urban-play.ru</a>
+                <a href="mailto:info@urban-play.ru" className="text-[10px] md:text-base text-secondary hover:underline break-words block md:mb-3 my-[25px]">info@urban-play.ru</a>
                 <Button 
                   variant="outline" 
                   size="sm" 
@@ -118,7 +118,7 @@ export function ContentSections() {
                   <Icon name="MapPin" size={16} className="text-[#0284c7] md:w-8 md:h-8" />
                 </div>
                 <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Адрес</h3>
-                <p className="text-[10px] md:text-base text-muted-foreground break-words mb-1 md:mb-3">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+                <p className="md:text-base text-muted-foreground break-words md:mb-3 text-base my-[13px]">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
                 <Button 
                   variant="outline" 
                   size="sm" 
