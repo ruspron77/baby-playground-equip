@@ -171,7 +171,7 @@ export function CategoryGrid({
                 style={isSelected ? { borderColor: '#3eaa03' } : {}}
               >
                 <div 
-                  className="aspect-[4/3] bg-white flex items-center justify-center relative overflow-hidden p-2 border-b-2 border-gray-200"
+                  className="aspect-[4/3] bg-white flex items-center justify-center relative overflow-hidden p-2"
                   onClick={() => handleProductClick(product)}
                 >
                   {product.image.startsWith('http') ? (
