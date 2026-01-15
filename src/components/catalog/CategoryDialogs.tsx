@@ -80,12 +80,15 @@ export function CategoryDialogs({
                 className="cursor-pointer transition-all hover:shadow-xl hover:-translate-y-2 overflow-hidden group flex flex-col border-2 border-gray-200 hover:border-gray-200 rounded-md"
                 onClick={() => handleSubcategoryClick(sub)}
               >
-                <div className="aspect-[4/3] relative overflow-hidden bg-white flex items-center justify-center p-0 flex-1">
+                <div className="aspect-[4/3] relative overflow-hidden bg-white flex items-center justify-center p-0">
                   {sub.image.startsWith('http') ? (
                     <img src={sub.image} alt={sub.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 scale-110" />
                   ) : (
                     <span className="text-7xl group-hover:scale-110 transition-transform duration-300">{sub.image}</span>
                   )}
+                </div>
+                <div className="py-2 px-2 sm:px-4 bg-white">
+                  <h4 className="font-semibold text-center text-xs sm:text-base break-words leading-tight">{sub.name}</h4>
                 </div>
               </Card>
             ))}
