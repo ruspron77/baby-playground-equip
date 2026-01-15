@@ -78,11 +78,11 @@ export function ContentSections() {
                 <div className="w-8 h-8 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
                   <Icon name="Phone" size={16} className="text-primary md:w-8 md:h-8" />
                 </div>
-                <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Телефон</h3>
-                <a href="tel:+79181151551" className="text-[10px] md:text-base text-primary hover:underline break-words block mb-2 md:mb-3">+7 (918) 115-15-51</a>
+                <h3 className="text-sm md:text-base font-bold mb-0.5 md:mb-2">Телефон</h3>
+                <a href="tel:+79181151551" className="text-xs md:text-base text-primary hover:underline break-words block mb-2 md:mb-3">+7 (918) 115-15-51</a>
                 <Button 
                   size="sm" 
-                  className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#22c55e] text-white hover:bg-[#4ade80] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
+                  className="text-xs md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#22c55e] text-white hover:bg-[#4ade80] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
                   onClick={() => setIsContactDialogOpen(true)}
                 >
                   <span className="block md:hidden">Позвонить</span>
@@ -95,11 +95,11 @@ export function ContentSections() {
                 <div className="w-8 h-8 md:w-16 md:h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
                   <Icon name="Mail" size={16} className="text-secondary md:w-8 md:h-8" />
                 </div>
-                <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Email</h3>
-                <a href="mailto:info@urban-play.ru" className="text-[10px] md:text-base text-secondary hover:underline break-words block mb-2 md:mb-3">info@urban-play.ru</a>
+                <h3 className="text-sm md:text-base font-bold mb-0.5 md:mb-2">Email</h3>
+                <a href="mailto:info@urban-play.ru" className="text-xs md:text-base text-secondary hover:underline break-words block mb-2 md:mb-3">info@urban-play.ru</a>
                 <Button 
                   size="sm" 
-                  className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#a855f7] text-white hover:bg-[#c084fc] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
+                  className="text-xs md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#a855f7] text-white hover:bg-[#c084fc] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
                   asChild
                 >
                   <a href="mailto:info@urban-play.ru">
@@ -114,11 +114,11 @@ export function ContentSections() {
                 <div className="w-8 h-8 md:w-16 md:h-16 bg-[#0284c7]/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
                   <Icon name="MapPin" size={16} className="text-[#0284c7] md:w-8 md:h-8" />
                 </div>
-                <h3 className="text-xs md:text-base font-bold mb-0.5 md:mb-2">Адрес</h3>
-                <p className="text-[10px] md:text-base text-muted-foreground break-words mb-1 md:mb-3">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+                <h3 className="text-sm md:text-base font-bold mb-0.5 md:mb-2">Адрес</h3>
+                <p className="text-xs md:text-base text-muted-foreground break-words mb-1 md:mb-3">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
                 <Button 
                   size="sm" 
-                  className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#0284c7] text-white hover:bg-[#38bdf8] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
+                  className="text-xs md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#0284c7] text-white hover:bg-[#38bdf8] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
                   asChild
                 >
                   <a href="https://yandex.ru/maps/?ll=38.989757,45.082358&mode=search&sll=38.989757,45.082358&text=Краснодар%2C%20ул.%20Кореновская%2C%2057&z=17" target="_blank" rel="noopener noreferrer">

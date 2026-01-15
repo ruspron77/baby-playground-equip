@@ -73,14 +73,14 @@ export function CategoryDialogs({
               {currentCategory?.name}
             </DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4 pb-4 sm:pb-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4 pb-4 sm:pb-0">
             {currentCategory?.subcategories.map((sub) => (
               <div
                 key={sub.name}
                 className="cursor-pointer transition-all hover:shadow-xl group rounded-md relative"
                 onClick={() => handleSubcategoryClick(sub)}
               >
-                <div className="aspect-[4/3] relative flex items-center justify-center">
+                <div className="aspect-[4/3] relative flex items-center justify-center overflow-hidden rounded-md">
                   {sub.image.startsWith('http') ? (
                     <img src={sub.image} alt={sub.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   ) : (
@@ -99,11 +99,11 @@ export function CategoryDialogs({
       <Dialog open={isSubSubcategoryDialogOpen} onOpenChange={setIsSubSubcategoryDialogOpen}>
         <DialogContent className="sm:max-w-5xl max-h-[80vh] sm:max-h-[80vh] h-full sm:h-auto overflow-y-auto m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full">
           <DialogHeader>
-            <DialogTitle className="text-4xl font-heading font-semibold text-center mb-4">
+            <DialogTitle className="text-2xl sm:text-4xl font-heading font-semibold text-center mb-2 sm:mb-4">
               {currentSubcategory?.name}
             </DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
             {currentSubcategory?.children?.map((subSub) => (
               <div key={subSub.name} className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group rounded-md flex flex-col relative border-2 border-gray-200" onClick={() => handleSubSubcategoryClick(subSub.name)}>
                 <div className="aspect-square overflow-hidden flex items-center justify-center p-0">
