@@ -87,7 +87,7 @@ export function CategoryDialogs({
                     <span className="text-7xl group-hover:scale-110 transition-transform duration-300">{sub.image}</span>
                   )}
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 py-1.5 px-2">
+                <div className="absolute bottom-0 left-0 right-0 py-1.5 px-2 bg-transparent">
                   <h4 className="font-heading text-white text-sm sm:text-xl leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-light py-[7px] text-center">{sub.name}</h4>
                 </div>
               </div>
@@ -108,9 +108,9 @@ export function CategoryDialogs({
               <div key={subSub.name} className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group rounded-md flex flex-col relative border-2 border-gray-200" onClick={() => handleSubSubcategoryClick(subSub.name)}>
                 <div className="aspect-square overflow-hidden flex items-center justify-center p-0">
                   {subSub.image.startsWith('http') ? (
-                    <img src={subSub.image} alt={subSub.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src={subSub.image} alt={subSub.name} className="w-full h-full object-contain" />
                   ) : (
-                    <span className="text-7xl group-hover:scale-110 transition-transform duration-300">{subSub.image}</span>
+                    <span className="text-7xl">{subSub.image}</span>
                   )}
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 py-1 px-2 sm:px-4">
