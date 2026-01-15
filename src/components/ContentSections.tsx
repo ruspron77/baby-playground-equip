@@ -74,7 +74,7 @@ export function ContentSections() {
           </div>
           <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-6 max-w-5xl mx-auto">
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-2 md:p-6">
+              <CardContent className="p-2 md:p-6 flex flex-col h-full">
                 <div className="w-8 h-8 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
                   <Icon name="Phone" size={16} className="text-primary md:w-8 md:h-8" />
                 </div>
@@ -82,7 +82,7 @@ export function ContentSections() {
                 <a href="tel:+79181151551" className="text-[10px] md:text-base text-primary hover:underline break-words block mb-1 md:mb-3">+7 (918) 115-15-51</a>
                 <Button 
                   size="sm" 
-                  className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#22c55e] text-white hover:bg-[#4ade80] transition-all duration-300 hover:scale-105 active:scale-95"
+                  className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#22c55e] text-white hover:bg-[#4ade80] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
                   onClick={() => setIsContactDialogOpen(true)}
                 >
                   Перезвоните мне
@@ -90,7 +90,7 @@ export function ContentSections() {
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-2 md:p-6">
+              <CardContent className="p-2 md:p-6 flex flex-col h-full">
                 <div className="w-8 h-8 md:w-16 md:h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
                   <Icon name="Mail" size={16} className="text-secondary md:w-8 md:h-8" />
                 </div>
@@ -98,7 +98,7 @@ export function ContentSections() {
                 <a href="mailto:info@urban-play.ru" className="text-[10px] md:text-base text-secondary hover:underline break-words block mb-1 md:mb-3">info@urban-play.ru</a>
                 <Button 
                   size="sm" 
-                  className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#a855f7] text-white hover:bg-[#c084fc] transition-all duration-300 hover:scale-105 active:scale-95"
+                  className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#a855f7] text-white hover:bg-[#c084fc] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
                   asChild
                 >
                   <a href="mailto:info@urban-play.ru">Написать нам</a>
@@ -106,7 +106,7 @@ export function ContentSections() {
               </CardContent>
             </Card>
             <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-2 md:p-6">
+              <CardContent className="p-2 md:p-6 flex flex-col h-full">
                 <div className="w-8 h-8 md:w-16 md:h-16 bg-[#0284c7]/10 rounded-full flex items-center justify-center mx-auto mb-1 md:mb-4">
                   <Icon name="MapPin" size={16} className="text-[#0284c7] md:w-8 md:h-8" />
                 </div>
@@ -114,7 +114,7 @@ export function ContentSections() {
                 <p className="text-[10px] md:text-base text-muted-foreground break-words mb-1 md:mb-3">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
                 <Button 
                   size="sm" 
-                  className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#0284c7] text-white hover:bg-[#38bdf8] transition-all duration-300 hover:scale-105 active:scale-95"
+                  className="text-[10px] md:text-sm px-1 py-1 h-auto md:h-9 w-full bg-[#0284c7] text-white hover:bg-[#38bdf8] transition-all duration-300 hover:scale-105 active:scale-95 mt-auto"
                   asChild
                 >
                   <a href="https://yandex.ru/maps/?ll=38.989757,45.082358&mode=search&sll=38.989757,45.082358&text=Краснодар%2C%20ул.%20Кореновская%2C%2057&z=17" target="_blank" rel="noopener noreferrer">
