@@ -212,7 +212,7 @@ export function ProductDialog({
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="w-full border-2 transition-colors h-11 bg-[#3eaa03] text-white hover:bg-[#2d8902] hover:text-white"
+                  className="w-full border-2 transition-colors h-11 bg-[#3eaa03] text-white hover:bg-[#2d8902] hover:text-white sm:bg-transparent sm:text-[#3eaa03] sm:hover:bg-[#3eaa03] sm:hover:text-white"
                   style={{ borderColor: '#3eaa03' }}
                   onClick={() => {
                     setIsProductDialogOpen(false);
