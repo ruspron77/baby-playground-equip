@@ -158,7 +158,7 @@ export function CatalogSection({
         }
       }, 100);
     }
-  }, [selectedCategory, selectedSeries, selectedSubSubcategory]);
+  }, [selectedCategory]);
 
   useEffect(() => {
     if (selectedSubSubcategory && productsRef.current) {
