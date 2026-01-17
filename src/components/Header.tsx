@@ -290,8 +290,8 @@ export function Header({
                     )}
                   </Button>
                 </SheetTrigger>
-                <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
-                  <div className="absolute top-4 right-4 sm:hidden z-50">
+                <SheetContent className="w-full sm:max-w-lg overflow-y-auto [&>button]:hidden">
+                  <div className="absolute top-4 right-4 z-50">
                     <Button
                       variant="outline"
                       size="icon"

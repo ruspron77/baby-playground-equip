@@ -81,20 +81,23 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
                 className="h-16 w-auto"
               />
             </Link>
-            <Button 
-              variant="outline" 
-              size="icon"
-              onClick={handleNavigateToCatalog}
-              className="rounded-full bg-transparent hover:bg-transparent hover:border-primary hover:text-primary h-9 w-9"
-            >
-              <Icon name="X" size={18} />
-            </Button>
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-heading font-bold hidden sm:block">Избранное</h1>
+              <Button 
+                variant="outline" 
+                size="icon"
+                onClick={handleNavigateToCatalog}
+                className="rounded-full bg-transparent hover:bg-transparent hover:border-primary hover:text-primary h-9 w-9"
+              >
+                <Icon name="X" size={20} />
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-heading font-bold mb-8">Избранное</h1>
+        <h1 className="text-4xl font-heading font-bold mb-8 sm:hidden">Избранное</h1>
 
         {favorites.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
