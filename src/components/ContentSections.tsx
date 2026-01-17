@@ -97,7 +97,14 @@ export function ContentSections() {
                   <Icon name="MapPin" size={24} className="text-[#0284c7] md:w-8 md:h-8" />
                 </div>
                 <h3 className="text-base md:text-base font-bold mb-2 md:mb-2">Адрес</h3>
-                <p className="text-base md:text-base text-muted-foreground break-words">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+                <a 
+                  href="https://yandex.ru/maps/?rtext=~45.053547,38.973389" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-base md:text-base text-blue-600 hover:underline break-words block"
+                >
+                  г. Краснодар, ул. Кореновская, д. 57 оф. 7
+                </a>
               </CardContent>
             </Card>
           </div>
