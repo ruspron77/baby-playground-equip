@@ -139,6 +139,9 @@ const App = () => {
                   favorites={favorites} 
                   removeFromFavorites={removeFromFavorites}
                   addToCart={addToCart}
+                  onProductClick={(product) => {
+                    window.location.href = `/?product=${product.id}`;
+                  }}
                 />
               } 
             />

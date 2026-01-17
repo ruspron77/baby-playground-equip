@@ -134,6 +134,18 @@ export function CatalogSection({
   }, [searchQuery]);
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('product');
+    if (productId) {
+      const product = products.find(p => p.id === parseInt(productId));
+      if (product) {
+        handleProductClick(product);
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    }
+  }, [products]);
+
+  useEffect(() => {
     if (selectedCategory && filtersRef.current) {
       setTimeout(() => {
         const element = filtersRef.current;

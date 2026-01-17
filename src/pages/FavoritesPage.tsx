@@ -24,9 +24,10 @@ interface FavoritesPageProps {
   favorites: Product[];
   removeFromFavorites: (id: number) => void;
   addToCart: (product: Product) => void;
+  onProductClick: (product: Product) => void;
 }
 
-export default function FavoritesPage({ favorites, removeFromFavorites, addToCart }: FavoritesPageProps) {
+export default function FavoritesPage({ favorites, removeFromFavorites, addToCart, onProductClick }: FavoritesPageProps) {
   const navigate = useNavigate();
 
   const handleNavigateToCatalog = () => {
@@ -84,7 +85,7 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
             {favorites.map((product) => (
-              <Card key={product.id} className="overflow-hidden hover:shadow-xl transition-all group">
+              <Card key={product.id} className="overflow-hidden hover:shadow-xl transition-all group cursor-pointer" onClick={() => onProductClick(product)}>
                 <div className="aspect-[4/3] relative overflow-hidden bg-white flex items-center justify-center">
                   {product.image.startsWith('http') ? (
                     <img 
@@ -113,7 +114,10 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
                     <Button 
                       size="sm"
                       className="flex-1 h-7 text-xs px-2"
-                      onClick={() => addToCart(product)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(product);
+                      }}
                     >
                       <Icon name="ShoppingCart" size={12} className="mr-1" />
                       В корзину
@@ -121,7 +125,10 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
                     <Button 
                       size="sm"
                       variant="outline"
-                      onClick={() => removeFromFavorites(product.id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeFromFavorites(product.id);
+                      }}
                       className="hover:bg-transparent hover:border-red-500 hover:text-red-500 h-7 w-7 p-0"
                     >
                       <Icon name="Trash2" size={12} />
