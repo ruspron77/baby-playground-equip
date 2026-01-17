@@ -67,7 +67,7 @@ export function ProductDialog({
 
   return (
     <Dialog open={isProductDialogOpen} onOpenChange={setIsProductDialogOpen}>
-      <DialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[85vh] overflow-y-auto p-3 sm:p-6">
+      <DialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[85vh] overflow-y-auto p-3 sm:p-6 [&>button]:hidden sm:[&>button]:flex">
         <div className="absolute top-4 right-4 sm:hidden z-50">
           <Button
             variant="outline"
