@@ -109,16 +109,6 @@ export function OrderForm({ open, onOpenChange, cart, calculateTotal, deliveryCo
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[95vh] overflow-hidden">
-        <div className="absolute top-4 left-4 sm:hidden z-50">
-          <Button
-            variant="outline"
-            size="icon"
-            className="rounded-full bg-transparent hover:bg-transparent hover:border-primary hover:text-primary h-9 w-9"
-            onClick={() => onOpenChange(false)}
-          >
-            <Icon name="ArrowLeft" size={20} />
-          </Button>
-        </div>
         <DialogHeader className="pb-2">
           <DialogTitle className="text-lg font-heading flex items-center justify-center gap-2">
             <Icon name="FileText" size={18} />

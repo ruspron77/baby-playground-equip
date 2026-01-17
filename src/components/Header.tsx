@@ -290,17 +290,7 @@ export function Header({
                     )}
                   </Button>
                 </SheetTrigger>
-                <SheetContent className="w-full sm:max-w-lg overflow-y-auto [&>button]:hidden">
-                  <div className="absolute top-4 right-4 z-50">
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="rounded-full bg-transparent hover:bg-transparent hover:border-primary hover:text-primary h-8 w-8"
-                      onClick={() => setIsCartOpen(false)}
-                    >
-                      <Icon name="X" size={18} />
-                    </Button>
-                  </div>
+                <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
                   <SheetHeader>
                     <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
                   </SheetHeader>
