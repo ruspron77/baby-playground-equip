@@ -108,7 +108,7 @@ export function CategoryDialogs({
               <div key={subSub.name} className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group rounded-md flex flex-col relative border-2 border-gray-200" onClick={() => handleSubSubcategoryClick(subSub.name)}>
                 <div className="aspect-square overflow-hidden flex items-center justify-center p-0">
                   {subSub.image.startsWith('http') ? (
-                    <img src={subSub.image} alt={subSub.name} className="w-full h-full object-contain" />
+                    <img src={subSub.image} alt={subSub.name} className="w-full h-full object-cover" />
                   ) : (
                     <span className="text-7xl">{subSub.image}</span>
                   )}
