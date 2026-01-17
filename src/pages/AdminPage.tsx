@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 
 const swingProducts = [
-  { article: '0110', name: 'Качели (одинарные, вариант 1)', images: ['https://cdn.poehali.dev/files/111.png'] },
+  { article: '0110', name: 'Качели (одинарные, вариант 1)', images: ['https://cdn.poehali.dev/files/смитьо.png'] },
   { article: '0111', name: 'Качели (одинарные, вариант 2)', images: ['https://cdn.poehali.dev/files/115.png'] },
   { article: '0112', name: 'Качели двойные (вариант 1)', images: ['https://cdn.poehali.dev/files/112.png'] },
   { article: '0113', name: 'Качели двойные (вариант 2)', images: ['https://cdn.poehali.dev/files/113.png'] },
