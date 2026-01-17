@@ -108,12 +108,12 @@ export function OrderForm({ open, onOpenChange, cart, calculateTotal, deliveryCo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[95vh] overflow-hidden">
+      <DialogContent className="max-w-2xl max-h-[95vh] overflow-hidden [&>button]:rounded-full [&>button]:bg-transparent [&>button]:hover:bg-transparent [&>button]:hover:border-primary [&>button]:hover:text-primary">
         <div className="absolute top-4 left-4 sm:hidden z-50">
           <Button
             variant="outline"
             size="icon"
-            className="hover:border-primary hover:text-primary hover:bg-transparent h-9 w-9"
+            className="rounded-full bg-transparent hover:bg-transparent hover:border-primary hover:text-primary h-9 w-9"
             onClick={() => onOpenChange(false)}
           >
             <Icon name="ArrowLeft" size={20} />
@@ -269,7 +269,7 @@ export function OrderForm({ open, onOpenChange, cart, calculateTotal, deliveryCo
       </CardContent>
 
       <Dialog open={showPrivacyDialog} onOpenChange={setShowPrivacyDialog}>
-        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto [&>button]:rounded-full [&>button]:bg-transparent [&>button]:hover:bg-transparent [&>button]:hover:border-primary [&>button]:hover:text-primary">
           <DialogHeader>
             <DialogTitle className="text-xl font-heading">Соглашение на обработку персональных данных</DialogTitle>
           </DialogHeader>

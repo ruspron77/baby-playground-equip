@@ -295,7 +295,7 @@ export function Header({
                     <Button
                       variant="outline"
                       size="icon"
-                      className="hover:border-primary hover:text-primary hover:bg-transparent h-9 w-9"
+                      className="rounded-full bg-transparent hover:bg-transparent hover:border-primary hover:text-primary h-9 w-9"
                       onClick={() => setIsCartOpen(false)}
                     >
                       <Icon name="X" size={20} />
@@ -542,7 +542,7 @@ export function Header({
       </Dialog>
 
       <Dialog open={showKPDialog} onOpenChange={setShowKPDialog}>
-        <DialogContent>
+        <DialogContent className="[&>button]:rounded-full [&>button]:bg-transparent [&>button]:hover:bg-transparent [&>button]:hover:border-primary [&>button]:hover:text-primary">
           <DialogHeader>
             <DialogTitle>Параметры коммерческого предложения</DialogTitle>
           </DialogHeader>

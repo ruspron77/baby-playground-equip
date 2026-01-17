@@ -67,12 +67,12 @@ export function ProductDialog({
 
   return (
     <Dialog open={isProductDialogOpen} onOpenChange={setIsProductDialogOpen}>
-      <DialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[85vh] overflow-y-auto p-3 sm:p-6">
+      <DialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[85vh] overflow-y-auto p-3 sm:p-6 [&>button]:rounded-full [&>button]:bg-transparent [&>button]:hover:bg-transparent [&>button]:hover:border-primary [&>button]:hover:text-primary">
         <div className="absolute top-4 right-4 sm:hidden z-50">
           <Button
             variant="outline"
             size="icon"
-            className="hover:border-primary hover:text-primary hover:bg-transparent h-9 w-9"
+            className="rounded-full bg-transparent hover:bg-transparent hover:border-primary hover:text-primary h-9 w-9"
             onClick={() => setIsProductDialogOpen(false)}
           >
             <Icon name="X" size={20} />
