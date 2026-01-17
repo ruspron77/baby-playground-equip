@@ -295,10 +295,10 @@ export function Header({
                     <Button
                       variant="outline"
                       size="icon"
-                      className="rounded-full bg-transparent hover:bg-transparent hover:border-primary hover:text-primary h-9 w-9"
+                      className="rounded-full bg-transparent hover:bg-transparent hover:border-primary hover:text-primary h-8 w-8"
                       onClick={() => setIsCartOpen(false)}
                     >
-                      <Icon name="X" size={20} />
+                      <Icon name="X" size={18} />
                     </Button>
                   </div>
                   <SheetHeader>
