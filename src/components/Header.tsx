@@ -167,14 +167,14 @@ export function Header({
               />
             </a>
           </div>
-          <nav className="hidden md:flex gap-6">
-            <a href="#about" className="text-foreground hover:text-primary transition-colors text-base font-medium">О компании</a>
-            <a href="#catalog" className="text-foreground hover:text-primary transition-colors text-base font-medium">Каталог</a>
-            <a href="#services" className="text-foreground hover:text-primary transition-colors text-base font-medium">Услуги</a>
-            <a href="#certificates" className="text-foreground hover:text-primary transition-colors text-base font-medium">Сертификаты</a>
-            <a href="#contacts" className="text-foreground hover:text-primary transition-colors text-base font-medium">Контакты</a>
-          </nav>
-          <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-6">
+            <nav className="flex gap-6">
+              <a href="#about" className="text-foreground hover:text-primary transition-colors text-base font-medium">О компании</a>
+              <a href="#catalog" className="text-foreground hover:text-primary transition-colors text-base font-medium">Каталог</a>
+              <a href="#services" className="text-foreground hover:text-primary transition-colors text-base font-medium">Услуги</a>
+              <a href="#certificates" className="text-foreground hover:text-primary transition-colors text-base font-medium">Сертификаты</a>
+              <a href="#contacts" className="text-foreground hover:text-primary transition-colors text-base font-medium">Контакты</a>
+            </nav>
             <div className="hidden lg:flex items-center gap-3">
               <a 
                 href="tel:+79181151551" 
@@ -187,6 +187,8 @@ export function Header({
                 Заказать звонок
               </Button>
             </div>
+          </div>
+          <div className="flex items-center gap-4">
             <div className="flex items-center gap-3">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
