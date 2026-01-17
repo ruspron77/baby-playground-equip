@@ -38,15 +38,7 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
 
   const handleNavigateToCatalog = () => {
-    navigate('/');
-    setTimeout(() => {
-      const element = document.getElementById('catalog');
-      if (element) {
-        const yOffset = -90;
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    }, 100);
+    navigate(-1);
   };
 
   const handleProductClick = async (product: Product) => {
@@ -85,10 +77,9 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
               variant="outline" 
               size="icon"
               onClick={handleNavigateToCatalog}
-              className="hover:border-primary hover:text-primary hover:bg-transparent h-9 w-9 md:h-10 md:w-auto md:px-4"
+              className="hover:border-primary hover:text-primary hover:bg-transparent h-9 w-9 md:h-10 md:w-10"
             >
-              <Icon name="X" size={20} className="md:mr-2" />
-              <span className="hidden md:inline">Закрыть</span>
+              <Icon name="X" size={20} />
             </Button>
           </div>
         </div>
