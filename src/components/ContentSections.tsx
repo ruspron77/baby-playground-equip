@@ -98,7 +98,7 @@ export function ContentSections() {
                 </div>
                 <h3 className="text-base md:text-base font-bold mb-2 md:mb-2">Адрес</h3>
                 <a 
-                  href="https://yandex.ru/maps/?rtext=~45.053547,38.973389" 
+                  href="https://yandex.ru/maps/?pt=38.973389,45.053547&z=16&l=map&text=г.%20Краснодар%2C%20ул.%20Кореновская%2C%20д.%2057" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-base md:text-base text-blue-600 hover:underline break-words block"
