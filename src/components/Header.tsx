@@ -529,7 +529,7 @@ export function Header({
       />
 
       <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
-        <DialogContent>
+        <DialogContent className="[&>button]:rounded-full [&>button]:bg-transparent [&>button]:hover:bg-transparent [&>button]:hover:border-primary [&>button]:hover:text-primary">
           <DialogHeader>
             <DialogTitle>Заказ успешно оформлен!</DialogTitle>
           </DialogHeader>
