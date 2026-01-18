@@ -321,8 +321,10 @@ export function Header({
                               placeholder="Поиск по товарам..."
                               value={cartSearchQuery}
                               onChange={(e) => setCartSearchQuery(e.target.value)}
+                              onFocus={(e) => e.target.blur()}
                               className="pl-10 focus-visible:ring-0 focus-visible:ring-offset-0"
                               autoFocus={false}
+                              inputMode="none"
                             />
                           </div>
                           {cartSearchQuery && filteredCatalogProducts.length > 0 && (
