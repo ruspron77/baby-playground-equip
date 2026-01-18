@@ -102,6 +102,9 @@ export function Header({
         orderButtonRef.current?.focus();
       }, 100);
     }
+    if (isCartOpen) {
+      document.activeElement?.blur();
+    }
   }, [isCartOpen, cart.length]);
 
   const filteredCatalogProducts = allProducts.filter(product => 
