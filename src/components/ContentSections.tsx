@@ -111,7 +111,7 @@ export function ContentSections() {
         </div>
       </section>
 
-      <footer className="text-white py-2" style={{ backgroundColor: '#5c038c' }}>
+      <footer className="py-2" style={{ backgroundColor: '#5c038c', color: '#1a0129' }}>
         <div className="container mx-auto px-4 text-center">
           <p>&copy; 2026 Urban Play. Все права защищены.</p>
         </div>
