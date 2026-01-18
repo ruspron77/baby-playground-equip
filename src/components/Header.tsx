@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -94,6 +94,15 @@ export function Header({
   const [hideDeliveryInKP, setHideDeliveryInKP] = useState(false);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [cartSearchQuery, setCartSearchQuery] = useState('');
+  const orderButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (isCartOpen && cart.length > 0 && orderButtonRef.current) {
+      setTimeout(() => {
+        orderButtonRef.current?.focus();
+      }, 100);
+    }
+  }, [isCartOpen, cart.length]);
 
   const filteredCatalogProducts = allProducts.filter(product => 
     cartSearchQuery === '' || 
@@ -468,6 +477,7 @@ export function Header({
                           </div>
                           <div className="space-y-2">
                             <Button 
+                              ref={orderButtonRef}
                               className="w-full" 
                               size="lg"
                               onClick={() => {

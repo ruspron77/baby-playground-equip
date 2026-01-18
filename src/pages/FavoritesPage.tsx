@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ProductDialog } from '@/components/catalog/ProductDialog';
 
 const formatPrice = (price: string | number): string => {
@@ -32,6 +32,10 @@ interface FavoritesPageProps {
 export default function FavoritesPage({ favorites, removeFromFavorites, addToCart, toggleFavorite }: FavoritesPageProps) {
   const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
   const [isProductDialogOpen, setIsProductDialogOpen] = useState(false);
   const [productImages, setProductImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
