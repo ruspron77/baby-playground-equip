@@ -185,7 +185,7 @@ export function ProductDialog({
                         <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
                           {idx === 0 ? 'Ширина' : idx === 1 ? 'Длина' : 'Высота'}
                         </p>
-                        <p className="font-semibold sm:text-base text-lg">{dim.trim()}</p>
+                        <p className="font-semibold sm:text-base text-xl">{dim.trim()}</p>
                       </div>
                     ))}
                   </div>
