@@ -141,7 +141,7 @@ export function ProductDialog({
             <div className="flex flex-col justify-center space-y-2 md:space-y-4 px-0 mx-0 my-0">
               <div>
                 <p className="sm:text-sm sm:mb-2 text-[#5a098c] text-base my-0">{selectedProduct.name.split('\n')[0]}</p>
-                <h2 className="font-heading sm:mb-4 font-semibold text-lg sm:text-3xl my-0">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
+                <h2 className="font-heading sm:mb-4 font-semibold sm:text-3xl my-0 text-3xl">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
                 <p className="font-bold text-primary sm:mb-4 text-xl sm:text-3xl my-0 py-1 mt-3">{formatPrice(selectedProduct.price)} ₽</p>
                 
                 <div className="flex gap-2 sm:gap-3 justify-start items-center">
@@ -177,7 +177,7 @@ export function ProductDialog({
               </div>
 
               <div className="border-t sm:py-[5px] my-0 py-0">
-                <h3 className="font-heading sm:mb-2 font-semibold text-sm sm:text-base my-2.5">Техническая информация</h3>
+                <h3 className="font-heading sm:mb-2 font-semibold sm:text-base my-2.5 text-lg">Техническая информация</h3>
                 {selectedProduct.dimensions && (
                   <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-1.5 sm:mb-4">
                     {selectedProduct.dimensions.split('х').map((dim, idx) => (
@@ -185,7 +185,7 @@ export function ProductDialog({
                         <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
                           {idx === 0 ? 'Ширина' : idx === 1 ? 'Длина' : 'Высота'}
                         </p>
-                        <p className="font-semibold text-xs sm:text-base">{dim.trim()}</p>
+                        <p className="font-semibold sm:text-base text-lg">{dim.trim()}</p>
                       </div>
                     ))}
                   </div>
