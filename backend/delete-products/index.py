@@ -52,8 +52,14 @@ def handler(event: dict, context) -> dict:
         
         deleted_count = 0
         
+        # Специальный режим: удалить по шаблону (LIKE)
+        if len(articles) == 1 and '%' in articles[0]:
+            # Формат: "ИК-%"
+            safe_pattern = articles[0].replace("'", "''")
+            cursor.execute(f"DELETE FROM {schema}.products WHERE article LIKE '{safe_pattern}'")
+            deleted_count = cursor.rowcount
         # Специальный режим: удалить по диапазону артикулов
-        if len(articles) == 1 and '-' in articles[0]:
+        elif len(articles) == 1 and '-' in articles[0]:
             # Формат: "0230-0265"
             parts = articles[0].split('-')
             if len(parts) == 2:

@@ -10,10 +10,10 @@ export function AdminPanel() {
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
   const [updateMode, setUpdateMode] = useState<'new' | 'update'>('update');
-  const [isDownloadingTemplate, setIsDownloadingTemplate] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [isUploadingImages, setIsUploadingImages] = useState(false);
+  const [isDeletingIK, setIsDeletingIK] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -102,75 +102,7 @@ export function AdminPanel() {
     }
   };
 
-  const handleDownloadTemplate = async () => {
-    setIsDownloadingTemplate(true);
-    try {
-      const response = await fetch('https://functions.poehali.dev/917765db-45ab-4e16-aab0-381a5f51201c');
-      const data = await response.json();
-      
-      if (data.file && data.filename) {
-        const byteCharacters = atob(data.file);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-          byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-        const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-        
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = data.filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      }
-    } catch (error) {
-      console.error('Download error:', error);
-      setMessage('Ошибка при скачивании шаблона');
-      setUploadStatus('error');
-    } finally {
-      setIsDownloadingTemplate(false);
-    }
-  };
 
-  const handleClearDuplicates = async () => {
-    if (!confirm('Удалить дубли товаров 0230-0265? Это необратимо!')) {
-      return;
-    }
-
-    setIsDeleting(true);
-    setUploadStatus('idle');
-    setMessage('');
-
-    try {
-      const response = await fetch('https://functions.poehali.dev/86a5f270-0e5f-4fc8-8762-1839512f352a', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          articles: ['0230-0265']
-        }),
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        setUploadStatus('success');
-        setMessage(`Удалено дублей: ${result.deleted}. Теперь загрузите файл заново!`);
-      } else {
-        throw new Error(result.error || 'Ошибка удаления');
-      }
-    } catch (error) {
-      console.error('Delete error:', error);
-      setUploadStatus('error');
-      setMessage(error instanceof Error ? error.message : 'Ошибка при удалении дублей');
-    } finally {
-      setIsDeleting(false);
-    }
-  };
 
   const handleImageFilesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -251,6 +183,43 @@ export function AdminPanel() {
     }
   };
 
+  const handleDeleteIK = async () => {
+    if (!confirm('Удалить все товары с артикулом ИК-? Это необратимо!')) {
+      return;
+    }
+
+    setIsDeletingIK(true);
+    setUploadStatus('idle');
+    setMessage('');
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/86a5f270-0e5f-4fc8-8762-1839512f352a', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          articles: ['ИК-%']
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setUploadStatus('success');
+        setMessage(`Удалено товаров с артикулом ИК-: ${result.deleted}`);
+      } else {
+        throw new Error(result.error || 'Ошибка удаления');
+      }
+    } catch (error) {
+      console.error('Delete IK error:', error);
+      setUploadStatus('error');
+      setMessage(error instanceof Error ? error.message : 'Ошибка при удалении товаров ИК-');
+    } finally {
+      setIsDeletingIK(false);
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <Card className="max-w-2xl mx-auto">
@@ -314,68 +283,24 @@ export function AdminPanel() {
             )}
           </div>
 
-          <div className="space-y-3">
-            <div className="flex gap-3">
-              <Button
-                onClick={handleDownloadTemplate}
-                disabled={isDownloadingTemplate}
-                variant="outline"
-                size="lg"
-                className="flex-1"
-              >
-                {isDownloadingTemplate ? (
-                  <>
-                    <Icon name="Loader2" size={20} className="mr-2 animate-spin" />
-                    Скачивание...
-                  </>
-                ) : (
-                  <>
-                    <Icon name="Download" size={20} className="mr-2" />
-                    Скачать шаблон
-                  </>
-                )}
-              </Button>
-
-              <Button
-                onClick={handleUpload}
-                disabled={!file || isUploading}
-                className="flex-1"
-                size="lg"
-              >
-                {isUploading ? (
-                  <>
-                    <Icon name="Loader2" size={20} className="mr-2 animate-spin" />
-                    Загрузка...
-                  </>
-                ) : (
-                  <>
-                    <Icon name="Upload" size={20} className="mr-2" />
-                    Загрузить каталог
-                  </>
-                )}
-              </Button>
-            </div>
-
-            <Button
-              onClick={handleClearDuplicates}
-              disabled={isDeleting}
-              variant="destructive"
-              size="sm"
-              className="w-full"
-            >
-              {isDeleting ? (
-                <>
-                  <Icon name="Loader2" size={16} className="mr-2 animate-spin" />
-                  Удаление...
-                </>
-              ) : (
-                <>
-                  <Icon name="Trash2" size={16} className="mr-2" />
-                  Очистить дубли 0230-0265
-                </>
-              )}
-            </Button>
-          </div>
+          <Button
+            onClick={handleUpload}
+            disabled={!file || isUploading}
+            className="w-full"
+            size="lg"
+          >
+            {isUploading ? (
+              <>
+                <Icon name="Loader2" size={20} className="mr-2 animate-spin" />
+                Загрузка...
+              </>
+            ) : (
+              <>
+                <Icon name="Upload" size={20} className="mr-2" />
+                Загрузить каталог
+              </>
+            )}
+          </Button>
 
           <div className="border-t pt-6 space-y-4">
             <div>
@@ -423,6 +348,28 @@ export function AdminPanel() {
                 <>
                   <Icon name="Image" size={16} className="mr-2" />
                   Загрузить изображения
+                </>
+              )}
+            </Button>
+          </div>
+
+          <div className="border-t pt-6">
+            <Button
+              onClick={handleDeleteIK}
+              disabled={isDeletingIK}
+              variant="destructive"
+              size="sm"
+              className="w-full"
+            >
+              {isDeletingIK ? (
+                <>
+                  <Icon name="Loader2" size={16} className="mr-2 animate-spin" />
+                  Удаление...
+                </>
+              ) : (
+                <>
+                  <Icon name="Trash2" size={16} className="mr-2" />
+                  Удалить товары с артикулом ИК-
                 </>
               )}
             </Button>
