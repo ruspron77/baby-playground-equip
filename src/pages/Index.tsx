@@ -257,6 +257,9 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
           isSubSubSubcategoryDialogOpen={catalogState.isSubSubSubcategoryDialogOpen}
           setIsSubSubSubcategoryDialogOpen={catalogState.setIsSubSubSubcategoryDialogOpen}
           handleSubSubSubcategoryClick={handlers.handleSubSubSubcategorySelect}
+          currentSubSubSubcategory={catalogState.currentSubSubSubcategory}
+          isFinalCategoryDialogOpen={catalogState.isFinalCategoryDialogOpen}
+          setIsFinalCategoryDialogOpen={catalogState.setIsFinalCategoryDialogOpen}
           filteredProducts={filteredProducts}
           handleAddToCart={handleAddToCart}
           searchQuery={catalogState.searchQuery}

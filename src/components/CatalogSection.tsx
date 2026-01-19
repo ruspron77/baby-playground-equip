@@ -8,6 +8,8 @@ import { ProductDialog } from './catalog/ProductDialog';
 interface SubSubSubcategory {
   name: string;
   image: string;
+  hasChildren?: boolean;
+  children?: { name: string; image: string }[];
 }
 
 interface SubSubcategory {
@@ -78,6 +80,9 @@ interface CatalogSectionProps {
   isSubSubSubcategoryDialogOpen: boolean;
   setIsSubSubSubcategoryDialogOpen: (open: boolean) => void;
   handleSubSubSubcategoryClick: (subSubSubName: string) => void;
+  currentSubSubSubcategory: SubSubSubcategory | null;
+  isFinalCategoryDialogOpen: boolean;
+  setIsFinalCategoryDialogOpen: (open: boolean) => void;
   filteredProducts: Product[];
   handleAddToCart: (product: Product) => void;
   searchQuery: string;
@@ -120,6 +125,9 @@ export function CatalogSection({
   isSubSubSubcategoryDialogOpen,
   setIsSubSubSubcategoryDialogOpen,
   handleSubSubSubcategoryClick,
+  currentSubSubSubcategory,
+  isFinalCategoryDialogOpen,
+  setIsFinalCategoryDialogOpen,
   filteredProducts,
   handleAddToCart,
   searchQuery,
@@ -243,6 +251,9 @@ export function CatalogSection({
         isSubSubSubcategoryDialogOpen={isSubSubSubcategoryDialogOpen}
         setIsSubSubSubcategoryDialogOpen={setIsSubSubSubcategoryDialogOpen}
         handleSubSubSubcategoryClick={handleSubSubSubcategoryClick}
+        currentSubSubSubcategory={currentSubSubSubcategory}
+        isFinalCategoryDialogOpen={isFinalCategoryDialogOpen}
+        setIsFinalCategoryDialogOpen={setIsFinalCategoryDialogOpen}
         onBackFromSubSubcategory={() => {
           setIsCategoryDialogOpen(true);
         }}

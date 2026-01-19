@@ -10,6 +10,8 @@ export interface CartItem {
 export interface SubSubSubcategory {
   name: string;
   image: string;
+  hasChildren?: boolean;
+  children?: { name: string; image: string }[];
 }
 
 export interface SubSubcategory {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { categories, Subcategory, SubSubcategory } from '@/components/data/catalogData';
+import { categories, Subcategory, SubSubcategory, SubSubSubcategory } from '@/components/data/catalogData';
 
 export function useCatalogState() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -11,6 +11,8 @@ export function useCatalogState() {
   const [currentSubcategory, setCurrentSubcategory] = useState<Subcategory | null>(null);
   const [currentSubSubcategory, setCurrentSubSubcategory] = useState<SubSubcategory | null>(null);
   const [isSubSubSubcategoryDialogOpen, setIsSubSubSubcategoryDialogOpen] = useState(false);
+  const [currentSubSubSubcategory, setCurrentSubSubSubcategory] = useState<SubSubSubcategory | null>(null);
+  const [isFinalCategoryDialogOpen, setIsFinalCategoryDialogOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   const [expandedSubcategories, setExpandedSubcategories] = useState<string[]>([]);
@@ -37,6 +39,10 @@ export function useCatalogState() {
     setCurrentSubSubcategory,
     isSubSubSubcategoryDialogOpen,
     setIsSubSubSubcategoryDialogOpen,
+    currentSubSubSubcategory,
+    setCurrentSubSubSubcategory,
+    isFinalCategoryDialogOpen,
+    setIsFinalCategoryDialogOpen,
     isSideMenuOpen,
     setIsSideMenuOpen,
     expandedCategories,
