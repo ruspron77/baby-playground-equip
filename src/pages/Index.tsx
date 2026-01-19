@@ -63,6 +63,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     searchQuery: catalogState.searchQuery,
     currentCategory: catalogState.currentCategory,
     currentSubcategory: catalogState.currentSubcategory,
+    currentSubSubcategory: catalogState.currentSubSubcategory,
   });
 
   const { availableCategories, filteredProducts } = useCatalogFilters({

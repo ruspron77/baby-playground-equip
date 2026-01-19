@@ -19,6 +19,7 @@ interface CatalogHandlersProps {
   searchQuery: string;
   currentCategory: typeof categories[0] | null;
   currentSubcategory: Subcategory | null;
+  currentSubSubcategory: SubSubcategory | null;
 }
 
 export function useCatalogHandlers(props: CatalogHandlersProps) {
@@ -41,6 +42,7 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
     searchQuery,
     currentCategory,
     currentSubcategory,
+    currentSubSubcategory,
   } = props;
 
   const handleCategoryClick = (cat: typeof categories[0]) => {
