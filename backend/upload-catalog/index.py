@@ -182,10 +182,10 @@ def handler(event: dict, context) -> dict:
                 if not article and not name:
                     continue
                 
-                print(f'Processing: article={article}, name={name[:30]}, category={full_category}, image={bool(image_url)}')
-                
                 # Ищем изображение для этой строки
                 image_url = image_map.get(row_idx, None)
+                
+                print(f'Processing: article={article}, name={name[:30] if len(name) > 30 else name}, category={full_category}, image={bool(image_url)}')
                 
                 # Escape для Simple Query Protocol
                 safe_article = article.replace("'", "''")
