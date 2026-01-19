@@ -54,7 +54,12 @@ export function useCatalogFilters({
     }
     
     if (selectedSubSubcategory) {
-      filtered = filtered.filter(p => p.subsubcategory === selectedSubSubcategory);
+      filtered = filtered.filter(p => {
+        if (!p.subsubcategory) return false;
+        // Поддержка многоуровневых категорий: "3-7 лет > Замок" должно совпадать с "Игровые комплексы > 3-7 лет > Замок"
+        return p.subsubcategory === selectedSubSubcategory || 
+               p.subsubcategory.includes(selectedSubSubcategory);
+      });
     }
     
     if (selectedSeries) {

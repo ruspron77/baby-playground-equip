@@ -75,6 +75,11 @@ export function useProducts() {
                 // Объединяем всё после серии (начиная с parts[2])
                 let subParts = parts.slice(2);
                 
+                // Убираем "Игровые комплексы" если он первый (он уже в структуре диалога)
+                if (subParts[0] === 'Игровые комплексы') {
+                  subParts = subParts.slice(1);
+                }
+                
                 // Убираем промежуточный уровень "Игровой комплекс X-Y лет"
                 subParts = subParts.map(p => {
                   if (p.includes('Игровой комплекс')) {
