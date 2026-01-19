@@ -1,0 +1,21 @@
+{
+  "tests": [
+    {
+      "name": "Test OPTIONS method",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Test template generation",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "file": "string",
+        "filename": "shablon_kataloga.xlsx"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
