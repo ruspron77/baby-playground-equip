@@ -54,6 +54,17 @@ export function useCatalogFilters({
       return filtered;
     }
     
+    // Сначала фильтруем по категории
+    if (selectedCategory) {
+      filtered = filtered.filter(p => p.category === selectedCategory);
+    }
+    
+    // Затем по серии (Classic/Eco)
+    if (selectedSeries) {
+      filtered = filtered.filter(p => p.subcategory === selectedSeries);
+    }
+    
+    // И только потом по подподкатегории
     if (selectedSubSubcategory) {
       const parts = selectedSubSubcategory.split(' > ');
       
@@ -75,10 +86,6 @@ export function useCatalogFilters({
         // Для других категорий (не игровые комплексы)
         return p.subsubcategory === selectedSubSubcategory;
       });
-    }
-    
-    if (selectedSeries) {
-      filtered = filtered.filter(p => p.subcategory === selectedSeries);
     }
     
     filtered = filtered.filter(p => parseInt(p.price) > 0);
