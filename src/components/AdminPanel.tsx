@@ -9,6 +9,7 @@ export function AdminPanel() {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const [updateMode, setUpdateMode] = useState<'new' | 'update'>('new');
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -54,6 +55,7 @@ export function AdminPanel() {
             body: JSON.stringify({
               filename: file.name,
               content: base64Data,
+              updateMode: updateMode,
             }),
           });
 
@@ -66,7 +68,9 @@ export function AdminPanel() {
           if (result.success) {
             setUploadStatus('success');
             const imagesText = result.imagesUploaded ? `, изображений: ${result.imagesUploaded}` : '';
-            setMessage(`Файл успешно загружен! Обработано товаров: ${result.productsCount || 0}${imagesText}`);
+            const updatedText = result.updatedCount ? `, обновлено: ${result.updatedCount}` : '';
+            const addedText = result.addedCount ? `, добавлено: ${result.addedCount}` : '';
+            setMessage(`Файл успешно загружен! Обработано товаров: ${result.productsCount || 0}${imagesText}${updatedText}${addedText}`);
             setFile(null);
             
             // Сбрасываем input
@@ -110,6 +114,36 @@ export function AdminPanel() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <div className="space-y-3">
+            <label className="text-sm font-medium">
+              Режим загрузки
+            </label>
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="updateMode"
+                  value="new"
+                  checked={updateMode === 'new'}
+                  onChange={(e) => setUpdateMode(e.target.value as 'new' | 'update')}
+                  className="w-4 h-4"
+                />
+                <span className="text-sm">Добавить новые товары</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="updateMode"
+                  value="update"
+                  checked={updateMode === 'update'}
+                  onChange={(e) => setUpdateMode(e.target.value as 'new' | 'update')}
+                  className="w-4 h-4"
+                />
+                <span className="text-sm">Обновить существующие (по артикулу)</span>
+              </label>
+            </div>
+          </div>
+
           <div className="space-y-2">
             <label htmlFor="excel-file-input" className="text-sm font-medium">
               Выберите файл Excel
@@ -186,6 +220,8 @@ export function AdminPanel() {
               <li>Структура: Артикул, Название, Категория, Цена, Габариты</li>
               <li>Первая строка должна содержать заголовки</li>
               <li>Изображения внутри файла будут автоматически загружены</li>
+              <li>Режим "Обновить" — меняет цены/данные по артикулу</li>
+              <li>Режим "Добавить" — только новые товары, пропускает дубли</li>
               <li>Максимальный размер файла: 10 MB</li>
             </ul>
           </div>

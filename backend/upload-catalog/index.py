@@ -29,6 +29,7 @@ def handler(event: dict, context) -> dict:
         body = json.loads(event.get('body', '{}'))
         filename = body.get('filename', 'catalog.xlsx')
         base64_content = body.get('content', '')
+        update_mode = body.get('updateMode', 'new')
         
         if not base64_content:
             return {
@@ -62,6 +63,8 @@ def handler(event: dict, context) -> dict:
         workbook = openpyxl.load_workbook(BytesIO(file_data))
         products_count = 0
         images_uploaded = 0
+        updated_count = 0
+        added_count = 0
         
         # Словарь для сопоставления позиций изображений с артикулами
         image_map = {}
@@ -152,18 +155,36 @@ def handler(event: dict, context) -> dict:
                 # Ищем изображение для этой строки
                 image_url = image_map.get(row_idx, None)
                 
-                # Вставляем или обновляем товар в БД
-                cursor.execute(f'''
-                    INSERT INTO {schema}.products (article, name, category, price, dimensions, image_url)
-                    VALUES (%s, %s, %s, %s, %s, %s)
-                    ON CONFLICT (article) 
-                    DO UPDATE SET 
-                        name = EXCLUDED.name,
-                        category = EXCLUDED.category,
-                        price = EXCLUDED.price,
-                        dimensions = EXCLUDED.dimensions,
-                        image_url = COALESCE(EXCLUDED.image_url, {schema}.products.image_url)
-                ''', (article, name, category, price, dimensions, image_url))
+                # Проверяем существует ли товар
+                cursor.execute(f'SELECT id FROM {schema}.products WHERE article = %s', (article,))
+                existing = cursor.fetchone()
+                
+                if update_mode == 'update':
+                    # Режим обновления - обновляем существующие или добавляем новые
+                    cursor.execute(f'''
+                        INSERT INTO {schema}.products (article, name, category, price, dimensions, image_url)
+                        VALUES (%s, %s, %s, %s, %s, %s)
+                        ON CONFLICT (article) 
+                        DO UPDATE SET 
+                            name = EXCLUDED.name,
+                            category = EXCLUDED.category,
+                            price = EXCLUDED.price,
+                            dimensions = EXCLUDED.dimensions,
+                            image_url = COALESCE(EXCLUDED.image_url, {schema}.products.image_url)
+                    ''', (article, name, category, price, dimensions, image_url))
+                    
+                    if existing:
+                        updated_count += 1
+                    else:
+                        added_count += 1
+                else:
+                    # Режим добавления - только новые товары
+                    if not existing:
+                        cursor.execute(f'''
+                            INSERT INTO {schema}.products (article, name, category, price, dimensions, image_url)
+                            VALUES (%s, %s, %s, %s, %s, %s)
+                        ''', (article, name, category, price, dimensions, image_url))
+                        added_count += 1
                 
                 products_count += 1
         
@@ -181,7 +202,9 @@ def handler(event: dict, context) -> dict:
                 'success': True,
                 'productsCount': products_count,
                 'imagesUploaded': images_uploaded,
-                'message': f'Файл загружен успешно. Обработано товаров: {products_count}, изображений: {images_uploaded}'
+                'updatedCount': updated_count,
+                'addedCount': added_count,
+                'message': f'Файл загружен успешно. Обработано товаров: {products_count}, изображений: {images_uploaded}, обновлено: {updated_count}, добавлено: {added_count}'
             }, ensure_ascii=False),
             'isBase64Encoded': False
         }
