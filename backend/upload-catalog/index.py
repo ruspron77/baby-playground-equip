@@ -118,6 +118,10 @@ def handler(event: dict, context) -> dict:
                     for col_idx, val in enumerate(row_values):
                         if 'картинк' in val or 'фото' in val or 'изображен' in val:
                             col_indices['image'] = col_idx
+                        elif 'подподкатегория' in val:
+                            col_indices['subcategory2'] = col_idx
+                        elif 'подкатегория' in val:
+                            col_indices['subcategory1'] = col_idx
                         elif 'категория' in val:
                             col_indices['category'] = col_idx
                         elif 'артикул' in val:
@@ -138,14 +142,25 @@ def handler(event: dict, context) -> dict:
                 if not any(str(val).strip() if val else '' for val in row):
                     continue
                 
-                # Извлекаем данные по индексам: Картинка(0), Категория(1), Артикул(2), Название(3), Размеры(4), Цена(5)
+                # Извлекаем данные: Картинка(0), Категория(1), Подкатегория(2), Подподкатегория(3), Артикул(4), Название(5), Размеры(6), Цена(7)
                 category = str(row[col_indices.get('category', 1)]).strip() if col_indices.get('category') is not None and len(row) > col_indices.get('category', 1) and row[col_indices.get('category', 1)] else 'Без категории'
-                article = str(row[col_indices.get('article', 2)]).strip() if col_indices.get('article') is not None and len(row) > col_indices.get('article', 2) and row[col_indices.get('article', 2)] else ''
-                name = str(row[col_indices.get('name', 3)]).strip() if col_indices.get('name') is not None and len(row) > col_indices.get('name', 3) and row[col_indices.get('name', 3)] else ''
-                dimensions = str(row[col_indices.get('dimensions', 4)]).strip() if col_indices.get('dimensions') is not None and len(row) > col_indices.get('dimensions', 4) and row[col_indices.get('dimensions', 4)] else ''
+                subcategory1 = str(row[col_indices.get('subcategory1', 2)]).strip() if col_indices.get('subcategory1') is not None and len(row) > col_indices.get('subcategory1', 2) and row[col_indices.get('subcategory1', 2)] else ''
+                subcategory2 = str(row[col_indices.get('subcategory2', 3)]).strip() if col_indices.get('subcategory2') is not None and len(row) > col_indices.get('subcategory2', 3) and row[col_indices.get('subcategory2', 3)] else ''
+                
+                # Собираем полный путь категории
+                category_parts = [category]
+                if subcategory1 and subcategory1 != 'None':
+                    category_parts.append(subcategory1)
+                if subcategory2 and subcategory2 != 'None':
+                    category_parts.append(subcategory2)
+                full_category = ' > '.join(category_parts)
+                
+                article = str(row[col_indices.get('article', 4)]).strip() if col_indices.get('article') is not None and len(row) > col_indices.get('article', 4) and row[col_indices.get('article', 4)] else ''
+                name = str(row[col_indices.get('name', 5)]).strip() if col_indices.get('name') is not None and len(row) > col_indices.get('name', 5) and row[col_indices.get('name', 5)] else ''
+                dimensions = str(row[col_indices.get('dimensions', 6)]).strip() if col_indices.get('dimensions') is not None and len(row) > col_indices.get('dimensions', 6) and row[col_indices.get('dimensions', 6)] else ''
                 
                 # Обработка цены
-                price_val = row[col_indices.get('price', 5)] if col_indices.get('price') is not None and len(row) > col_indices.get('price', 5) else 0
+                price_val = row[col_indices.get('price', 7)] if col_indices.get('price') is not None and len(row) > col_indices.get('price', 7) else 0
                 try:
                     price = int(float(str(price_val).replace(' ', '').replace(',', '.').replace('₽', '').strip())) if price_val else 0
                 except:
@@ -173,7 +188,7 @@ def handler(event: dict, context) -> dict:
                             price = EXCLUDED.price,
                             dimensions = EXCLUDED.dimensions,
                             image_url = COALESCE(EXCLUDED.image_url, {schema}.products.image_url)
-                    ''', (article, name, category, price, dimensions, image_url))
+                    ''', (article, name, full_category, price, dimensions, image_url))
                     
                     if existing:
                         updated_count += 1
@@ -185,7 +200,7 @@ def handler(event: dict, context) -> dict:
                         cursor.execute(f'''
                             INSERT INTO {schema}.products (article, name, category, price, dimensions, image_url)
                             VALUES (%s, %s, %s, %s, %s, %s)
-                        ''', (article, name, category, price, dimensions, image_url))
+                        ''', (article, name, full_category, price, dimensions, image_url))
                         added_count += 1
                 
                 products_count += 1
