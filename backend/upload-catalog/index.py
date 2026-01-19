@@ -116,16 +116,18 @@ def handler(event: dict, context) -> dict:
                     
                     # Определяем индексы колонок
                     for col_idx, val in enumerate(row_values):
-                        if 'артикул' in val:
+                        if 'картинк' in val or 'фото' in val or 'изображен' in val:
+                            col_indices['image'] = col_idx
+                        elif 'категория' in val:
+                            col_indices['category'] = col_idx
+                        elif 'артикул' in val:
                             col_indices['article'] = col_idx
                         elif 'название' in val or 'наименование' in val:
                             col_indices['name'] = col_idx
-                        elif 'категория' in val:
-                            col_indices['category'] = col_idx
-                        elif 'цена' in val:
-                            col_indices['price'] = col_idx
                         elif 'габарит' in val or 'размер' in val:
                             col_indices['dimensions'] = col_idx
+                        elif 'цена' in val:
+                            col_indices['price'] = col_idx
                     break
             
             if header_row_idx is None:
@@ -136,14 +138,14 @@ def handler(event: dict, context) -> dict:
                 if not any(str(val).strip() if val else '' for val in row):
                     continue
                 
-                # Извлекаем данные по индексам
-                article = str(row[col_indices.get('article', 0)]).strip() if col_indices.get('article') is not None and len(row) > col_indices.get('article', 0) and row[col_indices.get('article', 0)] else ''
-                name = str(row[col_indices.get('name', 1)]).strip() if col_indices.get('name') is not None and len(row) > col_indices.get('name', 1) and row[col_indices.get('name', 1)] else ''
-                category = str(row[col_indices.get('category', 2)]).strip() if col_indices.get('category') is not None and len(row) > col_indices.get('category', 2) and row[col_indices.get('category', 2)] else 'Без категории'
+                # Извлекаем данные по индексам: Картинка(0), Категория(1), Артикул(2), Название(3), Размеры(4), Цена(5)
+                category = str(row[col_indices.get('category', 1)]).strip() if col_indices.get('category') is not None and len(row) > col_indices.get('category', 1) and row[col_indices.get('category', 1)] else 'Без категории'
+                article = str(row[col_indices.get('article', 2)]).strip() if col_indices.get('article') is not None and len(row) > col_indices.get('article', 2) and row[col_indices.get('article', 2)] else ''
+                name = str(row[col_indices.get('name', 3)]).strip() if col_indices.get('name') is not None and len(row) > col_indices.get('name', 3) and row[col_indices.get('name', 3)] else ''
                 dimensions = str(row[col_indices.get('dimensions', 4)]).strip() if col_indices.get('dimensions') is not None and len(row) > col_indices.get('dimensions', 4) and row[col_indices.get('dimensions', 4)] else ''
                 
                 # Обработка цены
-                price_val = row[col_indices.get('price', 3)] if col_indices.get('price') is not None and len(row) > col_indices.get('price', 3) else 0
+                price_val = row[col_indices.get('price', 5)] if col_indices.get('price') is not None and len(row) > col_indices.get('price', 5) else 0
                 try:
                     price = int(float(str(price_val).replace(' ', '').replace(',', '.').replace('₽', '').strip())) if price_val else 0
                 except:
