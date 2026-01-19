@@ -78,6 +78,35 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     addToCart(product);
   };
 
+  const handleSearchQuery = (query: string) => {
+    catalogState.setSearchQuery(query);
+    
+    if (query.trim()) {
+      // Найти первый товар по запросу
+      const foundProduct = products.find(p => 
+        p.name.toLowerCase().includes(query.toLowerCase()) ||
+        p.id.toString().includes(query) ||
+        (p.article && p.article.toLowerCase().includes(query.toLowerCase()))
+      );
+      
+      // Если товар найден, открыть его категорию
+      if (foundProduct) {
+        catalogState.setSelectedCategory(foundProduct.category);
+        if (foundProduct.subcategory) {
+          catalogState.setSelectedSeries(foundProduct.subcategory);
+        }
+        
+        // Прокрутить к товарам
+        setTimeout(() => {
+          const productsSection = document.getElementById('products');
+          if (productsSection) {
+            productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      }
+    }
+  };
+
   const calculateTotal = () => {
     return cart.reduce((total, item) => {
       const price = typeof item.price === 'string' ? parseInt(item.price.replace(/\s/g, '')) : item.price;
@@ -187,7 +216,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         onAddToCart={handleAddToCart}
         clearCart={clearCart}
         searchQuery={catalogState.searchQuery}
-        setSearchQuery={catalogState.setSearchQuery}
+        setSearchQuery={handleSearchQuery}
         handleResetFilters={handlers.handleResetFilters}
       />
       
