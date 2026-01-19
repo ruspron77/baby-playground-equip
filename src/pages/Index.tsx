@@ -186,6 +186,9 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         allProducts={products}
         onAddToCart={handleAddToCart}
         clearCart={clearCart}
+        searchQuery={catalogState.searchQuery}
+        setSearchQuery={catalogState.setSearchQuery}
+        handleResetFilters={handlers.handleResetFilters}
       />
       
       <HeroSection onOpenCatalog={() => catalogState.setIsSideMenuOpen(true)} />

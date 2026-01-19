@@ -49,6 +49,9 @@ interface HeaderProps {
   favoritesCount?: number;
   allProducts?: Product[];
   onAddToCart?: (product: Product) => void;
+  searchQuery?: string;
+  setSearchQuery?: (query: string) => void;
+  handleResetFilters?: () => void;
 }
 
 const formatPrice = (price: string | number): string => {
@@ -80,7 +83,10 @@ export function Header({
   setImageRowHeight,
   favoritesCount = 0,
   allProducts = [],
-  onAddToCart
+  onAddToCart,
+  searchQuery = '',
+  setSearchQuery,
+  handleResetFilters
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showOrderForm, setShowOrderForm] = useState(false);
@@ -189,6 +195,37 @@ export function Header({
               <a href="#contacts" className="text-foreground hover:text-primary transition-colors text-base font-medium">Контакты</a>
             </nav>
             <div className="hidden lg:flex items-center gap-3">
+              {/* Поиск */}
+              {setSearchQuery && (
+                <div className="flex items-center gap-2">
+                  <div className="relative w-64">
+                    <Icon name="Search" size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                    <Input 
+                      type="text"
+                      placeholder="Поиск"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-9 h-9 text-sm"
+                    />
+                  </div>
+                  {(searchQuery || handleResetFilters) && (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => {
+                        if (searchQuery && setSearchQuery) {
+                          setSearchQuery('');
+                        } else if (handleResetFilters) {
+                          handleResetFilters();
+                        }
+                      }}
+                      className="h-9 w-9 hover:bg-gray-100"
+                    >
+                      <Icon name="X" size={18} />
+                    </Button>
+                  )}
+                </div>
+              )}
               <a 
                 href="tel:+79181151551" 
                 className="flex items-center gap-2 text-foreground hover:text-primary transition-colors text-base font-medium whitespace-nowrap"

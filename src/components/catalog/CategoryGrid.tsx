@@ -197,27 +197,7 @@ export function CategoryGrid({
                 </SelectContent>
               </Select>
             )}
-            {/* Поиск и сброс - десктопная версия */}
-            <div className="hidden sm:flex items-center gap-3 ml-auto">
-              <div className="relative w-80">
-                <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <Input 
-                  type="text"
-                  placeholder="Поиск"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 h-9"
-                />
-              </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleReset}
-                className="hover:border-primary hover:text-primary hover:bg-transparent"
-              >
-                Сбросить
-              </Button>
-            </div>
+
           </div>
         </div>
 
