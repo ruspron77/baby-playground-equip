@@ -30,12 +30,14 @@ def handler(event: dict, context) -> dict:
         schema = os.environ.get('MAIN_DB_SCHEMA', 'public')
         
         if category:
+            # Escape single quotes for Simple Query Protocol
+            safe_category = category.replace("'", "''")
             cursor.execute(f"""
                 SELECT id, article, name, category, dimensions, price, image_url, description
                 FROM {schema}.products
-                WHERE category = %s
+                WHERE category = '{safe_category}'
                 ORDER BY id
-            """, (category,))
+            """)
         else:
             cursor.execute(f"""
                 SELECT id, article, name, category, dimensions, price, image_url, description
