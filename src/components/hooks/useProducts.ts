@@ -39,8 +39,8 @@ export function useProducts() {
             if (typeof p.category === 'string' && p.category.includes(' > ')) {
               const parts = p.category.split(' > ').map((s: string) => s.trim());
               
-              // parts[0] - основная категория (Детские площадки, Спорт и т.д.)
-              if (parts[0] === 'Детские площадки') {
+              // parts[0] - основная категория (Детские площадки, Игра, Спорт и т.д.)
+              if (parts[0] === 'Детские площадки' || parts[0] === 'Игра') {
                 mappedCategory = 'playground';
               } else if (parts[0] === 'Спорт') {
                 mappedCategory = 'sport';
@@ -48,21 +48,32 @@ export function useProducts() {
                 mappedCategory = 'park';
               }
               
-              // parts[1] - серия (Игровые комплексы, и т.д.)
-              // parts[2] - возрастная группа или тип (3-7 лет, 5-12 лет)
-              // parts[3] - тематика (Классик, Джунгли, Замок и т.д.)
+              // parts[1] - серия (Classic, Eco и т.д.)
+              // parts[2] - подкатегория (Игровые комплексы, Качели и т.д.)
+              // parts[3+] - глубокая вложенность (3-7 лет > Замок)
               
               if (parts.length >= 2) {
-                subcategory = 'Серия "Classic"'; // Всё в Classic серию
+                // Определяем серию из parts[1]
+                if (parts[1] === 'Classic' || parts[1] === 'classic') {
+                  subcategory = 'Серия "Classic"';
+                } else if (parts[1] === 'Eco' || parts[1] === 'eco') {
+                  subcategory = 'Серия "Eco"';
+                } else if (parts[1] === 'Classic Sport') {
+                  subcategory = 'Серия "Classic Sport"';
+                } else if (parts[1] === 'Eco Sport') {
+                  subcategory = 'Серия "Eco Sport"';
+                } else {
+                  subcategory = 'Серия "Classic"'; // По умолчанию Classic
+                }
               }
               
               if (parts.length === 2) {
                 // Простой случай: Категория > Подкатегория
                 subsubcategory = parts[1];
               } else if (parts.length >= 3) {
-                // Сложный случай: Категория > Подкатегория > Подподкатегория > ...
-                // Объединяем всё после первой части
-                subsubcategory = parts.slice(1).join(' > ');
+                // Сложный случай: Категория > Серия > Подкатегория > Подподкатегория > ...
+                // Объединяем всё после серии (начиная с parts[2])
+                subsubcategory = parts.slice(2).join(' > ');
               }
             } else {
               // Старая логика для обратной совместимости
