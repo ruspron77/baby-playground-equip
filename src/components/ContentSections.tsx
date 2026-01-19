@@ -35,10 +35,30 @@ export function ContentSections() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-square bg-cover bg-center rounded-lg" style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/0123.jpg)' }}></div>
-              <div className="aspect-square bg-cover bg-center rounded-lg" style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/art0123.jpg)' }}></div>
-              <div className="aspect-square bg-cover bg-center rounded-lg" style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/photo_6436_2026-01-05_09-32-44.jpg)' }}></div>
-              <div className="aspect-square bg-cover bg-center rounded-lg" style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/photo_6436_2026-01-05_09-32-48.jpg)' }}></div>
+              <Card className="aspect-square flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
+                <CardContent className="text-center p-6">
+                  <div className="text-5xl font-bold text-primary mb-2">5+</div>
+                  <div className="text-sm text-muted-foreground">лет на рынке</div>
+                </CardContent>
+              </Card>
+              <Card className="aspect-square flex items-center justify-center bg-gradient-to-br from-secondary/10 to-secondary/5">
+                <CardContent className="text-center p-6">
+                  <div className="text-5xl font-bold text-secondary mb-2">500+</div>
+                  <div className="text-sm text-muted-foreground">площадок</div>
+                </CardContent>
+              </Card>
+              <Card className="aspect-square flex items-center justify-center bg-gradient-to-br from-[#0284c7]/10 to-[#0284c7]/5">
+                <CardContent className="text-center p-6">
+                  <div className="text-5xl font-bold text-[#0284c7] mb-2">700+</div>
+                  <div className="text-sm text-muted-foreground">товаров</div>
+                </CardContent>
+              </Card>
+              <Card className="aspect-square flex items-center justify-center bg-gradient-to-br from-accent/10 to-accent/5">
+                <CardContent className="text-center p-6">
+                  <div className="text-5xl font-bold text-accent mb-2">100%</div>
+                  <div className="text-sm text-muted-foreground">качество</div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
