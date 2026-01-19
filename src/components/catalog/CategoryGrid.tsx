@@ -137,24 +137,19 @@ export function CategoryGrid({
           </div>
           
           <div className="flex items-center gap-2 mb-4 overflow-x-auto">
-            <div className="flex gap-2 flex-shrink-0">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setSelectedSeries(selectedSeries?.includes('Classic') ? null : 'Серия "Classic"')}
-                className={selectedSeries?.includes('Classic') ? 'bg-white text-[#5a098c] border-2 border-[#5a098c] hover:bg-white hover:text-[#5a098c]' : 'bg-white hover:border-secondary hover:text-secondary hover:bg-white'}
-              >
-                Classic
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setSelectedSeries(selectedSeries?.includes('Eco') ? null : 'Серия "Eco"')}
-                className={selectedSeries?.includes('Eco') ? 'bg-white text-[#5a098c] border-2 border-[#5a098c] hover:bg-white hover:text-[#5a098c]' : 'bg-white hover:border-secondary hover:text-secondary hover:bg-white'}
-              >
-                Eco
-              </Button>
-            </div>
+            <Select
+              value={selectedSeries || 'all-series'}
+              onValueChange={(value) => setSelectedSeries(value === 'all-series' ? null : value)}
+            >
+              <SelectTrigger className={`w-32 sm:w-52 h-9 flex-shrink-0 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSeries ? 'text-[#1d2025]' : ''}`}>
+                <SelectValue placeholder="Все серии" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all-series">Все серии</SelectItem>
+                <SelectItem value='Серия "Classic"'>Classic</SelectItem>
+                <SelectItem value='Серия "Eco"'>Eco</SelectItem>
+              </SelectContent>
+            </Select>
             {availableSubSubcategories.length > 0 && (
               <Select
                 value={firstSelectValue}
