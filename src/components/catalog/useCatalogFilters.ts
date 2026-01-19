@@ -54,9 +54,22 @@ export function useCatalogFilters({
     }
     
     if (selectedSubSubcategory) {
+      const parts = selectedSubSubcategory.split(' > ');
       filtered = filtered.filter(p => {
         if (!p.subsubcategory) return false;
-        // Поддержка многоуровневых категорий: "3-7 лет > Замок" должно совпадать с "Игровые комплексы > 3-7 лет > Замок"
+        
+        // Если выбрано "Игровые комплексы > 3-7 лет" (без тематики)
+        if (parts.length === 2) {
+          // Показываем все товары этой возрастной категории
+          return p.subsubcategory.includes(parts[1]);
+        }
+        
+        // Если выбрано "Игровые комплексы > 3-7 лет > Классик"
+        if (parts.length === 3) {
+          return p.subsubcategory.includes(parts[1]) && p.subsubcategory.includes(parts[2]);
+        }
+        
+        // Для других категорий (не игровые комплексы)
         return p.subsubcategory === selectedSubSubcategory || 
                p.subsubcategory.includes(selectedSubSubcategory);
       });

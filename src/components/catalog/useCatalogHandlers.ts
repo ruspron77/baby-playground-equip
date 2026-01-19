@@ -202,10 +202,26 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
   };
 
   const handleSubSubSubcategorySelect = (subSubSubName: string) => {
-    if (currentCategory) {
+    if (currentCategory && currentSubSubcategory) {
       setSelectedCategory(currentCategory.id);
       setSelectedSubcategory(currentSubcategory?.name || null);
-      setSelectedSubSubcategory(`${currentSubSubcategory?.name} > ${subSubSubName}`);
+      
+      // Найти родителя currentSubSubcategory (например "Игровые комплексы")
+      let parentSubSub = null;
+      currentSubcategory?.children?.forEach(subSub => {
+        if (subSub.children?.some(child => child.name === currentSubSubcategory.name)) {
+          parentSubSub = subSub;
+        }
+      });
+      
+      if (parentSubSub) {
+        // Полный путь: "Игровые комплексы > 3-7 лет > Классик"
+        setSelectedSubSubcategory(`${parentSubSub.name} > ${currentSubSubcategory.name} > ${subSubSubName}`);
+      } else {
+        // Если родитель не найден, используем старую логику
+        setSelectedSubSubcategory(`${currentSubSubcategory.name} > ${subSubSubName}`);
+      }
+      
       setSelectedSeries(currentSubcategory?.name || null);
       setIsSubSubSubcategoryDialogOpen(false);
       setTimeout(() => {

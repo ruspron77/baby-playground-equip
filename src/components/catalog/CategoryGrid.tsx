@@ -96,6 +96,9 @@ export function CategoryGrid({
     const ageCategory = currentSubSub.children.find(c => c.name === selectedSubSubLevel2);
     availableSubSubSubcategories = ageCategory?.children || [];
   }
+  
+  // Значение для первого селекта (если "Игровые комплексы > 3-7 лет", то показываем просто это значение)
+  const firstSelectValue = selectedSubSubcategory || 'all';
 
   const handleReset = () => {
     if (searchQuery) {
@@ -134,7 +137,7 @@ export function CategoryGrid({
             </div>
             {availableSubSubcategories.length > 0 && (
               <Select
-                value={selectedSubSubLevel1 || 'all'}
+                value={firstSelectValue}
                 onValueChange={(value) => setSelectedSubSubcategory(value === 'all' ? null : value)}
               >
                 <SelectTrigger className={`w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSubSubLevel1 ? 'text-[#1d2025]' : ''}`}>
@@ -143,17 +146,12 @@ export function CategoryGrid({
                 <SelectContent>
                   <SelectItem value="all">Все категории</SelectItem>
                   {availableSubSubcategories.map((subSub) => {
-                    if (subSub.hasChildren && subSub.children) {
-                      return [
-                        <SelectItem key={subSub.name} value={subSub.name} disabled className="font-semibold">
-                          {subSub.name}
-                        </SelectItem>,
-                        ...subSub.children.map((child) => (
-                          <SelectItem key={`${subSub.name}-${child.name}`} value={`${subSub.name} > ${child.name}`} className="pl-6">
-                            {child.name}
-                          </SelectItem>
-                        ))
-                      ];
+                    if (subSub.hasChildren && subSub.children && subSub.name === 'Игровые комплексы') {
+                      return subSub.children.map((child) => (
+                        <SelectItem key={`${subSub.name}-${child.name}`} value={`${subSub.name} > ${child.name}`}>
+                          Комплексы {child.name}
+                        </SelectItem>
+                      ));
                     }
                     return (
                       <SelectItem key={subSub.name} value={subSub.name}>
