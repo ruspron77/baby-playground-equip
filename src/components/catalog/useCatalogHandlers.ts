@@ -6,8 +6,10 @@ interface CatalogHandlersProps {
   setSelectedSubSubcategory: (value: string | null) => void;
   setCurrentCategory: (value: typeof categories[0] | null) => void;
   setCurrentSubcategory: (value: Subcategory | null) => void;
+  setCurrentSubSubcategory: (value: SubSubcategory | null) => void;
   setIsCategoryDialogOpen: (value: boolean) => void;
   setIsSubSubcategoryDialogOpen: (value: boolean) => void;
+  setIsSubSubSubcategoryDialogOpen: (value: boolean) => void;
   setIsSideMenuOpen: (value: boolean) => void;
   setExpandedSubcategories: (value: string[] | ((prev: string[]) => string[])) => void;
   setExpandedSubSubcategories: (value: string[] | ((prev: string[]) => string[])) => void;
@@ -26,8 +28,10 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
     setSelectedSubSubcategory,
     setCurrentCategory,
     setCurrentSubcategory,
+    setCurrentSubSubcategory,
     setIsCategoryDialogOpen,
     setIsSubSubcategoryDialogOpen,
+    setIsSubSubSubcategoryDialogOpen,
     setIsSideMenuOpen,
     setExpandedSubcategories,
     setExpandedSubSubcategories,
@@ -66,19 +70,25 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
     }
   };
 
-  const handleSubSubcategorySelect = (subSubName: string) => {
-    if (currentCategory) {
-      setSelectedCategory(currentCategory.id);
-      setSelectedSubcategory(currentSubcategory?.name || null);
-      setSelectedSubSubcategory(subSubName);
-      setSelectedSeries(currentSubcategory?.name || null);
+  const handleSubSubcategorySelect = (subSub: SubSubcategory) => {
+    if (subSub.hasChildren && subSub.children) {
+      setCurrentSubSubcategory(subSub);
+      setIsSubSubSubcategoryDialogOpen(true);
       setIsSubSubcategoryDialogOpen(false);
-      setTimeout(() => {
-        const productsSection = document.getElementById('products');
-        if (productsSection) {
-          productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 300);
+    } else {
+      if (currentCategory) {
+        setSelectedCategory(currentCategory.id);
+        setSelectedSubcategory(currentSubcategory?.name || null);
+        setSelectedSubSubcategory(subSub.name);
+        setSelectedSeries(currentSubcategory?.name || null);
+        setIsSubSubcategoryDialogOpen(false);
+        setTimeout(() => {
+          const productsSection = document.getElementById('products');
+          if (productsSection) {
+            productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 300);
+      }
     }
   };
 
@@ -181,10 +191,27 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
     }
   };
 
+  const handleSubSubSubcategorySelect = (subSubSubName: string) => {
+    if (currentCategory) {
+      setSelectedCategory(currentCategory.id);
+      setSelectedSubcategory(currentSubcategory?.name || null);
+      setSelectedSubSubcategory(`${currentSubSubcategory?.name} > ${subSubSubName}`);
+      setSelectedSeries(currentSubcategory?.name || null);
+      setIsSubSubSubcategoryDialogOpen(false);
+      setTimeout(() => {
+        const productsSection = document.getElementById('products');
+        if (productsSection) {
+          productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 300);
+    }
+  };
+
   return {
     handleCategoryClick,
     handleSubcategorySelect,
     handleSubSubcategorySelect,
+    handleSubSubSubcategorySelect,
     handleTreeCategorySelect,
     handleTreeSubcategorySelect,
     handleTreeSubSubcategorySelect,

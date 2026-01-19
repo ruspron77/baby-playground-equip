@@ -3,9 +3,16 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
+interface SubSubSubcategory {
+  name: string;
+  image: string;
+}
+
 interface SubSubcategory {
   name: string;
   image: string;
+  hasChildren?: boolean;
+  children?: SubSubSubcategory[];
 }
 
 interface Subcategory {
@@ -34,7 +41,11 @@ interface CategoryDialogsProps {
   isSubSubcategoryDialogOpen: boolean;
   setIsSubSubcategoryDialogOpen: (open: boolean) => void;
   currentSubcategory: Subcategory | null;
-  handleSubSubcategoryClick: (subSubName: string) => void;
+  currentSubSubcategory: SubSubcategory | null;
+  handleSubSubcategoryClick: (subSub: SubSubcategory) => void;
+  isSubSubSubcategoryDialogOpen: boolean;
+  setIsSubSubSubcategoryDialogOpen: (open: boolean) => void;
+  handleSubSubSubcategoryClick: (subSubSubName: string) => void;
   onBackFromSubcategory?: () => void;
   onBackFromSubSubcategory?: () => void;
 }
@@ -47,7 +58,11 @@ export function CategoryDialogs({
   isSubSubcategoryDialogOpen,
   setIsSubSubcategoryDialogOpen,
   currentSubcategory,
+  currentSubSubcategory,
   handleSubSubcategoryClick,
+  isSubSubSubcategoryDialogOpen,
+  setIsSubSubSubcategoryDialogOpen,
+  handleSubSubSubcategoryClick,
   onBackFromSubcategory,
   onBackFromSubSubcategory,
 }: CategoryDialogsProps) {
@@ -105,7 +120,7 @@ export function CategoryDialogs({
           </DialogHeader>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
             {currentSubcategory?.children?.map((subSub) => (
-              <div key={subSub.name} className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group rounded-md flex flex-col relative border-2 border-gray-200" onClick={() => handleSubSubcategoryClick(subSub.name)}>
+              <div key={subSub.name} className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group rounded-md flex flex-col relative border-2 border-gray-200" onClick={() => handleSubSubcategoryClick(subSub)}>
                 <div className="aspect-square overflow-hidden flex items-center justify-center p-4">
                   {subSub.image.startsWith('http') ? (
                     <img src={subSub.image} alt={subSub.name} className="w-full h-full object-contain" />
@@ -115,6 +130,32 @@ export function CategoryDialogs({
                 </div>
                 <div className="absolute bottom-2 left-0 right-0 py-1 px-2 sm:px-4">
                   <h4 className="font-semibold text-center text-xs sm:text-sm break-words leading-tight text-[#1d2025]">{subSub.name}</h4>
+                </div>
+              </div>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isSubSubSubcategoryDialogOpen} onOpenChange={setIsSubSubSubcategoryDialogOpen}>
+        <DialogContent className="sm:max-w-5xl max-h-[80vh] sm:max-h-[80vh] h-full sm:h-auto overflow-y-auto m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full">
+          <DialogHeader>
+            <DialogTitle className="text-2xl sm:text-4xl font-heading font-semibold text-center mb-2 sm:mb-4">
+              {currentSubSubcategory?.name}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
+            {currentSubSubcategory?.children?.map((subSubSub) => (
+              <div key={subSubSub.name} className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group rounded-md flex flex-col relative border-2 border-gray-200" onClick={() => handleSubSubSubcategoryClick(subSubSub.name)}>
+                <div className="aspect-square overflow-hidden flex items-center justify-center p-4">
+                  {subSubSub.image.startsWith('http') ? (
+                    <img src={subSubSub.image} alt={subSubSub.name} className="w-full h-full object-contain" />
+                  ) : (
+                    <span className="text-7xl">{subSubSub.image}</span>
+                  )}
+                </div>
+                <div className="absolute bottom-2 left-0 right-0 py-1 px-2 sm:px-4">
+                  <h4 className="font-semibold text-center text-xs sm:text-sm break-words leading-tight text-[#1d2025]">{subSubSub.name}</h4>
                 </div>
               </div>
             ))}

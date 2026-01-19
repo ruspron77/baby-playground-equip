@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { categories, Subcategory } from '@/components/data/catalogData';
+import { categories, Subcategory, SubSubcategory } from '@/components/data/catalogData';
 
 export function useCatalogState() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -9,6 +9,8 @@ export function useCatalogState() {
   const [isSubSubcategoryDialogOpen, setIsSubSubcategoryDialogOpen] = useState(false);
   const [currentCategory, setCurrentCategory] = useState<typeof categories[0] | null>(null);
   const [currentSubcategory, setCurrentSubcategory] = useState<Subcategory | null>(null);
+  const [currentSubSubcategory, setCurrentSubSubcategory] = useState<SubSubcategory | null>(null);
+  const [isSubSubSubcategoryDialogOpen, setIsSubSubSubcategoryDialogOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   const [expandedSubcategories, setExpandedSubcategories] = useState<string[]>([]);
@@ -31,6 +33,10 @@ export function useCatalogState() {
     setCurrentCategory,
     currentSubcategory,
     setCurrentSubcategory,
+    currentSubSubcategory,
+    setCurrentSubSubcategory,
+    isSubSubSubcategoryDialogOpen,
+    setIsSubSubSubcategoryDialogOpen,
     isSideMenuOpen,
     setIsSideMenuOpen,
     expandedCategories,

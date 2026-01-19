@@ -73,7 +73,11 @@ interface CatalogSectionProps {
   isSubSubcategoryDialogOpen: boolean;
   setIsSubSubcategoryDialogOpen: (open: boolean) => void;
   currentSubcategory: Subcategory | null;
-  handleSubSubcategoryClick: (subSubName: string) => void;
+  currentSubSubcategory: SubSubcategory | null;
+  handleSubSubcategoryClick: (subSub: SubSubcategory) => void;
+  isSubSubSubcategoryDialogOpen: boolean;
+  setIsSubSubSubcategoryDialogOpen: (open: boolean) => void;
+  handleSubSubSubcategoryClick: (subSubSubName: string) => void;
   filteredProducts: Product[];
   handleAddToCart: (product: Product) => void;
   searchQuery: string;
@@ -111,7 +115,11 @@ export function CatalogSection({
   isSubSubcategoryDialogOpen,
   setIsSubSubcategoryDialogOpen,
   currentSubcategory,
+  currentSubSubcategory,
   handleSubSubcategoryClick,
+  isSubSubSubcategoryDialogOpen,
+  setIsSubSubSubcategoryDialogOpen,
+  handleSubSubSubcategoryClick,
   filteredProducts,
   handleAddToCart,
   searchQuery,
@@ -230,7 +238,11 @@ export function CatalogSection({
         isSubSubcategoryDialogOpen={isSubSubcategoryDialogOpen}
         setIsSubSubcategoryDialogOpen={setIsSubSubcategoryDialogOpen}
         currentSubcategory={currentSubcategory}
+        currentSubSubcategory={currentSubSubcategory}
         handleSubSubcategoryClick={handleSubSubcategoryClick}
+        isSubSubSubcategoryDialogOpen={isSubSubSubcategoryDialogOpen}
+        setIsSubSubSubcategoryDialogOpen={setIsSubSubSubcategoryDialogOpen}
+        handleSubSubSubcategoryClick={handleSubSubSubcategoryClick}
         onBackFromSubSubcategory={() => {
           setIsCategoryDialogOpen(true);
         }}

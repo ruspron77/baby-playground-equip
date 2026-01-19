@@ -50,8 +50,10 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     setSelectedSubSubcategory: catalogState.setSelectedSubSubcategory,
     setCurrentCategory: catalogState.setCurrentCategory,
     setCurrentSubcategory: catalogState.setCurrentSubcategory,
+    setCurrentSubSubcategory: catalogState.setCurrentSubSubcategory,
     setIsCategoryDialogOpen: catalogState.setIsCategoryDialogOpen,
     setIsSubSubcategoryDialogOpen: catalogState.setIsSubSubcategoryDialogOpen,
+    setIsSubSubSubcategoryDialogOpen: catalogState.setIsSubSubSubcategoryDialogOpen,
     setIsSideMenuOpen: catalogState.setIsSideMenuOpen,
     setExpandedSubcategories: catalogState.setExpandedSubcategories,
     setExpandedSubSubcategories: catalogState.setExpandedSubSubcategories,
@@ -249,7 +251,11 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
           isSubSubcategoryDialogOpen={catalogState.isSubSubcategoryDialogOpen}
           setIsSubSubcategoryDialogOpen={catalogState.setIsSubSubcategoryDialogOpen}
           currentSubcategory={catalogState.currentSubcategory}
+          currentSubSubcategory={catalogState.currentSubSubcategory}
           handleSubSubcategoryClick={handlers.handleSubSubcategorySelect}
+          isSubSubSubcategoryDialogOpen={catalogState.isSubSubSubcategoryDialogOpen}
+          setIsSubSubSubcategoryDialogOpen={catalogState.setIsSubSubSubcategoryDialogOpen}
+          handleSubSubSubcategoryClick={handlers.handleSubSubSubcategorySelect}
           filteredProducts={filteredProducts}
           handleAddToCart={handleAddToCart}
           searchQuery={catalogState.searchQuery}

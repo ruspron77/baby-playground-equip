@@ -81,6 +81,13 @@ export function CategoryGrid({
   const currentCategory = categories.find(c => c.id === selectedCategory);
   const currentSubcategory = currentCategory?.subcategories.find(s => s.name === selectedSeries);
   const availableSubSubcategories = currentSubcategory?.children || [];
+  
+  const selectedSubSubParts = selectedSubSubcategory?.split(' > ') || [];
+  const selectedSubSubLevel1 = selectedSubSubParts[0] || null;
+  const selectedSubSubLevel2 = selectedSubSubParts[1] || null;
+  
+  const currentSubSub = availableSubSubcategories.find(s => s.name === selectedSubSubLevel1);
+  const availableSubSubSubcategories = currentSubSub?.children || [];
 
   const handleReset = () => {
     if (searchQuery) {
@@ -119,10 +126,10 @@ export function CategoryGrid({
             </div>
             {availableSubSubcategories.length > 0 && (
               <Select
-                value={selectedSubSubcategory || 'all'}
+                value={selectedSubSubLevel1 || 'all'}
                 onValueChange={(value) => setSelectedSubSubcategory(value === 'all' ? null : value)}
               >
-                <SelectTrigger className={`w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSubSubcategory ? 'text-[#1d2025]' : ''}`}>
+                <SelectTrigger className={`w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSubSubLevel1 ? 'text-[#1d2025]' : ''}`}>
                   <SelectValue placeholder="Все категории" />
                 </SelectTrigger>
                 <SelectContent>
@@ -130,6 +137,24 @@ export function CategoryGrid({
                   {availableSubSubcategories.map((subSub) => (
                     <SelectItem key={subSub.name} value={subSub.name}>
                       {subSub.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+            {availableSubSubSubcategories.length > 0 && selectedSubSubLevel1 && (
+              <Select
+                value={selectedSubSubLevel2 || 'all-sub'}
+                onValueChange={(value) => setSelectedSubSubcategory(value === 'all-sub' ? selectedSubSubLevel1 : `${selectedSubSubLevel1} > ${value}`)}
+              >
+                <SelectTrigger className={`w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSubSubLevel2 ? 'text-[#1d2025]' : ''}`}>
+                  <SelectValue placeholder="Все подкатегории" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all-sub">Все подкатегории</SelectItem>
+                  {availableSubSubSubcategories.map((subSubSub) => (
+                    <SelectItem key={subSubSub.name} value={subSubSub.name}>
+                      {subSubSub.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
