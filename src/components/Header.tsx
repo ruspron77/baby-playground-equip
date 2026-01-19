@@ -197,17 +197,15 @@ export function Header({
             <div className="hidden lg:flex items-center gap-3">
               {/* Поиск */}
               {setSearchQuery && (
-                <div className="flex items-center gap-2">
-                  <div className="relative w-64">
-                    <Icon name="Search" size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                    <Input 
-                      type="text"
-                      placeholder="Поиск"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-9 h-9 text-sm"
-                    />
-                  </div>
+                <div className="relative w-64">
+                  <Icon name="Search" size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                  <Input 
+                    type="text"
+                    placeholder="Поиск"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-9 pr-9 h-9 text-sm"
+                  />
                   {(searchQuery || handleResetFilters) && (
                     <Button
                       variant="ghost"
@@ -219,9 +217,9 @@ export function Header({
                           handleResetFilters();
                         }
                       }}
-                      className="h-9 w-9 hover:bg-gray-100"
+                      className="absolute right-0 top-1/2 -translate-y-1/2 h-9 w-9 hover:bg-transparent"
                     >
-                      <Icon name="X" size={18} />
+                      <Icon name="X" size={16} className="text-muted-foreground hover:text-foreground" />
                     </Button>
                   )}
                 </div>
