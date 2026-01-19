@@ -97,8 +97,15 @@ export function CategoryGrid({
     availableSubSubSubcategories = ageCategory?.children || [];
   }
   
-  // Значение для первого селекта (если "Игровые комплексы > 3-7 лет", то показываем просто это значение)
-  const firstSelectValue = selectedSubSubcategory || 'all';
+  // Значение для первого селекта
+  let firstSelectValue = 'all';
+  if (selectedSubSubLevel1 && selectedSubSubLevel2) {
+    // Если есть оба уровня, формируем значение как "Игровые комплексы > 3-7 лет"
+    firstSelectValue = `${selectedSubSubLevel1} > ${selectedSubSubLevel2}`;
+  } else if (selectedSubSubLevel1) {
+    // Если только первый уровень
+    firstSelectValue = selectedSubSubLevel1;
+  }
 
   const handleReset = () => {
     if (searchQuery) {
