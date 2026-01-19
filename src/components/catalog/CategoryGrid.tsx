@@ -114,7 +114,29 @@ export function CategoryGrid({
             {categories.find(c => c.id === selectedCategory)?.name}
           </h2>
           
-          <div className="flex items-center gap-3 mb-4">
+          {/* Поиск и сброс - мобильная версия */}
+          <div className="flex sm:hidden items-center gap-2 mb-3">
+            <div className="relative flex-1">
+              <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <Input 
+                type="text"
+                placeholder="Поиск"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 h-9"
+              />
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleReset}
+              className="hover:border-primary hover:text-primary hover:bg-transparent"
+            >
+              Сбросить
+            </Button>
+          </div>
+          
+          <div className="flex items-center gap-3 mb-4 flex-wrap sm:flex-nowrap">
             <div className="flex gap-2">
               <Button
                 variant="outline"
@@ -175,24 +197,27 @@ export function CategoryGrid({
                 </SelectContent>
               </Select>
             )}
-            <div className="relative w-80 ml-auto">
-              <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <Input 
-                type="text"
-                placeholder="Поиск"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 h-9"
-              />
+            {/* Поиск и сброс - десктопная версия */}
+            <div className="hidden sm:flex items-center gap-3 ml-auto">
+              <div className="relative w-80">
+                <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <Input 
+                  type="text"
+                  placeholder="Поиск"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 h-9"
+                />
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleReset}
+                className="hover:border-primary hover:text-primary hover:bg-transparent"
+              >
+                Сбросить
+              </Button>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleReset}
-              className="hover:border-primary hover:text-primary hover:bg-transparent"
-            >
-              Сбросить
-            </Button>
           </div>
         </div>
 
