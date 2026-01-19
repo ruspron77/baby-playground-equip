@@ -182,13 +182,19 @@ export function CategoryGrid({
                   } else {
                     setSelectedSubSubcategory(`${selectedSubSubLevel1} > ${value}`);
                   }
+                  setTimeout(() => {
+                    const productsSection = document.getElementById('products');
+                    if (productsSection) {
+                      productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 100);
                 }}
               >
                 <SelectTrigger className={`w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSubSubLevel2 ? 'text-[#1d2025]' : ''}`}>
-                  <SelectValue placeholder="Все темы" />
+                  <SelectValue placeholder="Все серии" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all-themes">Все темы</SelectItem>
+                  <SelectItem value="all-themes">Все серии</SelectItem>
                   {availableSubSubSubcategories.map((subSubSub) => (
                     <SelectItem key={subSubSub.name} value={subSubSub.name}>
                       {subSubSub.name}
