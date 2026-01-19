@@ -76,8 +76,12 @@ def handler(event: dict, context) -> dict:
                 continue
             
             # Извлекаем изображения из листа
+            print(f'Sheet {sheet_name}: checking for images, has _images={hasattr(sheet, "_images")}')
+            
             if hasattr(sheet, '_images'):
-                for image in sheet._images:
+                print(f'Sheet {sheet_name}: found {len(sheet._images)} images')
+                
+                for idx, image in enumerate(sheet._images):
                     try:
                         img_data = image._data()
                         img_ext = image.format.lower() if hasattr(image, 'format') else 'png'
@@ -98,11 +102,16 @@ def handler(event: dict, context) -> dict:
                         anchor = image.anchor
                         if hasattr(anchor, '_from'):
                             row_idx = anchor._from.row
+                            print(f'Image {idx}: uploaded to row {row_idx}, url={img_url[:60]}...')
                             image_map[row_idx] = img_url
+                        else:
+                            print(f'Image {idx}: no anchor._from, anchor type={type(anchor)}')
                         
                         images_uploaded += 1
                     except Exception as img_error:
-                        print(f'Error uploading image: {img_error}')
+                        print(f'Error uploading image {idx}: {img_error}')
+            else:
+                print(f'Sheet {sheet_name}: NO _images attribute found!')
             
             # Ищем заголовки
             header_row_idx = None
