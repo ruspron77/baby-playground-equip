@@ -13,7 +13,7 @@ export function AdminPanel() {
 
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [isUploadingImages, setIsUploadingImages] = useState(false);
-  const [isDeletingIK, setIsDeletingIK] = useState(false);
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -183,42 +183,7 @@ export function AdminPanel() {
     }
   };
 
-  const handleDeleteIK = async () => {
-    if (!confirm('Удалить все товары с артикулом ИК-? Это необратимо!')) {
-      return;
-    }
 
-    setIsDeletingIK(true);
-    setUploadStatus('idle');
-    setMessage('');
-
-    try {
-      const response = await fetch('https://functions.poehali.dev/86a5f270-0e5f-4fc8-8762-1839512f352a', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          articles: ['ИК-%']
-        }),
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        setUploadStatus('success');
-        setMessage(`Удалено товаров с артикулом ИК-: ${result.deleted}`);
-      } else {
-        throw new Error(result.error || 'Ошибка удаления');
-      }
-    } catch (error) {
-      console.error('Delete IK error:', error);
-      setUploadStatus('error');
-      setMessage(error instanceof Error ? error.message : 'Ошибка при удалении товаров ИК-');
-    } finally {
-      setIsDeletingIK(false);
-    }
-  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -348,28 +313,6 @@ export function AdminPanel() {
                 <>
                   <Icon name="Image" size={16} className="mr-2" />
                   Загрузить изображения
-                </>
-              )}
-            </Button>
-          </div>
-
-          <div className="border-t pt-6">
-            <Button
-              onClick={handleDeleteIK}
-              disabled={isDeletingIK}
-              variant="destructive"
-              size="sm"
-              className="w-full"
-            >
-              {isDeletingIK ? (
-                <>
-                  <Icon name="Loader2" size={16} className="mr-2 animate-spin" />
-                  Удаление...
-                </>
-              ) : (
-                <>
-                  <Icon name="Trash2" size={16} className="mr-2" />
-                  Удалить товары с артикулом ИК-
                 </>
               )}
             </Button>
