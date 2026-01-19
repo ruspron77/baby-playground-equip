@@ -139,7 +139,10 @@ export function CategoryGrid({
           <div className="flex items-center gap-1 sm:gap-2 mb-4">
             <Select
               value={selectedSeries || 'all-series'}
-              onValueChange={(value) => setSelectedSeries(value === 'all-series' ? null : value)}
+              onValueChange={(value) => {
+                setSelectedSeries(value === 'all-series' ? null : value);
+                setSelectedSubSubcategory(null);
+              }}
             >
               <SelectTrigger className={`w-[30%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSeries ? 'text-[#1d2025]' : ''}`}>
                 <SelectValue placeholder="Серии" />
