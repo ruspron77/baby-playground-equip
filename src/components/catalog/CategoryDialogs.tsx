@@ -47,6 +47,7 @@ interface CategoryDialogsProps {
   setIsSubSubSubcategoryDialogOpen: (open: boolean) => void;
   handleSubSubSubcategoryClick: (subSubSubName: string) => void;
   currentSubSubSubcategory: SubSubSubcategory | null;
+  setCurrentSubSubSubcategory: (cat: SubSubSubcategory | null) => void;
   isFinalCategoryDialogOpen: boolean;
   setIsFinalCategoryDialogOpen: (open: boolean) => void;
   onBackFromSubcategory?: () => void;
@@ -67,6 +68,7 @@ export function CategoryDialogs({
   setIsSubSubSubcategoryDialogOpen,
   handleSubSubSubcategoryClick,
   currentSubSubSubcategory,
+  setCurrentSubSubSubcategory,
   isFinalCategoryDialogOpen,
   setIsFinalCategoryDialogOpen,
   onBackFromSubcategory,
