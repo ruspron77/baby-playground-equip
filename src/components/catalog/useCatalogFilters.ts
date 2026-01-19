@@ -59,15 +59,14 @@ export function useCatalogFilters({
       filtered = filtered.filter(p => {
         if (!p.subsubcategory) return false;
         
-        // Если выбрано "Игровые комплексы > 3-7 лет" (без тематики)
-        if (parts.length === 2) {
-          // Показываем все товары этой возрастной категории
-          return p.subsubcategory.includes(parts[1]);
+        // Если выбрано просто "Комплексы 3-7 лет" (все серии)
+        if (parts.length === 1) {
+          return p.subsubcategory.includes(parts[0]);
         }
         
-        // Если выбрано "Игровые комплексы > 3-7 лет > Классик"
-        if (parts.length === 3) {
-          return p.subsubcategory.includes(parts[1]) && p.subsubcategory.includes(parts[2]);
+        // Если выбрано "Комплексы 3-7 лет > Классик" (конкретная серия)
+        if (parts.length === 2) {
+          return p.subsubcategory.includes(parts[0]) && p.subsubcategory.includes(parts[1]);
         }
         
         // Для других категорий (не игровые комплексы)
