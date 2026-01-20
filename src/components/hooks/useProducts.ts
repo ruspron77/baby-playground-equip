@@ -35,6 +35,13 @@ export function useProducts() {
             let subcategory = undefined;
             let subsubcategory = undefined;
             
+            // Обработка старого формата для Workout (без иерархии)
+            if (p.category === 'Workout') {
+              mappedCategory = 'sport';
+              subcategory = 'Серия "Classic Sport"';
+              subsubcategory = 'Workout';
+            }
+            
             // Парсим категорию из формата "Категория > Подкатегория > Подподкатегория > ..."
             if (typeof p.category === 'string' && p.category.includes(' > ')) {
               const parts = p.category.split(' > ').map((s: string) => s.trim());
