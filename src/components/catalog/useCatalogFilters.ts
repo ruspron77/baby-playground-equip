@@ -57,16 +57,22 @@ export function useCatalogFilters({
     // Сначала фильтруем по категории
     if (selectedCategory) {
       filtered = filtered.filter(p => p.category === selectedCategory);
+      console.log(`После фильтра по категории "${selectedCategory}":`, filtered.length, 'товаров');
     }
     
     // Затем по серии (Classic/Eco)
     if (selectedSeries) {
+      console.log(`Фильтруем по серии "${selectedSeries}"`);
+      console.log('Примеры subcategory:', filtered.slice(0, 5).map(p => ({ name: p.name, subcategory: p.subcategory })));
       filtered = filtered.filter(p => p.subcategory === selectedSeries);
+      console.log(`После фильтра по серии "${selectedSeries}":`, filtered.length, 'товаров');
     }
     
     // И только потом по подподкатегории
     if (selectedSubSubcategory) {
       const parts = selectedSubSubcategory.split(' > ');
+      console.log(`Фильтруем по подкатегории "${selectedSubSubcategory}"`);
+      console.log('Примеры subsubcategory:', filtered.slice(0, 5).map(p => ({ name: p.name, subsubcategory: p.subsubcategory })));
       
       filtered = filtered.filter(p => {
         if (!p.subsubcategory) return false;
@@ -86,6 +92,7 @@ export function useCatalogFilters({
         // Для других категорий (не игровые комплексы)
         return p.subsubcategory === selectedSubSubcategory;
       });
+      console.log(`После фильтра по подкатегории "${selectedSubSubcategory}":`, filtered.length, 'товаров');
     }
     
     filtered = filtered.filter(p => parseInt(p.price) > 0);
