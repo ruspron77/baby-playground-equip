@@ -493,7 +493,7 @@ def handler(event, context):
         
         # Футер с условиями
         ws.merge_cells(f'A{current_row}:G{current_row}')
-        cell = ws.cell(row=current_row, column=1, value='Оборудование имеет сертификат соответствия ТС ЕАЭС 042-2017')
+        cell = ws.cell(row=current_row, column=1, value='Вся продукция сертифицирована и соответствует стандартам качества')
         cell.font = Font(name='Calibri', size=11)
         cell.alignment = Alignment(horizontal='left', vertical='center')
         current_row += 1

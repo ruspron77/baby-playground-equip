@@ -320,7 +320,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     # Футер с условиями - исходные интервалы
     c.setFont(font_name, 11)
-    c.drawString(10*mm, y_pos, 'Оборудование имеет сертификат соответствия ТС ЕАЭС 042-2017')
+    c.drawString(10*mm, y_pos, 'Вся продукция сертифицирована и соответствует стандартам качества')
     y_pos -= 5*mm
     c.drawString(10*mm, y_pos, 'Срок действия коммерческого предложения 15 дней')
     y_pos -= 5*mm
