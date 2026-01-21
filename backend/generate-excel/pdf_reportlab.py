@@ -258,12 +258,17 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         
         # Стиль для итоговой строки
         if is_last_page:
-            # Полностью убираем сетку в пустых ячейках (столбцы 0-4) - делаем невидимыми
-            for col in range(5):
-                style_list.extend([
-                    ('INNERGRID', (col, -1), (col, -1), 0, colors.white),
-                    ('BOX', (col, -1), (col, -1), 0, colors.white),
-                ])
+            # Убираем ВСЕ линии в пустых ячейках (столбцы 0-4) - левые, правые, нижние
+            style_list.extend([
+                # Убираем левую границу
+                ('LINEBEFORE', (0, -1), (0, -1), 0, colors.white),
+                # Убираем правую границу у каждой пустой ячейки
+                ('LINEAFTER', (0, -1), (4, -1), 0, colors.white),
+                # Убираем внутренние вертикальные линии между пустыми ячейками
+                ('LINEBEFORE', (1, -1), (4, -1), 0, colors.white),
+                # Убираем нижнюю границу пустых ячеек
+                ('LINEBELOW', (0, -1), (4, -1), 0, colors.white),
+            ])
             # Добавляем линию снизу последнего товара (строка перед итогом = -2)
             style_list.extend([
                 ('LINEBELOW', (0, -2), (-1, -2), 0.5, colors.black),
