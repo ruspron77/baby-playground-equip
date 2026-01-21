@@ -176,16 +176,18 @@ def generate_pdf(products, address, installation_percent, installation_cost, del
     signature_style = ParagraphStyle('Signature', parent=styles['Normal'], fontSize=10, alignment=TA_CENTER, fontName=font_name)
     story.append(Paragraph('Индивидуальный предприниматель___________________________/Пронин Р.О./', signature_style))
     
-    # Функция для добавления номеров страниц
-    def add_page_number(canvas, doc):
-        page_num = canvas.getPageNumber()
-        text = f"Страница {page_num} из {doc.page}"
+    # Функция для добавления номеров страниц и футера
+    def add_footer(canvas, doc):
         canvas.saveState()
+        
+        # Номер страницы
+        page_num = canvas.getPageNumber()
         canvas.setFont(font_name, 9)
-        canvas.drawRightString(A4[0] - 15*mm, 15*mm, text)
+        canvas.drawRightString(A4[0] - 15*mm, 15*mm, f"Страница {page_num}")
+        
         canvas.restoreState()
     
-    # Генерация PDF с номерами страниц
-    doc.build(story, onFirstPage=add_page_number, onLaterPages=add_page_number)
+    # Генерация PDF с футером
+    doc.build(story, onFirstPage=add_footer, onLaterPages=add_footer)
     buffer.seek(0)
     return buffer.read()
