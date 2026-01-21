@@ -1,26 +1,23 @@
 import io
+import os
 import urllib.request
 from datetime import datetime
 from fpdf import FPDF
 from PIL import Image as PILImage
 
 
-class PDF(FPDF):
-    def __init__(self):
-        super().__init__()
-        self.add_font('DejaVu', '', 'DejaVuSans.ttf')
-        self.add_font('DejaVu', 'B', 'DejaVuSans-Bold.ttf')
-
-
 def download_font(url, filename):
-    """Скачать шрифт"""
+    """Скачать шрифт если его нет"""
+    if os.path.exists(filename):
+        return True
     try:
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with urllib.request.urlopen(req, timeout=15) as response:
             with open(filename, 'wb') as f:
                 f.write(response.read())
         return True
-    except:
+    except Exception as e:
+        print(f'Failed to download {filename}: {e}')
         return False
 
 
@@ -29,10 +26,19 @@ def generate_pdf_fpdf(products, address, installation_percent, installation_cost
     """Генерация PDF с использованием FPDF2"""
     
     # Скачиваем шрифты
-    download_font('https://github.com/dejavu-fonts/dejavu-fonts/raw/master/ttf/DejaVuSans.ttf', 'DejaVuSans.ttf')
-    download_font('https://github.com/dejavu-fonts/dejavu-fonts/raw/master/ttf/DejaVuSans-Bold.ttf', 'DejaVuSans-Bold.ttf')
+    font_regular = '/tmp/DejaVuSans.ttf'
+    font_bold = '/tmp/DejaVuSans-Bold.ttf'
     
-    pdf = PDF()
+    download_font('https://github.com/dejavu-fonts/dejavu-fonts/raw/master/ttf/DejaVuSans.ttf', font_regular)
+    download_font('https://github.com/dejavu-fonts/dejavu-fonts/raw/master/ttf/DejaVuSans-Bold.ttf', font_bold)
+    
+    pdf = FPDF()
+    
+    # Добавляем шрифты только если они успешно загружены
+    if os.path.exists(font_regular):
+        pdf.add_font('DejaVu', '', font_regular)
+    if os.path.exists(font_bold):
+        pdf.add_font('DejaVu', 'B', font_bold)
     pdf.add_page()
     pdf.set_auto_page_break(auto=False)
     
