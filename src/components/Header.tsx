@@ -641,23 +641,25 @@ export function Header({
             </div>
             <div>
               <label className="text-sm font-medium mb-2 block">Формат файла</label>
-              <div className="flex gap-3 mb-4">
+              <div className="flex gap-2 mb-4">
                 <Button
                   type="button"
-                  variant={kpFormat === 'xlsx' ? 'default' : 'outline'}
-                  className="flex-1"
+                  variant="outline"
+                  size="sm"
+                  className={`flex-1 ${kpFormat === 'xlsx' ? 'bg-transparent border-primary text-primary hover:bg-primary/5' : 'border-border text-muted-foreground hover:bg-muted'}`}
                   onClick={() => setKpFormat('xlsx')}
                 >
-                  <Icon name="FileSpreadsheet" size={18} className="mr-2" />
+                  <Icon name="FileSpreadsheet" size={16} className="mr-1.5" />
                   XLSX
                 </Button>
                 <Button
                   type="button"
-                  variant={kpFormat === 'pdf' ? 'default' : 'outline'}
-                  className="flex-1"
+                  variant="outline"
+                  size="sm"
+                  className={`flex-1 ${kpFormat === 'pdf' ? 'bg-transparent border-primary text-primary hover:bg-primary/5' : 'border-border text-muted-foreground hover:bg-muted'}`}
                   onClick={() => setKpFormat('pdf')}
                 >
-                  <Icon name="FileText" size={18} className="mr-2" />
+                  <Icon name="FileText" size={16} className="mr-1.5" />
                   PDF
                 </Button>
               </div>
