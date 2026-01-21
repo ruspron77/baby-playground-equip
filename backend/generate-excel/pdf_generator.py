@@ -98,7 +98,7 @@ def generate_pdf(products, address, installation_percent, installation_cost, del
         story.append(Spacer(1, 5*mm))
     
     # Таблица товаров
-    table_data = [['№', 'Артикул', 'Наименование', 'Цена, ₽', 'Кол-во', 'Сумма, ₽']]
+    table_data = [['№', 'Артикул', 'Наименование', 'Изображение', 'Цена, ₽', 'Кол-во', 'Сумма, ₽']]
     
     total = 0
     for idx, product in enumerate(products, 1):
@@ -114,33 +114,47 @@ def generate_pdf(products, address, installation_percent, installation_cost, del
         sum_price = price * quantity
         total += sum_price
         
+        # Загрузка изображения товара
+        product_image = None
+        try:
+            img_url = product.get('image', '')
+            if img_url:
+                req = urllib.request.Request(img_url, headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req, timeout=5) as response:
+                    img_data = io.BytesIO(response.read())
+                    product_image = Image(img_data, width=20*mm, height=20*mm)
+        except Exception as e:
+            print(f'Failed to load product image: {e}')
+            product_image = ''
+        
         table_data.append([
             str(idx),
             product.get('article', ''),
             product['name'],
+            product_image if product_image else '',
             f"{price:,}".replace(',', ' '),
             str(quantity),
             f"{sum_price:,}".replace(',', ' ')
         ])
     
     # Итого
-    table_data.append(['', '', '', '', 'Итого:', f"{total:,}".replace(',', ' ')])
+    table_data.append(['', '', '', '', '', 'Итого:', f"{total:,}".replace(',', ' ')])
     
     # Монтаж
     if not hide_installation and installation_cost > 0:
-        table_data.append(['', '', '', '', f'Монтаж ({installation_percent}%):', f"{installation_cost:,}".replace(',', ' ')])
+        table_data.append(['', '', '', '', '', f'Монтаж ({installation_percent}%):', f"{installation_cost:,}".replace(',', ' ')])
         total += installation_cost
     
     # Доставка
     if not hide_delivery and delivery_cost > 0:
-        table_data.append(['', '', '', '', 'Доставка:', f"{delivery_cost:,}".replace(',', ' ')])
+        table_data.append(['', '', '', '', '', 'Доставка:', f"{delivery_cost:,}".replace(',', ' ')])
         total += delivery_cost
     
     # Всего
-    table_data.append(['', '', '', '', 'Всего:', f"{total:,}".replace(',', ' ')])
+    table_data.append(['', '', '', '', '', 'Всего:', f"{total:,}".replace(',', ' ')])
     
-    # Создание таблицы
-    col_widths = [10*mm, 25*mm, 70*mm, 25*mm, 15*mm, 25*mm]
+    # Создание таблицы с изображениями
+    col_widths = [8*mm, 18*mm, 55*mm, 22*mm, 20*mm, 12*mm, 20*mm]
     product_table = Table(table_data, colWidths=col_widths)
     product_table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#44aa02')),
@@ -149,10 +163,12 @@ def generate_pdf(products, address, installation_percent, installation_cost, del
         ('ALIGN', (2, 1), (2, -1), 'LEFT'),
         ('FONTNAME', (0, 0), (-1, -1), font_name),
         ('FONTNAME', (0, 0), (-1, 0), font_name_bold),
-        ('FONTSIZE', (0, 0), (-1, 0), 9),
-        ('FONTSIZE', (0, 1), (-1, -1), 8),
+        ('FONTSIZE', (0, 0), (-1, 0), 8),
+        ('FONTSIZE', (0, 1), (-1, -1), 7),
         ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
         ('TOPPADDING', (0, 0), (-1, 0), 8),
+        ('BOTTOMPADDING', (0, 1), (-1, -4), 3),
+        ('TOPPADDING', (0, 1), (-1, -4), 3),
         ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
         ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
         ('FONTNAME', (0, -1), (-1, -1), font_name_bold),
