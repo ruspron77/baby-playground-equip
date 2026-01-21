@@ -5,7 +5,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image, PageBreak
 from reportlab.lib.enums import TA_CENTER, TA_RIGHT, TA_LEFT
 from font_helper import register_cyrillic_font
 
@@ -20,7 +20,7 @@ def generate_pdf(products, address, installation_percent, installation_cost, del
     buffer = io.BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=A4, 
                            rightMargin=15*mm, leftMargin=15*mm,
-                           topMargin=10*mm, bottomMargin=15*mm)
+                           topMargin=10*mm, bottomMargin=50*mm)
     
     story = []
     styles = getSampleStyleSheet()
@@ -161,8 +161,31 @@ def generate_pdf(products, address, installation_percent, installation_cost, del
     ]))
     
     story.append(product_table)
+    story.append(Spacer(1, 10*mm))
     
-    # Генерация PDF
-    doc.build(story)
+    # Футер с условиями
+    footer_style = ParagraphStyle('Footer', parent=styles['Normal'], fontSize=10, fontName=font_name)
+    story.append(Paragraph('Вся продукция сертифицирована и соответствует стандартам качества', footer_style))
+    story.append(Spacer(1, 3*mm))
+    story.append(Paragraph('Срок действия коммерческого предложения 15 дней', footer_style))
+    story.append(Spacer(1, 3*mm))
+    story.append(Paragraph('Срок изготовления оборудования 30 дней', footer_style))
+    story.append(Spacer(1, 10*mm))
+    
+    # Подпись
+    signature_style = ParagraphStyle('Signature', parent=styles['Normal'], fontSize=10, alignment=TA_CENTER, fontName=font_name)
+    story.append(Paragraph('Индивидуальный предприниматель___________________________/Пронин Р.О./', signature_style))
+    
+    # Функция для добавления номеров страниц
+    def add_page_number(canvas, doc):
+        page_num = canvas.getPageNumber()
+        text = f"Страница {page_num} из {doc.page}"
+        canvas.saveState()
+        canvas.setFont(font_name, 9)
+        canvas.drawRightString(A4[0] - 15*mm, 15*mm, text)
+        canvas.restoreState()
+    
+    # Генерация PDF с номерами страниц
+    doc.build(story, onFirstPage=add_page_number, onLaterPages=add_page_number)
     buffer.seek(0)
     return buffer.read()
