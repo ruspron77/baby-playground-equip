@@ -463,17 +463,11 @@ export function Header({
                           {sortedCart.map((item, index) => (
                             <Card 
                               key={item.id} 
-                              className={`overflow-hidden cursor-move transition-all ${
+                              className={`overflow-hidden transition-all ${
                                 draggedIndex === index ? 'opacity-50 scale-95' : ''
                               } ${
                                 dragOverIndex === index ? 'border-2 border-primary' : ''
                               }`}
-                              draggable
-                              onDragStart={() => setDraggedIndex(index)}
-                              onDragEnd={() => {
-                                setDraggedIndex(null);
-                                setDragOverIndex(null);
-                              }}
                               onDragOver={(e) => {
                                 e.preventDefault();
                                 setDragOverIndex(index);
@@ -493,8 +487,19 @@ export function Header({
                             >
                               <CardContent className="p-3">
                                 <div className="flex gap-3">
-                                  <div className="flex items-center mr-2 text-muted-foreground">
-                                    <Icon name="GripVertical" size={20} className="cursor-grab active:cursor-grabbing" />
+                                  <div 
+                                    className="flex items-center mr-2 text-muted-foreground cursor-grab active:cursor-grabbing"
+                                    draggable
+                                    onDragStart={(e) => {
+                                      setDraggedIndex(index);
+                                      e.stopPropagation();
+                                    }}
+                                    onDragEnd={() => {
+                                      setDraggedIndex(null);
+                                      setDragOverIndex(null);
+                                    }}
+                                  >
+                                    <Icon name="GripVertical" size={20} />
                                   </div>
                                   <div className="w-20 h-20 flex-shrink-0 bg-white rounded flex items-center justify-center">
                                     {item.image.startsWith('http') ? (
