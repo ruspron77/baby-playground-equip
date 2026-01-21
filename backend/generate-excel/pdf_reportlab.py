@@ -247,8 +247,8 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             # Шрифты
             ('FONT', (0, 0), (-1, -1), font_name, 10),
             ('FONT', (0, 0), (-1, 0), font_name, 8),  # Заголовки
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#59068c')),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#9b5fc4')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
             ('ALIGN', (1, 1), (1, -1), 'LEFT'),
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
