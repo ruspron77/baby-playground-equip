@@ -161,29 +161,31 @@ def generate_pdf(products, address, installation_percent, installation_cost, del
     ]))
     
     story.append(product_table)
-    story.append(Spacer(1, 10*mm))
     
-    # Футер с условиями
-    footer_style = ParagraphStyle('Footer', parent=styles['Normal'], fontSize=10, fontName=font_name)
-    story.append(Paragraph('Вся продукция сертифицирована и соответствует стандартам качества', footer_style))
-    story.append(Spacer(1, 3*mm))
-    story.append(Paragraph('Срок действия коммерческого предложения 15 дней', footer_style))
-    story.append(Spacer(1, 3*mm))
-    story.append(Paragraph('Срок изготовления оборудования 30 дней', footer_style))
-    story.append(Spacer(1, 10*mm))
-    
-    # Подпись
-    signature_style = ParagraphStyle('Signature', parent=styles['Normal'], fontSize=10, alignment=TA_CENTER, fontName=font_name)
-    story.append(Paragraph('Индивидуальный предприниматель___________________________/Пронин Р.О./', signature_style))
-    
-    # Функция для добавления номеров страниц и футера
+    # Функция для добавления футера на каждой странице
     def add_footer(canvas, doc):
         canvas.saveState()
+        
+        # Футер с условиями
+        canvas.setFont(font_name, 9)
+        y_position = 40*mm
+        canvas.drawString(15*mm, y_position, 'Вся продукция сертифицирована и соответствует стандартам качества')
+        y_position -= 4*mm
+        canvas.drawString(15*mm, y_position, 'Срок действия коммерческого предложения 15 дней')
+        y_position -= 4*mm
+        canvas.drawString(15*mm, y_position, 'Срок изготовления оборудования 30 дней')
+        
+        # Подпись
+        y_position -= 8*mm
+        canvas.setFont(font_name, 10)
+        signature_text = 'Индивидуальный предприниматель___________________________/Пронин Р.О./'
+        text_width = canvas.stringWidth(signature_text, font_name, 10)
+        canvas.drawString((A4[0] - text_width) / 2, y_position, signature_text)
         
         # Номер страницы
         page_num = canvas.getPageNumber()
         canvas.setFont(font_name, 9)
-        canvas.drawRightString(A4[0] - 15*mm, 15*mm, f"Страница {page_num}")
+        canvas.drawRightString(A4[0] - 15*mm, 15*mm, f"Страница {page_num} из 2")
         
         canvas.restoreState()
     
