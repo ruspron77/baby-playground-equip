@@ -98,6 +98,7 @@ export function Header({
   const [kpDeliveryCost, setKpDeliveryCost] = useState(0);
   const [hideInstallationInKP, setHideInstallationInKP] = useState(false);
   const [hideDeliveryInKP, setHideDeliveryInKP] = useState(false);
+  const [kpFormat, setKpFormat] = useState<'xlsx' | 'pdf'>('xlsx');
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [cartSearchQuery, setCartSearchQuery] = useState('');
   const orderButtonRef = useRef<HTMLButtonElement>(null);
@@ -638,6 +639,29 @@ export function Header({
                 step="500"
               />
             </div>
+            <div>
+              <label className="text-sm font-medium mb-2 block">Формат файла</label>
+              <div className="flex gap-3 mb-4">
+                <Button
+                  type="button"
+                  variant={kpFormat === 'xlsx' ? 'default' : 'outline'}
+                  className="flex-1"
+                  onClick={() => setKpFormat('xlsx')}
+                >
+                  <Icon name="FileSpreadsheet" size={18} className="mr-2" />
+                  XLSX
+                </Button>
+                <Button
+                  type="button"
+                  variant={kpFormat === 'pdf' ? 'default' : 'outline'}
+                  className="flex-1"
+                  onClick={() => setKpFormat('pdf')}
+                >
+                  <Icon name="FileText" size={18} className="mr-2" />
+                  PDF
+                </Button>
+              </div>
+            </div>
             <Button 
               className="w-full" 
               onClick={() => {
@@ -650,7 +674,7 @@ export function Header({
                 });
                 setShowKPDialog(false);
               }}
-            >Скачать коммерческое предложение</Button>
+            >Скачать коммерческое предложение ({kpFormat.toUpperCase()})</Button>
           </div>
         </DialogContent>
       </Dialog>
