@@ -52,6 +52,7 @@ def get_next_kp_number():
 
 def handler(event, context):
     """Генерация Excel или PDF файла с коммерческим предложением"""
+    print(f'Function started. Memory limit: {context.memory_limit_in_mb} MB')
     
     if event.get('httpMethod') == 'OPTIONS':
         return {
@@ -67,6 +68,7 @@ def handler(event, context):
     try:
         body = json.loads(event.get('body', '{}'))
         products = body.get('products', [])
+        print(f'Processing {len(products)} products')
         address = body.get('address', '')
         installation_percent = body.get('installationPercent', 0)
         installation_cost = body.get('installationCost', 0)
@@ -111,38 +113,35 @@ def handler(event, context):
         # Отступ одной строки сверху
         current_row = 2
         
-        # Логотип (левый верхний угол) - встраиваем в исходном качестве
+        # Логотип (левый верхний угол) - оптимизированная загрузка
         try:
+            print('Loading logo...')
             logo_url = 'https://cdn.poehali.dev/files/%D0%BB%D0%BE%D0%B3%D0%BE%D0%BA%D0%BF.png'
             req = urllib.request.Request(logo_url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req, timeout=5) as response:
+            with urllib.request.urlopen(req, timeout=3) as response:
                 logo_data = response.read()
                 
-                # Открываем только для получения размеров
+                # Открываем и сразу ресайзим для экономии памяти
                 pil_logo = PILImage.open(io.BytesIO(logo_data))
-                original_width, original_height = pil_logo.size
                 
                 # Целевые размеры
                 target_width = 180
                 target_height = 90
                 
-                # Вычисляем размеры с сохранением пропорций
-                width_ratio = target_width / original_width
-                height_ratio = target_height / original_height
-                ratio = min(width_ratio, height_ratio)
+                # Ресайзим изображение сразу
+                pil_logo.thumbnail((target_width, target_height), PILImage.Resampling.LANCZOS)
                 
-                final_width = int(original_width * ratio)
-                final_height = int(original_height * ratio)
+                # Сохраняем в буфер
+                logo_buffer = io.BytesIO()
+                pil_logo.save(logo_buffer, format='PNG', optimize=True)
+                logo_buffer.seek(0)
                 
-                # Создаем изображение напрямую из оригинальных байтов (без пересохранения!)
-                logo_buffer = io.BytesIO(logo_data)
                 logo_img = XLImage(logo_buffer)
-                
-                # Устанавливаем размеры для отображения (качество не теряется!)
-                logo_img.width = final_width
-                logo_img.height = final_height
+                logo_img.width = pil_logo.width
+                logo_img.height = pil_logo.height
                 
                 ws.add_image(logo_img, 'A2')
+                print('Logo loaded successfully')
         except Exception as e:
             print(f'Failed to load logo: {e}')
         
@@ -282,9 +281,10 @@ def handler(event, context):
             cell.border = thin_border
             cell.font = Font(name='Calibri', size=11)
             
-            # Рисунок - встраиваем напрямую в максимальном качестве
+            # Рисунок - оптимизированная загрузка
             if product.get('image') and product['image'].startswith('http'):
                 try:
+                    print(f'Loading product image {idx}...')
                     # Энкодим URL для корректной работы с кириллицей
                     image_url = product['image']
                     
@@ -297,54 +297,48 @@ def handler(event, context):
                     ))
                     
                     req = urllib.request.Request(safe_url, headers={'User-Agent': 'Mozilla/5.0'})
-                    with urllib.request.urlopen(req, timeout=5) as response:
+                    with urllib.request.urlopen(req, timeout=3) as response:
                         img_data = response.read()
                         
-                        # Открываем изображение только для получения размеров
+                        # Открываем и сразу ресайзим
                         pil_img = PILImage.open(io.BytesIO(img_data))
-                        original_width, original_height = pil_img.size
                         
-                        # Целевые размеры под новую ячейку (20.00 width × 75.00 height)
-                        # Конвертация: 20.00 Excel units * 7 = 140 pixels (примерно)
-                        # 75.00 height points = 100 pixels
-                        col_width_pixels = 140
-                        row_height_pixels = 100
+                        # Целевые размеры
+                        target_width = 130
+                        target_height = 90
                         
-                        target_width = col_width_pixels - 10  # 130 пикселей с отступом
-                        target_height = row_height_pixels - 10  # 90 пикселей с отступом
+                        # Ресайзим сразу для экономии памяти
+                        pil_img.thumbnail((target_width, target_height), PILImage.Resampling.LANCZOS)
                         
-                        # Вычисляем финальные размеры с сохранением пропорций
-                        width_ratio = target_width / original_width
-                        height_ratio = target_height / original_height
-                        ratio = min(width_ratio, height_ratio)
+                        # Сохраняем в буфер
+                        img_buffer = io.BytesIO()
+                        pil_img.save(img_buffer, format='PNG', optimize=True)
+                        img_buffer.seek(0)
                         
-                        final_width = int(original_width * ratio)
-                        final_height = int(original_height * ratio)
-                        
-                        # Создаем изображение напрямую из оригинальных байтов
-                        original_buffer = io.BytesIO(img_data)
-                        img = XLImage(original_buffer)
-                        
-                        # Устанавливаем размеры для отображения
-                        img.width = final_width
-                        img.height = final_height
+                        img = XLImage(img_buffer)
+                        img.width = pil_img.width
+                        img.height = pil_img.height
                         
                         # Центрируем изображение (EMU: 1 px ≈ 9525 EMU)
                         from openpyxl.drawing.spreadsheet_drawing import AnchorMarker, TwoCellAnchor
                         
+                        col_width_pixels = 140
+                        row_height_pixels = 100
+                        
                         # Рассчитываем отступы для центрирования
-                        offset_x = int((col_width_pixels - final_width) / 2 * 9525)
-                        offset_y = int((row_height_pixels - final_height) / 2 * 9525)
+                        offset_x = int((col_width_pixels - pil_img.width) / 2 * 9525)
+                        offset_y = int((row_height_pixels - pil_img.height) / 2 * 9525)
                         
                         # Привязка к колонке C (индекс 2)
                         anchor = TwoCellAnchor()
                         anchor._from = AnchorMarker(col=2, colOff=offset_x, row=current_row-1, rowOff=offset_y)
-                        anchor.to = AnchorMarker(col=2, colOff=offset_x + final_width * 9525, row=current_row-1, rowOff=offset_y + final_height * 9525)
+                        anchor.to = AnchorMarker(col=2, colOff=offset_x + pil_img.width * 9525, row=current_row-1, rowOff=offset_y + pil_img.height * 9525)
                         img.anchor = anchor
                         
                         ws.add_image(img)
+                        print(f'Product image {idx} loaded')
                 except Exception as e:
-                    print(f'Failed to load image: {e}')
+                    print(f'Failed to load image {idx}: {e}')
             
             cell = ws.cell(row=current_row, column=3, value='')
             cell.border = thin_border
@@ -522,10 +516,12 @@ def handler(event, context):
         cell.font = Font(name='Calibri', size=11)
         
         # Сохранение
+        print('Saving Excel file...')
         output = io.BytesIO()
         wb.save(output)
         output.seek(0)
         excel_data = output.read()
+        print(f'Excel file saved, size: {len(excel_data)} bytes')
         
         return {
             'statusCode': 200,

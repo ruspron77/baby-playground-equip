@@ -19,7 +19,7 @@ from PIL import Image as PILImage
 def generate_pdf_reportlab(products, address, installation_percent, installation_cost, delivery_cost, 
                            hide_installation, hide_delivery, kp_number):
     """Генерация PDF с использованием ReportLab (кириллица через DejaVu)"""
-    
+    print(f'PDF generation started for {len(products)} products')
     buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=A4)
     width, height = A4
@@ -29,7 +29,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         # Скачиваем шрифт DejaVu Sans (аналог Calibri)
         font_url = 'https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans.ttf'
         req = urllib.request.Request(font_url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=5) as response:
+        with urllib.request.urlopen(req, timeout=3) as response:
             font_data = response.read()
             font_path = '/tmp/DejaVuSans.ttf'
             with open(font_path, 'wb') as f:
@@ -40,7 +40,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         # Жирный шрифт
         font_url_bold = 'https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans-Bold.ttf'
         req_bold = urllib.request.Request(font_url_bold, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req_bold, timeout=5) as response:
+        with urllib.request.urlopen(req_bold, timeout=3) as response:
             font_bold_data = response.read()
             font_bold_path = '/tmp/DejaVuSans-Bold.ttf'
             with open(font_bold_path, 'wb') as f:
@@ -68,11 +68,13 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         ))
         
         req = urllib.request.Request(safe_url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=5) as response:
+        with urllib.request.urlopen(req, timeout=3) as response:
             logo_data = io.BytesIO(response.read())
             pil_logo = PILImage.open(logo_data)
+            # Ресайзим для экономии памяти
+            pil_logo.thumbnail((180, 90), PILImage.Resampling.LANCZOS)
             temp_logo = '/tmp/logo.png'
-            pil_logo.save(temp_logo, 'PNG')
+            pil_logo.save(temp_logo, 'PNG', optimize=True)
             # Логотип: 180x90 pts (аналог XLSX)
             c.drawImage(temp_logo, 10*mm, y_pos - 22*mm, width=60*mm, height=25*mm, preserveAspectRatio=True, mask='auto')
     except Exception as e:
@@ -157,11 +159,13 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
                 ))
                 
                 req = urllib.request.Request(safe_url, headers={'User-Agent': 'Mozilla/5.0'})
-                with urllib.request.urlopen(req, timeout=5) as response:
+                with urllib.request.urlopen(req, timeout=3) as response:
                     img_data = io.BytesIO(response.read())
                     pil_img = PILImage.open(img_data)
+                    # Ресайзим для экономии памяти
+                    pil_img.thumbnail((130, 90), PILImage.Resampling.LANCZOS)
                     temp_img = f'/tmp/prod_{idx}.png'
-                    pil_img.save(temp_img, 'PNG')
+                    pil_img.save(temp_img, 'PNG', optimize=True)
                     img_placeholder = RLImage(temp_img, width=35*mm, height=25*mm)
             except Exception as e:
                 print(f'Image {idx} error: {e}')
@@ -268,4 +272,6 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     c.save()
     buffer.seek(0)
-    return buffer.read()
+    pdf_data = buffer.read()
+    print(f'PDF generated, size: {len(pdf_data)} bytes')
+    return pdf_data
