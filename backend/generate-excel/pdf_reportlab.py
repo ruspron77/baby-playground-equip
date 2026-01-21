@@ -78,25 +78,25 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     except Exception as e:
         print(f'Logo error: {e}')
     
-    # Шапка компании (правый верхний угол)
+    # Шапка компании (правый верхний угол) - увеличенные интервалы
     c.setFont(font_name_bold, 11)
     right_x = width - 10*mm
     c.drawRightString(right_x, y_pos, 'ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ')
-    y_pos -= 4*mm
+    y_pos -= 5*mm  # Увеличено с 4mm до 5mm
     
     c.setFont(font_name, 11)
     c.drawRightString(right_x, y_pos, 'ИНН 110209455200 ОГРНИП 32377460012482')
-    y_pos -= 4*mm
+    y_pos -= 5*mm  # Увеличено с 4mm до 5mm
     c.drawRightString(right_x, y_pos, '350005, г. Краснодар, ул. Кореновская, д. 57 оф.7')
-    y_pos -= 4*mm
+    y_pos -= 5*mm  # Увеличено с 4mm до 5mm
     c.drawRightString(right_x, y_pos, 'тел: +7 918 115 15 51 e-mail: info@urban-play.ru')
-    y_pos -= 4*mm
+    y_pos -= 5*mm  # Увеличено с 4mm до 5mm
     
     c.setFillColor(colors.HexColor('#58078a'))  # Фиолетовый цвет ссылки
     c.drawRightString(right_x, y_pos, 'www.urban-play.ru')
     c.linkURL('https://www.urban-play.ru', (right_x - 40*mm, y_pos - 2*mm, right_x, y_pos + 3*mm))
     c.setFillColor(colors.black)
-    y_pos -= 8*mm
+    y_pos -= 10*mm  # Увеличено с 8mm до 10mm
     
     # Декоративные линии (салатовая и фиолетовая)
     c.setFillColor(colors.HexColor('#44aa02'))  # Зеленая
@@ -249,14 +249,14 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     y_pos = y_pos - table_height - 10*mm
     
-    # Футер с условиями
+    # Футер с условиями - увеличенные интервалы
     c.setFont(font_name, 11)
     c.drawString(10*mm, y_pos, 'Оборудование имеет сертификат соответствия ТС ЕАЭС 042-2017')
-    y_pos -= 5*mm
+    y_pos -= 7*mm  # Увеличено с 5mm до 7mm
     c.drawString(10*mm, y_pos, 'Срок действия коммерческого предложения 15 дней')
-    y_pos -= 5*mm
+    y_pos -= 7*mm  # Увеличено с 5mm до 7mm
     c.drawString(10*mm, y_pos, 'Срок изготовления оборудования 30 дней')
-    y_pos -= 12*mm
+    y_pos -= 15*mm  # Увеличено с 12mm до 15mm
     
     # Подпись
     c.setFont(font_name, 11)
