@@ -183,7 +183,7 @@ export function ProductDialog({
                     {selectedProduct.dimensions.split('х').map((dim, idx) => (
                       <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center">
                         <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
-                          {idx === 0 ? 'Ширина' : idx === 1 ? 'Длина' : 'Высота'}
+                          {idx === 0 ? 'Длина' : idx === 1 ? 'Ширина' : 'Высота'}
                         </p>
                         <p className="font-semibold sm:text-base text-xl">{dim.trim()}</p>
                       </div>
