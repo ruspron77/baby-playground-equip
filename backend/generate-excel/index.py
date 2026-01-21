@@ -80,9 +80,9 @@ def handler(event, context):
         
         # Генерация PDF
         if file_format == 'pdf':
-            from pdf_generator import generate_pdf
+            from pdf_fpdf import generate_pdf_fpdf
             
-            pdf_content = generate_pdf(
+            pdf_content = generate_pdf_fpdf(
                 products, address, installation_percent, installation_cost,
                 delivery_cost, hide_installation, hide_delivery, kp_number
             )
