@@ -255,12 +255,10 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
         ]
         
-        # Стиль для итоговой строки
+        # Стиль для итоговой строки - только жирный шрифт, без дополнительных линий
         if is_last_page:
             style_list.extend([
                 ('FONT', (-2, -1), (-1, -1), font_name_bold, 11),
-                ('LINEABOVE', (5, -1), (-1, -1), 1.5, colors.black),
-                ('LINEBELOW', (5, -1), (-1, -1), 1.5, colors.black),
             ])
         
         table.setStyle(TableStyle(style_list))
