@@ -226,16 +226,16 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     data_rows = table_data[1:-1]  # Все кроме заголовка и итого
     footer = table_data[-1:]  # Строка «Итого»
     
-    # Высота одной строки ~25-30mm (учитывая изображения)
-    row_height = 30*mm
-    # Для первой страницы оставляем место под футер, для остальных используем весь лист
-    first_page_height = y_pos - 80*mm
-    next_page_height = height - 40*mm  # На новых страницах используем весь лист
+    # Высота одной строки ~25mm (с учётом изображений)
+    row_height = 25*mm
+    # Для первой страницы оставляем место под футер (60мм), для остальных используем весь лист (15мм отступ)
+    first_page_height = y_pos - 60*mm
+    next_page_height = height - 15*mm  # На новых страницах начинаем с самого верха
     first_page_rows = int(first_page_height / row_height)
     next_page_rows = int(next_page_height / row_height)
     
     # Функция для отрисовки таблицы на странице
-    def draw_table_chunk(chunk_data, y_position, is_first_page=True, is_last_page=False):
+    def draw_table_chunk(chunk_data, y_position, is_first_page=True, is_last_page=False, page_number=1, total_pages=1):
         # Добавляем заголовок на каждую страницу
         chunk_with_header = header + chunk_data
         if is_last_page:
@@ -267,7 +267,19 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         table.wrapOn(c, width, height)
         table_height = table._height
         table.drawOn(c, 10*mm, y_position - table_height)
+        
+        # Добавляем нумерацию страниц внизу справа
+        c.setFont(font_name, 9)
+        c.drawRightString(width - 10*mm, 10*mm, f'Страница {page_number} из {total_pages}')
+        
         return y_position - table_height
+    
+    # Рассчитываем общее количество страниц
+    total_items = len(data_rows)
+    total_pages = 1  # Минимум одна страница
+    if total_items > first_page_rows:
+        remaining = total_items - first_page_rows
+        total_pages += (remaining + next_page_rows - 1) // next_page_rows
     
     # Разбиваем данные на страницы
     current_y = y_pos
@@ -283,13 +295,13 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         data_rows = data_rows[rows_to_take:]
         is_last = (len(data_rows) == 0)
         
-        current_y = draw_table_chunk(chunk, current_y, is_first, is_last)
+        current_y = draw_table_chunk(chunk, current_y, is_first, is_last, page_num, total_pages)
         
         # Если есть ещё данные, создаём новую страницу БЕЗ логотипа
         if data_rows:
             c.showPage()
-            # На новой странице начинаем сверху
-            current_y = height - 20*mm
+            # На новой странице начинаем с самого верха
+            current_y = height - 5*mm
     
     y_pos = current_y - 10*mm
     
