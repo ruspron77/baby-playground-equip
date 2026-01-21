@@ -115,7 +115,7 @@ def handler(event, context):
         try:
             logo_url = 'https://cdn.poehali.dev/files/%D0%BB%D0%BE%D0%B3%D0%BE%D0%BA%D0%BF.png'
             req = urllib.request.Request(logo_url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req, timeout=10) as response:
+            with urllib.request.urlopen(req, timeout=5) as response:
                 logo_data = response.read()
                 
                 # Открываем только для получения размеров
@@ -297,7 +297,7 @@ def handler(event, context):
                     ))
                     
                     req = urllib.request.Request(safe_url, headers={'User-Agent': 'Mozilla/5.0'})
-                    with urllib.request.urlopen(req, timeout=10) as response:
+                    with urllib.request.urlopen(req, timeout=5) as response:
                         img_data = response.read()
                         
                         # Открываем изображение только для получения размеров

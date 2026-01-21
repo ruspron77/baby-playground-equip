@@ -29,7 +29,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         # Скачиваем шрифт DejaVu Sans (аналог Calibri)
         font_url = 'https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans.ttf'
         req = urllib.request.Request(font_url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with urllib.request.urlopen(req, timeout=5) as response:
             font_data = response.read()
             font_path = '/tmp/DejaVuSans.ttf'
             with open(font_path, 'wb') as f:
@@ -40,7 +40,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         # Жирный шрифт
         font_url_bold = 'https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans-Bold.ttf'
         req_bold = urllib.request.Request(font_url_bold, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req_bold, timeout=10) as response:
+        with urllib.request.urlopen(req_bold, timeout=5) as response:
             font_bold_data = response.read()
             font_bold_path = '/tmp/DejaVuSans-Bold.ttf'
             with open(font_bold_path, 'wb') as f:
@@ -68,7 +68,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         ))
         
         req = urllib.request.Request(safe_url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with urllib.request.urlopen(req, timeout=5) as response:
             logo_data = io.BytesIO(response.read())
             pil_logo = PILImage.open(logo_data)
             temp_logo = '/tmp/logo.png'
@@ -157,7 +157,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
                 ))
                 
                 req = urllib.request.Request(safe_url, headers={'User-Agent': 'Mozilla/5.0'})
-                with urllib.request.urlopen(req, timeout=10) as response:
+                with urllib.request.urlopen(req, timeout=5) as response:
                     img_data = io.BytesIO(response.read())
                     pil_img = PILImage.open(img_data)
                     temp_img = f'/tmp/prod_{idx}.png'
