@@ -20,7 +20,7 @@ def generate_pdf(products, address, installation_percent, installation_cost, del
     buffer = io.BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=A4, 
                            rightMargin=15*mm, leftMargin=15*mm,
-                           topMargin=10*mm, bottomMargin=50*mm)
+                           topMargin=5*mm, bottomMargin=50*mm)
     
     story = []
     styles = getSampleStyleSheet()
