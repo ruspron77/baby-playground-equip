@@ -162,10 +162,10 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
                 with urllib.request.urlopen(req, timeout=3) as response:
                     img_data = io.BytesIO(response.read())
                     pil_img = PILImage.open(img_data)
-                    # Ресайзим для экономии памяти
-                    pil_img.thumbnail((130, 90), PILImage.Resampling.LANCZOS)
+                    # Ресайзим для ВЫСОКОГО качества
+                    pil_img.thumbnail((400, 300), PILImage.Resampling.LANCZOS)
                     temp_img = f'/tmp/prod_{idx}.png'
-                    pil_img.save(temp_img, 'PNG', optimize=True)
+                    pil_img.save(temp_img, 'PNG', optimize=False, quality=95)
                     img_placeholder = RLImage(temp_img, width=35*mm, height=25*mm)
             except Exception as e:
                 print(f'Image {idx} error: {e}')
@@ -230,7 +230,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     row_height = 25*mm
     # Для всех страниц оставляем 50мм снизу
     first_page_height = y_pos - 50*mm
-    next_page_height = height - 50*mm  # На новых страницах тоже 50мм снизу
+    next_page_height = height - 60*mm  # На новых страницах 60мм снизу (таблица выше)
     first_page_rows = int(first_page_height / row_height)
     next_page_rows = int(next_page_height / row_height)
     
