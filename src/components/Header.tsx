@@ -101,7 +101,14 @@ export function Header({
   const [kpFormat, setKpFormat] = useState<'xlsx' | 'pdf'>('xlsx');
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [cartSearchQuery, setCartSearchQuery] = useState('');
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+  const [sortedCart, setSortedCart] = useState(cart);
   const orderButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    setSortedCart(cart);
+  }, [cart]);
 
   useEffect(() => {
     if (isCartOpen) {
@@ -453,10 +460,42 @@ export function Header({
                           )}
                         </div>
                         <div className="space-y-3">
-                          {cart.map((item) => (
-                            <Card key={item.id} className="overflow-hidden">
+                          {sortedCart.map((item, index) => (
+                            <Card 
+                              key={item.id} 
+                              className={`overflow-hidden cursor-move transition-all ${
+                                draggedIndex === index ? 'opacity-50 scale-95' : ''
+                              } ${
+                                dragOverIndex === index ? 'border-2 border-primary' : ''
+                              }`}
+                              draggable
+                              onDragStart={() => setDraggedIndex(index)}
+                              onDragEnd={() => {
+                                setDraggedIndex(null);
+                                setDragOverIndex(null);
+                              }}
+                              onDragOver={(e) => {
+                                e.preventDefault();
+                                setDragOverIndex(index);
+                              }}
+                              onDragLeave={() => setDragOverIndex(null)}
+                              onDrop={(e) => {
+                                e.preventDefault();
+                                if (draggedIndex !== null && draggedIndex !== index) {
+                                  const newCart = [...sortedCart];
+                                  const [draggedItem] = newCart.splice(draggedIndex, 1);
+                                  newCart.splice(index, 0, draggedItem);
+                                  setSortedCart(newCart);
+                                }
+                                setDraggedIndex(null);
+                                setDragOverIndex(null);
+                              }}
+                            >
                               <CardContent className="p-3">
                                 <div className="flex gap-3">
+                                  <div className="flex items-center mr-2 text-muted-foreground">
+                                    <Icon name="GripVertical" size={20} className="cursor-grab active:cursor-grabbing" />
+                                  </div>
                                   <div className="w-20 h-20 flex-shrink-0 bg-white rounded flex items-center justify-center">
                                     {item.image.startsWith('http') ? (
                                       <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
