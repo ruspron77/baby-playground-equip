@@ -246,7 +246,7 @@ def handler(event, context):
             cell.font = Font(name='Calibri', bold=True, size=10)
             cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
             cell.border = thin_border
-            cell.fill = PatternFill(start_color='9b5fc4', end_color='9b5fc4', fill_type='solid')
+            cell.fill = PatternFill(start_color='c8a5e0', end_color='c8a5e0', fill_type='solid')
             cell.font = Font(name='Calibri', bold=True, size=10, color='000000')
         
         ws.row_dimensions[current_row].height = 16.50
