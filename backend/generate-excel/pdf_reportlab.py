@@ -96,7 +96,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     c.drawRightString(right_x, y_pos, 'www.urban-play.ru')
     c.linkURL('https://www.urban-play.ru', (right_x - 40*mm, y_pos - 2*mm, right_x, y_pos + 3*mm))
     c.setFillColor(colors.black)
-    y_pos -= 10*mm  # Увеличено с 8mm до 10mm
+    y_pos -= 6*mm  # Уменьшено с 10mm до 6mm - ближе к шапке
     
     # Декоративные линии (салатовая и фиолетовая)
     c.setFillColor(colors.HexColor('#44aa02'))  # Зеленая
@@ -106,20 +106,20 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     c.setFillColor(colors.HexColor('#58078a'))  # Фиолетовая
     c.rect(10*mm, y_pos, width - 20*mm, 0.7*mm, fill=1, stroke=0)
     c.setFillColor(colors.black)
-    y_pos -= 10*mm
+    y_pos -= 6*mm  # Уменьшено с 10mm до 6mm
     
     # Заголовок КП
     c.setFont(font_name_bold, 12)
     kp_date = datetime.now().strftime("%d.%m.%Y")
     kp_title = f'Коммерческое предложение № {kp_number:04d} от {kp_date}'
     c.drawCentredString(width / 2, y_pos, kp_title)
-    y_pos -= 10*mm
+    y_pos -= 8*mm  # Уменьшено с 10mm до 8mm
     
     # Адрес объекта (если указан)
     if address:
         c.setFont(font_name, 11)
         c.drawString(10*mm, y_pos, f'Адрес объекта: {address}')
-        y_pos -= 10*mm
+        y_pos -= 8*mm  # Уменьшено с 10mm до 8mm
     
     # Таблица товаров
     table_data = [
