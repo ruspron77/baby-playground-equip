@@ -1,6 +1,7 @@
 import io
 import os
 import urllib.request
+import urllib.parse
 from datetime import datetime
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
@@ -8,48 +9,82 @@ from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import Table, TableStyle, Image
+from reportlab.platypus import Table, TableStyle, Image as RLImage
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import Paragraph
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 from PIL import Image as PILImage
 
 
 def generate_pdf_reportlab(products, address, installation_percent, installation_cost, delivery_cost, 
                            hide_installation, hide_delivery, kp_number):
-    """Генерация PDF с использованием ReportLab (встроенные кириллические шрифты)"""
+    """Генерация PDF с использованием ReportLab (кириллица через DejaVu)"""
     
     buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=A4)
     width, height = A4
     
-    # Регистрируем кириллический шрифт (встроен в reportlab)
+    # Загружаем шрифт DejaVu Sans для кириллицы
     try:
-        from reportlab.pdfbase.cidfonts import UnicodeCIDFont
-        pdfmetrics.registerFont(UnicodeCIDFont('HeiseiKakuGo-W5'))
-        font_name = 'HeiseiKakuGo-W5'
-    except:
+        # Скачиваем шрифт DejaVu Sans (аналог Calibri)
+        font_url = 'https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans.ttf'
+        req = urllib.request.Request(font_url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=10) as response:
+            font_data = response.read()
+            font_path = '/tmp/DejaVuSans.ttf'
+            with open(font_path, 'wb') as f:
+                f.write(font_data)
+        
+        pdfmetrics.registerFont(TTFont('DejaVuSans', font_path))
+        
+        # Жирный шрифт
+        font_url_bold = 'https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans-Bold.ttf'
+        req_bold = urllib.request.Request(font_url_bold, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req_bold, timeout=10) as response:
+            font_bold_data = response.read()
+            font_bold_path = '/tmp/DejaVuSans-Bold.ttf'
+            with open(font_bold_path, 'wb') as f:
+                f.write(font_bold_data)
+        
+        pdfmetrics.registerFont(TTFont('DejaVuSans-Bold', font_bold_path))
+        
+        font_name = 'DejaVuSans'
+        font_name_bold = 'DejaVuSans-Bold'
+    except Exception as e:
+        print(f'Font loading error: {e}')
         font_name = 'Helvetica'
+        font_name_bold = 'Helvetica-Bold'
     
-    y_pos = height - 20*mm
+    y_pos = height - 15*mm
     
-    # Логотип
+    # Логотип (левый верхний угол)
     try:
-        logo_url = 'https://cdn.poehali.dev/files/%D0%BB%D0%BE%D0%B3%D0%BE%D0%BA%D0%BF.png'
-        req = urllib.request.Request(logo_url, headers={'User-Agent': 'Mozilla/5.0'})
+        logo_url = 'https://cdn.poehali.dev/files/логокп.png'
+        parsed = urllib.parse.urlparse(logo_url)
+        encoded_path = urllib.parse.quote(parsed.path, safe='/')
+        safe_url = urllib.parse.urlunparse((
+            parsed.scheme, parsed.netloc, encoded_path,
+            parsed.params, parsed.query, parsed.fragment
+        ))
+        
+        req = urllib.request.Request(safe_url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req, timeout=10) as response:
             logo_data = io.BytesIO(response.read())
-            img = PILImage.open(logo_data)
+            pil_logo = PILImage.open(logo_data)
             temp_logo = '/tmp/logo.png'
-            img.save(temp_logo, 'PNG')
-            c.drawImage(temp_logo, 20*mm, y_pos - 25*mm, width=60*mm, height=30*mm, preserveAspectRatio=True, mask='auto')
+            pil_logo.save(temp_logo, 'PNG')
+            # Логотип: 180x90 pts (аналог XLSX)
+            c.drawImage(temp_logo, 10*mm, y_pos - 22*mm, width=60*mm, height=25*mm, preserveAspectRatio=True, mask='auto')
     except Exception as e:
         print(f'Logo error: {e}')
     
-    # Шапка компании (справа)
-    c.setFont(font_name, 11)
-    right_x = width - 20*mm
+    # Шапка компании (правый верхний угол)
+    c.setFont(font_name_bold, 11)
+    right_x = width - 10*mm
     c.drawRightString(right_x, y_pos, 'ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ')
-    y_pos -= 5*mm
+    y_pos -= 4*mm
     
-    c.setFont(font_name, 9)
+    c.setFont(font_name, 11)
     c.drawRightString(right_x, y_pos, 'ИНН 110209455200 ОГРНИП 32377460012482')
     y_pos -= 4*mm
     c.drawRightString(right_x, y_pos, '350005, г. Краснодар, ул. Кореновская, д. 57 оф.7')
@@ -59,51 +94,51 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     c.setFillColor(colors.HexColor('#0563C1'))
     c.drawRightString(right_x, y_pos, 'www.urban-play.ru')
-    c.linkURL('https://www.urban-play.ru', (right_x - 50*mm, y_pos - 2*mm, right_x, y_pos + 3*mm))
-    c.setFillColor(colors.black)
-    y_pos -= 6*mm
-    
-    # Декоративные линии
-    c.setFillColor(colors.HexColor('#44aa02'))
-    c.rect(20*mm, y_pos, width - 40*mm, 0.5*mm, fill=1, stroke=0)
-    y_pos -= 1*mm
-    
-    c.setFillColor(colors.HexColor('#58078a'))
-    c.rect(20*mm, y_pos, width - 40*mm, 0.5*mm, fill=1, stroke=0)
+    c.linkURL('https://www.urban-play.ru', (right_x - 40*mm, y_pos - 2*mm, right_x, y_pos + 3*mm))
     c.setFillColor(colors.black)
     y_pos -= 8*mm
     
+    # Декоративные линии (салатовая и фиолетовая)
+    c.setFillColor(colors.HexColor('#44aa02'))  # Зеленая
+    c.rect(10*mm, y_pos, width - 20*mm, 0.7*mm, fill=1, stroke=0)
+    y_pos -= 1*mm
+    
+    c.setFillColor(colors.HexColor('#58078a'))  # Фиолетовая
+    c.rect(10*mm, y_pos, width - 20*mm, 0.7*mm, fill=1, stroke=0)
+    c.setFillColor(colors.black)
+    y_pos -= 10*mm
+    
     # Заголовок КП
-    c.setFont(font_name, 14)
+    c.setFont(font_name_bold, 12)
     kp_date = datetime.now().strftime("%d.%m.%Y")
     kp_title = f'Коммерческое предложение № {kp_number:04d} от {kp_date}'
     c.drawCentredString(width / 2, y_pos, kp_title)
-    y_pos -= 8*mm
+    y_pos -= 10*mm
     
-    # Адрес
+    # Адрес объекта (если указан)
     if address:
         c.setFont(font_name, 11)
-        c.drawString(20*mm, y_pos, f'Адрес объекта: {address}')
-        y_pos -= 8*mm
+        c.drawString(10*mm, y_pos, f'Адрес объекта: {address}')
+        y_pos -= 10*mm
     
     # Таблица товаров
     table_data = [
         ['№', 'Наименование', 'Рисунок', 'Кол-во', 'Ед. изм', 'Цена, руб', 'Сумма, руб']
     ]
     
-    total = 0
+    equipment_total = 0
     total_product_quantity = sum(p['quantity'] for p in products)
     delivery_per_unit = (delivery_cost / total_product_quantity) if (hide_delivery and delivery_cost > 0 and total_product_quantity > 0) else 0
     installation_percent_multiplier = (installation_percent / 100) if (hide_installation and installation_percent > 0) else 0
     
     for idx, product in enumerate(products, 1):
-        base_price = int(product['price'].replace(' ', ''))
+        base_price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']
         quantity = product['quantity']
         
         price_with_installation = base_price * (1 + installation_percent_multiplier)
         final_price = price_with_installation + delivery_per_unit
         final_sum = final_price * quantity
-        total += final_sum
+        equipment_total += final_sum
         
         article = product.get('article', '')
         name = product.get('name', '')
@@ -113,14 +148,23 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         img_placeholder = ''
         if product.get('image', '').startswith('http'):
             try:
-                req = urllib.request.Request(product['image'], headers={'User-Agent': 'Mozilla/5.0'})
-                with urllib.request.urlopen(req, timeout=5) as response:
+                image_url = product['image']
+                parsed = urllib.parse.urlparse(image_url)
+                encoded_path = urllib.parse.quote(parsed.path, safe='/')
+                safe_url = urllib.parse.urlunparse((
+                    parsed.scheme, parsed.netloc, encoded_path,
+                    parsed.params, parsed.query, parsed.fragment
+                ))
+                
+                req = urllib.request.Request(safe_url, headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req, timeout=10) as response:
                     img_data = io.BytesIO(response.read())
                     pil_img = PILImage.open(img_data)
                     temp_img = f'/tmp/prod_{idx}.png'
                     pil_img.save(temp_img, 'PNG')
-                    img_placeholder = Image(temp_img, width=40*mm, height=20*mm)
-            except:
+                    img_placeholder = RLImage(temp_img, width=35*mm, height=25*mm)
+            except Exception as e:
+                print(f'Image {idx} error: {e}')
                 img_placeholder = ''
         
         table_data.append([
@@ -133,7 +177,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             f'{final_sum:,.2f}'.replace(',', ' ')
         ])
     
-    # Монтаж
+    # Монтаж (если не скрыт)
     if installation_cost > 0 and not hide_installation:
         table_data.append([
             str(len(products) + 1),
@@ -145,7 +189,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             f'{installation_cost:,.2f}'.replace(',', ' ')
         ])
     
-    # Доставка
+    # Доставка (если не скрыта)
     if delivery_cost > 0 and not hide_delivery:
         next_num = len(products) + (2 if (installation_cost > 0 and not hide_installation) else 1)
         table_data.append([
@@ -158,52 +202,62 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             f'{delivery_cost:,.2f}'.replace(',', ' ')
         ])
     
-    # Итого
-    final_total = total
+    # Итого (с учетом только видимых строк)
+    total_sum = equipment_total
     if installation_cost > 0 and not hide_installation:
-        final_total += installation_cost
+        total_sum += installation_cost
     if delivery_cost > 0 and not hide_delivery:
-        final_total += delivery_cost
+        total_sum += delivery_cost
     
     table_data.append([
-        '', '', '', '', '', 'Итого:', f'{final_total:,.2f}'.replace(',', ' ')
+        '', '', '', '', '', 'Итого:', f'{total_sum:,.2f}'.replace(',', ' ')
     ])
     
-    # Создаем таблицу
-    col_widths = [10*mm, 50*mm, 40*mm, 15*mm, 15*mm, 25*mm, 25*mm]
+    # Создаем таблицу с правильными пропорциями (как в XLSX)
+    # Колонки: №(4), Наименование(27), Рисунок(20), Кол-во(7), Ед.изм(7), Цена(13), Сумма(14)
+    col_widths = [8*mm, 50*mm, 38*mm, 13*mm, 13*mm, 25*mm, 27*mm]
     
-    table = Table(table_data, colWidths=col_widths)
+    table = Table(table_data, colWidths=col_widths, rowHeights=None)
     table.setStyle(TableStyle([
-        ('FONT', (0, 0), (-1, -1), font_name, 9),
-        ('FONT', (0, 0), (-1, 0), font_name, 10),
+        # Шрифты
+        ('FONT', (0, 0), (-1, -1), font_name, 10),
+        ('FONT', (0, 0), (-1, 0), font_name_bold, 10),  # Заголовки жирным
+        ('FONT', (-2, -1), (-1, -1), font_name_bold, 11),  # Итого жирным
+        
+        # Фон заголовков
         ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#D3D3D3')),
-        ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
+        
+        # Выравнивание
         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('ALIGN', (1, 1), (1, -1), 'LEFT'),
+        ('ALIGN', (1, 1), (1, -1), 'LEFT'),  # Наименование влево
         ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-        ('GRID', (0, 0), (-1, -2), 0.5, colors.black),
-        ('BOX', (5, -1), (-1, -1), 0.5, colors.black),
-        ('FONTNAME', (-2, -1), (-1, -1), font_name),
-        ('FONTSIZE', (-2, -1), (-1, -1), 10),
+        
+        # Границы
+        ('GRID', (0, 0), (-1, -2), 0.5, colors.black),  # Все ячейки кроме итого
+        ('BOX', (5, -1), (-1, -1), 0.5, colors.black),  # Рамка для итого
+        
+        # Цвет текста
+        ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
     ]))
     
     # Рисуем таблицу
     table.wrapOn(c, width, height)
     table_height = table._height
-    table.drawOn(c, 20*mm, y_pos - table_height)
+    table.drawOn(c, 10*mm, y_pos - table_height)
     
-    y_pos = y_pos - table_height - 8*mm
+    y_pos = y_pos - table_height - 10*mm
     
-    # Футер
-    c.setFont(font_name, 10)
-    c.drawString(20*mm, y_pos, 'Оборудование имеет сертификат соответствия ТС ЕАЭС 042-2017')
+    # Футер с условиями
+    c.setFont(font_name, 11)
+    c.drawString(10*mm, y_pos, 'Оборудование имеет сертификат соответствия ТС ЕАЭС 042-2017')
     y_pos -= 5*mm
-    c.drawString(20*mm, y_pos, 'Срок действия коммерческого предложения 15 дней')
+    c.drawString(10*mm, y_pos, 'Срок действия коммерческого предложения 15 дней')
     y_pos -= 5*mm
-    c.drawString(20*mm, y_pos, 'Срок изготовления оборудования 30 дней')
-    y_pos -= 10*mm
+    c.drawString(10*mm, y_pos, 'Срок изготовления оборудования 30 дней')
+    y_pos -= 12*mm
     
     # Подпись
+    c.setFont(font_name, 11)
     c.drawCentredString(width / 2, y_pos, 'Индивидуальный предприниматель___________________________/Пронин Р.О./')
     
     c.save()
