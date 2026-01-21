@@ -313,8 +313,8 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         # Если есть ещё данные, создаём новую страницу БЕЗ логотипа
         if data_rows:
             c.showPage()
-            # На новой странице начинаем с отступом сверху 20мм
-            current_y = height - 20*mm
+            # На новой странице начинаем с отступом сверху 10мм (таблица выше)
+            current_y = height - 10*mm
     
     y_pos = current_y - 10*mm
     
