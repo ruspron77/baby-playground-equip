@@ -205,4 +205,4 @@ def generate_pdf_fpdf(products, address, installation_percent, installation_cost
     pdf.set_xy(10, y_pos)
     pdf.cell(0, 5, 'Индивидуальный предприниматель___________________________/Пронин Р.О./', align='C')
     
-    return pdf.output(dest='S').encode('latin1')
+    return pdf.output()
