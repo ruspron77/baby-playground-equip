@@ -230,7 +230,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     row_height = 25*mm
     # Для всех страниц оставляем 50мм снизу
     first_page_height = y_pos - 50*mm
-    next_page_height = height - 60*mm  # На новых страницах 60мм снизу (таблица выше)
+    next_page_height = height - 70*mm  # На новых страницах 70мм снизу (таблица еще выше)
     first_page_rows = int(first_page_height / row_height)
     next_page_rows = int(next_page_height / row_height)
     
