@@ -255,15 +255,18 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
         ]
         
-        # Стиль для итоговой строки - убираем линии в пустых ячейках (столбцы 0-4)
+        # Стиль для итоговой строки
         if is_last_page:
             style_list.extend([
-                # Убираем все границы в пустых ячейках итоговой строки
+                # Скрываем линии сетки в пустых ячейках (столбцы 0-4)
                 ('LINEBELOW', (0, -1), (4, -1), 0, colors.white),
                 ('LINEABOVE', (0, -1), (4, -1), 0, colors.white),
                 ('LINEBEFORE', (0, -1), (4, -1), 0, colors.white),
                 ('LINEAFTER', (0, -1), (4, -1), 0, colors.white),
-                ('GRID', (0, -1), (4, -1), 0, colors.white),
+                # Добавляем линию снизу всей таблицы (последняя строка)
+                ('LINEBELOW', (0, -1), (-1, -1), 0.5, colors.black),
+                # Добавляем линию сверху строки "Итого" (только для ячеек с данными)
+                ('LINEABOVE', (5, -1), (-1, -1), 0.5, colors.black),
             ])
         
         table.setStyle(TableStyle(style_list))
