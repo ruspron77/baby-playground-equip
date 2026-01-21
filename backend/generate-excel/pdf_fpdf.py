@@ -14,10 +14,8 @@ def generate_pdf_fpdf(products, address, installation_percent, installation_cost
     pdf.add_page()
     pdf.set_auto_page_break(auto=False)
     
-    # Используем встроенный шрифт с поддержкой UTF-8
-    pdf.add_font('DejaVu', '', '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf')
-    pdf.add_font('DejaVu', 'B', '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf')
-    pdf.set_font('DejaVu', '', 11)
+    # Используем встроенные шрифты без кириллицы
+    pdf.set_font('Helvetica', '', 11)
     
     # Логотип
     try:
@@ -28,23 +26,23 @@ def generate_pdf_fpdf(products, address, installation_percent, installation_cost
             with open('/tmp/logo_temp.png', 'wb') as f:
                 f.write(logo_data.getvalue())
             pdf.image('/tmp/logo_temp.png', x=10, y=10, w=60)
-    except:
-        pass
+    except Exception as e:
+        print(f'Failed to load logo: {e}')
     
-    # Информация о компании (справа)
-    pdf.set_font('DejaVu', 'B', 11)
+    # Информация о компании (справа) - транслитом
+    pdf.set_font('Helvetica', 'B', 11)
     pdf.set_xy(120, 10)
-    pdf.cell(0, 5, 'ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ', align='R')
+    pdf.cell(0, 5, 'IP PRONIN RUSLAN OLEGOVICH', align='R')
     
-    pdf.set_font('DejaVu', '', 9)
+    pdf.set_font('Helvetica', '', 9)
     pdf.set_xy(120, 15)
-    pdf.cell(0, 5, 'ИНН 110209455200 ОГРНИП 32377460012482', align='R')
+    pdf.cell(0, 5, 'INN 110209455200 OGRNIP 32377460012482', align='R')
     
     pdf.set_xy(120, 20)
-    pdf.cell(0, 5, '350005, г. Краснодар, ул. Кореновская, д. 57 оф.7', align='R')
+    pdf.cell(0, 5, '350005, Krasnodar, ul. Korenovskaya, 57-7', align='R')
     
     pdf.set_xy(120, 25)
-    pdf.cell(0, 5, 'тел: +7 918 115 15 51', align='R')
+    pdf.cell(0, 5, 'tel: +7 918 115 15 51', align='R')
     
     pdf.set_xy(120, 30)
     pdf.cell(0, 5, 'e-mail: info@urban-play.ru', align='R')
@@ -55,33 +53,33 @@ def generate_pdf_fpdf(products, address, installation_percent, installation_cost
     pdf.set_text_color(0, 0, 0)
     
     # Декоративные линии
-    pdf.set_fill_color(68, 170, 2)  # Зелёный
+    pdf.set_fill_color(68, 170, 2)
     pdf.rect(10, 45, 190, 0.5, 'F')
     
-    pdf.set_fill_color(88, 7, 138)  # Фиолетовый
+    pdf.set_fill_color(88, 7, 138)
     pdf.rect(10, 46, 190, 0.5, 'F')
     
     # Заголовок КП
-    pdf.set_font('DejaVu', 'B', 14)
+    pdf.set_font('Helvetica', 'B', 14)
     pdf.set_xy(10, 52)
     kp_date = datetime.now().strftime("%d.%m.%Y")
-    pdf.cell(0, 8, f'Коммерческое предложение № {kp_number:04d} от {kp_date}', align='C')
+    pdf.cell(0, 8, f'Commercial Offer No {kp_number:04d} from {kp_date}', align='C')
     
     # Адрес объекта
     y_pos = 65
     if address:
-        pdf.set_font('DejaVu', '', 11)
+        pdf.set_font('Helvetica', '', 11)
         pdf.set_xy(10, y_pos)
-        pdf.cell(0, 6, f'Адрес объекта: {address}')
+        pdf.cell(0, 6, f'Address: {address}')
         y_pos += 10
     
     # Таблица товаров
-    pdf.set_font('DejaVu', 'B', 9)
+    pdf.set_font('Helvetica', 'B', 9)
     pdf.set_fill_color(68, 170, 2)
     pdf.set_text_color(255, 255, 255)
     
     col_widths = [10, 25, 75, 25, 15, 30]
-    headers = ['№', 'Артикул', 'Наименование', 'Цена, ₽', 'Кол-во', 'Сумма, ₽']
+    headers = ['No', 'Article', 'Name', 'Price, RUB', 'Qty', 'Sum, RUB']
     
     x_start = 10
     pdf.set_xy(x_start, y_pos)
@@ -91,7 +89,7 @@ def generate_pdf_fpdf(products, address, installation_percent, installation_cost
     y_pos += 8
     pdf.set_text_color(0, 0, 0)
     pdf.set_fill_color(255, 255, 255)
-    pdf.set_font('DejaVu', '', 9)
+    pdf.set_font('Helvetica', '', 9)
     
     total = 0
     for idx, product in enumerate(products, 1):
@@ -109,23 +107,29 @@ def generate_pdf_fpdf(products, address, installation_percent, installation_cost
         pdf.set_xy(x_start, y_pos)
         pdf.cell(col_widths[0], 6, str(idx), border=1, align='C')
         pdf.cell(col_widths[1], 6, product.get('article', ''), border=1, align='C')
-        pdf.cell(col_widths[2], 6, product['name'][:40], border=1)
+        
+        # Только латиница в названиях
+        name = product['name'][:40]
+        # Простая очистка от кириллицы
+        name_clean = ''.join(c if ord(c) < 128 else '?' for c in name)
+        pdf.cell(col_widths[2], 6, name_clean, border=1)
+        
         pdf.cell(col_widths[3], 6, f"{price:,}".replace(',', ' '), border=1, align='R')
         pdf.cell(col_widths[4], 6, str(quantity), border=1, align='C')
         pdf.cell(col_widths[5], 6, f"{sum_price:,}".replace(',', ' '), border=1, align='R')
         y_pos += 6
     
     # Итого
-    pdf.set_font('DejaVu', 'B', 9)
+    pdf.set_font('Helvetica', 'B', 9)
     pdf.set_xy(x_start + sum(col_widths[:4]), y_pos)
-    pdf.cell(col_widths[4], 6, 'Итого:', border=1, align='R')
+    pdf.cell(col_widths[4], 6, 'Total:', border=1, align='R')
     pdf.cell(col_widths[5], 6, f"{total:,}".replace(',', ' '), border=1, align='R')
     y_pos += 6
     
     # Монтаж
     if not hide_installation and installation_cost > 0:
         pdf.set_xy(x_start + sum(col_widths[:4]), y_pos)
-        pdf.cell(col_widths[4], 6, f'Монтаж ({installation_percent}%):', border=1, align='R')
+        pdf.cell(col_widths[4], 6, f'Install ({installation_percent}%):', border=1, align='R')
         pdf.cell(col_widths[5], 6, f"{installation_cost:,}".replace(',', ' '), border=1, align='R')
         total += installation_cost
         y_pos += 6
@@ -133,33 +137,33 @@ def generate_pdf_fpdf(products, address, installation_percent, installation_cost
     # Доставка
     if not hide_delivery and delivery_cost > 0:
         pdf.set_xy(x_start + sum(col_widths[:4]), y_pos)
-        pdf.cell(col_widths[4], 6, 'Доставка:', border=1, align='R')
+        pdf.cell(col_widths[4], 6, 'Delivery:', border=1, align='R')
         pdf.cell(col_widths[5], 6, f"{delivery_cost:,}".replace(',', ' '), border=1, align='R')
         total += delivery_cost
         y_pos += 6
     
     # Всего
     pdf.set_xy(x_start + sum(col_widths[:4]), y_pos)
-    pdf.cell(col_widths[4], 6, 'Всего:', border=1, align='R')
+    pdf.cell(col_widths[4], 6, 'Grand Total:', border=1, align='R')
     pdf.cell(col_widths[5], 6, f"{total:,}".replace(',', ' '), border=1, align='R')
     y_pos += 10
     
     # Футер
-    pdf.set_font('DejaVu', '', 10)
+    pdf.set_font('Helvetica', '', 10)
     pdf.set_xy(10, y_pos)
-    pdf.cell(0, 5, 'Оборудование имеет сертификат соответствия ТС ЕАЭС 042-2017')
+    pdf.cell(0, 5, 'Equipment has certificate TS EAES 042-2017')
     y_pos += 6
     
     pdf.set_xy(10, y_pos)
-    pdf.cell(0, 5, 'Срок действия коммерческого предложения 15 дней')
+    pdf.cell(0, 5, 'Commercial offer validity: 15 days')
     y_pos += 6
     
     pdf.set_xy(10, y_pos)
-    pdf.cell(0, 5, 'Срок изготовления оборудования 30 дней')
+    pdf.cell(0, 5, 'Production time: 30 days')
     y_pos += 10
     
     # Подпись
     pdf.set_xy(10, y_pos)
-    pdf.cell(0, 5, 'Индивидуальный предприниматель___________________________/Пронин Р.О./', align='C')
+    pdf.cell(0, 5, 'Individual entrepreneur___________________________/Pronin R.O./', align='C')
     
     return pdf.output()
