@@ -631,11 +631,36 @@ export function Header({
       </Dialog>
 
       <Dialog open={showKPDialog} onOpenChange={setShowKPDialog}>
-        <DialogContent>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Параметры коммерческого предложения</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
+            <div className="border rounded-lg p-3 bg-muted/30">
+              <h4 className="font-semibold text-sm mb-3 flex items-center gap-2">
+                <Icon name="ShoppingCart" size={16} />
+                Товары в корзине ({sortedCart.length})
+              </h4>
+              <div className="space-y-2 max-h-60 overflow-y-auto">
+                {sortedCart.map((item, idx) => (
+                  <div key={item.id} className="flex gap-2 text-xs bg-white p-2 rounded border">
+                    <span className="text-muted-foreground">{idx + 1}.</span>
+                    <div className="flex-1">
+                      <p className="font-medium">{item.name.split('\n')[1] || item.name}</p>
+                      <p className="text-muted-foreground">{item.name.split('\n')[0]}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold">{item.quantity} шт</p>
+                      <p className="text-primary">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 pt-3 border-t flex justify-between font-bold">
+                <span>Итого:</span>
+                <span className="text-primary">{formatPrice(calculateTotal())} ₽</span>
+              </div>
+            </div>
             <div>
               <label className="text-sm font-medium mb-2 block">Адрес объекта</label>
               <Input
