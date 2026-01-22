@@ -501,7 +501,7 @@ def handler(event, context):
             # discount_amount теперь это КОНЕЧНАЯ сумма заказа, а не скидка
             discount_value = total_sum - discount_amount
         
-        if discount_value > 0:
+        if discount_value != 0:
             for col in range(1, 6):
                 cell = ws.cell(row=current_row, column=col, value='')
             
