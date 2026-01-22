@@ -103,6 +103,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: "Open Sans", sans-serif;
+    overflow-x: hidden;
   }
 
   h1,
@@ -118,6 +119,7 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 85px;
+    overflow-x: hidden;
   }
 
   button {
