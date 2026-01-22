@@ -73,8 +73,8 @@ export function ProductDialog({
         </DialogHeader>
         {selectedProduct && (
           <div className="grid md:grid-cols-[1.5fr,1fr] gap-2 md:gap-6">
-            <div>
-              <div className="relative aspect-square bg-white rounded-lg flex items-center justify-center overflow-hidden border md:border border-0 p-0 mb-2">
+            <div className="flex items-start">
+              <div className="relative aspect-square bg-white rounded-lg flex items-center justify-center overflow-hidden border flex-1">
                 {productImages.length > 0 ? (
                   <>
                     <img 
@@ -138,7 +138,7 @@ export function ProductDialog({
               )}
             </div>
 
-            <div className="flex flex-col justify-center space-y-2 md:space-y-4 px-0 mx-0 my-0">
+            <div className="flex flex-col justify-start space-y-2 md:space-y-4 px-0 mx-0 my-0">
               <div>
                 <p className="sm:text-sm sm:mb-2 text-[#5a098c] my-0 text-base font-medium">{selectedProduct.name.split('\n')[0]}</p>
                 <h2 className="font-heading sm:mb-4 font-semibold sm:text-3xl my-0 text-3xl">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
