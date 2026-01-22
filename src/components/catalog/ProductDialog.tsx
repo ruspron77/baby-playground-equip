@@ -80,8 +80,7 @@ export function ProductDialog({
                     <img 
                       src={productImages[currentImageIndex]} 
                       alt={selectedProduct.name} 
-                      className="w-full h-full p-1 object-contain px-0 my-0 mx-0 py-0" 
-                      loading="lazy"
+                      className="w-full h-full object-contain p-4" 
                     />
                     {productImages.length > 1 && (
                       <>
@@ -116,7 +115,7 @@ export function ProductDialog({
                     )}
                   </>
                 ) : selectedProduct.image.startsWith('http') ? (
-                  <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-contain p-1 px-0" loading="lazy" />
+                  <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-contain p-4" />
                 ) : (
                   <span className="text-8xl">{selectedProduct.image}</span>
                 )}
