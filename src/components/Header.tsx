@@ -105,6 +105,8 @@ export function Header({
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const [sortedCart, setSortedCart] = useState(cart);
   const orderButtonRef = useRef<HTMLButtonElement>(null);
+  const [discountPercent, setDiscountPercent] = useState(0);
+  const [discountAmount, setDiscountAmount] = useState(0);
 
   useEffect(() => {
     setSortedCart(cart);
@@ -682,6 +684,42 @@ export function Header({
                 placeholder="0"
                 step="500"
               />
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-2 block">Скидка</label>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-xs text-muted-foreground mb-1 block">Процент (%)</label>
+                  <Input
+                    type="number"
+                    value={discountPercent || ''}
+                    onChange={(e) => {
+                      const percent = Number(e.target.value) || 0;
+                      setDiscountPercent(percent);
+                      setDiscountAmount(0);
+                    }}
+                    placeholder="0"
+                    step="1"
+                    min="0"
+                    max="100"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-muted-foreground mb-1 block">Сумма (₽)</label>
+                  <Input
+                    type="number"
+                    value={discountAmount || ''}
+                    onChange={(e) => {
+                      const amount = Number(e.target.value) || 0;
+                      setDiscountAmount(amount);
+                      setDiscountPercent(0);
+                    }}
+                    placeholder="0"
+                    step="100"
+                    min="0"
+                  />
+                </div>
+              </div>
             </div>
             <div>
               <label className="text-sm font-medium mb-2 block">Формат файла</label>
