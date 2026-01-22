@@ -131,7 +131,7 @@ export function ProductDialog({
                       }`}
                       onClick={() => setCurrentImageIndex(idx)}
                     >
-                      <img src={img} alt={`${selectedProduct.name} ${idx + 1}`} className="w-full h-full object-contain p-1" loading="lazy" />
+                      <img src={img} alt={`${selectedProduct.name} ${idx + 1}`} className="w-full h-full object-contain p-1" />
                     </button>
                   ))}
                 </div>
