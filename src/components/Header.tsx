@@ -244,7 +244,7 @@ export function Header({
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button onClick={() => setIsContactDialogOpen(true)} size="sm">
+            <Button onClick={() => setIsContactDialogOpen(true)} size="sm" className="hidden md:inline-flex">
               Заказать звонок
             </Button>
             <div className="flex items-center gap-3">
