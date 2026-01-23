@@ -198,11 +198,11 @@ export function Header({
           </div>
           <div className="hidden md:flex items-center gap-6 flex-1 justify-between ml-6">
             <nav className="flex gap-6">
-              <a href="#about" className="text-foreground hover:text-primary transition-colors text-base font-medium">О компании</a>
-              <a href="#catalog" className="text-foreground hover:text-primary transition-colors text-base font-medium">Каталог</a>
-              <a href="#services" className="text-foreground hover:text-primary transition-colors text-base font-medium">Услуги</a>
-              <a href="#certificates" className="text-foreground hover:text-primary transition-colors text-base font-medium">Сертификаты</a>
-              <a href="#contacts" className="text-foreground hover:text-primary transition-colors text-base font-medium">Контакты</a>
+              <a href="#about" onClick={handleResetFilters} className="text-foreground hover:text-primary transition-colors text-base font-medium">О компании</a>
+              <a href="#catalog" onClick={handleResetFilters} className="text-foreground hover:text-primary transition-colors text-base font-medium">Каталог</a>
+              <a href="#services" onClick={handleResetFilters} className="text-foreground hover:text-primary transition-colors text-base font-medium">Услуги</a>
+              <a href="#certificates" onClick={handleResetFilters} className="text-foreground hover:text-primary transition-colors text-base font-medium">Сертификаты</a>
+              <a href="#contacts" onClick={handleResetFilters} className="text-foreground hover:text-primary transition-colors text-base font-medium">Контакты</a>
             </nav>
             <div className="hidden lg:flex items-center gap-3">
               {/* Поиск */}
@@ -266,35 +266,50 @@ export function Header({
                     <a 
                       href="#about" 
                       className="text-base hover:text-primary transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        handleResetFilters?.();
+                      }}
                     >
                       О компании
                     </a>
                     <a 
                       href="#catalog" 
                       className="text-base hover:text-primary transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        handleResetFilters?.();
+                      }}
                     >
                       Каталог
                     </a>
                     <a 
                       href="#services" 
                       className="text-base hover:text-primary transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        handleResetFilters?.();
+                      }}
                     >
                       Услуги
                     </a>
                     <a 
                       href="#certificates" 
                       className="text-base hover:text-primary transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        handleResetFilters?.();
+                      }}
                     >
                       Сертификаты
                     </a>
                     <a 
                       href="#contacts" 
                       className="text-base hover:text-primary transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        handleResetFilters?.();
+                      }}
                     >
                       Контакты
                     </a>
