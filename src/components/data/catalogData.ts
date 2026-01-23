@@ -66,7 +66,16 @@ export const categories = [
             ]
           },
           { name: 'Балансиры', image: 'https://cdn.poehali.dev/files/мишкаа.png' },
-          { name: 'Горки', image: 'https://cdn.poehali.dev/files/0100.png' },
+          {
+            name: 'Горки',
+            image: 'https://cdn.poehali.dev/files/0100.png',
+            hasChildren: true,
+            children: [
+              { name: 'Горки h-0.6', image: '🛝' },
+              { name: 'Горки h-1.0', image: '🛝' },
+              { name: 'Горки h-1.5', image: '🛝' }
+            ]
+          },
           { name: 'Домики', image: 'https://cdn.poehali.dev/files/%D0%B4%D0%BE%D0%BC%D0%B8%D0%BA%202.png' },
           { name: 'Качели', image: 'https://cdn.poehali.dev/files/%D0%BA%D0%B0%D1%87%D0%B5%D0%BB%D0%B8.png' },
           { name: 'Карусели', image: 'https://cdn.poehali.dev/files/%D0%BA%D0%B0%D1%80%D1%83%D1%81%D0%B5%D0%BB%D1%8C.png' },
