@@ -49,6 +49,7 @@ interface CategoryGridProps {
   toggleFavorite: (product: Product) => void;
   setSelectedSubSubcategory: (value: string | null) => void;
   selectedProduct: Product | null;
+  handleTreeCategorySelect: (id: string, cat: Category) => void;
 }
 
 const formatPrice = (price: string | number): string => {
@@ -75,6 +76,7 @@ export function CategoryGrid({
   toggleFavorite,
   setSelectedSubSubcategory,
   selectedProduct,
+  handleTreeCategorySelect,
 }: CategoryGridProps) {
   if (!selectedCategory) return null;
 
@@ -139,6 +141,28 @@ export function CategoryGrid({
           </div>
           
           <div className="flex items-center gap-1 sm:gap-2 mb-0 py-0">
+            <Select
+              value={selectedCategory || 'all-categories'}
+              onValueChange={(value) => {
+                if (value !== 'all-categories') {
+                  const category = categories.find(c => c.id === value);
+                  if (category) {
+                    handleTreeCategorySelect(value, category);
+                  }
+                }
+              }}
+            >
+              <SelectTrigger className={`w-[30%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedCategory ? 'text-[#1d2025]' : ''}`}>
+                <SelectValue placeholder="Категории" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((category) => (
+                  <SelectItem key={category.id} value={category.id}>
+                    {category.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             {availableSeries.length > 0 && (
               <Select
                 value={selectedSeries || 'all-series'}

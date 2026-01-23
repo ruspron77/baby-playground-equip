@@ -270,6 +270,7 @@ export function CatalogSection({
         favorites={favorites}
         toggleFavorite={toggleFavorite}
         selectedProduct={selectedProduct}
+        handleTreeCategorySelect={handleTreeCategorySelect}
       />
 
       <ProductDialog
