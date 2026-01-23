@@ -318,7 +318,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         />
       </div>
       
-      <ContentSections />
+      {!catalogState.selectedCategory && <ContentSections />}
       </div>
       </div>
     </div>
