@@ -176,7 +176,7 @@ export function ProductDialog({
                 </div>
               </div>
 
-              <div className="border-t sm:py-[5px] py-0 my-0">
+              <div className="border-t sm:py-[5px] py-0 my-[7px]">
                 <h3 className="font-heading sm:mb-2 font-semibold sm:text-base my-2.5 text-lg">Техническая информация</h3>
                 {selectedProduct.dimensions && (
                   <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-1.5 sm:mb-4">
@@ -203,8 +203,8 @@ export function ProductDialog({
                 </div>
               )}
 
-              <div className="border-t sm:py-3 mx-0 hidden md:block my-0 py-0">
-                <p className="text-muted-foreground text-sm py-[5px] my-[17px]">
+              <div className="border-t sm:py-3 mx-0 hidden md:block py-0 my-0">
+                <p className="text-muted-foreground text-sm py-[5px] my-0">
                   Если появились вопросы, вы можете получить консультацию руководителя проекта:
                 </p>
                 <Button 
