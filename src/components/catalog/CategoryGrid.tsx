@@ -144,6 +144,9 @@ export function CategoryGrid({
                 value={selectedSeries || 'all-series'}
                 onValueChange={(value) => {
                   setSelectedSeries(value === 'all-series' ? null : value);
+                  setTimeout(() => {
+                    productsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 100);
                 }}
               >
                 <SelectTrigger className={`w-[30%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSeries ? 'text-[#1d2025]' : ''}`}>
@@ -164,6 +167,9 @@ export function CategoryGrid({
                 value={firstSelectValue}
                 onValueChange={(value) => {
                   setSelectedSubSubcategory(value === 'all' ? null : value);
+                  setTimeout(() => {
+                    productsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 100);
                 }}
               >
                 <SelectTrigger className={`w-[35%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSubSubLevel1 ? 'text-[#1d2025]' : ''}`}>
@@ -188,6 +194,9 @@ export function CategoryGrid({
                   } else {
                     setSelectedSubSubcategory(`${selectedSubSubLevel1} > ${value}`);
                   }
+                  setTimeout(() => {
+                    productsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 100);
                 }}
               >
                 <SelectTrigger className={`w-[35%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSubSubLevel2 ? 'text-[#1d2025]' : ''}`}>
