@@ -197,7 +197,7 @@ export function ProductDialog({
 
               <div className="border-t sm:py-3 mx-0 hidden md:block py-0 my-0">
                 <p className="text-muted-foreground text-sm py-[5px] my-[30px]">
-                  Если появились вопросы, вы можете получить консультацию руководителя проекта:
+                  Если появились вопросы, вы можете получить консультацию руководителя проекта по телефону <a href="tel:+79181151551" className="text-primary hover:underline">+7 918 115 15 51</a> или заказать обратный звонок.
                 </p>
                 <Button 
                   variant="outline" 
