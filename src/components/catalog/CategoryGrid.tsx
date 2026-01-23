@@ -111,11 +111,11 @@ export function CategoryGrid({
     <div id="products" className="container mx-auto px-4 pt-2">
       <div ref={filtersRef}>
         {/* Заголовок - скрывается при скролле на мобильных */}
-        <h2 className="text-4xl font-heading sm:block font-semibold my-2.5">
+        <h2 className="text-4xl font-heading sm:block font-semibold mb-2">
           {categories.find(c => c.id === selectedCategory)?.name}
         </h2>
         
-        <div className="sticky top-0 bg-white z-40 -mx-4 px-4 my-0 py-5">
+        <div className="sticky top-0 bg-white z-40 -mx-4 px-4 pb-3 pt-2">
           {/* Поиск и сброс - мобильная версия */}
           <div className="flex sm:hidden items-center gap-2 mb-3">
             <div className="relative flex-1">
@@ -138,7 +138,7 @@ export function CategoryGrid({
             </Button>
           </div>
           
-          <div className="flex items-center gap-1 sm:gap-2 mb-4 py-0">
+          <div className="flex items-center gap-1 sm:gap-2 mb-0 py-0">
             {availableSeries.length > 0 && (
               <Select
                 value={selectedSeries || 'all-series'}
