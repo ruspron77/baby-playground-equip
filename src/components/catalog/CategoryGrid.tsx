@@ -168,7 +168,7 @@ export function CategoryGrid({
                       const scrollContainer = document.querySelector('.flex-1.overflow-y-auto');
                       if (scrollContainer) {
                         const elementTop = productsRef.current.offsetTop;
-                        scrollContainer.scrollTo({ top: elementTop - 80, behavior: 'smooth' });
+                        scrollContainer.scrollTo({ top: elementTop - 120, behavior: 'smooth' });
                       }
                     }
                   }, 100);
@@ -197,7 +197,7 @@ export function CategoryGrid({
                       const scrollContainer = document.querySelector('.flex-1.overflow-y-auto');
                       if (scrollContainer) {
                         const elementTop = productsRef.current.offsetTop;
-                        scrollContainer.scrollTo({ top: elementTop - 80, behavior: 'smooth' });
+                        scrollContainer.scrollTo({ top: elementTop - 120, behavior: 'smooth' });
                       }
                     }
                   }, 100);
@@ -230,7 +230,7 @@ export function CategoryGrid({
                       const scrollContainer = document.querySelector('.flex-1.overflow-y-auto');
                       if (scrollContainer) {
                         const elementTop = productsRef.current.offsetTop;
-                        scrollContainer.scrollTo({ top: elementTop - 80, behavior: 'smooth' });
+                        scrollContainer.scrollTo({ top: elementTop - 120, behavior: 'smooth' });
                       }
                     }
                   }, 100);
