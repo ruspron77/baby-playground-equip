@@ -196,8 +196,8 @@ export function ProductDialog({
               </div>
 
               <div className="border-t sm:py-3 mx-0 hidden md:block py-0 my-0">
-                <p className="text-muted-foreground text-sm pt-3 pb-3">
-                  Если появились вопросы, вы можете получить консультацию руководителя проекта по телефону <a href="tel:+79181151551" className="text-primary hover:underline whitespace-nowrap">+7&nbsp;918&nbsp;115&nbsp;15&nbsp;51</a> или заказать обратный звонок.
+                <p className="text-muted-foreground text-sm pt-3 pb-3 leading-relaxed">
+                  Если появились вопросы, вы можете получить консультацию руководителя проекта по телефону <span className="inline-block"><a href="tel:+79181151551" className="text-primary hover:underline">+7 918 115 15 51</a></span> или заказать обратный звонок.
                 </p>
                 <Button 
                   variant="outline" 
