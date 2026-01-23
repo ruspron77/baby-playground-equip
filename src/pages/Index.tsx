@@ -232,12 +232,16 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       />
       
       <div className="flex-1 overflow-y-auto">
-      <HeroSection onOpenCatalog={() => catalogState.setIsSideMenuOpen(true)} />
+      {!catalogState.selectedCategory && (
+        <>
+          <HeroSection onOpenCatalog={() => catalogState.setIsSideMenuOpen(true)} />
+          <ServicesSection />
+        </>
+      )}
       
       <div className="flex flex-col">
-      <ServicesSection />
       
-      <section id="catalog" className="pt-4 pb-8 bg-gray-50 order-2 md:order-2">
+      <section id="catalog" className={`pt-4 pb-8 bg-gray-50 order-2 md:order-2 ${catalogState.selectedCategory ? 'hidden' : ''}`}>
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-heading text-center mb-4 font-semibold">Каталог продукции</h2>
           <p className="text-center text-muted-foreground mb-6 max-w-2xl mx-auto">

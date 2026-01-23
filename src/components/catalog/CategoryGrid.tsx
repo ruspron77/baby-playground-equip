@@ -110,7 +110,7 @@ export function CategoryGrid({
   };
 
   return (
-    <div id="products" className="container mx-auto px-4 pt-2">
+    <div id="products" className="container mx-auto px-4 pt-2 h-full flex flex-col">
       <div ref={filtersRef}>
         <div className="sticky top-0 bg-white z-40 -mx-4 px-4 pb-3 pt-4">
           {/* Поиск и сброс - мобильная версия */}
@@ -281,7 +281,7 @@ export function CategoryGrid({
           </div>
         </div>
 
-        <div ref={productsRef} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 pt-4 pb-2">
+        <div ref={productsRef} className="flex-1 overflow-y-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 pt-4 pb-2 content-start">
           {filteredProducts.map((product) => {
             const isFavorite = favorites.some(f => f.id === product.id);
             const isSelected = selectedProduct?.id === product.id;
