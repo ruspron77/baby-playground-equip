@@ -180,23 +180,6 @@ export function CategoryGrid({
                 ))}
               </SelectContent>
             </Select>
-            <div className="flex-1"></div>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => {
-                handleResetFilters();
-                setTimeout(() => {
-                  const element = document.getElementById('catalog');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }, 100);
-              }}
-              className="hidden sm:flex hover:border-red-500 hover:text-red-500 hover:bg-transparent h-9 w-9"
-            >
-              <Icon name="X" size={20} />
-            </Button>
             {availableSeries.length > 0 && (
               <Select
                 value={selectedSeries || 'all-series'}
@@ -294,7 +277,23 @@ export function CategoryGrid({
                 </SelectContent>
               </Select>
             )}
-
+            <div className="flex-1"></div>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => {
+                handleResetFilters();
+                setTimeout(() => {
+                  const element = document.getElementById('catalog');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }, 100);
+              }}
+              className="hidden sm:flex hover:border-red-500 hover:text-red-500 hover:bg-transparent h-9 w-9"
+            >
+              <Icon name="X" size={20} />
+            </Button>
           </div>
         </div>
 
