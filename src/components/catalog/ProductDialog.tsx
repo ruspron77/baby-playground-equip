@@ -176,7 +176,7 @@ export function ProductDialog({
                 </div>
               </div>
 
-              <div className="border-t sm:py-[5px] py-0 my-[7px] pb-6">
+              <div className="border-t sm:py-[5px] py-0 my-[7px] pb-2">
                 <h3 className="font-heading sm:mb-2 font-semibold sm:text-base my-2.5 text-lg">Техническая информация</h3>
                 {selectedProduct.dimensions && (
                   <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-1.5 sm:mb-4">
@@ -195,7 +195,7 @@ export function ProductDialog({
                 )}
               </div>
 
-              <div className="border-t sm:py-3 mx-0 hidden md:block py-0 my-0">
+              <div className="border-t sm:py-3 mx-0 hidden md:block py-0 mt-0">
                 <p className="text-muted-foreground text-sm pt-3 pb-3 leading-relaxed">
                   Если появились вопросы, вы можете получить консультацию менеджера по телефону <span className="inline-block"><a href="tel:+79181151551" className="text-primary hover:underline">+7 918 115 15 51</a></span> или заказать обратный звонок.
                 </p>
