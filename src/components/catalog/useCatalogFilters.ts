@@ -95,7 +95,8 @@ export function useCatalogFilters({
       console.log(`После фильтра по подкатегории "${selectedSubSubcategory}":`, filtered.length, 'товаров');
     }
     
-    filtered = filtered.filter(p => parseInt(p.price) > 0);
+    // Временно отключил фильтр по цене, чтобы показывать товары без цены
+    // filtered = filtered.filter(p => parseInt(p.price) > 0);
     
     return filtered;
   })();
