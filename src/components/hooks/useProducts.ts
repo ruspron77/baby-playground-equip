@@ -44,7 +44,9 @@ export function useProducts() {
             
             // Парсим категорию из формата "Категория > Подкатегория > Подподкатегория > ..."
             if (typeof p.category === 'string' && p.category.includes(' > ')) {
-              const parts = p.category.split(' > ').map((s: string) => s.trim());
+              // Нормализуем множественные пробелы перед парсингом
+              const normalizedCategory = p.category.replace(/\s+/g, ' ').trim();
+              const parts = normalizedCategory.split(' > ').map((s: string) => s.trim());
               
               // parts[0] - основная категория (Детские площадки, Игра, Спорт и т.д.)
               if (parts[0] === 'Детские площадки' || parts[0] === 'Игра') {
@@ -94,21 +96,24 @@ export function useProducts() {
                 
                 // Преобразуем "Игровой комплекс X-Y лет" → "Комплексы X-Y лет"
                 subParts = subParts.map(p => {
-                  if (p.includes('Игровой комплекс')) {
+                  // Нормализуем множественные пробелы в один
+                  let normalized = p.replace(/\s+/g, ' ').trim();
+                  
+                  if (normalized.includes('Игровой комплекс')) {
                     // "Игровой комплекс 3-7 лет" → "Комплексы 3-7 лет"
-                    return p.replace('Игровой комплекс', 'Комплексы');
+                    normalized = normalized.replace('Игровой комплекс', 'Комплексы');
                   }
                   // Нормализуем регистр названий (классик → Классик)
-                  if (p.toLowerCase() === 'классик') {
+                  if (normalized.toLowerCase() === 'классик') {
                     return 'Классик';
                   }
-                  if (p.toLowerCase() === 'джунгли') {
+                  if (normalized.toLowerCase() === 'джунгли') {
                     return 'Джунгли';
                   }
-                  if (p.toLowerCase() === 'замок') {
+                  if (normalized.toLowerCase() === 'замок') {
                     return 'Замок';
                   }
-                  return p;
+                  return normalized;
                 });
                 
                 subsubcategory = subParts.join(' > ');
