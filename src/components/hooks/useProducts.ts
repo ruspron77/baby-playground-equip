@@ -61,9 +61,10 @@ export function useProducts() {
               
               if (parts.length >= 2) {
                 // Определяем серию из parts[1]
-                if (parts[1] === 'Classic' || parts[1] === 'classic') {
+                const seriesName = parts[1].toLowerCase();
+                if (seriesName === 'classic') {
                   subcategory = 'Серия "Classic"';
-                } else if (parts[1] === 'Eco' || parts[1] === 'eco') {
+                } else if (seriesName === 'eco') {
                   subcategory = 'Серия "Eco"';
                 } else if (parts[1] === 'Classic Sport') {
                   subcategory = 'Серия "Classic Sport"';
@@ -96,6 +97,16 @@ export function useProducts() {
                   if (p.includes('Игровой комплекс')) {
                     // "Игровой комплекс 3-7 лет" → "Комплексы 3-7 лет"
                     return p.replace('Игровой комплекс', 'Комплексы');
+                  }
+                  // Нормализуем регистр названий (классик → Классик)
+                  if (p.toLowerCase() === 'классик') {
+                    return 'Классик';
+                  }
+                  if (p.toLowerCase() === 'джунгли') {
+                    return 'Джунгли';
+                  }
+                  if (p.toLowerCase() === 'замок') {
+                    return 'Замок';
                   }
                   return p;
                 });
