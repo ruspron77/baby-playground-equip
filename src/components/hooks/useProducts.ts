@@ -100,7 +100,11 @@ export function useProducts() {
                 // Убираем дублирование: ["Горки", "Горки h-1.0"] → ["Горки", "h-1.0"]
                 // Если второй элемент начинается с первого + пробел, убираем дубль из второго
                 if (subParts.length >= 2 && subParts[1].toLowerCase().startsWith(subParts[0].toLowerCase() + ' ')) {
+                  const before = subParts[1];
                   subParts[1] = subParts[1].substring(subParts[0].length + 1); // Убираем "Горки " из "Горки h-1.0"
+                  if (p.name.includes('Горк')) {
+                    console.log(`🛝 Горка обработка: "${before}" → "${subParts[1]}", full path: ${p.category}`);
+                  }
                 }
                 
                 // Преобразуем "Игровой комплекс X-Y лет" → "Комплексы X-Y лет"
@@ -149,6 +153,11 @@ export function useProducts() {
                 });
                 
                 subsubcategory = subParts.join(' > ');
+                
+                // Лог для Горок
+                if (p.name.includes('Горк')) {
+                  console.log(`🛝 Итоговая subsubcategory для "${p.name}": "${subsubcategory}"`);
+                }
               }
             } else {
               // Старая логика для обратной совместимости
