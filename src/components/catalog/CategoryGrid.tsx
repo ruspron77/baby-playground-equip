@@ -290,7 +290,7 @@ export function CategoryGrid({
                   }
                 }, 100);
               }}
-              className="hidden sm:flex hover:border-red-500 hover:text-red-500 hover:bg-transparent h-9 w-9"
+              className="hidden sm:flex hover:border-[#3eaa03] hover:text-[#3eaa03] hover:bg-transparent h-9 w-9"
             >
               <Icon name="X" size={20} />
             </Button>
