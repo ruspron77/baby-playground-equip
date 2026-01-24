@@ -72,7 +72,7 @@ export function ProductDialog({
           <DialogTitle className="sr-only">Информация о товаре</DialogTitle>
         </DialogHeader>
         {selectedProduct && (
-          <div className="flex flex-col md:grid md:grid-cols-[1.5fr,1fr] gap-2 md:gap-6 overflow-hidden md:h-full">
+          <div className="flex flex-col md:grid md:grid-cols-[2fr,1fr] gap-2 md:gap-6 overflow-hidden md:h-full">
             <div className="flex flex-col items-start flex-shrink-0 md:flex-shrink md:overflow-hidden">
               <div className="relative aspect-square bg-white rounded-lg flex items-start justify-center overflow-hidden border-0 md:border w-full pt-2 md:pt-4">
                 {productImages.length > 0 ? (
