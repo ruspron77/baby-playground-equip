@@ -97,9 +97,10 @@ export function useProducts() {
                 // Сначала нормализуем пробелы во всех элементах
                 subParts = subParts.map(p => p.replace(/\s+/g, ' ').trim());
                 
-                // Теперь убираем дублирование категории (например ["Горки", "Горки h-1.0"] → ["Горки h-1.0"])
+                // Убираем дублирование: ["Горки", "Горки h-1.0"] → ["Горки", "h-1.0"]
+                // Если второй элемент начинается с первого + пробел, убираем дубль из второго
                 if (subParts.length >= 2 && subParts[1].toLowerCase().startsWith(subParts[0].toLowerCase() + ' ')) {
-                  subParts = subParts.slice(1);
+                  subParts[1] = subParts[1].substring(subParts[0].length + 1); // Убираем "Горки " из "Горки h-1.0"
                 }
                 
                 // Преобразуем "Игровой комплекс X-Y лет" → "Комплексы X-Y лет"
