@@ -94,6 +94,11 @@ export function useProducts() {
                   subParts = subParts.slice(1);
                 }
                 
+                // Убираем дублирование категории в начале пути (например "Горки > Горки h-1.0" → "Горки h-1.0")
+                if (subParts.length >= 2 && subParts[1].toLowerCase().startsWith(subParts[0].toLowerCase())) {
+                  subParts = subParts.slice(1);
+                }
+                
                 // Преобразуем "Игровой комплекс X-Y лет" → "Комплексы X-Y лет"
                 subParts = subParts.map(p => {
                   // Нормализуем множественные пробелы в один
