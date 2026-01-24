@@ -94,15 +94,17 @@ export function useProducts() {
                   subParts = subParts.slice(1);
                 }
                 
-                // Убираем дублирование категории в начале пути (например "Горки > Горки h-1.0" → "Горки h-1.0")
-                if (subParts.length >= 2 && subParts[1].toLowerCase().startsWith(subParts[0].toLowerCase())) {
+                // Сначала нормализуем пробелы во всех элементах
+                subParts = subParts.map(p => p.replace(/\s+/g, ' ').trim());
+                
+                // Теперь убираем дублирование категории (например ["Горки", "Горки h-1.0"] → ["Горки h-1.0"])
+                if (subParts.length >= 2 && subParts[1].toLowerCase().startsWith(subParts[0].toLowerCase() + ' ')) {
                   subParts = subParts.slice(1);
                 }
                 
                 // Преобразуем "Игровой комплекс X-Y лет" → "Комплексы X-Y лет"
                 subParts = subParts.map(p => {
-                  // Нормализуем множественные пробелы в один
-                  let normalized = p.replace(/\s+/g, ' ').trim();
+                  let normalized = p;
                   
                   if (normalized.includes('Игровой комплекс')) {
                     // "Игровой комплекс 3-7 лет" → "Комплексы 3-7 лет"

@@ -71,9 +71,9 @@ export const categories = [
             image: 'https://cdn.poehali.dev/files/0100.png',
             hasChildren: true,
             children: [
-              { name: 'Горки h-0.6', image: '🛝' },
-              { name: 'Горки h-1.0', image: '🛝' },
-              { name: 'Горки h-1.5', image: '🛝' }
+              { name: 'h-0.6', image: '🛝' },
+              { name: 'h-1.0', image: '🛝' },
+              { name: 'h-1.5', image: '🛝' }
             ]
           },
           { name: 'Домики', image: 'https://cdn.poehali.dev/files/%D0%B4%D0%BE%D0%BC%D0%B8%D0%BA%202.png' },
