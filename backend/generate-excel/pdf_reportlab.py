@@ -312,6 +312,8 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
                 # Красный цвет для текста и цифр скидки (средняя строка футера)
                 style_list.extend([
                     ('TEXTCOLOR', (5, -2), (6, -2), colors.red),
+                    # Обычный шрифт для строки со скидкой (не жирный)
+                    ('FONT', (5, -2), (6, -2), font_name, 10),
                 ])
         else:
             # На остальных страницах обычная сетка
