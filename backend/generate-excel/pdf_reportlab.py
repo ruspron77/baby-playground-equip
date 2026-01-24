@@ -214,7 +214,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         total_sum += delivery_cost
     
     table_data.append([
-        '', '', '', '', '', '', f'{total_sum:,.2f}'.replace(',', ' ')
+        '', '', '', '', '', 'Итого:', f'{total_sum:,.2f}'.replace(',', ' ')
     ])
     
     # Скидка (если указана)
@@ -228,7 +228,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     if discount_value != 0:
         discount_label = f'Скидка ({discount_percent}%)' if discount_percent > 0 else 'Скидка'
         table_data.append([
-            '', '', '', '', '', '', f'{abs(discount_value):,.2f}'.replace(',', ' ')
+            '', '', '', '', '', discount_label + ':', f'{abs(discount_value):,.2f}'.replace(',', ' ')
         ])
         
         # Итого к оплате
@@ -296,19 +296,21 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
                 ('LINEBELOW', (0, last_data_row), (-1, last_data_row), 0.5, colors.black),
             ])
             
-            # Стили для строк футера - только последний столбец с рамкой
+            # Стили для строк футера - рамка для колонок 5 (текст) и 6 (сумма)
             for i in range(num_footer_rows):
                 row_idx = -(num_footer_rows - i)
-                # Рамка только для последнего столбца
+                # Рамка для предпоследней и последней колонок
                 style_list.extend([
+                    ('BOX', (5, row_idx), (5, row_idx), 0.5, colors.black),
                     ('BOX', (6, row_idx), (6, row_idx), 0.5, colors.black),
+                    ('ALIGN', (5, row_idx), (5, row_idx), 'RIGHT'),
                 ])
             
             # Если есть скидка (3 строки: Итого, Скидка, К оплате)
             if num_footer_rows == 3:
-                # Красный цвет для цифр скидки (средняя строка футера)
+                # Красный цвет для текста и цифр скидки (средняя строка футера)
                 style_list.extend([
-                    ('TEXTCOLOR', (6, -2), (6, -2), colors.red),
+                    ('TEXTCOLOR', (5, -2), (6, -2), colors.red),
                 ])
         else:
             # На остальных страницах обычная сетка
@@ -321,36 +323,6 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         table_height = table._height
         table_bottom_y = y_position - table_height
         table.drawOn(c, 10*mm, table_bottom_y)
-        
-        # Если это последняя страница, добавляем текстовые метки для итоговых строк
-        if is_last_page:
-            num_footer_rows = len(footer)
-            # Вычисляем высоту одной строки футера (примерно)
-            footer_row_height = 15  # примерно 15 точек на строку
-            
-            # Позиция для текста "Итого:" (первая строка футера снизу)
-            text_x = 10*mm + sum(col_widths[:5]) + 5  # После 5 колонок + небольшой отступ
-            
-            c.setFont(font_name_bold, 10)
-            
-            if num_footer_rows == 1:
-                # Только "Итого"
-                itogo_y = table_bottom_y + footer_row_height * 0.7
-                c.drawString(text_x, itogo_y, 'Итого:')
-            elif num_footer_rows == 3:
-                # Итого, Скидка, К оплате
-                k_oplate_y = table_bottom_y + footer_row_height * 0.7
-                skidka_y = k_oplate_y + footer_row_height
-                itogo_y = skidka_y + footer_row_height
-                
-                c.drawString(text_x, itogo_y, 'Итого:')
-                
-                c.setFillColor(colors.red)
-                discount_label = f'Скидка ({discount_percent}%)' if discount_percent > 0 else 'Скидка'
-                c.drawString(text_x, skidka_y, discount_label + ':')
-                c.setFillColor(colors.black)
-                
-                c.drawString(text_x, k_oplate_y, 'К оплате:')
         
         # Добавляем нумерацию страниц внизу справа
         c.setFont(font_name, 9)
