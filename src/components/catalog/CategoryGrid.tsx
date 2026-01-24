@@ -126,7 +126,7 @@ export function CategoryGrid({
                 }
               }}
             >
-              <SelectTrigger className={`w-[35%] h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedCategory ? 'text-[#1d2025]' : ''}`}>
+              <SelectTrigger className={`w-[35%] h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm ${selectedCategory ? 'text-[#1d2025]' : ''}`}>
                 <SelectValue placeholder="Категории" />
               </SelectTrigger>
               <SelectContent>
@@ -198,7 +198,7 @@ export function CategoryGrid({
                   }, 100);
                 }}
               >
-                <SelectTrigger className={`w-[30%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSeries ? 'text-[#1d2025]' : ''}`}>
+                <SelectTrigger className={`w-[30%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm sm:text-base ${selectedSeries ? 'text-[#1d2025]' : ''}`}>
                   <SelectValue placeholder="Серии" />
                 </SelectTrigger>
                 <SelectContent>
@@ -229,7 +229,7 @@ export function CategoryGrid({
                   }, 100);
                 }}
               >
-                <SelectTrigger className={`w-[35%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSubSubLevel1 ? 'text-[#1d2025]' : ''}`}>
+                <SelectTrigger className={`w-[35%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm sm:text-base ${selectedSubSubLevel1 ? 'text-[#1d2025]' : ''}`}>
                   <SelectValue placeholder="Категории" />
                 </SelectTrigger>
                 <SelectContent>
@@ -264,7 +264,7 @@ export function CategoryGrid({
                   }, 100);
                 }}
               >
-                <SelectTrigger className={`w-[35%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 ${selectedSubSubLevel2 ? 'text-[#1d2025]' : ''}`}>
+                <SelectTrigger className={`w-[35%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm sm:text-base ${selectedSubSubLevel2 ? 'text-[#1d2025]' : ''}`}>
                   <SelectValue placeholder="Темы" />
                 </SelectTrigger>
                 <SelectContent>
