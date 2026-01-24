@@ -28,6 +28,8 @@ def handler(event: dict, context) -> dict:
         filename = body.get('filename', 'image.png')
         base64_content = body.get('content', '')
         
+        print(f'Получен запрос на загрузку изображения для артикула: {article}, filename: {filename}')
+        
         if not article or not base64_content:
             return {
                 'statusCode': 400,
@@ -66,6 +68,8 @@ def handler(event: dict, context) -> dict:
         
         img_url = f"https://cdn.poehali.dev/projects/{os.environ['AWS_ACCESS_KEY_ID']}/bucket/{img_filename}"
         
+        print(f'Изображение загружено в S3: {img_url}')
+        
         # Обновляем товар в БД
         conn = psycopg2.connect(os.environ['DATABASE_URL'])
         cursor = conn.cursor()
@@ -74,11 +78,14 @@ def handler(event: dict, context) -> dict:
         safe_article = article.replace("'", "''")
         safe_url = img_url.replace("'", "''")
         
+        print(f'Ищем товар с артикулом: {safe_article} в схеме: {schema}')
+        
         # Проверяем существует ли товар
         cursor.execute(f"SELECT id, name FROM {schema}.products WHERE article = '{safe_article}' LIMIT 1")
         result = cursor.fetchone()
         
         if not result:
+            print(f'Товар с артикулом {article} не найден в базе!')
             cursor.close()
             conn.close()
             return {
@@ -97,8 +104,14 @@ def handler(event: dict, context) -> dict:
         product_id = result[0]
         product_name = result[1]
         
+        print(f'Товар найден: ID={product_id}, name={product_name}')
+        
         # Обновляем URL изображения
-        cursor.execute(f"UPDATE {schema}.products SET image_url = '{safe_url}' WHERE article = '{safe_article}'")
+        update_query = f"UPDATE {schema}.products SET image_url = '{safe_url}' WHERE article = '{safe_article}'"
+        print(f'Выполняю UPDATE: {update_query}')
+        cursor.execute(update_query)
+        
+        print(f'UPDATE выполнен, строк обновлено: {cursor.rowcount}')
         
         conn.commit()
         cursor.close()
