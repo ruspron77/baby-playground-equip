@@ -193,7 +193,29 @@ export function AdminPanel() {
       return;
     }
 
-    const articles = articlesToDelete.split('-').map(a => a.trim()).filter(a => a);
+    const input = articlesToDelete.trim();
+    let articles: string[] = [];
+
+    const rangeMatch = input.match(/^(\d+)-(\d+)$/);
+    if (rangeMatch) {
+      const start = parseInt(rangeMatch[1]);
+      const end = parseInt(rangeMatch[2]);
+      
+      if (start > end) {
+        setMessage('Начальный артикул должен быть меньше конечного');
+        setUploadStatus('error');
+        return;
+      }
+
+      const prefix = rangeMatch[1].match(/^0+/)?.[0] || '';
+      const length = rangeMatch[1].length;
+
+      for (let i = start; i <= end; i++) {
+        articles.push(i.toString().padStart(length, '0'));
+      }
+    } else {
+      articles = input.split('-').map(a => a.trim()).filter(a => a);
+    }
     
     if (articles.length === 0) {
       setMessage('Введите корректные артикулы');
@@ -201,7 +223,11 @@ export function AdminPanel() {
       return;
     }
 
-    if (!confirm(`Удалить товары с артикулами: ${articles.join(', ')}? Это необратимо!`)) {
+    const confirmMessage = articles.length > 10 
+      ? `Удалить ${articles.length} товаров (${articles[0]} - ${articles[articles.length - 1]})? Это необратимо!`
+      : `Удалить товары с артикулами: ${articles.join(', ')}? Это необратимо!`;
+
+    if (!confirm(confirmMessage)) {
       return;
     }
 
@@ -380,7 +406,7 @@ export function AdminPanel() {
                 Удаление товаров
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Введите артикулы через дефис (например: 0230-0235-0240)
+                Введите артикулы через дефис (например: 0230-0235-0240) или диапазон (например: 0230-0235)
               </p>
             </div>
 
@@ -393,7 +419,7 @@ export function AdminPanel() {
                 type="text"
                 value={articlesToDelete}
                 onChange={(e) => setArticlesToDelete(e.target.value)}
-                placeholder="0230-0235-0240"
+                placeholder="0230-0235 (диапазон) или 0230-0235-0240 (список)"
                 disabled={isDeleting}
               />
             </div>
