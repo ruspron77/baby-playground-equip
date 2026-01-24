@@ -67,14 +67,14 @@ export function ProductDialog({
 
   return (
     <Dialog open={isProductDialogOpen} onOpenChange={setIsProductDialogOpen}>
-      <DialogContent className="max-w-6xl max-h-[90vh] sm:max-h-[85vh] p-3 sm:p-6 overflow-hidden flex flex-col">
+      <DialogContent className="max-w-6xl max-h-[95vh] sm:max-h-[85vh] p-3 sm:p-6 overflow-hidden flex flex-col">
         <DialogHeader>
           <DialogTitle className="sr-only">Информация о товаре</DialogTitle>
         </DialogHeader>
         {selectedProduct && (
           <div className="flex flex-col md:grid md:grid-cols-[1.5fr,1fr] gap-2 md:gap-6 overflow-hidden md:h-full">
             <div className="flex flex-col items-start flex-shrink-0 md:flex-shrink md:overflow-hidden">
-              <div className="relative aspect-square bg-white rounded-lg flex items-start justify-center overflow-hidden border-0 md:border w-full pt-4">
+              <div className="relative aspect-square bg-white rounded-lg flex items-start justify-center overflow-hidden border-0 md:border w-full pt-2 md:pt-4">
                 {productImages.length > 0 ? (
                   <>
                     <img 
@@ -140,11 +140,11 @@ export function ProductDialog({
 
             <div className="flex flex-col justify-start space-y-2 md:space-y-4 px-0 mx-0 my-0 overflow-y-auto flex-1">
               <div>
-                <p className="sm:text-base sm:mb-2 text-[#5a098c] my-0 font-medium text-lg">{selectedProduct.name.split('\n')[0]}</p>
-                <h2 className="font-heading sm:mb-4 font-semibold sm:text-3xl my-0 text-2xl">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
-                <p className="font-bold text-primary sm:mb-4 text-3xl sm:text-3xl my-0 py-1 mt-3 mb-3">{formatPrice(selectedProduct.price)} ₽</p>
+                <p className="sm:text-base sm:mb-2 text-[#5a098c] my-0 font-medium text-sm leading-tight">{selectedProduct.name.split('\n')[0]}</p>
+                <h2 className="font-heading sm:mb-4 font-semibold sm:text-3xl my-0 text-xl leading-tight line-clamp-2">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
+                <p className="font-bold text-primary sm:mb-4 text-2xl sm:text-3xl my-0 py-1 mt-2 mb-2">{formatPrice(selectedProduct.price)} ₽</p>
                 
-                <div className="flex gap-2 sm:gap-3 justify-start items-center mt-0">
+                <div className="flex gap-2 sm:gap-3 justify-start items-center mt-0 mb-2">
                   <Button 
                     size="lg" 
                     className="h-11 px-6"
@@ -176,12 +176,12 @@ export function ProductDialog({
                 </div>
               </div>
 
-              <div className="border-t sm:py-[5px] py-0 my-[7px] pb-0">
-                <h3 className="font-heading sm:mb-2 font-semibold sm:text-base my-2.5 text-lg">Техническая информация</h3>
+              <div className="border-t sm:py-[5px] py-0 my-1 pb-0">
+                <h3 className="font-heading sm:mb-2 font-semibold sm:text-base my-1.5 text-base">Техническая информация</h3>
                 {selectedProduct.dimensions && (
                   <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-0">
                     {selectedProduct.dimensions.split('х').map((dim, idx) => (
-                      <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center py-3">
+                      <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center py-2">
                         <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
                           {idx === 0 ? 'Длина' : idx === 1 ? 'Ширина' : 'Высота'}
                         </p>
