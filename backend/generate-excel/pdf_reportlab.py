@@ -214,7 +214,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         total_sum += delivery_cost
     
     table_data.append([
-        '', '', '', '', '', 'Итого', f'{total_sum:,.2f}'.replace(',', ' ')
+        '', '', '', '', '', '', f'{total_sum:,.2f}'.replace(',', ' ')
     ])
     
     # Скидка (если указана)
@@ -228,7 +228,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     if discount_value != 0:
         discount_label = f'Скидка ({discount_percent}%)' if discount_percent > 0 else 'Скидка'
         table_data.append([
-            '', '', '', '', '', discount_label, f'{abs(discount_value):,.2f}'.replace(',', ' ')
+            '', '', '', '', '', '', f'{abs(discount_value):,.2f}'.replace(',', ' ')
         ])
         
         # Итого к оплате
@@ -243,8 +243,14 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     # Отделяем заголовок от данных
     header = table_data[0:1]
-    data_rows = table_data[1:-1]  # Все кроме заголовка и итого
-    footer = table_data[-1:]  # Строка «Итого»
+    
+    # Определяем количество строк в footer
+    footer_rows_count = 1  # Итого
+    if discount_value != 0:
+        footer_rows_count += 2  # Скидка + К оплате
+    
+    data_rows = table_data[1:-footer_rows_count]  # Все кроме заголовка и итого
+    footer = table_data[-footer_rows_count:]  # Строки итого
     
     # Высота одной строки ~25mm (с учётом изображений)
     row_height = 25*mm
@@ -275,21 +281,35 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
         ]
         
-        # Применяем границы ко всей таблице, КРОМЕ последней строки если это последняя страница
+        # Применяем границы ко всей таблице, КРОМЕ строк итого если это последняя страница
         if is_last_page:
-            # Сетка для всех строк кроме последней
+            # Количество строк футера в текущем чанке
+            num_footer_rows = len(footer)
+            
+            # Сетка для всех строк кроме строк футера
+            last_data_row = -(num_footer_rows + 1)
             style_list.extend([
-                ('GRID', (0, 0), (-1, -2), 0.5, colors.black),
+                ('GRID', (0, 0), (-1, last_data_row), 0.5, colors.black),
             ])
             # Линия снизу последнего товара
             style_list.extend([
-                ('LINEBELOW', (0, -2), (-1, -2), 0.5, colors.black),
+                ('LINEBELOW', (0, last_data_row), (-1, last_data_row), 0.5, colors.black),
             ])
-            # Обводим только ячейки "Итого" и сумму в последней строке
-            style_list.extend([
-                ('BOX', (5, -1), (5, -1), 0.5, colors.black),  # Ячейка "Итого"
-                ('BOX', (6, -1), (6, -1), 0.5, colors.black),  # Ячейка с суммой
-            ])
+            
+            # Стили для строк футера - только последний столбец с рамкой
+            for i in range(num_footer_rows):
+                row_idx = -(num_footer_rows - i)
+                # Рамка только для последнего столбца
+                style_list.extend([
+                    ('BOX', (6, row_idx), (6, row_idx), 0.5, colors.black),
+                ])
+            
+            # Если есть скидка (3 строки: Итого, Скидка, К оплате)
+            if num_footer_rows == 3:
+                # Красный цвет для цифр скидки (средняя строка футера)
+                style_list.extend([
+                    ('TEXTCOLOR', (6, -2), (6, -2), colors.red),
+                ])
         else:
             # На остальных страницах обычная сетка
             style_list.extend([
@@ -299,13 +319,44 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         table.setStyle(TableStyle(style_list))
         table.wrapOn(c, width, height)
         table_height = table._height
-        table.drawOn(c, 10*mm, y_position - table_height)
+        table_bottom_y = y_position - table_height
+        table.drawOn(c, 10*mm, table_bottom_y)
+        
+        # Если это последняя страница, добавляем текстовые метки для итоговых строк
+        if is_last_page:
+            num_footer_rows = len(footer)
+            # Вычисляем высоту одной строки футера (примерно)
+            footer_row_height = 15  # примерно 15 точек на строку
+            
+            # Позиция для текста "Итого:" (первая строка футера снизу)
+            text_x = 10*mm + sum(col_widths[:5]) + 5  # После 5 колонок + небольшой отступ
+            
+            c.setFont(font_name_bold, 10)
+            
+            if num_footer_rows == 1:
+                # Только "Итого"
+                itogo_y = table_bottom_y + footer_row_height * 0.7
+                c.drawString(text_x, itogo_y, 'Итого:')
+            elif num_footer_rows == 3:
+                # Итого, Скидка, К оплате
+                k_oplate_y = table_bottom_y + footer_row_height * 0.7
+                skidka_y = k_oplate_y + footer_row_height
+                itogo_y = skidka_y + footer_row_height
+                
+                c.drawString(text_x, itogo_y, 'Итого:')
+                
+                c.setFillColor(colors.red)
+                discount_label = f'Скидка ({discount_percent}%)' if discount_percent > 0 else 'Скидка'
+                c.drawString(text_x, skidka_y, discount_label + ':')
+                c.setFillColor(colors.black)
+                
+                c.drawString(text_x, k_oplate_y, 'К оплате:')
         
         # Добавляем нумерацию страниц внизу справа
         c.setFont(font_name, 9)
         c.drawRightString(width - 10*mm, 10*mm, f'Страница {page_number} из {total_pages}')
         
-        return y_position - table_height
+        return table_bottom_y
     
     # Рассчитываем общее количество страниц
     total_items = len(data_rows)
