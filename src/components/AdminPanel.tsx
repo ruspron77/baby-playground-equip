@@ -75,11 +75,16 @@ export function AdminPanel() {
             const imagesText = result.imagesUploaded ? `, изображений: ${result.imagesUploaded}` : '';
             const updatedText = result.updatedCount ? `, обновлено: ${result.updatedCount}` : '';
             const addedText = result.addedCount ? `, добавлено: ${result.addedCount}` : '';
-            setMessage(`Файл успешно загружен! Обработано товаров: ${result.productsCount || 0}${imagesText}${updatedText}${addedText}`);
+            setMessage(`Файл успешно загружен! Обработано товаров: ${result.productsCount || 0}${imagesText}${updatedText}${addedText}. Обновляем каталог...`);
             setFile(null);
             
             const fileInput = document.getElementById('excel-file-input') as HTMLInputElement;
             if (fileInput) fileInput.value = '';
+            
+            // Обновляем страницу через 2 секунды чтобы пользователь успел прочитать сообщение
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
           } else {
             throw new Error(result.error || 'Неизвестная ошибка');
           }
