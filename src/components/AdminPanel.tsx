@@ -13,6 +13,9 @@ export function AdminPanel() {
 
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [isUploadingImages, setIsUploadingImages] = useState(false);
+  
+  const [articlesToDelete, setArticlesToDelete] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -183,6 +186,58 @@ export function AdminPanel() {
     }
   };
 
+  const handleDeleteByArticles = async () => {
+    if (!articlesToDelete.trim()) {
+      setMessage('Введите артикулы для удаления');
+      setUploadStatus('error');
+      return;
+    }
+
+    const articles = articlesToDelete.split('-').map(a => a.trim()).filter(a => a);
+    
+    if (articles.length === 0) {
+      setMessage('Введите корректные артикулы');
+      setUploadStatus('error');
+      return;
+    }
+
+    if (!confirm(`Удалить товары с артикулами: ${articles.join(', ')}? Это необратимо!`)) {
+      return;
+    }
+
+    setIsDeleting(true);
+    setUploadStatus('idle');
+    setMessage('');
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/86a5f270-0e5f-4fc8-8762-1839512f352a', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          articles: articles
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setUploadStatus('success');
+        setMessage(`Удалено товаров: ${result.deleted}`);
+        setArticlesToDelete('');
+      } else {
+        throw new Error(result.error || 'Ошибка удаления');
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+      setUploadStatus('error');
+      setMessage(error instanceof Error ? error.message : 'Ошибка при удалении');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
 
 
   return (
@@ -313,6 +368,51 @@ export function AdminPanel() {
                 <>
                   <Icon name="Image" size={16} className="mr-2" />
                   Загрузить изображения
+                </>
+              )}
+            </Button>
+          </div>
+
+          <div className="border-t pt-6 space-y-4">
+            <div>
+              <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                <Icon name="Trash2" size={20} className="text-destructive" />
+                Удаление товаров
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Введите артикулы через дефис (например: 0230-0235-0240)
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="articles-to-delete" className="text-sm font-medium">
+                Артикулы для удаления
+              </label>
+              <Input
+                id="articles-to-delete"
+                type="text"
+                value={articlesToDelete}
+                onChange={(e) => setArticlesToDelete(e.target.value)}
+                placeholder="0230-0235-0240"
+                disabled={isDeleting}
+              />
+            </div>
+
+            <Button
+              onClick={handleDeleteByArticles}
+              disabled={isDeleting || !articlesToDelete.trim()}
+              variant="destructive"
+              className="w-full"
+            >
+              {isDeleting ? (
+                <>
+                  <Icon name="Loader2" size={16} className="mr-2 animate-spin" />
+                  Удаление...
+                </>
+              ) : (
+                <>
+                  <Icon name="Trash2" size={16} className="mr-2" />
+                  Удалить товары
                 </>
               )}
             </Button>
