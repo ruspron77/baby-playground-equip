@@ -95,8 +95,8 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     y_pos -= 5*mm  # Увеличено с 4mm до 5mm
     
     c.setFillColor(colors.HexColor('#59068c'))  # Фиолетовый цвет ссылки
-    c.drawRightString(right_x, y_pos, 'www.urban-play.ru')
-    c.linkURL('https://www.urban-play.ru', (right_x - 40*mm, y_pos - 2*mm, right_x, y_pos + 3*mm))
+    c.drawRightString(right_x, y_pos, 'urban-play.ru')
+    c.linkURL('https://urban-play.ru', (right_x - 40*mm, y_pos - 2*mm, right_x, y_pos + 3*mm))
     c.setFillColor(colors.black)
     y_pos -= 6*mm  # Уменьшено с 10mm до 6mm - ближе к шапке
     
