@@ -138,7 +138,7 @@ export const categories = [
           { name: 'Спортивные снаряды', image: '🏋️' },
           {
             name: 'Тренажеры уличные',
-            image: '🚴',
+            image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4957bc0e-86d4-411b-a2b0-7902e369a099.png',
             hasChildren: true,
             children: [
               { name: 'Одиночные', image: '💪' },
