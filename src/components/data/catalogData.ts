@@ -58,7 +58,7 @@ export const categories = [
             image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4cd730e4-fd3b-4b60-b4c4-0be4b80e5671.png',
             hasChildren: true,
             children: [
-              { name: 'Классик', image: '🏰' },
+              { name: 'Классик', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/b51dd912-5e72-4d57-b5e8-be0e17e01066.png' },
               { name: 'Замок', image: '🏯' },
               { name: 'Джунгли', image: '🌴' },
               { name: 'Морская', image: '🌊' },
