@@ -62,7 +62,7 @@ export const categories = [
               { name: 'Замок', image: '🏯' },
               { name: 'Джунгли', image: '🌴' },
               { name: 'Морская', image: '🌊' },
-              { name: 'Лабиринт', image: '🌀' }
+              { name: 'Лабиринт', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/227215e9-4c5a-4c37-ae12-1d1a7a7549bc.png' }
             ]
           },
           { name: 'Балансиры', image: 'https://cdn.poehali.dev/files/мишкаа.png' },
