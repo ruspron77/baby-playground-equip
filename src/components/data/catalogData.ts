@@ -143,7 +143,7 @@ export const categories = [
             children: [
               { name: 'Одиночные', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/5930076c-f808-41e9-a4fd-a8c3dc99013d.png' },
               { name: 'Комбинированные', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/7df330ff-0466-4dd6-a7dd-92d0278ab776.png' },
-              { name: 'Силовые', image: '🦾' },
+              { name: 'Силовые', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/ca42d04c-7a6a-416a-a618-5579ceec6025.png' },
               { name: 'Детские', image: '👶' }
             ]
           },
