@@ -88,7 +88,7 @@ export const categories = [
           { name: 'Лазы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/8942d22c-3781-4db3-9d74-c3fde653b50e.png' },
           { name: 'Игровые элементы', image: '🎮' },
           { name: 'Теневые навесы', image: '⛱️' },
-          { name: 'Столики и скамейки', image: '🪑' }
+          { name: 'Столики и скамейки', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/3b03c9f0-0fe1-4bfe-ad38-fa775834a0e5.png' }
         ]
       },
       { 
