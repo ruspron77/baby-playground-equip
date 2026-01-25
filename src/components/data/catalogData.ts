@@ -85,7 +85,7 @@ export const categories = [
           { name: 'Скалодром', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/07481213-c392-48be-aebf-6532ed066c5c.png' },
           { name: 'Полоса препятствий', image: 'https://cdn.poehali.dev/files/%D0%BF%D0%BE%D0%BB%D0%BE%D1%81%D0%B0.png' },
           { name: 'Техника', image: 'https://cdn.poehali.dev/files/%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D0%BA%D0%B0.png' },
-          { name: 'Лазы', image: 'https://cdn.poehali.dev/files/%D0%BB%D0%B0%D0%B7.png' },
+          { name: 'Лазы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/8942d22c-3781-4db3-9d74-c3fde653b50e.png' },
           { name: 'Игровые элементы', image: '🎮' },
           { name: 'Теневые навесы', image: '⛱️' },
           { name: 'Столики и скамейки', image: '🪑' }
