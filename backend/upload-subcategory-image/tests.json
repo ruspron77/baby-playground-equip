@@ -1,0 +1,19 @@
+{
+  "tests": [{
+    "name": "Test subcategory image upload",
+    "method": "POST",
+    "path": "/",
+    "body": {
+      "subcategory": "Ворота",
+      "image_url": "https://example.com/test.png"
+    },
+    "expectedStatus": 200,
+    "expectedBody": {
+      "success": true,
+      "subcategory_id": "number",
+      "subcategory_name": "string",
+      "image_url": "string"
+    },
+    "bodyMatcher": "partial"
+  }]
+}
