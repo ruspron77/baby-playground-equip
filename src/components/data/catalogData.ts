@@ -133,7 +133,6 @@ export const categories = [
               { name: 'Комплексы на трубе', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/5d81654c-59a6-41fa-8bae-9fec5ea21b0e.png' }
             ]
           },
-          { name: 'Скамьи гимнастические', image: '🪑' },
           { name: 'Оборудование для скейт-парков', image: '🛹' },
           { name: 'Спортивные снаряды', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/3030b2f2-590c-490e-ac64-c890f700e734.png' },
           {
