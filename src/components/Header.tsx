@@ -99,6 +99,9 @@ export function Header({
   const [hideInstallationInKP, setHideInstallationInKP] = useState(false);
   const [hideDeliveryInKP, setHideDeliveryInKP] = useState(false);
   const [kpFormat, setKpFormat] = useState<'xlsx' | 'pdf'>('xlsx');
+  const [kpDiscountPercent, setKpDiscountPercent] = useState(0);
+  const [kpDiscountAmount, setKpDiscountAmount] = useState(0);
+  const [kpTargetTotal, setKpTargetTotal] = useState(0);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [cartSearchQuery, setCartSearchQuery] = useState('');
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
@@ -718,12 +721,12 @@ export function Header({
                   <label className="text-xs text-muted-foreground mb-1 block">Процент (%)</label>
                   <Input
                     type="number"
-                    value={discountPercent || ''}
+                    value={kpDiscountPercent || ''}
                     onChange={(e) => {
                       const percent = Number(e.target.value) || 0;
-                      setDiscountPercent(percent);
-                      setDiscountAmount(0);
-                      setTargetTotal(0);
+                      setKpDiscountPercent(percent);
+                      setKpDiscountAmount(0);
+                      setKpTargetTotal(0);
                     }}
                     placeholder="0"
                     step="1"
@@ -735,14 +738,14 @@ export function Header({
                   <label className="text-xs text-muted-foreground mb-1 block">Итоговая сумма (₽)</label>
                   <Input
                     type="number"
-                    value={targetTotal || ''}
+                    value={kpTargetTotal || ''}
                     onChange={(e) => {
                       const targetAmount = Number(e.target.value) || 0;
-                      setTargetTotal(targetAmount);
+                      setKpTargetTotal(targetAmount);
                       const currentTotal = calculateTotal();
                       const calculatedDiscount = currentTotal - targetAmount;
-                      setDiscountAmount(calculatedDiscount > 0 ? calculatedDiscount : 0);
-                      setDiscountPercent(0);
+                      setKpDiscountAmount(calculatedDiscount > 0 ? calculatedDiscount : 0);
+                      setKpDiscountPercent(0);
                     }}
                     placeholder="0"
                     step="100"
@@ -795,8 +798,8 @@ export function Header({
                   hideDelivery: hideDeliveryInKP,
                   format: kpFormat,
                   sortedCart: sortedCart,
-                  discountPercent: discountPercent,
-                  discountAmount: discountAmount
+                  discountPercent: kpDiscountPercent,
+                  discountAmount: kpDiscountAmount
                 });
                 setShowKPDialog(false);
               }}
