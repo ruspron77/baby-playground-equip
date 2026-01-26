@@ -79,6 +79,9 @@ def handler(event, context):
         discount_percent = body.get('discountPercent', 0)
         discount_amount = body.get('discountAmount', 0)
         
+        print(f'Discount percent: {discount_percent}')
+        print(f'Discount amount: {discount_amount}')
+        
         # Получаем номер КП
         kp_number = get_next_kp_number()
         
