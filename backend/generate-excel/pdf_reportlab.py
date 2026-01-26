@@ -364,6 +364,15 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     y_pos = current_y - 10*mm
     
+    # Проверяем, хватает ли места для футера (нужно ~30мм)
+    if y_pos < 40*mm:
+        c.showPage()
+        y_pos = height - 30*mm
+        # Нумерация для новой страницы
+        total_pages += 1
+        c.setFont(font_name, 9)
+        c.drawRightString(width - 10*mm, 10*mm, f'Страница {total_pages} из {total_pages}')
+    
     # Футер с условиями - исходные интервалы
     c.setFont(font_name, 11)
     c.drawString(10*mm, y_pos, 'Вся продукция сертифицирована и соответствует стандартам качества')
