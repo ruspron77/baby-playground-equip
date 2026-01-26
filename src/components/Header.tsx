@@ -107,6 +107,7 @@ export function Header({
   const orderButtonRef = useRef<HTMLButtonElement>(null);
   const [discountPercent, setDiscountPercent] = useState(0);
   const [discountAmount, setDiscountAmount] = useState(0);
+  const [targetTotal, setTargetTotal] = useState(0);
 
   useEffect(() => {
     setSortedCart(cart);
@@ -722,6 +723,7 @@ export function Header({
                       const percent = Number(e.target.value) || 0;
                       setDiscountPercent(percent);
                       setDiscountAmount(0);
+                      setTargetTotal(0);
                     }}
                     placeholder="0"
                     step="1"
@@ -733,9 +735,10 @@ export function Header({
                   <label className="text-xs text-muted-foreground mb-1 block">Итоговая сумма (₽)</label>
                   <Input
                     type="number"
-                    value={discountAmount || ''}
+                    value={targetTotal || ''}
                     onChange={(e) => {
                       const targetAmount = Number(e.target.value) || 0;
+                      setTargetTotal(targetAmount);
                       const currentTotal = calculateTotal();
                       const calculatedDiscount = currentTotal - targetAmount;
                       setDiscountAmount(calculatedDiscount > 0 ? calculatedDiscount : 0);
