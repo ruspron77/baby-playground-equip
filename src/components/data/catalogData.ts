@@ -121,8 +121,7 @@ export const categories = [
         hasChildren: true,
         children: [
           { name: 'Workout', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/7b34f04e-d5d6-4851-b8a2-6c6f20c1d8eb.png' },
-          { name: 'Ворота, стойки, щиты', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2c77178f-ec33-4666-942e-95b4316cecc5.png' },
-          { name: 'Полоса препятствий ГТО', image: '🏅' },
+          { name: 'Спортивные снаряды', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/3030b2f2-590c-490e-ac64-c890f700e734.png' },
           {
             name: 'Спортивные комплексы',
             image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/deb57eb0-f487-40cb-8baa-dd409badc4b7.png',
@@ -133,8 +132,6 @@ export const categories = [
               { name: 'Комплексы на трубе', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/5d81654c-59a6-41fa-8bae-9fec5ea21b0e.png' }
             ]
           },
-          { name: 'Оборудование для скейт-парков', image: '🛹' },
-          { name: 'Спортивные снаряды', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/3030b2f2-590c-490e-ac64-c890f700e734.png' },
           {
             name: 'Тренажеры уличные',
             image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4957bc0e-86d4-411b-a2b0-7902e369a099.png',
@@ -146,6 +143,9 @@ export const categories = [
               { name: 'Детские', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/a342f17c-3286-4131-8274-a08a2230e2d9.png' }
             ]
           },
+          { name: 'Ворота, стойки, щиты', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2c77178f-ec33-4666-942e-95b4316cecc5.png' },
+          { name: 'Полоса препятствий ГТО', image: '🏅' },
+          { name: 'Оборудование для скейт-парков', image: '🛹' },
           { name: 'Трибуны сборно-разборные', image: '🏟️' }
         ]
       },
