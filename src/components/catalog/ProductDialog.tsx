@@ -79,7 +79,8 @@ export function ProductDialog({
                   <>
                     <img 
                       src={productImages[currentImageIndex]} 
-                      alt={selectedProduct.name} 
+                      alt={selectedProduct.name}
+                      loading="lazy"
                       className="w-full h-full object-contain p-4" 
                     />
                     {productImages.length > 1 && (
@@ -115,7 +116,7 @@ export function ProductDialog({
                     )}
                   </>
                 ) : selectedProduct.image.startsWith('http') ? (
-                  <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-contain p-4" />
+                  <img src={selectedProduct.image} alt={selectedProduct.name} loading="lazy" className="w-full h-full object-contain p-4" />
                 ) : (
                   <span className="text-8xl">{selectedProduct.image}</span>
                 )}
@@ -131,7 +132,7 @@ export function ProductDialog({
                       }`}
                       onClick={() => setCurrentImageIndex(idx)}
                     >
-                      <img src={img} alt={`${selectedProduct.name} ${idx + 1}`} className="w-full h-full object-contain p-1" />
+                      <img src={img} alt={`${selectedProduct.name} ${idx + 1}`} loading="lazy" className="w-full h-full object-contain p-1" />
                     </button>
                   ))}
                 </div>
