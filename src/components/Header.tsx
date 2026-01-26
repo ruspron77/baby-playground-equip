@@ -742,8 +742,11 @@ export function Header({
                     onChange={(e) => {
                       const targetAmount = Number(e.target.value) || 0;
                       setKpTargetTotal(targetAmount);
-                      const currentTotal = calculateTotal();
-                      const calculatedDiscount = currentTotal - targetAmount;
+                      // Считаем полную сумму: товары + монтаж + доставка
+                      const totalWithServices = calculateTotal() + 
+                        Math.round(calculateTotal() * (kpInstallationPercent / 100)) + 
+                        kpDeliveryCost;
+                      const calculatedDiscount = totalWithServices - targetAmount;
                       setKpDiscountAmount(calculatedDiscount > 0 ? calculatedDiscount : 0);
                       setKpDiscountPercent(0);
                     }}
