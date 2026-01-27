@@ -38,38 +38,6 @@ const App = () => {
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
-
-    // Скрытие адресной строки браузера при первой загрузке
-    window.scrollTo(0, 1);
-    setTimeout(() => window.scrollTo(0, 0), 0);
-
-    // Скрытие при скролле
-    let ticking = false;
-    let lastScrollY = window.scrollY;
-    
-    const hideAddressBar = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Скролл вниз - принудительно прокручиваем чуть дальше, чтобы спрятать панели
-        if (window.innerHeight + currentScrollY < document.body.scrollHeight - 50) {
-          window.scrollBy(0, 1);
-        }
-      }
-      
-      lastScrollY = currentScrollY;
-      ticking = false;
-    };
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(hideAddressBar);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const addToFavorites = (product: Product) => {

@@ -100,12 +100,26 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    overflow: hidden;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: "Open Sans", sans-serif;
     overflow-x: hidden;
-    min-height: 100vh;
-    min-height: 100dvh;
+    overflow-y: auto;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
   }
 
   h1,
@@ -116,14 +130,6 @@
   h6 {
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 85px;
-    overflow-x: hidden;
-    height: 100%;
-    height: 100dvh;
   }
 
   button {
