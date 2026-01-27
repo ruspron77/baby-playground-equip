@@ -118,6 +118,18 @@ export function Header({
 
   useEffect(() => {
     if (isCartOpen) {
+      // Скроллим корзину в начало при открытии
+      setTimeout(() => {
+        const sheetContent = document.querySelector('[data-cart-sheet]');
+        if (sheetContent) {
+          sheetContent.scrollTop = 0;
+        }
+      }, 0);
+    }
+  }, [isCartOpen]);
+
+  useEffect(() => {
+    if (isCartOpen) {
       setTimeout(() => {
         if (cart.length > 0 && orderButtonRef.current) {
           orderButtonRef.current.focus();
@@ -379,7 +391,7 @@ export function Header({
                     )}
                   </Button>
                 </SheetTrigger>
-                <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
+                <SheetContent className="w-full sm:max-w-lg overflow-y-auto" data-cart-sheet>
                   <SheetHeader>
                     <SheetTitle className="text-2xl font-heading">Корзина</SheetTitle>
                   </SheetHeader>
