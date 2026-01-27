@@ -38,6 +38,20 @@ const App = () => {
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
+
+    // Скрытие адресной строки браузера при скролле на мобильных
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        // Скролл вниз - скрываем браузерные панели
+        window.scrollTo(0, currentScrollY + 1);
+      }
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const addToFavorites = (product: Product) => {
