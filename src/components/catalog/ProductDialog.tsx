@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
+import { useEffect, useRef } from 'react';
 
 interface Product {
   id: number;
@@ -28,6 +29,10 @@ interface ProductDialogProps {
   favorites: Product[];
   toggleFavorite: (product: Product) => void;
   onBackToCatalog?: () => void;
+  onNextProduct?: () => void;
+  onPreviousProduct?: () => void;
+  hasNextProduct?: boolean;
+  hasPreviousProduct?: boolean;
 }
 
 const formatPrice = (price: string | number): string => {
@@ -47,8 +52,14 @@ export function ProductDialog({
   favorites,
   toggleFavorite,
   onBackToCatalog,
+  onNextProduct,
+  onPreviousProduct,
+  hasNextProduct,
+  hasPreviousProduct,
 }: ProductDialogProps) {
   const isFavorite = selectedProduct ? favorites.some(f => f.id === selectedProduct.id) : false;
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
   const handleBackToCatalog = () => {
     setIsProductDialogOpen(false);
@@ -65,9 +76,35 @@ export function ProductDialog({
     }, 100);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0 && hasNextProduct && onNextProduct) {
+        onNextProduct();
+      } else if (diff < 0 && hasPreviousProduct && onPreviousProduct) {
+        onPreviousProduct();
+      }
+    }
+  };
+
   return (
     <Dialog open={isProductDialogOpen} onOpenChange={setIsProductDialogOpen}>
-      <DialogContent className="max-w-6xl max-h-[95vh] sm:max-h-[85vh] p-3 sm:p-6 overflow-hidden flex flex-col">
+      <DialogContent 
+        className="max-w-6xl max-h-[95vh] sm:max-h-[85vh] p-3 sm:p-6 overflow-hidden flex flex-col"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <DialogHeader>
           <DialogTitle className="sr-only">Информация о товаре</DialogTitle>
         </DialogHeader>

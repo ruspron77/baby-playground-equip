@@ -211,6 +211,28 @@ export function CatalogSection({
     }
   };
 
+  const handleNextProduct = () => {
+    if (!selectedProduct) return;
+    const currentIndex = filteredProducts.findIndex(p => p.id === selectedProduct.id);
+    if (currentIndex < filteredProducts.length - 1) {
+      handleProductClick(filteredProducts[currentIndex + 1]);
+    }
+  };
+
+  const handlePreviousProduct = () => {
+    if (!selectedProduct) return;
+    const currentIndex = filteredProducts.findIndex(p => p.id === selectedProduct.id);
+    if (currentIndex > 0) {
+      handleProductClick(filteredProducts[currentIndex - 1]);
+    }
+  };
+
+  const currentProductIndex = selectedProduct 
+    ? filteredProducts.findIndex(p => p.id === selectedProduct.id)
+    : -1;
+  const hasNextProduct = currentProductIndex >= 0 && currentProductIndex < filteredProducts.length - 1;
+  const hasPreviousProduct = currentProductIndex > 0;
+
   return (
     <>
       <CatalogSideMenu
@@ -293,6 +315,10 @@ export function CatalogSection({
             }
           }
         }}
+        onNextProduct={handleNextProduct}
+        onPreviousProduct={handlePreviousProduct}
+        hasNextProduct={hasNextProduct}
+        hasPreviousProduct={hasPreviousProduct}
       />
 
       <ContactDialog 
