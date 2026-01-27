@@ -175,9 +175,9 @@ export const categories = [
         image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2f1c34a0-077e-4d33-aec5-d1eb670279c3.png',
         hasChildren: true,
         children: [
-          { name: 'Скамья уличная 1.5 м', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2f1c34a0-077e-4d33-aec5-d1eb670279c3.png' },
-          { name: 'Скамья уличная 2.0 м', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2f1c34a0-077e-4d33-aec5-d1eb670279c3.png' },
-          { name: 'Скамья парковая', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2f1c34a0-077e-4d33-aec5-d1eb670279c3.png' }
+          { name: 'Скамья уличная 1.5 м', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/d55cd81c-8565-4ee7-9d0c-cb1ca41e6c19.png' },
+          { name: 'Скамья уличная 2.0 м', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/f4450b15-3b7f-4138-9365-9cbf845ac239.png' },
+          { name: 'Скамья парковая', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/42de545c-6b87-4cba-ab4a-3cc9762fe337.png' }
         ]
       },
       { name: 'Урны', image: '🗑️' },
