@@ -11,9 +11,10 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
         className="absolute inset-0 bg-fixed"
         style={{ 
           backgroundImage: 'url(https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/579c2eb8-6491-4a40-98d9-cb4c60202999.png)',
-          backgroundSize: '110%',
+          backgroundSize: 'cover',
           backgroundPosition: 'center center',
-          backgroundAttachment: 'fixed'
+          backgroundAttachment: 'fixed',
+          backgroundRepeat: 'no-repeat'
         }}
       >
         <div className="absolute inset-0 bg-black/30 px-0 mx-0 my-0 py-0"></div>
