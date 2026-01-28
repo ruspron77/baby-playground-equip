@@ -6,7 +6,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
   return (
-    <section id="hero" className="relative pt-0 pb-8 md:pb-16 overflow-hidden min-h-[225px] md:min-h-[500px]">
+    <section id="hero" className="relative pt-0 pb-2 md:pb-4 overflow-hidden min-h-[225px] md:min-h-[400px]">
       <div 
         className="absolute inset-0"
         style={{ 
@@ -19,7 +19,7 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
         <div className="absolute inset-0 bg-black/30 px-0 mx-0 my-0 py-0"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 my-[60px]">
+      <div className="container mx-auto px-4 relative z-10 my-[40px] md:my-[60px]">
         <div className="max-w-3xl animate-fade-in">
           <h2 className="md:text-4xl lg:text-6xl font-heading md:mb-6 text-white font-semibold text-2xl py-0 my-0">
             Создаём пространство для игры и спорта
