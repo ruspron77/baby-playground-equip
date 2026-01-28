@@ -6,7 +6,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
   return (
-    <section id="hero" className="relative pt-0 pb-16 md:pb-32 overflow-hidden min-h-[225px] md:min-h-[700px]">
+    <section id="hero" className="relative pt-0 pb-8 md:pb-16 overflow-hidden min-h-[225px] md:min-h-[500px]">
       <div 
         className="absolute inset-0"
         style={{ 
