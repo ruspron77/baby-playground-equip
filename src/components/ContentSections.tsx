@@ -13,7 +13,7 @@ export function ContentSections() {
         <div className="container mx-auto px-0">
           <div className="grid md:grid-cols-2 gap-12 items-center px-3">
             <div className="animate-fade-in px-3">
-              <h2 className="font-heading mb-6 font-semibold text-center md:text-left text-2xl">О компании</h2>
+              <h2 className="font-heading mb-6 font-semibold text-center md:text-left text-3xl">О компании</h2>
               <p className="text-lg text-muted-foreground mb-4">Мы специализируемся на производстве детского игрового и спортивного оборудования на протяжении 5 лет. За это время мы оснастили более 500 детских площадок по всей России.</p>
               <p className="text-lg text-muted-foreground mb-6">
                 Наша продукция соответствует всем стандартам безопасности и имеет необходимые сертификаты. 
@@ -67,7 +67,7 @@ export function ContentSections() {
       <section id="certificates" className="pt-4 pb-8 bg-white">
         <div className="container mx-auto py-0 px-3">
           <div className="text-center mb-12">
-            <h2 className="font-heading mb-4 font-semibold text-2xl">Сертификаты</h2>
+            <h2 className="font-heading mb-4 font-semibold text-3xl">Сертификаты</h2>
             <p className="text-lg text-muted-foreground">Вся продукция сертифицирована и соответствует стандартам качества</p>
           </div>
           <div className="grid grid-cols-3 gap-4 md:gap-6">
@@ -89,7 +89,7 @@ export function ContentSections() {
       <section id="contacts" className="bg-muted/30 px-3 py-[7px]">
         <div className="container mx-auto px-0 py-[21px] my-[21px]">
           <div className="text-center mb-12">
-            <h2 className="font-heading font-semibold text-2xl my-0 py-0">Контакты</h2>
+            <h2 className="font-heading font-semibold my-0 py-0 text-3xl">Контакты</h2>
             <p className="text-lg text-muted-foreground py-0">Свяжитесь с нами любым удобным способом</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6">

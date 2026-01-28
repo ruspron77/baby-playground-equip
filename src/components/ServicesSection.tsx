@@ -5,7 +5,7 @@ export function ServicesSection() {
   return (
     <section id="services" className="pt-4 pb-8 bg-muted/30 order-1 md:order-1">
       <div className="container mx-auto px-3">
-        <h2 className="font-heading font-semibold text-center mb-4 text-2xl">Услуги</h2>
+        <h2 className="font-heading font-semibold text-center mb-4 text-3xl">Услуги</h2>
         <p className="text-center text-muted-foreground mb-6 max-w-2xl mx-auto md:whitespace-nowrap">
           Полный цикл работ — от идеи до установки. Мы обеспечиваем качество на каждом этапе
         </p>
