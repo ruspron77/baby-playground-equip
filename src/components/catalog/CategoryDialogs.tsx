@@ -96,7 +96,7 @@ export function CategoryDialogs({
               {currentCategory?.name}
             </DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-1 gap-4 px-4 pb-4 sm:grid-cols-2 sm:gap-6 sm:px-6 sm:pb-6">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 sm:px-6 sm:pb-6 px-0 py-0">
             {currentCategory?.subcategories.map((sub) => (
               <div
                 key={sub.name}
