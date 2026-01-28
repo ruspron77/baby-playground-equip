@@ -10,9 +10,9 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
       <div 
         className="absolute inset-0"
         style={{ 
-          backgroundImage: 'url(https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/d0d33c74-0dd7-4efb-ada8-1fe25973c31c.png)',
-          backgroundSize: 'contain',
-          backgroundPosition: 'center center',
+          backgroundImage: 'url(https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/5a6f75a1-218e-4c07-a69c-e44af5e9b97c.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 30%',
           backgroundRepeat: 'no-repeat'
         }}
       >
