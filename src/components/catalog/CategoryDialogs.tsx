@@ -150,7 +150,7 @@ export function CategoryDialogs({
       </Dialog>
 
       <Dialog open={isSubSubSubcategoryDialogOpen} onOpenChange={setIsSubSubSubcategoryDialogOpen}>
-        <DialogContent className="sm:max-w-2xl max-h-[85vh] sm:max-h-[85vh] h-auto sm:h-auto overflow-hidden m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full flex flex-col">
+        <DialogContent className="sm:max-w-4xl max-h-[85vh] sm:max-h-[85vh] h-auto sm:h-auto overflow-hidden m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full flex flex-col">
           <DialogHeader className="sticky top-0 bg-white z-10 pb-2 sm:pb-4">
             <DialogTitle className="text-xl sm:text-4xl font-heading font-semibold text-center mb-2 sm:mb-4">
               {currentSubSubcategory?.name}
