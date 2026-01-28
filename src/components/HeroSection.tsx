@@ -8,8 +8,11 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
   return (
     <section id="hero" className="relative pt-0 pb-16 md:pb-36 overflow-hidden">
       <div 
-        className="absolute inset-0 bg-cover bg-center md:bg-fixed"
-        style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/19191919.jpg)' }}
+        className="absolute inset-0 bg-cover md:bg-fixed"
+        style={{ 
+          backgroundImage: 'url(https://cdn.poehali.dev/files/19191919.jpg)',
+          backgroundPosition: 'center 30%'
+        }}
       >
         <div className="absolute inset-0 bg-black/30 py-0 px-0 mx-0 my-0"></div>
       </div>
