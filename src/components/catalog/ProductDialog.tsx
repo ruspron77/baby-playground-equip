@@ -206,6 +206,9 @@ export function ProductDialog({
                     size="lg"
                     variant="outline"
                     onClick={() => window.location.href = 'tel:+79181151551'}
+                    onTouchStart={(e) => e.stopPropagation()}
+                    onTouchMove={(e) => e.stopPropagation()}
+                    onTouchEnd={(e) => e.stopPropagation()}
                     className="sm:hidden h-11 px-6 flex-shrink-0 ml-auto bg-transparent border-primary text-primary hover:bg-primary hover:text-white"
                   >
                     <Icon name="Phone" size={18} className="mr-2" />
