@@ -255,7 +255,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
                 className="group cursor-pointer"
               >
                 <div 
-                  className="relative overflow-hidden rounded-md bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 aspect-[4/3] border-2 border-gray-200 hover:border-gray-200"
+                  className="relative overflow-hidden rounded-md bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 aspect-square md:aspect-[4/3] border-2 border-gray-200 hover:border-gray-200"
                 >
                   <div className="absolute inset-0">
                     <img 
