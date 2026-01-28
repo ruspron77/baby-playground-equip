@@ -12,7 +12,7 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
         style={{ 
           backgroundImage: 'url(https://cdn.poehali.dev/files/19191919.jpg)',
           backgroundSize: 'cover',
-          backgroundPosition: 'center 100%'
+          backgroundPosition: 'center 65%'
         }}
       >
         <div className="absolute inset-0 bg-black/30 px-0 mx-0 my-0 py-0"></div>
