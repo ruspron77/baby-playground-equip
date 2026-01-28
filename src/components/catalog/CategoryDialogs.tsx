@@ -90,13 +90,13 @@ export function CategoryDialogs({
   return (
     <>
       <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
-        <DialogContent className="sm:max-w-4xl max-h-[85vh] sm:max-h-[85vh] h-auto sm:h-auto overflow-y-auto m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full">
-          <DialogHeader>
+        <DialogContent className="sm:max-w-4xl max-h-[85vh] sm:max-h-[85vh] h-auto sm:h-auto overflow-hidden m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full flex flex-col">
+          <DialogHeader className="sticky top-0 bg-white z-10 pb-2 sm:pb-4">
             <DialogTitle className="text-2xl sm:text-4xl font-heading font-semibold text-center mb-2 sm:mb-6">
               {currentCategory?.name}
             </DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 sm:px-6 sm:pb-6 px-0 py-0">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 sm:px-6 sm:pb-6 px-0 py-0 overflow-y-auto">
             {currentCategory?.subcategories.map((sub) => (
               <div
                 key={sub.name}
@@ -124,13 +124,13 @@ export function CategoryDialogs({
       </Dialog>
 
       <Dialog open={isSubSubcategoryDialogOpen} onOpenChange={setIsSubSubcategoryDialogOpen}>
-        <DialogContent className="sm:max-w-3xl max-h-[85vh] sm:max-h-[80vh] h-auto sm:h-auto overflow-y-auto m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full">
-          <DialogHeader>
+        <DialogContent className="sm:max-w-3xl max-h-[85vh] sm:max-h-[80vh] h-auto sm:h-auto overflow-hidden m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full flex flex-col">
+          <DialogHeader className="sticky top-0 bg-white z-10 pb-2 sm:pb-4">
             <DialogTitle className="text-2xl sm:text-4xl font-heading font-semibold text-center mb-2 sm:mb-4">
               {currentSubcategory?.name}
             </DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 sm:px-4 sm:pb-4 px-0 py-0">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 sm:px-4 sm:pb-4 px-0 py-0 overflow-y-auto">
             {currentSubcategory?.children?.map((subSub) => (
               <div key={subSub.name} className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group rounded-md flex flex-col relative border-2 border-gray-200" onClick={() => handleSubSubcategoryClick(subSub)}>
                 <div className="aspect-square overflow-hidden flex items-center justify-center p-6 sm:p-4">
