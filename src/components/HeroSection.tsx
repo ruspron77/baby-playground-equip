@@ -16,7 +16,7 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 bg-black/30 px-0 mx-0 my-0 py-0"></div>
+        <div className="absolute inset-0 px-0 mx-0 my-0 py-0 bg-[#00000030]"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10 md:my-[93px] my-[42px]">
