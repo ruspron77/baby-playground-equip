@@ -10,7 +10,7 @@ export function ContentSections() {
   return (
     <div className="order-4">
       <section id="about" className="pt-4 pb-8 bg-muted/30">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-0">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
               <h2 className="text-4xl font-heading mb-6 font-semibold text-center md:text-left">О компании</h2>
@@ -65,7 +65,7 @@ export function ContentSections() {
       </section>
 
       <section id="certificates" className="pt-4 pb-8 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-0 py-0">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-heading mb-4 font-semibold">Сертификаты</h2>
             <p className="text-lg text-muted-foreground">Вся продукция сертифицирована и соответствует стандартам качества</p>
@@ -86,8 +86,8 @@ export function ContentSections() {
         </div>
       </section>
 
-      <section id="contacts" className="pt-4 pb-16 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <section id="contacts" className="bg-muted/30 py-10">
+        <div className="container mx-auto px-0">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-heading mb-4 font-semibold">Контакты</h2>
             <p className="text-lg text-muted-foreground">Свяжитесь с нами любым удобным способом</p>
