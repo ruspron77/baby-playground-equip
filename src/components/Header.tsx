@@ -314,19 +314,19 @@ export function Header({
           </div>
           <div className="hidden md:flex items-center gap-6 flex-1 justify-between ml-6">
             <nav className="flex gap-6">
-              <a className="font-medium hover:text-primary transition-colors cursor-pointer text-base" href="#about" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <a className="text-base font-medium hover:text-primary transition-colors cursor-pointer" href="#about" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>
                 О компании
               </a>
-              <a className="font-medium hover:text-primary transition-colors cursor-pointer text-base" href="#catalog" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <a className="text-base font-medium hover:text-primary transition-colors cursor-pointer" href="#catalog" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>
                 Каталог
               </a>
-              <a className="font-medium hover:text-primary transition-colors cursor-pointer text-base" href="#services" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <a className="text-base font-medium hover:text-primary transition-colors cursor-pointer" href="#services" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>
                 Услуги
               </a>
-              <a className="font-medium hover:text-primary transition-colors cursor-pointer text-base" href="#certificates" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('certificates')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <a className="text-base font-medium hover:text-primary transition-colors cursor-pointer" href="#certificates" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('certificates')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>
                 Сертификаты
               </a>
-              <a className="font-medium hover:text-primary transition-colors cursor-pointer text-base" href="#contacts" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <a className="text-base font-medium hover:text-primary transition-colors cursor-pointer" href="#contacts" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>
                 Контакты
               </a>
             </nav>
@@ -351,7 +351,7 @@ export function Header({
                   </Button>
                 )}
               </div>
-              <a href="tel:+79181151551" className="flex items-center gap-2 font-medium hover:text-primary transition-colors text-base">
+              <a href="tel:+79181151551" className="flex items-center gap-2 text-base font-medium hover:text-primary transition-colors">
                 <Icon name="Phone" size={18} />
                 +7 918 115-15-51
               </a>
@@ -359,7 +359,7 @@ export function Header({
                 Заказать звонок
               </Button>
               <Link to="/favorites">
-                <Button variant="ghost" size="icon" className="relative hover:bg-transparent hover:border hover:border-primary hover:text-primary">
+                <Button variant="outline" size="icon" className="relative hover:bg-transparent hover:border-primary hover:text-primary">
                   <Icon name="Heart" size={20} />
                   {favoritesCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
@@ -370,7 +370,7 @@ export function Header({
               </Link>
               <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="relative hover:bg-transparent hover:border hover:border-primary hover:text-primary">
+                  <Button variant="outline" size="icon" className="relative hover:bg-transparent hover:border-primary hover:text-primary">
                     <Icon name="ShoppingCart" size={20} />
                     {cart.length > 0 && (
                       <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
@@ -586,7 +586,7 @@ export function Header({
           </div>
           <div className="flex md:hidden items-center gap-2">
             <Link to="/favorites">
-              <Button variant="ghost" size="icon" className="relative hover:bg-transparent hover:border hover:border-primary hover:text-primary">
+              <Button variant="outline" size="icon" className="relative hover:bg-transparent hover:border-primary hover:text-primary">
                 <Icon name="Heart" size={20} />
                 {favoritesCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
@@ -597,7 +597,7 @@ export function Header({
             </Link>
             <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative hover:bg-transparent hover:border hover:border-primary hover:text-primary">
+                <Button variant="outline" size="icon" className="relative hover:bg-transparent hover:border-primary hover:text-primary">
                   <Icon name="ShoppingCart" size={20} />
                   {cart.length > 0 && (
                     <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
