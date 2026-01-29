@@ -508,21 +508,25 @@ def handler(event, context):
             for col in range(1, 6):
                 cell = ws.cell(row=current_row, column=col, value='')
             
-            discount_label = f'Скидка {discount_percent}%' if discount_percent > 0 else 'Скидка'
-            cell = ws.cell(row=current_row, column=6, value=discount_label)
+            cell = ws.cell(row=current_row, column=6, value='Скидка')
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.font = Font(name='Calibri', size=11)
             cell.border = thin_border
             
-            cell = ws.cell(row=current_row, column=7, value=abs(discount_value))
+            cell = ws.cell(row=current_row, column=7, value=-abs(discount_value))
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.number_format = '#,##0.00\ ""'
             cell.font = Font(name='Calibri', size=11, color='FF0000')
             cell.border = thin_border
             current_row += 1
             
-            # Итого с учетом скидки
-            total_with_discount = total_sum - discount_value
+            # Итого с учетом скидки - вычитаем скидку из товаров, потом добавляем монтаж и доставку
+            equipment_with_discount = equipment_total - discount_value
+            total_with_discount = equipment_with_discount
+            if installation_cost > 0 and not hide_installation:
+                total_with_discount += installation_cost
+            if delivery_cost > 0 and not hide_delivery:
+                total_with_discount += delivery_cost
             
             for col in range(1, 6):
                 cell = ws.cell(row=current_row, column=col, value='')
