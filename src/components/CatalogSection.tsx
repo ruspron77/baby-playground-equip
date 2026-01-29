@@ -142,7 +142,6 @@ export function CatalogSection({
   toggleFavorite,
 }: CatalogSectionProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [initialSelectedProduct, setInitialSelectedProduct] = useState<Product | null>(null);
   const [isProductDialogOpen, setIsProductDialogOpen] = useState(false);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [productImages, setProductImages] = useState<string[]>([]);
@@ -194,7 +193,6 @@ export function CatalogSection({
 
   const handleProductClick = async (product: Product) => {
     setSelectedProduct(product);
-    setInitialSelectedProduct(product);
     setIsProductDialogOpen(true);
     setCurrentImageIndex(0);
     setProductImages([]);
@@ -301,12 +299,7 @@ export function CatalogSection({
 
       <ProductDialog
         isProductDialogOpen={isProductDialogOpen}
-        setIsProductDialogOpen={(open) => {
-          setIsProductDialogOpen(open);
-          if (!open) {
-            setSelectedProduct(initialSelectedProduct);
-          }
-        }}
+        setIsProductDialogOpen={setIsProductDialogOpen}
         selectedProduct={selectedProduct}
         productImages={productImages}
         currentImageIndex={currentImageIndex}
