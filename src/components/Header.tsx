@@ -908,7 +908,7 @@ export function Header({
         </DialogContent>
       </Dialog>
 
-      <Dialog open={showKPDialog} onOpenChange={(open) => {
+      <Sheet open={showKPDialog} onOpenChange={(open) => {
         setShowKPDialog(open);
         if (open) {
           setKpAddress('');
@@ -922,10 +922,10 @@ export function Header({
           setKpFormat('xlsx');
         }
       }}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Создание КП</DialogTitle>
-          </DialogHeader>
+        <SheetContent className="w-full sm:max-w-md overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle>Создание КП</SheetTitle>
+          </SheetHeader>
           <div className="space-y-4 py-4">
             <div>
               <label className="text-sm font-medium mb-2 block">Адрес доставки</label>
@@ -1060,8 +1060,8 @@ export function Header({
               </div>
             </div>
           </div>
-          <div className="flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setShowKPDialog(false)} className="hover:bg-transparent hover:border-primary hover:text-primary">
+          <div className="sticky bottom-0 bg-background border-t pt-4 flex gap-2">
+            <Button variant="outline" onClick={() => setShowKPDialog(false)} className="flex-1 hover:bg-transparent hover:border-primary hover:text-primary">
               Отмена
             </Button>
             <Button onClick={() => {
@@ -1077,13 +1077,13 @@ export function Header({
                 discountAmount: kpDiscountAmount
               });
               setShowKPDialog(false);
-            }}>
+            }} className="flex-1">
               <Icon name="Download" size={16} className="mr-2" />
               Скачать
             </Button>
           </div>
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
 
       <Dialog open={isExcelSettingsOpen} onOpenChange={setIsExcelSettingsOpen}>
         <DialogContent className="sm:max-w-md">
