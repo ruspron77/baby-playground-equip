@@ -121,7 +121,7 @@ export function ProductDialog({
                 {productImages.length > 0 ? (
                   <>
                     <img 
-                      src={optimizeImage(productImages[currentImageIndex], undefined, 95)} 
+                      src={productImages[currentImageIndex]} 
                       alt={selectedProduct.name}
                       loading="eager"
                       decoding="async"
@@ -161,7 +161,7 @@ export function ProductDialog({
                     )}
                   </>
                 ) : selectedProduct.image.startsWith('http') ? (
-                  <img src={optimizeImage(selectedProduct.image, undefined, 95)} alt={selectedProduct.name} loading="eager" decoding="async" className="w-full h-full p-4 px-0 my-0 py-0 object-contain" style={{ contentVisibility: 'auto' }} />
+                  <img src={selectedProduct.image} alt={selectedProduct.name} loading="eager" decoding="async" className="w-full h-full p-4 px-0 my-0 py-0 object-contain" style={{ contentVisibility: 'auto' }} />
                 ) : (
                   <span className="text-8xl">{selectedProduct.image}</span>
                 )}
@@ -177,7 +177,7 @@ export function ProductDialog({
                       }`}
                       onClick={() => setCurrentImageIndex(idx)}
                     >
-                      <img src={optimizeImage(img, 200, 80)} alt={`${selectedProduct.name} ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-full object-contain p-1" style={{ contentVisibility: 'auto' }} />
+                      <img src={img} alt={`${selectedProduct.name} ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-full object-contain p-1" style={{ contentVisibility: 'auto' }} />
                     </button>
                   ))}
                 </div>
