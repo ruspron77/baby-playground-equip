@@ -279,11 +279,8 @@ def handler(event, context):
         # Коэффициент скидки для применения к каждому товару
         discount_multiplier = 1 - (discount_value / equipment_total_original) if equipment_total_original > 0 else 1
         
-        # Сумма товаров со скидкой (для расчета монтажа от неё)
-        equipment_total_discounted = equipment_total_original * discount_multiplier
-        
-        # Монтаж считается от суммы товаров СО скидкой
-        calculated_installation_cost = equipment_total_discounted * (installation_percent / 100) if installation_percent > 0 else 0
+        # Монтаж считается от суммы товаров ДО скидки
+        calculated_installation_cost = equipment_total_original * (installation_percent / 100) if installation_percent > 0 else 0
         
         # Доставка на единицу товара (равномерное распределение)
         delivery_per_unit = (delivery_cost / total_product_quantity) if (hide_delivery and delivery_cost > 0 and total_product_quantity > 0) else 0
