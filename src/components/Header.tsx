@@ -725,11 +725,11 @@ export function Header({
                             <img 
                               src={item.image} 
                               alt={item.name}
-                              className="w-16 h-16 object-contain rounded"
+                              className="w-16 h-16 object-contain rounded py-0 px-0 mx-0 my-0"
                             />
-                            <div className="flex-1 min-w-0 space-y-0.5">
-                              <p className="text-xs text-primary font-medium leading-tight">{item.name.split('\n')[0]}</p>
-                              <h4 className="font-medium text-sm leading-tight">{item.name.split('\n').slice(1).join(' ')}</h4>
+                            <div className="flex-1 min-w-0 space-y-0.5 my-0 py-0">
+                              <p className="text-xs text-primary font-medium leading-tight py-0 my-0">{item.name.split('\n')[0]}</p>
+                              <h4 className="font-medium text-sm leading-tight my-[15px] py-0">{item.name.split('\n').slice(1).join(' ')}</h4>
                             </div>
                             <Button
                               variant="ghost"
@@ -748,7 +748,7 @@ export function Header({
                               >
                                 <Icon name="Minus" size={14} />
                               </Button>
-                              <span className="w-6 text-center text-sm font-medium">{item.quantity}</span>
+                              <span className="w-6 text-center text-sm font-medium my-0 py-0">{item.quantity}</span>
                               <Button
                                 variant="outline"
                                 size="icon"
