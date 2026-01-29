@@ -244,8 +244,8 @@ export function Header({
 
   const totalCost = calculateTotal();
   const discountedTotal = totalCost - discountAmount;
-  const installationCost = (discountedTotal * installationPercent) / 100;
-  const finalTotal = discountedTotal + installationCost + deliveryCost;
+  const installationCost = Math.round((discountedTotal * installationPercent) / 100);
+  const finalTotal = Math.round(discountedTotal + installationCost + deliveryCost);
 
   const handleTargetTotalChange = (value: number) => {
     setTargetTotal(value);
@@ -562,7 +562,7 @@ export function Header({
                           <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="flex-1" size="lg">
                             Оформить заказ
                           </Button>
-                          <Button onClick={() => setShowKPDialog(true)} variant="outline" className="hover:bg-transparent hover:border-primary hover:text-primary" size="lg">
+                          <Button onClick={() => setShowKPDialog(true)} variant="outline" className="bg-transparent border-primary text-primary hover:bg-transparent hover:border-primary hover:text-primary" size="lg">
                             КП
                           </Button>
                         </div>
@@ -778,7 +778,7 @@ export function Header({
                         <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="flex-1" size="lg">
                           Оформить заказ
                         </Button>
-                        <Button onClick={() => setShowKPDialog(true)} variant="outline" className="hover:bg-transparent hover:border-primary hover:text-primary" size="lg">
+                        <Button onClick={() => setShowKPDialog(true)} variant="outline" className="bg-transparent border-primary text-primary hover:bg-transparent hover:border-primary hover:text-primary" size="lg">
                           КП
                         </Button>
                       </div>
