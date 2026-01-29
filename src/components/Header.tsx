@@ -315,13 +315,13 @@ export function Header({
           <div className="hidden md:flex items-center gap-6 flex-1 justify-between ml-6">
             <nav className="flex gap-6">
               <a href="#about" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
-                О нас
+                О компании
               </a>
               <a href="#catalog" onClick={(e) => { e.preventDefault(); setIsSideMenuOpen(true); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
                 Каталог
               </a>
-              <a href="#portfolio" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
-                Портфолио
+              <a href="#services" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+                Услуги
               </a>
               <a href="#certificates" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('certificates')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
                 Сертификаты
