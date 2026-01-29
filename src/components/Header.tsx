@@ -497,9 +497,9 @@ export function Header({
                               dragOverIndex === index && draggedIndex !== index ? 'border-primary border-2' : ''
                             }`}
                           >
-                            <CardContent className="p-3 flex items-center gap-3 relative">
+                            <CardContent className="p-3 flex items-start gap-3">
                               <div 
-                                className="cursor-grab active:cursor-grabbing"
+                                className="cursor-grab active:cursor-grabbing pt-2"
                                 draggable
                                 onDragStart={(e) => {
                                   e.stopPropagation();
@@ -511,40 +511,42 @@ export function Header({
                               <img 
                                 src={item.image} 
                                 alt={item.name}
-                                className="w-16 h-16 object-contain rounded"
+                                className="w-16 h-16 object-cover rounded"
                               />
-                              <div className="flex-1 min-w-0 space-y-0.5">
-                                <p className="text-xs text-primary font-medium leading-tight">{item.name.split('\n')[0]}</p>
-                                <h4 className="font-medium text-sm leading-tight">{item.name.split('\n').slice(1).join(' ')}</h4>
+                              <div className="flex-1 min-w-0 space-y-1">
+                                <p className="text-sm text-primary font-medium">{item.name.split('\n')[0]}</p>
+                                <h4 className="font-medium text-sm">{item.name.split('\n').slice(1).join(' ')}</h4>
+                                <div className="flex items-center gap-2">
+                                  <Button
+                                    variant="outline"
+                                    size="icon"
+                                    className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
+                                    onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                                  >
+                                    <Icon name="Minus" size={16} />
+                                  </Button>
+                                  <span className="w-8 text-center font-medium">{item.quantity}</span>
+                                  <Button
+                                    variant="outline"
+                                    size="icon"
+                                    className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
+                                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                  >
+                                    <Icon name="Plus" size={16} />
+                                  </Button>
+                                </div>
                               </div>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                className="absolute top-2 right-2 h-6 w-6 hover:bg-transparent hover:text-red-500"
-                                onClick={() => removeFromCart(item.id)}
-                              >
-                                <Icon name="Trash2" size={14} />
-                              </Button>
-                              <div className="absolute bottom-2 left-[104px] flex items-center gap-1.5">
+                              <div className="flex flex-col items-end gap-2">
+                                <p className="font-bold text-primary text-sm">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
                                 <Button
-                                  variant="outline"
+                                  variant="ghost"
                                   size="icon"
-                                  className="h-7 w-7 rounded hover:bg-transparent hover:border-primary hover:text-primary"
-                                  onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                                  className="h-8 w-8 hover:bg-transparent hover:border hover:border-red-500 hover:text-red-500"
+                                  onClick={() => removeFromCart(item.id)}
                                 >
-                                  <Icon name="Minus" size={14} />
-                                </Button>
-                                <span className="w-6 text-center text-sm font-medium">{item.quantity}</span>
-                                <Button
-                                  variant="outline"
-                                  size="icon"
-                                  className="h-7 w-7 rounded hover:bg-transparent hover:border-primary hover:text-primary"
-                                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                >
-                                  <Icon name="Plus" size={14} />
+                                  <Icon name="Trash2" size={16} />
                                 </Button>
                               </div>
-                              <p className="absolute bottom-2 right-3 font-bold text-primary text-sm">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
                             </CardContent>
                           </Card>
                         ))}
@@ -711,9 +713,9 @@ export function Header({
                             dragOverIndex === index && draggedIndex !== index ? 'border-primary border-2' : ''
                           }`}
                         >
-                          <CardContent className="p-3 flex items-center gap-3 relative">
+                          <CardContent className="p-3 flex items-start gap-3 py-0 my-1.5">
                             <div 
-                              className="cursor-grab active:cursor-grabbing"
+                              className="cursor-grab active:cursor-grabbing pt-2"
                               draggable
                               onDragStart={(e) => {
                                 e.stopPropagation();
@@ -725,40 +727,42 @@ export function Header({
                             <img 
                               src={item.image} 
                               alt={item.name}
-                              className="w-16 h-16 object-contain rounded py-0 px-0 mx-0 my-0"
+                              className="w-16 h-16 object-cover rounded"
                             />
-                            <div className="flex-1 min-w-0 space-y-0.5 my-0 py-0">
-                              <p className="text-xs text-primary font-medium leading-tight py-0 my-0">{item.name.split('\n')[0]}</p>
-                              <h4 className="font-medium text-sm leading-tight my-[15px] py-0">{item.name.split('\n').slice(1).join(' ')}</h4>
+                            <div className="flex-1 min-w-0 space-y-1">
+                              <p className="text-sm text-primary font-medium">{item.name.split('\n')[0]}</p>
+                              <h4 className="font-medium text-sm my-0.5">{item.name.split('\n').slice(1).join(' ')}</h4>
+                              <div className="flex items-center gap-2 my-0.5">
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
+                                  onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                                >
+                                  <Icon name="Minus" size={16} />
+                                </Button>
+                                <span className="w-8 text-center font-medium">{item.quantity}</span>
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
+                                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                >
+                                  <Icon name="Plus" size={16} />
+                                </Button>
+                              </div>
                             </div>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="absolute top-2 right-2 h-6 w-6 hover:bg-transparent hover:text-red-500"
-                              onClick={() => removeFromCart(item.id)}
-                            >
-                              <Icon name="Trash2" size={14} />
-                            </Button>
-                            <div className="absolute bottom-2 left-[104px] flex items-center gap-1.5">
+                            <div className="flex flex-col items-end gap-2">
+                              <p className="font-bold text-primary text-sm">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
                               <Button
-                                variant="outline"
+                                variant="ghost"
                                 size="icon"
-                                className="h-7 w-7 rounded hover:bg-transparent hover:border-primary hover:text-primary"
-                                onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                                className="h-8 w-8 hover:bg-transparent hover:border hover:border-red-500 hover:text-red-500"
+                                onClick={() => removeFromCart(item.id)}
                               >
-                                <Icon name="Minus" size={14} />
-                              </Button>
-                              <span className="w-6 text-center text-sm font-medium my-0 py-0">{item.quantity}</span>
-                              <Button
-                                variant="outline"
-                                size="icon"
-                                className="h-7 w-7 rounded hover:bg-transparent hover:border-primary hover:text-primary"
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              >
-                                <Icon name="Plus" size={14} />
+                                <Icon name="Trash2" size={16} />
                               </Button>
                             </div>
-                            <p className="absolute bottom-2 right-3 font-bold text-primary text-sm">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
                           </CardContent>
                         </Card>
                       ))}
