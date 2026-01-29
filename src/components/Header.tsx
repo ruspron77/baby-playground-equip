@@ -713,7 +713,7 @@ export function Header({
                             dragOverIndex === index && draggedIndex !== index ? 'border-primary border-2' : ''
                           }`}
                         >
-                          <CardContent className="p-3 flex items-start gap-3 py-0 my-0">
+                          <CardContent className="p-3 flex items-start gap-3 my-0 py-0.5">
                             <div 
                               className="cursor-grab active:cursor-grabbing pt-2"
                               draggable
@@ -732,7 +732,7 @@ export function Header({
                             <div className="flex-1 min-w-0 space-y-1">
                               <p className="text-sm text-primary font-medium my-[3px]">{item.name.split('\n')[0]}</p>
                               <h4 className="font-medium text-sm my-0.5">{item.name.split('\n').slice(1).join(' ')}</h4>
-                              <div className="flex items-center gap-2 my-0.5">
+                              <div className="flex items-center gap-2 my-0">
                                 <Button
                                   variant="outline"
                                   size="icon"
@@ -753,7 +753,7 @@ export function Header({
                               </div>
                             </div>
                             <div className="flex flex-col items-end gap-2">
-                              <p className="font-bold text-primary text-sm">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
+                              <p className="font-bold text-primary my-[11px] text-base">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
                               <Button
                                 variant="ghost"
                                 size="icon"
