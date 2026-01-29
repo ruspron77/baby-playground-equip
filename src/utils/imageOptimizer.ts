@@ -13,7 +13,7 @@ export function optimizeImage(url: string, width?: number, quality: number = 85)
   const actualWidth = width || (isMobile ? 600 : 1200);
   const actualQuality = Math.min(quality, 95);
   
-  return `https://images.weserv.nl/?url=${encodeURIComponent(url)}&w=${actualWidth}&q=${actualQuality}&output=webp&il&n=-1`;
+  return `https://images.weserv.nl/?url=${encodeURIComponent(url)}&w=${actualWidth}&q=${actualQuality}&output=webp&il&n=-1&we`;
 }
 
 /**
