@@ -473,14 +473,7 @@ def handler(event, context):
             
             current_row += 1
         
-        # Итого (с учетом только видимых строк)
-        total_sum = equipment_total
-        if installation_cost > 0 and not hide_installation:
-            total_sum += installation_cost
-        if delivery_cost > 0 and not hide_delivery:
-            total_sum += delivery_cost
-        
-        # Пустые ячейки БЕЗ рамок
+        # Итого по товарам
         for col in range(1, 6):
             cell = ws.cell(row=current_row, column=col, value='')
         
@@ -489,19 +482,18 @@ def handler(event, context):
         cell.font = Font(name='Calibri', bold=True, size=11)
         cell.border = thin_border
         
-        cell = ws.cell(row=current_row, column=7, value=total_sum)
+        cell = ws.cell(row=current_row, column=7, value=equipment_total)
         cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.number_format = '#,##0.00\ ""'
         cell.font = Font(name='Calibri', bold=True, size=11)
         cell.border = thin_border
         current_row += 1
         
-        # Скидка (если указана) - применяется только к товарам, без монтажа и доставки
+        # Скидка (если указана) - применяется только к товарам
         discount_value = 0
         if discount_percent > 0:
             discount_value = equipment_total * (discount_percent / 100)
         elif discount_amount > 0:
-            # discount_amount это сумма скидки
             discount_value = discount_amount
         
         if discount_value > 0:
@@ -510,7 +502,7 @@ def handler(event, context):
             
             cell = ws.cell(row=current_row, column=6, value='Скидка')
             cell.alignment = Alignment(horizontal='center', vertical='center')
-            cell.font = Font(name='Calibri', size=11)
+            cell.font = Font(name='Calibri', size=11, color='FF0000')
             cell.border = thin_border
             
             cell = ws.cell(row=current_row, column=7, value=-abs(discount_value))
@@ -519,27 +511,27 @@ def handler(event, context):
             cell.font = Font(name='Calibri', size=11, color='FF0000')
             cell.border = thin_border
             current_row += 1
-            
-            # Итого с учетом скидки - вычитаем скидку из товаров, потом добавляем монтаж и доставку
-            equipment_with_discount = equipment_total - discount_value
-            total_with_discount = equipment_with_discount
-            if installation_cost > 0 and not hide_installation:
-                total_with_discount += installation_cost
-            if delivery_cost > 0 and not hide_delivery:
-                total_with_discount += delivery_cost
-            
-            for col in range(1, 6):
-                cell = ws.cell(row=current_row, column=col, value='')
-            
-            cell = ws.cell(row=current_row, column=6, value='К оплате:')
-            cell.alignment = Alignment(horizontal='center', vertical='center')
-            cell.font = Font(name='Calibri', bold=True, size=11)
-            cell.border = thin_border
-            
-            cell = ws.cell(row=current_row, column=7, value=total_with_discount)
-            cell.alignment = Alignment(horizontal='center', vertical='center')
-            cell.number_format = '#,##0.00\ ""'
-            cell.font = Font(name='Calibri', bold=True, size=11)
+        
+        # Итоговая сумма с учетом скидки, монтажа и доставки
+        equipment_with_discount = equipment_total - discount_value
+        total_with_discount = equipment_with_discount
+        if installation_cost > 0 and not hide_installation:
+            total_with_discount += installation_cost
+        if delivery_cost > 0 and not hide_delivery:
+            total_with_discount += delivery_cost
+        
+        for col in range(1, 6):
+            cell = ws.cell(row=current_row, column=col, value='')
+        
+        cell = ws.cell(row=current_row, column=6, value='К оплате:')
+        cell.alignment = Alignment(horizontal='center', vertical='center')
+        cell.font = Font(name='Calibri', bold=True, size=11)
+        cell.border = thin_border
+        
+        cell = ws.cell(row=current_row, column=7, value=total_with_discount)
+        cell.alignment = Alignment(horizontal='center', vertical='center')
+        cell.number_format = '#,##0.00\ ""'
+        cell.font = Font(name='Calibri', bold=True, size=11)
         cell.border = thin_border
         
         current_row += 1
