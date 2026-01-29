@@ -825,7 +825,18 @@ export function Header({
           <DialogHeader>
             <DialogTitle>Оформление заказа</DialogTitle>
           </DialogHeader>
-          <OrderForm onSubmit={handleOrderSubmit} />
+          <OrderForm 
+            open={showOrderForm}
+            onOpenChange={setShowOrderForm}
+            cart={cart}
+            calculateTotal={calculateTotal}
+            deliveryCost={deliveryCost}
+            installationPercent={installationPercent}
+            calculateInstallationCost={calculateInstallationCost}
+            calculateGrandTotal={calculateGrandTotal}
+            onSubmit={handleOrderSubmit}
+            currentOrderNumber={currentOrderNumber}
+          />
         </DialogContent>
       </Dialog>
 
