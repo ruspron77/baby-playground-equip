@@ -335,7 +335,7 @@ export function Header({
                 <Icon name="Phone" size={18} />
                 +7 918 115-15-51
               </a>
-              <Button onClick={() => setIsContactDialogOpen(true)} className="bg-primary hover:bg-primary/90">
+              <Button onClick={() => setIsContactDialogOpen(true)} className="bg-primary hover:bg-primary/90 h-9">
                 Заказать звонок
               </Button>
               <div className="relative">
