@@ -211,6 +211,10 @@ export function CatalogSection({
     }
   };
 
+  const handleBackToCatalog = () => {
+    setSelectedProduct(null);
+  };
+
   const handleNextProduct = () => {
     if (!selectedProduct) return;
     const currentIndex = filteredProducts.findIndex(p => p.id === selectedProduct.id);
@@ -306,15 +310,7 @@ export function CatalogSection({
         setIsContactDialogOpen={setIsContactDialogOpen}
         favorites={favorites}
         toggleFavorite={toggleFavorite}
-        onBackToCatalog={() => {
-          // Прокрутка к категории товара
-          if (selectedProduct) {
-            const category = categories.find(c => c.id === selectedProduct.category);
-            if (category) {
-              handleCategoryClick(category);
-            }
-          }
-        }}
+        onBackToCatalog={handleBackToCatalog}
         onNextProduct={handleNextProduct}
         onPreviousProduct={handlePreviousProduct}
         hasNextProduct={hasNextProduct}
