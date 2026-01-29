@@ -104,6 +104,7 @@ export function Header({
   const [kpTargetTotal, setKpTargetTotal] = useState(0);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [cartSearchQuery, setCartSearchQuery] = useState('');
+  const [catalogSearchQuery, setCatalogSearchQuery] = useState('');
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const [sortedCart, setSortedCart] = useState(cart);
@@ -157,9 +158,9 @@ export function Header({
   }, [isCartOpen, cart.length]);
 
   const filteredCatalogProducts = allProducts.filter(product => 
-    cartSearchQuery === '' || 
-    product.name.toLowerCase().includes(cartSearchQuery.toLowerCase()) ||
-    (product.article && product.article.toLowerCase().includes(cartSearchQuery.toLowerCase()))
+    catalogSearchQuery === '' || 
+    product.name.toLowerCase().includes(catalogSearchQuery.toLowerCase()) ||
+    (product.article && product.article.toLowerCase().includes(catalogSearchQuery.toLowerCase()))
   );
 
   const getNextOrderNumber = () => {
@@ -400,13 +401,13 @@ export function Header({
                           <Input
                             type="text"
                             placeholder="Поиск товаров для добавления..."
-                            value={cartSearchQuery}
-                            onChange={(e) => setCartSearchQuery(e.target.value)}
+                            value={catalogSearchQuery}
+                            onChange={(e) => setCatalogSearchQuery(e.target.value)}
                             className="pl-9"
                           />
                         </div>
 
-                        {cartSearchQuery && filteredCatalogProducts.length > 0 && (
+                        {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
                           <Card>
                             <CardContent className="p-0 max-h-[400px] overflow-y-auto">
                               <div className="divide-y">
@@ -427,7 +428,7 @@ export function Header({
                           </Card>
                         )}
 
-                        {cartSearchQuery && filteredCatalogProducts.length === 0 && (
+                        {catalogSearchQuery && filteredCatalogProducts.length === 0 && (
                           <p className="text-sm text-muted-foreground text-center py-4">
                             Ничего не найдено
                           </p>
@@ -596,13 +597,13 @@ export function Header({
                         <Input
                           type="text"
                           placeholder="Поиск товаров для добавления..."
-                          value={cartSearchQuery}
-                          onChange={(e) => setCartSearchQuery(e.target.value)}
+                          value={catalogSearchQuery}
+                          onChange={(e) => setCatalogSearchQuery(e.target.value)}
                           className="pl-9"
                         />
                       </div>
 
-                      {cartSearchQuery && filteredCatalogProducts.length > 0 && (
+                      {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
                         <Card>
                           <CardContent className="p-0 max-h-[400px] overflow-y-auto">
                             <div className="divide-y">
@@ -623,7 +624,7 @@ export function Header({
                         </Card>
                       )}
 
-                      {cartSearchQuery && filteredCatalogProducts.length === 0 && (
+                      {catalogSearchQuery && filteredCatalogProducts.length === 0 && (
                         <p className="text-sm text-muted-foreground text-center py-4">
                           Ничего не найдено
                         </p>
