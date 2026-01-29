@@ -302,7 +302,7 @@ export function Header({
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50 border-b px-0">
       <div className="container mx-auto my-0 py-0 px-0">
-        <div className="flex items-center justify-between py-[5px] px-[15px]">
+        <div className="flex items-center justify-between py-[5px] px-[17px]">
           <div className="flex items-center gap-3">
             <a href="#hero" className="cursor-pointer" onClick={() => handleResetFilters?.()}>
               <img 
@@ -314,19 +314,19 @@ export function Header({
           </div>
           <div className="hidden md:flex items-center gap-6 flex-1 justify-between ml-6">
             <nav className="flex gap-6">
-              <a href="#about" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <a className="font-medium hover:text-primary transition-colors cursor-pointer text-base" href="#about" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
                 О компании
               </a>
-              <a href="#catalog" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <a className="font-medium hover:text-primary transition-colors cursor-pointer text-base" href="#catalog" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
                 Каталог
               </a>
-              <a href="#services" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <a className="font-medium hover:text-primary transition-colors cursor-pointer text-base" href="#services" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
                 Услуги
               </a>
-              <a href="#certificates" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('certificates')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <a className="font-medium hover:text-primary transition-colors cursor-pointer text-base" href="#certificates" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('certificates')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
                 Сертификаты
               </a>
-              <a href="#contacts" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <a className="font-medium hover:text-primary transition-colors cursor-pointer text-base" href="#contacts" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
                 Контакты
               </a>
             </nav>
@@ -351,7 +351,7 @@ export function Header({
                   </Button>
                 )}
               </div>
-              <a href="tel:+79181151551" className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
+              <a href="tel:+79181151551" className="flex items-center gap-2 font-medium hover:text-primary transition-colors text-base">
                 <Icon name="Phone" size={18} />
                 +7 918 115-15-51
               </a>
