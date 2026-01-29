@@ -656,7 +656,7 @@ export function Header({
                   </div>
                 ) : (
                   <>
-                    <div className="space-y-2 flex-1 overflow-y-auto py-4">
+                    <div className="space-y-2 flex-1 overflow-y-auto py-0">
                       {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
                         <Card className="mb-4">
                           <CardContent className="p-0 max-h-[300px] overflow-y-auto">
@@ -754,8 +754,8 @@ export function Header({
                       ))}
                     </div>
 
-                    <div className="sticky bottom-0 bg-background border-t pt-4 space-y-3">
-                      <div className="flex items-center gap-2 border-b py-[5px]">
+                    <div className="sticky bottom-0 bg-background border-t space-y-3 py-0">
+                      <div className="flex items-center gap-2 border-b py-1">
                         <span className="text-sm">Монтаж:</span>
                         <Input
                           type="number"
@@ -769,7 +769,7 @@ export function Header({
                         </span>
                       </div>
 
-                      <div className="flex justify-between text-lg font-bold">
+                      <div className="flex justify-between text-lg font-bold my-0">
                         <span>Итого:</span>
                         <span className="text-primary">{formatPrice(finalTotal)} ₽</span>
                       </div>
