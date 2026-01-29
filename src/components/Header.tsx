@@ -510,7 +510,7 @@ export function Header({
                                   <Button
                                     variant="outline"
                                     size="icon"
-                                    className="h-8 w-8"
+                                    className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
                                     onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
                                   >
                                     <Icon name="Minus" size={16} />
@@ -519,7 +519,7 @@ export function Header({
                                   <Button
                                     variant="outline"
                                     size="icon"
-                                    className="h-8 w-8"
+                                    className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
                                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                   >
                                     <Icon name="Plus" size={16} />
@@ -531,7 +531,7 @@ export function Header({
                                 <Button
                                   variant="ghost"
                                   size="icon"
-                                  className="h-8 w-8"
+                                  className="h-8 w-8 hover:bg-transparent hover:border hover:border-red-500 hover:text-red-500"
                                   onClick={() => removeFromCart(item.id)}
                                 >
                                   <Icon name="Trash2" size={16} />
@@ -565,10 +565,10 @@ export function Header({
                         <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="w-full" size="lg">
                           Оформить заказ
                         </Button>
-                        <Button onClick={() => setShowKPDialog(true)} variant="outline" className="w-full" size="lg">
+                        <Button onClick={() => setShowKPDialog(true)} variant="outline" className="w-full hover:bg-transparent hover:border-primary hover:text-primary" size="lg">
                           Сформировать коммерческое предложение
                         </Button>
-                        <Button onClick={() => clearCart?.()} variant="ghost" className="w-full" size="sm">
+                        <Button onClick={() => clearCart?.()} variant="ghost" className="w-full hover:bg-transparent hover:border hover:border-red-500 hover:text-red-500" size="sm">
                           Очистить корзину
                         </Button>
                       </div>
@@ -731,7 +731,7 @@ export function Header({
                                 <Button
                                   variant="outline"
                                   size="icon"
-                                  className="h-8 w-8"
+                                  className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
                                   onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
                                 >
                                   <Icon name="Minus" size={16} />
@@ -740,7 +740,7 @@ export function Header({
                                 <Button
                                   variant="outline"
                                   size="icon"
-                                  className="h-8 w-8"
+                                  className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
                                   onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                 >
                                   <Icon name="Plus" size={16} />
@@ -752,7 +752,7 @@ export function Header({
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8"
+                                className="h-8 w-8 hover:bg-transparent hover:border hover:border-red-500 hover:text-red-500"
                                 onClick={() => removeFromCart(item.id)}
                               >
                                 <Icon name="Trash2" size={16} />
@@ -786,10 +786,10 @@ export function Header({
                       <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="w-full" size="lg">
                         Оформить заказ
                       </Button>
-                      <Button onClick={() => setShowKPDialog(true)} variant="outline" className="w-full" size="lg">
+                      <Button onClick={() => setShowKPDialog(true)} variant="outline" className="w-full hover:bg-transparent hover:border-primary hover:text-primary" size="lg">
                         Сформировать коммерческое предложение
                       </Button>
-                      <Button onClick={() => clearCart?.()} variant="ghost" className="w-full" size="sm">
+                      <Button onClick={() => clearCart?.()} variant="ghost" className="w-full hover:bg-transparent hover:border hover:border-red-500 hover:text-red-500" size="sm">
                         Очистить корзину
                       </Button>
                     </div>
