@@ -21,7 +21,7 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
 
       <div className="container relative z-10 md:my-[93px] mx-0 my-0 px-[11px]">
         <div className="max-w-3xl animate-fade-in">
-          <h2 className="md:text-4xl lg:text-6xl font-heading md:mb-6 text-white font-semibold px-0 mx-0 my-0 py-0 text-xl">
+          <h2 className="md:text-4xl lg:text-6xl font-heading md:mb-6 text-white font-semibold px-0 mx-0 py-0 text-xl my-4">
             Создаём пространство для игры и спорта
           </h2>
           <p className="md:text-xl text-white/90 md:mb-8 my-0 py-0 px-0 font-normal text-left text-sm">
