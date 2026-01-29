@@ -962,7 +962,7 @@ export function Header({
                 <Button
                   variant={kpFormat === 'xlsx' ? 'default' : 'outline'}
                   onClick={() => setKpFormat('xlsx')}
-                  className="flex-1"
+                  className={`flex-1 ${kpFormat === 'xlsx' ? '' : 'hover:bg-transparent hover:border-primary hover:text-primary'}`}
                 >
                   <Icon name="FileSpreadsheet" size={16} className="mr-2" />
                   Excel
@@ -970,7 +970,7 @@ export function Header({
                 <Button
                   variant={kpFormat === 'pdf' ? 'default' : 'outline'}
                   onClick={() => setKpFormat('pdf')}
-                  className="flex-1"
+                  className={`flex-1 ${kpFormat === 'pdf' ? '' : 'hover:bg-transparent hover:border-primary hover:text-primary'}`}
                 >
                   <Icon name="FileText" size={16} className="mr-2" />
                   PDF
@@ -979,7 +979,7 @@ export function Header({
             </div>
           </div>
           <div className="flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setShowKPDialog(false)}>
+            <Button variant="outline" onClick={() => setShowKPDialog(false)} className="hover:bg-transparent hover:border-primary hover:text-primary">
               Отмена
             </Button>
             <Button onClick={() => {
