@@ -226,9 +226,8 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         discount_value = discount_amount
     
     if discount_value > 0:
-        discount_label = f'Скидка {discount_percent}%' if discount_percent > 0 else 'Скидка'
         table_data.append([
-            '', '', '', '', '', discount_label + ':', ''
+            '', '', '', '', '', 'Скидка:', f'{abs(discount_value):,.2f}'.replace(',', ' ')
         ])
         
         # Итого к оплате

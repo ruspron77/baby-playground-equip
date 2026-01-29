@@ -517,7 +517,7 @@ def handler(event, context):
             for col in range(1, 6):
                 cell = ws.cell(row=current_row, column=col, value='')
             
-            cell = ws.cell(row=current_row, column=6, value='Скидка')
+            cell = ws.cell(row=current_row, column=6, value='Скидка:')
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.font = Font(name='Calibri', size=11, color='FF0000')
             cell.border = thin_border
