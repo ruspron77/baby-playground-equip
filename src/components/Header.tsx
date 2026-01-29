@@ -420,7 +420,10 @@ export function Header({
                             className="pl-9"
                           />
                         </div>
-                        {sortedCart.map((item, index) => (
+                        {sortedCart.filter(item => 
+                          cartSearchQuery === '' || 
+                          item.name.toLowerCase().includes(cartSearchQuery.toLowerCase())
+                        ).map((item, index) => (
                           <Card 
                             key={`${item.id}-${index}`}
                             draggable
@@ -435,9 +438,6 @@ export function Header({
                             }`}
                           >
                             <CardContent className="p-3 flex items-center gap-3">
-                              <div className="cursor-grab active:cursor-grabbing">
-                                <Icon name="GripVertical" size={20} className="text-muted-foreground" />
-                              </div>
                               <img 
                                 src={item.image} 
                                 alt={item.name}
