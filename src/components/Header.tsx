@@ -464,45 +464,49 @@ export function Header({
                               dragOverIndex === index && draggedIndex !== index ? 'border-primary border-2' : ''
                             }`}
                           >
-                            <CardContent className="p-3 flex items-center gap-3">
+                            <CardContent className="p-3 flex items-start gap-3">
+                              <div className="cursor-grab active:cursor-grabbing pt-2">
+                                <Icon name="GripVertical" size={20} className="text-muted-foreground" />
+                              </div>
                               <img 
                                 src={item.image} 
                                 alt={item.name}
                                 className="w-16 h-16 object-cover rounded"
                               />
-                              <div className="flex-1 min-w-0">
-                                <h4 className="font-medium text-sm line-clamp-2">{item.name}</h4>
+                              <div className="flex-1 min-w-0 space-y-1">
+                                <p className="text-sm text-primary font-medium">{item.name.split('\n')[0]}</p>
+                                <h4 className="font-medium text-sm">{item.name.split('\n').slice(1).join(' ')}</h4>
+                                <div className="flex items-center gap-2">
+                                  <Button
+                                    variant="outline"
+                                    size="icon"
+                                    className="h-8 w-8"
+                                    onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                                  >
+                                    <Icon name="Minus" size={16} />
+                                  </Button>
+                                  <span className="w-8 text-center font-medium">{item.quantity}</span>
+                                  <Button
+                                    variant="outline"
+                                    size="icon"
+                                    className="h-8 w-8"
+                                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                  >
+                                    <Icon name="Plus" size={16} />
+                                  </Button>
+                                </div>
                               </div>
-                              <div className="flex items-center gap-2">
+                              <div className="flex flex-col items-end gap-2">
+                                <p className="font-bold text-primary text-sm">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
                                 <Button
-                                  variant="outline"
+                                  variant="ghost"
                                   size="icon"
                                   className="h-8 w-8"
-                                  onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                                  onClick={() => removeFromCart(item.id)}
                                 >
-                                  <Icon name="Minus" size={16} />
-                                </Button>
-                                <span className="w-8 text-center font-medium">{item.quantity}</span>
-                                <Button
-                                  variant="outline"
-                                  size="icon"
-                                  className="h-8 w-8"
-                                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                >
-                                  <Icon name="Plus" size={16} />
+                                  <Icon name="Trash2" size={16} />
                                 </Button>
                               </div>
-                              <div className="text-right min-w-[100px]">
-                                <p className="font-bold text-sm">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
-                              </div>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                className="h-8 w-8"
-                                onClick={() => removeFromCart(item.id)}
-                              >
-                                <Icon name="Trash2" size={16} />
-                              </Button>
                             </CardContent>
                           </Card>
                         ))}
@@ -651,45 +655,49 @@ export function Header({
                             dragOverIndex === index && draggedIndex !== index ? 'border-primary border-2' : ''
                           }`}
                         >
-                          <CardContent className="p-3 flex items-center gap-3">
+                          <CardContent className="p-3 flex items-start gap-3">
+                            <div className="cursor-grab active:cursor-grabbing pt-2">
+                              <Icon name="GripVertical" size={20} className="text-muted-foreground" />
+                            </div>
                             <img 
                               src={item.image} 
                               alt={item.name}
                               className="w-16 h-16 object-cover rounded"
                             />
-                            <div className="flex-1 min-w-0">
-                              <h4 className="font-medium text-sm line-clamp-2">{item.name}</h4>
+                            <div className="flex-1 min-w-0 space-y-1">
+                              <p className="text-sm text-primary font-medium">{item.name.split('\n')[0]}</p>
+                              <h4 className="font-medium text-sm">{item.name.split('\n').slice(1).join(' ')}</h4>
+                              <div className="flex items-center gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  className="h-8 w-8"
+                                  onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                                >
+                                  <Icon name="Minus" size={16} />
+                                </Button>
+                                <span className="w-8 text-center font-medium">{item.quantity}</span>
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  className="h-8 w-8"
+                                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                >
+                                  <Icon name="Plus" size={16} />
+                                </Button>
+                              </div>
                             </div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-col items-end gap-2">
+                              <p className="font-bold text-primary text-sm">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
                               <Button
-                                variant="outline"
+                                variant="ghost"
                                 size="icon"
                                 className="h-8 w-8"
-                                onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                                onClick={() => removeFromCart(item.id)}
                               >
-                                <Icon name="Minus" size={16} />
-                              </Button>
-                              <span className="w-8 text-center font-medium">{item.quantity}</span>
-                              <Button
-                                variant="outline"
-                                size="icon"
-                                className="h-8 w-8"
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              >
-                                <Icon name="Plus" size={16} />
+                                <Icon name="Trash2" size={16} />
                               </Button>
                             </div>
-                            <div className="text-right min-w-[100px]">
-                              <p className="font-bold text-sm">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
-                            </div>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8"
-                              onClick={() => removeFromCart(item.id)}
-                            >
-                              <Icon name="Trash2" size={16} />
-                            </Button>
                           </CardContent>
                         </Card>
                       ))}
