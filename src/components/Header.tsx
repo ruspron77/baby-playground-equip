@@ -103,7 +103,6 @@ export function Header({
   const [kpDiscountAmount, setKpDiscountAmount] = useState(0);
   const [kpTargetTotal, setKpTargetTotal] = useState(0);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
-  const [cartSearchQuery, setCartSearchQuery] = useState('');
   const [catalogSearchQuery, setCatalogSearchQuery] = useState('');
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
@@ -442,16 +441,41 @@ export function Header({
                           <Icon name="Search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                           <Input
                             type="text"
-                            placeholder="Поиск по товарам..."
-                            value={cartSearchQuery}
-                            onChange={(e) => setCartSearchQuery(e.target.value)}
+                            placeholder="Поиск товаров для добавления..."
+                            value={catalogSearchQuery}
+                            onChange={(e) => setCatalogSearchQuery(e.target.value)}
                             className="pl-9"
                           />
                         </div>
-                        {sortedCart.filter(item => 
-                          cartSearchQuery === '' || 
-                          item.name.toLowerCase().includes(cartSearchQuery.toLowerCase())
-                        ).map((item, index) => (
+
+                        {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
+                          <Card className="mb-4">
+                            <CardContent className="p-0 max-h-[300px] overflow-y-auto">
+                              <div className="divide-y">
+                                {filteredCatalogProducts.map((product) => (
+                                  <div key={product.id} className="p-3 hover:bg-muted/50 cursor-pointer flex items-center gap-3" onClick={() => onAddToCart?.(product)}>
+                                    <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
+                                    <div className="flex-1 min-w-0">
+                                      <p className="text-sm font-medium line-clamp-2">{product.name}</p>
+                                      <p className="text-sm text-muted-foreground">{product.price} ₽</p>
+                                    </div>
+                                    <Button size="sm" variant="secondary">
+                                      <Icon name="Plus" size={16} />
+                                    </Button>
+                                  </div>
+                                ))}
+                              </div>
+                            </CardContent>
+                          </Card>
+                        )}
+
+                        {catalogSearchQuery && filteredCatalogProducts.length === 0 && (
+                          <p className="text-sm text-muted-foreground text-center py-4 mb-4">
+                            Ничего не найдено
+                          </p>
+                        )}
+
+                        {sortedCart.map((item, index) => (
                           <Card 
                             key={`${item.id}-${index}`}
                             onDragOver={(e) => handleDragOver(e, index)}
@@ -638,16 +662,41 @@ export function Header({
                         <Icon name="Search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                         <Input
                           type="text"
-                          placeholder="Поиск по товарам..."
-                          value={cartSearchQuery}
-                          onChange={(e) => setCartSearchQuery(e.target.value)}
+                          placeholder="Поиск товаров для добавления..."
+                          value={catalogSearchQuery}
+                          onChange={(e) => setCatalogSearchQuery(e.target.value)}
                           className="pl-9"
                         />
                       </div>
-                      {sortedCart.filter(item => 
-                        cartSearchQuery === '' || 
-                        item.name.toLowerCase().includes(cartSearchQuery.toLowerCase())
-                      ).map((item, index) => (
+
+                      {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
+                        <Card className="mb-4">
+                          <CardContent className="p-0 max-h-[300px] overflow-y-auto">
+                            <div className="divide-y">
+                              {filteredCatalogProducts.map((product) => (
+                                <div key={product.id} className="p-3 hover:bg-muted/50 cursor-pointer flex items-center gap-3" onClick={() => onAddToCart?.(product)}>
+                                  <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-medium line-clamp-2">{product.name}</p>
+                                    <p className="text-sm text-muted-foreground">{product.price} ₽</p>
+                                  </div>
+                                  <Button size="sm" variant="secondary">
+                                    <Icon name="Plus" size={16} />
+                                  </Button>
+                                </div>
+                              ))}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      )}
+
+                      {catalogSearchQuery && filteredCatalogProducts.length === 0 && (
+                        <p className="text-sm text-muted-foreground text-center py-4 mb-4">
+                          Ничего не найдено
+                        </p>
+                      )}
+
+                      {sortedCart.map((item, index) => (
                         <Card 
                           key={`${item.id}-${index}`}
                           onDragOver={(e) => handleDragOver(e, index)}
