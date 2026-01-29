@@ -713,7 +713,7 @@ export function Header({
                             dragOverIndex === index && draggedIndex !== index ? 'border-primary border-2' : ''
                           }`}
                         >
-                          <CardContent className="p-3 flex items-start gap-3 py-0 my-1.5">
+                          <CardContent className="p-3 flex items-start gap-3 py-0 my-0">
                             <div 
                               className="cursor-grab active:cursor-grabbing pt-2"
                               draggable
@@ -727,7 +727,7 @@ export function Header({
                             <img 
                               src={item.image} 
                               alt={item.name}
-                              className="w-16 h-16 object-cover rounded"
+                              className="w-16 h-16 object-cover rounded py-0 my-2.5"
                             />
                             <div className="flex-1 min-w-0 space-y-1">
                               <p className="text-sm text-primary font-medium">{item.name.split('\n')[0]}</p>
@@ -741,7 +741,7 @@ export function Header({
                                 >
                                   <Icon name="Minus" size={16} />
                                 </Button>
-                                <span className="w-8 text-center font-medium">{item.quantity}</span>
+                                <span className="w-8 text-center font-medium my-0 py-0">{item.quantity}</span>
                                 <Button
                                   variant="outline"
                                   size="icon"
