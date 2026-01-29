@@ -380,11 +380,8 @@ export function Header({
                   </Button>
                 </SheetTrigger>
                 <SheetContent data-cart-sheet className="w-full sm:max-w-md overflow-y-auto pt-0 flex flex-col">
-                  <SheetHeader className="sticky top-0 bg-background z-10 pb-4 pt-6 border-b flex flex-row items-center justify-between">
+                  <SheetHeader className="sticky top-0 bg-background z-10 pb-4 pt-6 border-b">
                     <SheetTitle className="text-xl">Корзина</SheetTitle>
-                    <Button variant="ghost" size="icon" onClick={() => setIsCartOpen(false)}>
-                      <Icon name="X" size={20} />
-                    </Button>
                   </SheetHeader>
 
                   {cart.length === 0 ? (
@@ -579,11 +576,8 @@ export function Header({
                 </Button>
               </SheetTrigger>
               <SheetContent data-cart-sheet className="w-full sm:max-w-md overflow-y-auto pt-0 flex flex-col">
-                <SheetHeader className="sticky top-0 bg-background z-10 pb-4 pt-6 border-b flex flex-row items-center justify-between">
+                <SheetHeader className="sticky top-0 bg-background z-10 pb-4 pt-6 border-b">
                   <SheetTitle className="text-xl">Корзина</SheetTitle>
-                  <Button variant="ghost" size="icon" onClick={() => setIsCartOpen(false)}>
-                    <Icon name="X" size={20} />
-                  </Button>
                 </SheetHeader>
 
                 {cart.length === 0 ? (
