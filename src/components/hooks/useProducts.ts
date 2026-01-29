@@ -86,8 +86,11 @@ export function useProducts() {
               if (parts.length === 2) {
                 // Простой случай: Категория > Подкатегория
                 // НО! Для категорий со сериями (Игра, Спорт) parts[1] - это серия, а не подкатегория
-                // Поэтому НЕ устанавливаем subsubcategory для Игра/Спорт с только 2 уровнями
-                if (parts[0] !== 'Игра' && parts[0] !== 'Детские площадки' && parts[0] !== 'Спорт') {
+                // Для Парк: parts[1] - это уже подкатегория (Урны, Скамейки)
+                // Поэтому устанавливаем subsubcategory = subcategory для Парк
+                if (parts[0] === 'Парк') {
+                  subsubcategory = parts[1]; // "Урны", "Скамейки"
+                } else if (parts[0] !== 'Игра' && parts[0] !== 'Детские площадки' && parts[0] !== 'Спорт') {
                   subsubcategory = parts[1];
                 }
               } else if (parts.length >= 3) {
