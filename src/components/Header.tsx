@@ -382,8 +382,18 @@ export function Header({
                   </div>
                 </SheetTrigger>
                 <SheetContent data-cart-sheet className="w-full sm:max-w-md overflow-y-auto pt-0 flex flex-col">
-                  <SheetHeader className="sticky top-0 bg-background z-10 pb-4 pt-6 border-b">
+                  <SheetHeader className="sticky top-0 bg-background z-10 pb-3 pt-6">
                     <SheetTitle className="text-xl">Корзина</SheetTitle>
+                    <div className="relative pt-3">
+                      <Icon name="Search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        type="text"
+                        placeholder="Поиск товаров для добавления..."
+                        value={catalogSearchQuery}
+                        onChange={(e) => setCatalogSearchQuery(e.target.value)}
+                        className="pl-9"
+                      />
+                    </div>
                   </SheetHeader>
 
                   {cart.length === 0 ? (
@@ -397,17 +407,6 @@ export function Header({
                       </div>
 
                       <div className="w-full max-w-md space-y-4 mt-6">
-                        <div className="relative">
-                          <Icon name="Search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                          <Input
-                            type="text"
-                            placeholder="Поиск товаров для добавления..."
-                            value={catalogSearchQuery}
-                            onChange={(e) => setCatalogSearchQuery(e.target.value)}
-                            className="pl-9"
-                          />
-                        </div>
-
                         {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
                           <Card>
                             <CardContent className="p-0 max-h-[400px] overflow-y-auto">
@@ -442,17 +441,6 @@ export function Header({
                   ) : (
                     <>
                       <div className="space-y-2 flex-1 overflow-y-auto py-4">
-                        <div className="relative mb-4">
-                          <Icon name="Search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                          <Input
-                            type="text"
-                            placeholder="Поиск товаров для добавления..."
-                            value={catalogSearchQuery}
-                            onChange={(e) => setCatalogSearchQuery(e.target.value)}
-                            className="pl-9"
-                          />
-                        </div>
-
                         {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
                           <Card className="mb-4">
                             <CardContent className="p-0 max-h-[300px] overflow-y-auto">
@@ -570,15 +558,14 @@ export function Header({
                           <span className="text-primary">{formatPrice(finalTotal)} ₽</span>
                         </div>
 
-                        <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="w-full" size="lg">
-                          Оформить заказ
-                        </Button>
-                        <Button onClick={() => setShowKPDialog(true)} variant="outline" className="w-full hover:bg-transparent hover:border-primary hover:text-primary" size="lg">
-                          Сформировать коммерческое предложение
-                        </Button>
-                        <Button onClick={() => clearCart?.()} variant="ghost" className="w-full hover:bg-transparent hover:border hover:border-red-500 hover:text-red-500" size="sm">
-                          Очистить корзину
-                        </Button>
+                        <div className="flex gap-2">
+                          <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="flex-1" size="lg">
+                            Оформить заказ
+                          </Button>
+                          <Button onClick={() => setShowKPDialog(true)} variant="outline" className="hover:bg-transparent hover:border-primary hover:text-primary" size="lg">
+                            КП
+                          </Button>
+                        </div>
                       </div>
                     </>
                   )}
@@ -611,8 +598,18 @@ export function Header({
                 </div>
               </SheetTrigger>
               <SheetContent data-cart-sheet className="w-full sm:max-w-md overflow-y-auto pt-0 flex flex-col">
-                <SheetHeader className="sticky top-0 bg-background z-10 pb-4 pt-6 border-b">
+                <SheetHeader className="sticky top-0 bg-background z-10 pb-3 pt-6">
                   <SheetTitle className="text-xl">Корзина</SheetTitle>
+                  <div className="relative pt-3">
+                    <Icon name="Search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                    <Input
+                      type="text"
+                      placeholder="Поиск товаров для добавления..."
+                      value={catalogSearchQuery}
+                      onChange={(e) => setCatalogSearchQuery(e.target.value)}
+                      className="pl-9"
+                    />
+                  </div>
                 </SheetHeader>
 
                 {cart.length === 0 ? (
@@ -626,17 +623,6 @@ export function Header({
                     </div>
 
                     <div className="w-full max-w-md space-y-4 mt-6">
-                      <div className="relative">
-                        <Icon name="Search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                        <Input
-                          type="text"
-                          placeholder="Поиск товаров для добавления..."
-                          value={catalogSearchQuery}
-                          onChange={(e) => setCatalogSearchQuery(e.target.value)}
-                          className="pl-9"
-                        />
-                      </div>
-
                       {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
                         <Card>
                           <CardContent className="p-0 max-h-[400px] overflow-y-auto">
@@ -670,18 +656,7 @@ export function Header({
                   </div>
                 ) : (
                   <>
-                    <div className="space-y-2 flex-1 overflow-y-auto py-0">
-                      <div className="relative mb-4">
-                        <Icon name="Search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                        <Input
-                          type="text"
-                          placeholder="Поиск товаров для добавления..."
-                          value={catalogSearchQuery}
-                          onChange={(e) => setCatalogSearchQuery(e.target.value)}
-                          className="pl-9"
-                        />
-                      </div>
-
+                    <div className="space-y-2 flex-1 overflow-y-auto py-4">
                       {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
                         <Card className="mb-4">
                           <CardContent className="p-0 max-h-[300px] overflow-y-auto">
@@ -799,15 +774,14 @@ export function Header({
                         <span className="text-primary">{formatPrice(finalTotal)} ₽</span>
                       </div>
 
-                      <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="w-full" size="lg">
-                        Оформить заказ
-                      </Button>
-                      <Button onClick={() => setShowKPDialog(true)} variant="outline" className="w-full hover:bg-transparent hover:border-primary hover:text-primary" size="lg">
-                        Сформировать коммерческое предложение
-                      </Button>
-                      <Button onClick={() => clearCart?.()} variant="ghost" className="w-full hover:bg-transparent hover:border hover:border-red-500 hover:text-red-500" size="sm">
-                        Очистить корзину
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="flex-1" size="lg">
+                          Оформить заказ
+                        </Button>
+                        <Button onClick={() => setShowKPDialog(true)} variant="outline" className="hover:bg-transparent hover:border-primary hover:text-primary" size="lg">
+                          КП
+                        </Button>
+                      </div>
                     </div>
                   </>
                 )}
