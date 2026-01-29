@@ -279,11 +279,17 @@ def handler(event, context):
         # Коэффициент скидки для применения к каждому товару
         discount_multiplier = 1 - (discount_value / equipment_total_original) if equipment_total_original > 0 else 1
         
+        # Сумма товаров со скидкой (для расчета монтажа от неё)
+        equipment_total_discounted = equipment_total_original * discount_multiplier
+        
+        # Монтаж считается от суммы товаров СО скидкой
+        calculated_installation_cost = equipment_total_discounted * (installation_percent / 100) if installation_percent > 0 else 0
+        
         # Доставка на единицу товара (равномерное распределение)
         delivery_per_unit = (delivery_cost / total_product_quantity) if (hide_delivery and delivery_cost > 0 and total_product_quantity > 0) else 0
         
-        # Процент монтажа для добавления к цене
-        installation_percent_multiplier = (installation_percent / 100) if (hide_installation and installation_percent > 0) else 0
+        # Процент монтажа для добавления к цене (если скрыт)
+        installation_per_unit = (calculated_installation_cost / total_product_quantity) if (hide_installation and calculated_installation_cost > 0 and total_product_quantity > 0) else 0
         
         equipment_total = 0  # Итоговая сумма товаров со скидкой
         
@@ -387,10 +393,10 @@ def handler(event, context):
             # Применяем скидку к цене товара
             discounted_price = base_price * discount_multiplier
             
-            # Монтаж: добавляем процент к цене товара (10% → +10% к цене)
-            price_with_installation = discounted_price * (1 + installation_percent_multiplier)
+            # Если монтаж скрыт - добавляем его равномерно на каждый товар
+            price_with_installation = discounted_price + (installation_per_unit / quantity if quantity > 0 else 0)
             
-            # Доставка: добавляем равномерно на единицу товара
+            # Если доставка скрыта - добавляем равномерно на единицу товара
             final_price = price_with_installation + delivery_per_unit
             
             cell = ws.cell(row=current_row, column=6, value=final_price)
@@ -410,8 +416,8 @@ def handler(event, context):
             
             current_row += 1
         
-        # Монтаж (если не скрыт)
-        if installation_cost > 0 and not hide_installation:
+        # Монтаж (если не скрыт) - считаем от суммы товаров со скидкой
+        if calculated_installation_cost > 0 and not hide_installation:
             ws.row_dimensions[current_row].height = 25
             
             cell = ws.cell(row=current_row, column=1, value=len(products) + 1)
@@ -437,13 +443,13 @@ def handler(event, context):
             cell.border = thin_border
             cell.font = Font(name='Calibri', size=11)
             
-            cell = ws.cell(row=current_row, column=6, value=installation_cost)
+            cell = ws.cell(row=current_row, column=6, value=calculated_installation_cost)
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.number_format = '#,##0.00\ ""'
             cell.border = thin_border
             cell.font = Font(name='Calibri', size=11)
             
-            cell = ws.cell(row=current_row, column=7, value=installation_cost)
+            cell = ws.cell(row=current_row, column=7, value=calculated_installation_cost)
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.number_format = '#,##0.00\ ""'
             cell.border = thin_border
@@ -493,10 +499,10 @@ def handler(event, context):
             
             current_row += 1
         
-        # Итого = товары (без скидки) + монтаж + доставка
+        # Итого = товары (без скидки) + монтаж (от суммы со скидкой) + доставка
         total_before_discount = equipment_total_original
-        if installation_cost > 0 and not hide_installation:
-            total_before_discount += installation_cost
+        if calculated_installation_cost > 0 and not hide_installation:
+            total_before_discount += calculated_installation_cost
         if delivery_cost > 0 and not hide_delivery:
             total_before_discount += delivery_cost
         
