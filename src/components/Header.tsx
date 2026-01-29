@@ -957,6 +957,19 @@ export function Header({
               </div>
             </div>
 
+            <div className="bg-muted p-4 rounded-lg">
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium">Итоговая цена КП:</span>
+                <span className="text-lg font-bold text-primary">
+                  {formatPrice(Math.round(
+                    (totalCost - kpDiscountAmount) + 
+                    Math.round(((totalCost - kpDiscountAmount) * kpInstallationPercent) / 100) + 
+                    kpDeliveryCost
+                  ))} ₽
+                </span>
+              </div>
+            </div>
+
             <div>
               <label className="text-sm font-medium mb-2 block">Формат файла</label>
               <div className="flex gap-2">
