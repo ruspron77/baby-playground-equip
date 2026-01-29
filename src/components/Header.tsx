@@ -969,6 +969,7 @@ export function Header({
               <Input
                 type="number"
                 placeholder="0"
+                step="500"
                 value={kpDeliveryCost || ''}
                 onChange={(e) => setKpDeliveryCost(parseFloat(e.target.value) || 0)}
               />
