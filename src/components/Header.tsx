@@ -755,7 +755,7 @@ export function Header({
                     </div>
 
                     <div className="sticky bottom-0 bg-background border-t pt-4 space-y-3">
-                      <div className="flex items-center gap-2 border-b py-0">
+                      <div className="flex items-center gap-2 border-b py-[5px]">
                         <span className="text-sm">Монтаж:</span>
                         <Input
                           type="number"
