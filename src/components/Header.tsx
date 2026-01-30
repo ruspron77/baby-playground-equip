@@ -931,7 +931,7 @@ export function Header({
           setKpFormat('xlsx');
         }
       }}>
-        <SheetContent className="w-full sm:max-w-md overflow-y-auto">
+        <SheetContent className="w-full sm:max-w-md overflow-y-auto overflow-x-hidden">
           <SheetHeader>
             <SheetTitle>Создание КП</SheetTitle>
           </SheetHeader>
