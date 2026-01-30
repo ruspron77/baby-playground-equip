@@ -121,11 +121,14 @@ export function Header({
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const isMobile = window.innerWidth < 768;
       
       if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setIsHeaderVisible(false);
+        document.documentElement.style.setProperty('--filters-top', '0px');
       } else if (currentScrollY < lastScrollY.current) {
         setIsHeaderVisible(true);
+        document.documentElement.style.setProperty('--filters-top', isMobile ? '76px' : '85px');
       }
       
       lastScrollY.current = currentScrollY;
@@ -355,7 +358,7 @@ export function Header({
   };
 
   return (
-    <header className={`bg-white shadow-sm fixed left-0 right-0 z-50 border-b transition-transform duration-300 ${isHeaderVisible ? 'top-0' : '-top-[76px] md:-top-[85px]'}`}>
+    <header className={`bg-white shadow-sm fixed left-0 right-0 z-40 border-b transition-transform duration-300 ${isHeaderVisible ? 'top-0' : '-top-[86px] md:-top-[95px]'}`}>
       <div className="w-full mx-auto">
         <div className="flex items-center justify-between py-[5px] px-2 md:px-[17px]">
           <div className="flex items-center gap-3">
