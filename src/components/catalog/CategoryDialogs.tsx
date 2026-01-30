@@ -144,7 +144,11 @@ export function CategoryDialogs({
                       )}
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 py-1 px-2 -mb-px">
-                      <h4 className="font-heading text-white sm:text-xl leading-tight font-light text-center drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] py-1 text-xl">{sub.name}</h4>
+                      <h4 className={`font-heading text-white sm:text-xl leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-xl ${
+                        (currentCategory?.id === 'playground' || currentCategory?.id === 'sport')
+                          ? 'font-light text-center py-1 sm:py-[17px]'
+                          : 'font-light text-center py-1'
+                      }`}>{sub.name}</h4>
                     </div>
                   </div>
                 )}
