@@ -200,7 +200,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
   };
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-background">
+    <div className="min-h-screen flex flex-col bg-background">
       <Header
         cart={cart}
         isCartOpen={isCartOpen}
@@ -231,7 +231,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         handleResetFilters={handlers.handleResetFilters}
       />
       
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1">
       {!catalogState.selectedCategory && (
         <>
           <HeroSection onOpenCatalog={() => catalogState.setIsSideMenuOpen(true)} />
