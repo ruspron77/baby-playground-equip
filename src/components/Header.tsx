@@ -1073,7 +1073,7 @@ export function Header({
               </div>
             </div>
           </div>
-          <div className="sticky bottom-0 bg-background border-t pt-4 flex gap-2">
+          <div className="bg-background border-t pt-4 flex gap-2">
             <Button variant="outline" onClick={() => setShowKPDialog(false)} className="flex-1 hover:bg-transparent hover:border-primary hover:text-primary">
               Отмена
             </Button>
