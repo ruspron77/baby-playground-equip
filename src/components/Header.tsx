@@ -854,7 +854,7 @@ export function Header({
                           type="number"
                           value={installationPercent || ''}
                           onChange={(e) => setInstallationPercent(parseFloat(e.target.value) || 0)}
-                          className="w-14 text-xs h-9 text-center min-w-0 max-w-14 shrink-0"
+                          className="w-14 text-base h-9 text-center min-w-0 max-w-14 shrink-0"
                         />
                         <span className="text-xs shrink-0">%</span>
                         <span className="ml-auto text-xs font-medium whitespace-nowrap text-right overflow-hidden text-ellipsis">
