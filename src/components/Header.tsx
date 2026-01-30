@@ -526,6 +526,8 @@ export function Header({
                                 } as React.DragEvent;
                                 handleDrop(dropEvent, dragOverIndex);
                               }
+                              setDraggedIndex(null);
+                              setDragOverIndex(null);
                             }}
                             data-cart-index={index}
                             className={`transition-all ${
@@ -773,6 +775,8 @@ export function Header({
                               } as React.DragEvent;
                               handleDrop(dropEvent, dragOverIndex);
                             }
+                            setDraggedIndex(null);
+                            setDragOverIndex(null);
                           }}
                           data-cart-index={index}
                           className={`transition-all ${
