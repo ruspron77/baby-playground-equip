@@ -848,16 +848,16 @@ export function Header({
                     </div>
 
                     <div className="sticky bottom-0 bg-background border-t space-y-3 py-0">
-                      <div className="flex items-center gap-2 border-b py-1">
-                        <span className="text-xs">Монтаж:</span>
+                      <div className="flex items-center gap-1 border-b py-1">
+                        <span className="text-xs whitespace-nowrap">Монтаж:</span>
                         <Input
                           type="number"
                           value={installationPercent || ''}
                           onChange={(e) => setInstallationPercent(parseFloat(e.target.value) || 0)}
-                          className="w-20 text-xs h-9 text-center"
+                          className="w-14 text-xs h-9 text-center min-w-0"
                         />
                         <span className="text-xs">%</span>
-                        <span className="ml-auto text-xs font-medium">
+                        <span className="ml-auto text-xs font-medium whitespace-nowrap">
                           {formatPrice(installationCost)} ₽
                         </span>
                       </div>
