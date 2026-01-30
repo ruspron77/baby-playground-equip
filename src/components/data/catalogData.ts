@@ -39,7 +39,7 @@ export const categories = [
     order: 1,
     subcategories: [
       { 
-        name: 'Eco', 
+        name: 'Classic', 
         image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/7fe1a07b-eb15-4491-a94b-06fba564d3ca.png',
         hasChildren: true,
         children: [
@@ -90,7 +90,7 @@ export const categories = [
         ]
       },
       { 
-        name: 'Classic', 
+        name: 'Eco', 
         image: 'https://cdn.poehali.dev/files/%D0%B8%D0%B3%D1%80%D0%B0%20Eco.png',
         hasChildren: true,
         children: [
