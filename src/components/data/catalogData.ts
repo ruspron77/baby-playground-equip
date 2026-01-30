@@ -31,7 +31,7 @@ export interface Subcategory {
 export const categories = [
   {
     id: 'playground',
-    name: 'Серия',
+    name: 'Игра',
     icon: 'Smile',
     color: 'from-primary/20 to-primary/5',
     image: 'https://cdn.poehali.dev/files/%D0%B8%D0%B3%D1%80%D0%B0%20(2).png',
