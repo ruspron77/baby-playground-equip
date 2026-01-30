@@ -64,7 +64,7 @@ export function useCatalogFilters({
     if (selectedSeries) {
       console.log(`Фильтруем по серии "${selectedSeries}"`);
       console.log('Примеры subcategory:', filtered.slice(0, 5).map(p => ({ name: p.name, subcategory: p.subcategory })));
-      filtered = filtered.filter(p => p.subcategory === selectedSeries);
+      filtered = filtered.filter(p => p.subcategory?.includes(selectedSeries));
       console.log(`После фильтра по серии "${selectedSeries}":`, filtered.length, 'товаров');
     }
     
