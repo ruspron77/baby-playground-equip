@@ -85,10 +85,43 @@ export function OrderForm({ open, onOpenChange, cart, calculateTotal, deliveryCo
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (validateForm()) {
+      // Отправка email
+      try {
+        const emailData = {
+          orderNumber: currentOrderNumber,
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          address: formData.address,
+          legalStatus: formData.legalStatus,
+          comment: formData.comment,
+          cartItems: cart.map(item => ({
+            name: item.name,
+            article: item.article || 'Н/Д',
+            price: item.price,
+            quantity: item.quantity
+          })),
+          total: calculateTotal(),
+          installationCost: calculateInstallationCost(),
+          deliveryCost: deliveryCost,
+          grandTotal: calculateGrandTotal()
+        };
+
+        await fetch('https://functions.poehali.dev/b4ac51ba-4335-450b-8400-234c423fa7b0', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(emailData),
+        });
+      } catch (error) {
+        console.error('Failed to send email:', error);
+      }
+      
       onSubmit(formData);
     }
   };

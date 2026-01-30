@@ -1,4 +1,5 @@
 {
+  "send-callback-email": "https://functions.poehali.dev/79b601c4-b94b-4c1b-a0d0-851dbad1734e",
   "upload-subcategory-image": "https://functions.poehali.dev/6dd2dc32-d4f8-44b9-abea-df4f374bde31",
   "upload-image": "https://functions.poehali.dev/cffc3d7a-5348-4b4d-899c-7d41c585573d",
   "delete-products": "https://functions.poehali.dev/86a5f270-0e5f-4fc8-8762-1839512f352a",

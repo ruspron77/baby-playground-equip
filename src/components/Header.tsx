@@ -640,7 +640,7 @@ export function Header({
               size="sm" 
               className="text-sm px-3 hover:brightness-90" 
               style={{ backgroundColor: '#3eaa03' }}
-              onClick={() => window.location.href = 'tel:+74951234567'}
+              onClick={() => window.location.href = 'tel:+79181151551'}
             >
               <Icon name="Phone" size={16} className="mr-1" />
               Позвонить

@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "name": "Test callback request submission",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Иван Иванов",
+        "phone": "+7 918 123-45-67",
+        "email": "test@example.com",
+        "city": "Краснодар",
+        "status": "individual",
+        "comment": "Хочу узнать о детских площадках"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

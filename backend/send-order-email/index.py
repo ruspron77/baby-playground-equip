@@ -5,7 +5,7 @@ from email.mime.multipart import MIMEMultipart
 import os
 
 def handler(event, context):
-    """Отправка заказа на email info@urban-play.ru"""
+    """Отправка заказа на email ruspro23@mail.ru"""
     
     if event.get('httpMethod') == 'OPTIONS':
         return {
@@ -175,7 +175,7 @@ def handler(event, context):
         msg = MIMEMultipart('alternative')
         msg['Subject'] = f'Новый заказ #{order_number} от {customer_name}'
         msg['From'] = smtp_user
-        msg['To'] = 'info@urban-play.ru'
+        msg['To'] = 'ruspro23@mail.ru'
         
         html_part = MIMEText(html_content, 'html', 'utf-8')
         msg.attach(html_part)
