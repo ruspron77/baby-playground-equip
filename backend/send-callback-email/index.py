@@ -79,7 +79,10 @@ def handler(event, context):
         smtp_user = os.environ.get('SMTP_USER')
         smtp_password = os.environ.get('SMTP_PASSWORD')
         
+        print(f'SMTP config: host={smtp_host}, port={smtp_port}, user={smtp_user[:5]}***')
+        
         if not smtp_user or not smtp_password:
+            print('ERROR: SMTP credentials not configured')
             return {
                 'statusCode': 500,
                 'headers': {
@@ -99,10 +102,15 @@ def handler(event, context):
         msg.attach(html_part)
         
         # Отправляем письмо
-        with smtplib.SMTP(smtp_host, smtp_port) as server:
+        print(f'Attempting to connect to {smtp_host}:{smtp_port}')
+        with smtplib.SMTP(smtp_host, smtp_port, timeout=10) as server:
+            print('Connected, starting TLS')
             server.starttls()
+            print('TLS started, logging in')
             server.login(smtp_user, smtp_password)
+            print('Logged in, sending message')
             server.send_message(msg)
+            print('Message sent successfully')
         
         return {
             'statusCode': 200,
