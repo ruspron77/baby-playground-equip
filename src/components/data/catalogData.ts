@@ -73,7 +73,8 @@ export const categories = [
             children: [
               { name: 'h-0.6', image: '🛝' },
               { name: 'h-1.0', image: '🛝' },
-              { name: 'h-1.5', image: '🛝' }
+              { name: 'h-1.5', image: '🛝' },
+              { name: 'Ограждение', image: '🚧' }
             ]
           },
           { name: 'Домики', image: 'https://cdn.poehali.dev/files/%D0%B4%D0%BE%D0%BC%D0%B8%D0%BA%202.png' },
@@ -81,10 +82,7 @@ export const categories = [
           { name: 'Карусели', image: 'https://cdn.poehali.dev/files/%D0%BA%D0%B0%D1%80%D1%83%D1%81%D0%B5%D0%BB%D1%8C.png' },
           { name: 'Качалки', image: 'https://cdn.poehali.dev/files/%D0%BA%D0%B0%D1%87%D0%B0%D0%BB%D0%BA%D0%B0.png' },
           { name: 'Песочницы', image: 'https://cdn.poehali.dev/files/%D0%BF%D0%B5%D1%81%D0%BE%D1%87%D0%BD%D0%B8%D1%86%D0%B0.png' },
-          { name: 'Веревочный парк', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/0bd6ae06-0963-4f77-88c4-0c52782ea1c0.png' },
-          { name: 'Скалодром', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/07481213-c392-48be-aebf-6532ed066c5c.png' },
           { name: 'Полоса препятствий', image: 'https://cdn.poehali.dev/files/%D0%BF%D0%BE%D0%BB%D0%BE%D1%81%D0%B0.png' },
-          { name: 'Техника', image: 'https://cdn.poehali.dev/files/%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D0%BA%D0%B0.png' },
           { name: 'Лазы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/8942d22c-3781-4db3-9d74-c3fde653b50e.png' },
           { name: 'Игровые элементы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/6b219d44-4f58-4412-91d2-f3ed6a0256be.png' },
           { name: 'Теневые навесы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/88a2a993-e5fe-40d3-9722-30f8d99564c2.png' },
