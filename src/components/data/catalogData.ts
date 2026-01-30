@@ -71,8 +71,8 @@ export const categories = [
             image: 'https://cdn.poehali.dev/files/0100.png',
             hasChildren: true,
             children: [
-              { name: 'h-0.6', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/dd1cced9-136c-4884-8909-b202200caedb.png' },
-              { name: 'h-1.0', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/d229149f-a0b2-4a96-95d3-e644246ea9a5.png' },
+              { name: 'h-0.6', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/d229149f-a0b2-4a96-95d3-e644246ea9a5.png' },
+              { name: 'h-1.0', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/dd1cced9-136c-4884-8909-b202200caedb.png' },
               { name: 'h-1.5', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/5376ba5a-d25f-426a-bf2e-ea8e7ef50d56.png' }
             ]
           },
