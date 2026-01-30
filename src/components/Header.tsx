@@ -848,23 +848,23 @@ export function Header({
                     </div>
 
                     <div className="sticky bottom-0 bg-background border-t space-y-3 py-0">
-                      <div className="flex items-center gap-1 border-b py-1">
-                        <span className="text-xs whitespace-nowrap">Монтаж:</span>
+                      <div className="flex items-center gap-1 border-b py-1 min-w-0 overflow-hidden">
+                        <span className="text-xs whitespace-nowrap shrink-0">Монтаж:</span>
                         <Input
                           type="number"
                           value={installationPercent || ''}
                           onChange={(e) => setInstallationPercent(parseFloat(e.target.value) || 0)}
-                          className="w-14 text-xs h-9 text-center min-w-0"
+                          className="w-14 text-xs h-9 text-center min-w-0 max-w-14 shrink-0"
                         />
-                        <span className="text-xs">%</span>
-                        <span className="ml-auto text-xs font-medium whitespace-nowrap">
+                        <span className="text-xs shrink-0">%</span>
+                        <span className="ml-auto text-xs font-medium whitespace-nowrap text-right overflow-hidden text-ellipsis">
                           {formatPrice(installationCost)} ₽
                         </span>
                       </div>
 
-                      <div className="flex justify-between text-lg font-bold my-0">
-                        <span>Итого:</span>
-                        <span className="text-primary">{formatPrice(finalTotal)} ₽</span>
+                      <div className="flex justify-between text-lg font-bold my-0 min-w-0">
+                        <span className="shrink-0">Итого:</span>
+                        <span className="text-primary text-right overflow-hidden text-ellipsis">{formatPrice(finalTotal)} ₽</span>
                       </div>
 
                       <div className="flex gap-2">
