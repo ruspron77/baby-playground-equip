@@ -35,6 +35,45 @@
 <div id="root"></div>
 <script type="module" src="/src/main.tsx"></script>
 
+<!-- Hide address bar on mobile scroll -->
+<script>
+  // Скрытие адресной строки при прокрутке на мобильных
+  let lastScrollY = 0;
+  let ticking = false;
+  
+  function hideAddressBar() {
+    if (window.innerWidth <= 768) {
+      window.scrollTo(0, 1);
+    }
+  }
+  
+  // Скрыть адресную строку при загрузке
+  window.addEventListener('load', function() {
+    setTimeout(hideAddressBar, 100);
+  });
+  
+  // Скрывать адресную строку при прокрутке вниз
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > lastScrollY && currentScrollY > 50) {
+          // Прокрутка вниз - дополнительный толчок для скрытия
+          if (window.innerWidth <= 768) {
+            window.scrollBy(0, 1);
+          }
+        }
+        
+        lastScrollY = currentScrollY;
+        ticking = false;
+      });
+      
+      ticking = true;
+    }
+  }, { passive: true });
+</script>
+
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function (m, e, t, r, i, k, a) {
