@@ -73,8 +73,7 @@ export const categories = [
             children: [
               { name: 'h-0.6', image: '🛝' },
               { name: 'h-1.0', image: '🛝' },
-              { name: 'h-1.5', image: '🛝' },
-              { name: 'Ограждение', image: '🚧' }
+              { name: 'h-1.5', image: '🛝' }
             ]
           },
           { name: 'Домики', image: 'https://cdn.poehali.dev/files/%D0%B4%D0%BE%D0%BC%D0%B8%D0%BA%202.png' },
@@ -82,6 +81,7 @@ export const categories = [
           { name: 'Карусели', image: 'https://cdn.poehali.dev/files/%D0%BA%D0%B0%D1%80%D1%83%D1%81%D0%B5%D0%BB%D1%8C.png' },
           { name: 'Качалки', image: 'https://cdn.poehali.dev/files/%D0%BA%D0%B0%D1%87%D0%B0%D0%BB%D0%BA%D0%B0.png' },
           { name: 'Песочницы', image: 'https://cdn.poehali.dev/files/%D0%BF%D0%B5%D1%81%D0%BE%D1%87%D0%BD%D0%B8%D1%86%D0%B0.png' },
+          { name: 'Ограждение', image: '🚧' },
           { name: 'Полоса препятствий', image: 'https://cdn.poehali.dev/files/%D0%BF%D0%BE%D0%BB%D0%BE%D1%81%D0%B0.png' },
           { name: 'Лазы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/8942d22c-3781-4db3-9d74-c3fde653b50e.png' },
           { name: 'Игровые элементы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/6b219d44-4f58-4412-91d2-f3ed6a0256be.png' },
