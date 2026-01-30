@@ -947,17 +947,17 @@ export function Header({
 
             <div className="space-y-2">
               <label className="text-sm font-medium">Скидка</label>
-              <div className="flex items-center gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 <Input
                   type="number"
-                  placeholder="Скидка %"
+                  placeholder="%"
                   value={kpDiscountPercent || ''}
                   onChange={(e) => handleKpDiscountPercentChange(parseFloat(e.target.value) || 0)}
                   className="text-sm"
                 />
                 <Input
                   type="number"
-                  placeholder="Скидка ₽"
+                  placeholder="₽"
                   value={kpDiscountAmount || ''}
                   onChange={(e) => handleKpDiscountAmountChange(parseFloat(e.target.value) || 0)}
                   className="text-sm"
