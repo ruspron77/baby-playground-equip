@@ -39,7 +39,7 @@ export const categories = [
     order: 1,
     subcategories: [
       { 
-        name: 'Серия "Classic"', 
+        name: 'Серия "Eco"', 
         image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/7fe1a07b-eb15-4491-a94b-06fba564d3ca.png',
         hasChildren: true,
         children: [
@@ -90,7 +90,7 @@ export const categories = [
         ]
       },
       { 
-        name: 'Серия "Eco"', 
+        name: 'Серия "Classic"', 
         image: 'https://cdn.poehali.dev/files/%D0%B8%D0%B3%D1%80%D0%B0%20Eco.png',
         hasChildren: true,
         children: [
@@ -114,7 +114,7 @@ export const categories = [
     order: 2,
     subcategories: [
       { 
-        name: 'Серия "Classic Sport"', 
+        name: 'Серия "Eco Sport"', 
         image: 'https://cdn.poehali.dev/files/%D1%81%D0%BF%D0%BE%D1%80%D1%82%20Classic.png',
         hasChildren: true,
         children: [
@@ -148,7 +148,7 @@ export const categories = [
         ]
       },
       { 
-        name: 'Серия "Eco Sport"', 
+        name: 'Серия "Classic Sport"', 
         image: 'https://cdn.poehali.dev/files/%D1%81%D0%BF%D0%BE%D1%80%D1%82%20Eco.png',
         hasChildren: true,
         children: [
