@@ -953,14 +953,14 @@ export function Header({
                   placeholder="%"
                   value={kpDiscountPercent || ''}
                   onChange={(e) => handleKpDiscountPercentChange(parseFloat(e.target.value) || 0)}
-                  className="text-sm"
+                  className="text-sm min-w-0 w-full"
                 />
                 <Input
                   type="number"
                   placeholder="₽"
                   value={kpDiscountAmount || ''}
                   onChange={(e) => handleKpDiscountAmountChange(parseFloat(e.target.value) || 0)}
-                  className="text-sm"
+                  className="text-sm min-w-0 w-full"
                 />
               </div>
               <Input
@@ -968,7 +968,7 @@ export function Header({
                 placeholder="Целевая сумма ₽"
                 value={kpTargetTotal || ''}
                 onChange={(e) => handleKpTargetTotalChange(parseFloat(e.target.value) || 0)}
-                className="text-sm"
+                className="text-sm min-w-0 w-full"
               />
             </div>
 
