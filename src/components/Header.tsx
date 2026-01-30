@@ -111,10 +111,29 @@ export function Header({
   const [discountPercent, setDiscountPercent] = useState(0);
   const [discountAmount, setDiscountAmount] = useState(0);
   const [targetTotal, setTargetTotal] = useState(0);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     setSortedCart(cart);
   }, [cart]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setIsHeaderVisible(false);
+      } else if (currentScrollY < lastScrollY.current) {
+        setIsHeaderVisible(true);
+      }
+      
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (isCartOpen) {
@@ -336,7 +355,7 @@ export function Header({
   };
 
   return (
-    <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-50 border-b">
+    <header className={`bg-white shadow-sm fixed left-0 right-0 z-50 border-b transition-transform duration-300 ${isHeaderVisible ? 'top-0' : '-top-[76px] md:-top-[85px]'}`}>
       <div className="w-full mx-auto">
         <div className="flex items-center justify-between py-[5px] px-2 md:px-[17px]">
           <div className="flex items-center gap-3">
