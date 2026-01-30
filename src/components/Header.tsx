@@ -849,15 +849,15 @@ export function Header({
 
                     <div className="sticky bottom-0 bg-background border-t space-y-3 py-0">
                       <div className="flex items-center gap-2 border-b py-1">
-                        <span className="text-sm">Монтаж:</span>
+                        <span className="text-xs">Монтаж:</span>
                         <Input
                           type="number"
                           value={installationPercent || ''}
                           onChange={(e) => setInstallationPercent(parseFloat(e.target.value) || 0)}
-                          className="w-20 text-sm h-9 text-center"
+                          className="w-20 text-xs h-9 text-center"
                         />
-                        <span className="text-sm">%</span>
-                        <span className="ml-auto text-sm font-medium">
+                        <span className="text-xs">%</span>
+                        <span className="ml-auto text-xs font-medium">
                           {formatPrice(installationCost)} ₽
                         </span>
                       </div>
