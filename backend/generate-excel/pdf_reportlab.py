@@ -217,21 +217,16 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         '', '', '', '', '', 'Итого:', f'{total_sum:,.2f}'.replace(',', ' ')
     ])
     
-    # Скидка (если указана) - применяется только к товарам, без монтажа и доставки
-    discount_value = 0
-    if discount_percent > 0:
-        discount_value = equipment_total * (discount_percent / 100)
-    elif discount_amount > 0:
-        # discount_amount это сумма скидки
-        discount_value = discount_amount
-    
-    if discount_value > 0:
+    # Скидка (если указана)
+    if discount_amount > 0:
+        # Показываем скидку (процент и сумму)
+        discount_text = f'Скидка ({discount_percent:.1f}%)' if discount_percent > 0 else 'Скидка'
         table_data.append([
-            '', '', '', '', '', 'Скидка:', f'-{abs(discount_value):,.2f}'.replace(',', ' ')
+            '', '', '', '', '', discount_text, f'-{abs(discount_amount):,.2f}'.replace(',', ' ')
         ])
         
-        # Итого к оплате
-        total_with_discount = total_sum - discount_value
+        # Итого к оплате (итого - скидка)
+        total_with_discount = total_sum - discount_amount
         table_data.append([
             '', '', '', '', '', 'К оплате:', f'{total_with_discount:,.2f}'.replace(',', ' ')
         ])
@@ -245,7 +240,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     # Определяем количество строк в footer
     footer_rows_count = 1  # Итого
-    if discount_value != 0:
+    if discount_amount > 0:
         footer_rows_count += 2  # Скидка + К оплате
     
     data_rows = table_data[1:-footer_rows_count]  # Все кроме заголовка и итого
