@@ -266,7 +266,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
                     />
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 py-1.5 px-2 -mb-px">
-                    <h3 className="font-heading text-white sm:text-xl leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-light text-center py-[30px] text-2xl">{category.name}</h3>
+                    <h3 className="font-heading text-white sm:text-xl leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-light text-center text-2xl py-2">{category.name}</h3>
                   </div>
                 </div>
               </div>
