@@ -109,7 +109,7 @@ export function HeaderSimple(props: HeaderProps) {
 
   return (
     <>
-      <header className="bg-white shadow-sm z-50 border-b px-0">
+      <header className="bg-white shadow-sm sticky top-0 z-50 border-b px-0">
         <Navbar
           favoritesCount={props.favoritesCount || 0}
           searchQuery={props.searchQuery || ''}
