@@ -68,14 +68,14 @@ export function useProducts() {
                   subcategory = parts[1]; // "Скамейки", "Урны" и т.д.
                 } else {
                   // Определяем серию из parts[1] для Игра/Спорт
-                  const seriesName = parts[1].toLowerCase();
-                  if (seriesName === 'classic') {
+                  const seriesName = parts[1];
+                  if (seriesName === 'Classic' || seriesName === 'classic') {
                     subcategory = 'Серия "Classic"';
-                  } else if (seriesName === 'eco') {
+                  } else if (seriesName === 'Eco' || seriesName === 'eco') {
                     subcategory = 'Серия "Eco"';
-                  } else if (parts[1] === 'Classic Sport') {
+                  } else if (seriesName === 'Classic Sport') {
                     subcategory = 'Серия "Classic Sport"';
-                  } else if (parts[1] === 'Eco Sport') {
+                  } else if (seriesName === 'Eco Sport') {
                     subcategory = 'Серия "Eco Sport"';
                   } else {
                     subcategory = 'Серия "Classic"'; // По умолчанию Classic
