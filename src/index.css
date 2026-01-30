@@ -121,25 +121,37 @@
 
   @media screen and (max-width: 768px) {
     html {
-      /* Фоллбэк для старых браузеров */
       height: 100vh;
-      /* Для iOS Safari */
       height: -webkit-fill-available;
-      /* Современный стандарт - динамическая высота viewport */
       height: 100dvh;
+      height: calc(var(--vh, 1vh) * 100);
+      overflow: hidden;
     }
 
     body {
-      /* Фоллбэк для старых браузеров */
       min-height: 100vh;
-      /* Для iOS Safari */
       min-height: -webkit-fill-available;
-      /* Современный стандарт */
       min-height: 100dvh;
-      /* Предотвращает bounce-эффект при скролле */
-      overscroll-behavior-y: none;
-      /* Улучшает производительность скролла на iOS */
+      min-height: calc(var(--vh, 1vh) * 100);
+      max-height: 100vh;
+      max-height: -webkit-fill-available;
+      max-height: 100dvh;
+      max-height: calc(var(--vh, 1vh) * 100);
+      overscroll-behavior: none;
       -webkit-overflow-scrolling: touch;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #root {
+      height: 100vh;
+      height: -webkit-fill-available;
+      height: 100dvh;
+      height: calc(var(--vh, 1vh) * 100);
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
     }
   }
 

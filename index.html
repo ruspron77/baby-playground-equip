@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
     <meta name="mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
     <meta name="theme-color" content="#ffffff"/>
+    <meta name="format-detection" content="telephone=no"/>
     <title>Детские площадки</title>
     <meta name="description" content="Производим детское игровое, спортивное и парковое оборудование.">
     <meta name="author" content="poehali.dev"/>
@@ -34,6 +35,52 @@
 <body>
 <div id="root"></div>
 <script type="module" src="/src/main.tsx"></script>
+
+<!-- Mobile address bar auto-hide script -->
+<script>
+(function() {
+  // Проверяем, что это мобильное устройство
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (!isMobile || window.innerWidth > 768) return;
+  
+  // Устанавливаем правильную высоту для iOS
+  function setVhProperty() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+  
+  // Устанавливаем при загрузке
+  setVhProperty();
+  
+  // Обновляем при изменении размера (когда скрывается/показывается адресная строка)
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(setVhProperty, 100);
+  });
+  
+  // Скрываем адресную строку при первой загрузке
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      window.scrollTo(0, 1);
+      setTimeout(function() {
+        window.scrollTo(0, 0);
+      }, 100);
+    }, 300);
+  });
+  
+  // Принудительное скрытие при первом касании
+  let firstTouch = true;
+  document.addEventListener('touchstart', function() {
+    if (firstTouch) {
+      firstTouch = false;
+      setTimeout(function() {
+        window.scrollTo(0, window.scrollY + 1);
+      }, 50);
+    }
+  }, { passive: true });
+})();
+</script>
 
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
