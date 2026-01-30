@@ -284,9 +284,10 @@ export function Header({
       // Скидка = Итого - Целевая сумма
       const newDiscountAmount = Math.max(0, totalBeforeDiscount - value);
       const newDiscountPercent = totalCost > 0 ? (newDiscountAmount / totalCost) * 100 : 0;
+      const roundedPercent = Math.round(newDiscountPercent * 10) / 10;
       
       setKpDiscountAmount(newDiscountAmount);
-      setKpDiscountPercent(newDiscountPercent);
+      setKpDiscountPercent(roundedPercent);
     }
   };
 
@@ -297,8 +298,9 @@ export function Header({
       setKpTargetTotal(0);
       return;
     }
-    setKpDiscountPercent(value);
-    const newDiscountAmount = (totalCost * value) / 100;
+    const roundedValue = Math.round(value * 10) / 10;
+    setKpDiscountPercent(roundedValue);
+    const newDiscountAmount = (totalCost * roundedValue) / 100;
     setKpDiscountAmount(newDiscountAmount);
     
     // Итого = товары + монтаж + доставка
@@ -320,7 +322,8 @@ export function Header({
     setKpDiscountAmount(value);
     if (totalCost > 0) {
       const newDiscountPercent = (value / totalCost) * 100;
-      setKpDiscountPercent(newDiscountPercent);
+      const roundedPercent = Math.round(newDiscountPercent * 10) / 10;
+      setKpDiscountPercent(roundedPercent);
     }
     
     // Итого = товары + монтаж + доставка
@@ -999,6 +1002,7 @@ export function Header({
                 <Input
                   type="number"
                   placeholder="%"
+                  step="0.1"
                   value={kpDiscountPercent || ''}
                   onChange={(e) => handleKpDiscountPercentChange(parseFloat(e.target.value) || 0)}
                   className="text-base min-w-0 w-full"
