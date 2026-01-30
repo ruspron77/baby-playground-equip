@@ -607,6 +607,15 @@ export function Header({
             </div>
           </div>
           <div className="flex md:hidden items-center gap-2">
+            <Button 
+              size="sm" 
+              className="text-sm px-3 hover:brightness-90" 
+              style={{ backgroundColor: '#3eaa03' }}
+              onClick={() => window.location.href = 'tel:+74951234567'}
+            >
+              <Icon name="Phone" size={16} className="mr-1" />
+              Позвонить
+            </Button>
             <Link to="/favorites">
               <Button variant="outline" size="icon" className="relative h-10 w-10 p-0 gap-0 hover:bg-transparent hover:border-primary hover:text-primary">
                 <Icon name="Heart" size={20} />
