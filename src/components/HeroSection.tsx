@@ -16,11 +16,11 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 px-0 mx-0 my-0 py-0 bg-[#00000030]"></div>
+        <div className="absolute inset-0 px-0 mx-0 bg-[#00000030] py-0 my-0"></div>
       </div>
 
-      <div className="container relative z-10 md:my-[93px] mx-0 py-[22px] px-[30px] my-[68px]">
-        <div className="max-w-3xl animate-fade-in mx-0">
+      <div className="container relative z-10 md:my-[93px] mx-0 py-[22px] px-[30px] my-[75px]">
+        <div className="max-w-3xl animate-fade-in mx-0 px-2.5">
           <h2 className="md:text-4xl lg:text-6xl font-heading md:mb-6 text-white font-semibold py-0 my-[18px] text-2xl px-0 mx-0">
             Создаём пространство для игры и спорта
           </h2>
