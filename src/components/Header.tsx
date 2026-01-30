@@ -981,8 +981,8 @@ export function Header({
                     checked={hideInstallationInKP}
                     onCheckedChange={(checked) => setHideInstallationInKP(checked as boolean)}
                   />
-                  <label htmlFor="hideInstallation" className="text-sm cursor-pointer">
-                    Скрыть монтаж в КП
+                  <label htmlFor="hideInstallation" className="text-xs sm:text-sm cursor-pointer whitespace-nowrap">
+                    Скрыть в КП
                   </label>
                 </div>
               </div>
@@ -1003,8 +1003,8 @@ export function Header({
                     checked={hideDeliveryInKP}
                     onCheckedChange={(checked) => setHideDeliveryInKP(checked as boolean)}
                   />
-                  <label htmlFor="hideDelivery" className="text-sm cursor-pointer">
-                    Скрыть доставку в КП
+                  <label htmlFor="hideDelivery" className="text-xs sm:text-sm cursor-pointer whitespace-nowrap">
+                    Скрыть в КП
                   </label>
                 </div>
               </div>
