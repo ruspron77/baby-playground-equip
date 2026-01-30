@@ -336,7 +336,7 @@ export function Header({
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50 border-b">
+    <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-50 border-b">
       <div className="w-full mx-auto">
         <div className="flex items-center justify-between py-[5px] px-2 md:px-[17px]">
           <div className="flex items-center gap-3">
