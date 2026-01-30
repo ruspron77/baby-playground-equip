@@ -433,46 +433,48 @@ export function Header({
                   </SheetHeader>
 
                   {cart.length === 0 ? (
-                    <div className="flex-1 flex flex-col items-center justify-center py-12 gap-6">
-                      <div className="text-center space-y-3">
-                        <Icon name="ShoppingCart" size={64} className="mx-auto text-muted-foreground/30" />
-                        <p className="text-muted-foreground text-lg font-medium">Корзина пуста</p>
-                        <p className="text-sm text-muted-foreground/70 max-w-[280px] mx-auto">
-                          Добавьте товары из каталога, чтобы начать оформление заказа
-                        </p>
-                      </div>
-
-                      <div className="w-full max-w-md space-y-4 mt-6">
-                        {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
-                          <Card>
-                            <CardContent className="p-0 max-h-[400px] overflow-y-auto">
-                              <div className="divide-y">
-                                {filteredCatalogProducts.map((product) => (
-                                  <div key={product.id} className="p-3 hover:bg-muted/50 cursor-pointer flex items-center gap-3" onClick={() => {
-                                    onAddToCart?.(product);
-                                    setCatalogSearchQuery('');
-                                  }}>
-                                    <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
-                                    <div className="flex-1 min-w-0">
-                                      <p className="text-sm font-medium line-clamp-2">{product.name}</p>
-                                      <p className="text-sm text-muted-foreground">{product.price} ₽</p>
-                                    </div>
-                                    <Button size="sm" variant="outline" className="hover:bg-transparent hover:border-primary hover:text-primary">
-                                      <Icon name="Plus" size={16} />
-                                    </Button>
+                    <div className="flex-1 flex flex-col py-4">
+                      {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
+                        <Card className="mb-4">
+                          <CardContent className="p-0 max-h-[400px] overflow-y-auto">
+                            <div className="divide-y">
+                              {filteredCatalogProducts.map((product) => (
+                                <div key={product.id} className="p-3 hover:bg-muted/50 cursor-pointer flex items-center gap-3" onClick={() => {
+                                  onAddToCart?.(product);
+                                  setCatalogSearchQuery('');
+                                }}>
+                                  <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-medium line-clamp-2">{product.name}</p>
+                                    <p className="text-sm text-muted-foreground">{product.price} ₽</p>
                                   </div>
-                                ))}
-                              </div>
-                            </CardContent>
-                          </Card>
-                        )}
+                                  <Button size="sm" variant="outline" className="hover:bg-transparent hover:border-primary hover:text-primary">
+                                    <Icon name="Plus" size={16} />
+                                  </Button>
+                                </div>
+                              ))}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      )}
 
-                        {catalogSearchQuery && filteredCatalogProducts.length === 0 && (
-                          <p className="text-sm text-muted-foreground text-center py-4">
-                            Ничего не найдено
-                          </p>
-                        )}
-                      </div>
+                      {catalogSearchQuery && filteredCatalogProducts.length === 0 && (
+                        <p className="text-sm text-muted-foreground text-center py-4">
+                          Ничего не найдено
+                        </p>
+                      )}
+
+                      {!catalogSearchQuery && (
+                        <div className="flex-1 flex flex-col items-center justify-center gap-6">
+                          <div className="text-center space-y-3">
+                            <Icon name="ShoppingCart" size={64} className="mx-auto text-muted-foreground/30" />
+                            <p className="text-muted-foreground text-lg font-medium">Корзина пуста</p>
+                            <p className="text-sm text-muted-foreground/70 max-w-[280px] mx-auto">
+                              Добавьте товары из каталога, чтобы начать оформление заказа
+                            </p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <>
@@ -682,46 +684,48 @@ export function Header({
                 </SheetHeader>
 
                 {cart.length === 0 ? (
-                  <div className="flex-1 flex flex-col items-center justify-center py-12 gap-6">
-                    <div className="text-center space-y-3">
-                      <Icon name="ShoppingCart" size={64} className="mx-auto text-muted-foreground/30" />
-                      <p className="text-muted-foreground text-lg font-medium">Корзина пуста</p>
-                      <p className="text-sm text-muted-foreground/70 max-w-[280px] mx-auto">
-                        Добавьте товары из каталога, чтобы начать оформление заказа
-                      </p>
-                    </div>
-
-                    <div className="w-full max-w-md space-y-4 mt-6">
-                      {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
-                        <Card>
-                          <CardContent className="p-0 max-h-[400px] overflow-y-auto">
-                            <div className="divide-y">
-                              {filteredCatalogProducts.map((product) => (
-                                <div key={product.id} className="p-3 hover:bg-muted/50 cursor-pointer flex items-center gap-3" onClick={() => {
-                                  onAddToCart?.(product);
-                                  setCatalogSearchQuery('');
-                                }}>
-                                  <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
-                                  <div className="flex-1 min-w-0">
-                                    <p className="text-sm font-medium line-clamp-2">{product.name}</p>
-                                    <p className="text-sm text-muted-foreground">{product.price} ₽</p>
-                                  </div>
-                                  <Button size="sm" variant="outline" className="hover:bg-transparent hover:border-primary hover:text-primary">
-                                    <Icon name="Plus" size={16} />
-                                  </Button>
+                  <div className="flex-1 flex flex-col py-4">
+                    {catalogSearchQuery && filteredCatalogProducts.length > 0 && (
+                      <Card className="mb-4">
+                        <CardContent className="p-0 max-h-[400px] overflow-y-auto">
+                          <div className="divide-y">
+                            {filteredCatalogProducts.map((product) => (
+                              <div key={product.id} className="p-3 hover:bg-muted/50 cursor-pointer flex items-center gap-3" onClick={() => {
+                                onAddToCart?.(product);
+                                setCatalogSearchQuery('');
+                              }}>
+                                <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium line-clamp-2">{product.name}</p>
+                                  <p className="text-sm text-muted-foreground">{product.price} ₽</p>
                                 </div>
-                              ))}
-                            </div>
-                          </CardContent>
-                        </Card>
-                      )}
+                                <Button size="sm" variant="outline" className="hover:bg-transparent hover:border-primary hover:text-primary">
+                                  <Icon name="Plus" size={16} />
+                                </Button>
+                              </div>
+                            ))}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
 
-                      {catalogSearchQuery && filteredCatalogProducts.length === 0 && (
-                        <p className="text-sm text-muted-foreground text-center py-4">
-                          Ничего не найдено
-                        </p>
-                      )}
-                    </div>
+                    {catalogSearchQuery && filteredCatalogProducts.length === 0 && (
+                      <p className="text-sm text-muted-foreground text-center py-4">
+                        Ничего не найдено
+                      </p>
+                    )}
+
+                    {!catalogSearchQuery && (
+                      <div className="flex-1 flex flex-col items-center justify-center gap-6">
+                        <div className="text-center space-y-3">
+                          <Icon name="ShoppingCart" size={64} className="mx-auto text-muted-foreground/30" />
+                          <p className="text-muted-foreground text-lg font-medium">Корзина пуста</p>
+                          <p className="text-sm text-muted-foreground/70 max-w-[280px] mx-auto">
+                            Добавьте товары из каталога, чтобы начать оформление заказа
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <>
