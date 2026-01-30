@@ -863,13 +863,13 @@ export function Header({
                 </SheetHeader>
                 <nav className="flex flex-col gap-4 mt-6">
                   <a href="#about" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); handleResetFilters?.(); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-lg font-medium hover:text-primary transition-colors">
-                    О нас
+                    О компании
                   </a>
-                  <a href="#catalog" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); setIsSideMenuOpen(true); }} className="text-lg font-medium hover:text-primary transition-colors">
+                  <a href="#catalog" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); handleResetFilters?.(); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-lg font-medium hover:text-primary transition-colors">
                     Каталог
                   </a>
-                  <a href="#portfolio" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); handleResetFilters?.(); setTimeout(() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-lg font-medium hover:text-primary transition-colors">
-                    Портфолио
+                  <a href="#services" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); handleResetFilters?.(); setTimeout(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-lg font-medium hover:text-primary transition-colors">
+                    Услуги
                   </a>
                   <a href="#certificates" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); handleResetFilters?.(); setTimeout(() => document.getElementById('certificates')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="text-lg font-medium hover:text-primary transition-colors">
                     Сертификаты
