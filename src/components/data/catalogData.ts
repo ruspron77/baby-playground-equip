@@ -114,7 +114,7 @@ export const categories = [
     order: 2,
     subcategories: [
       { 
-        name: 'Eco Sport', 
+        name: 'Classic Sport', 
         image: 'https://cdn.poehali.dev/files/%D1%81%D0%BF%D0%BE%D1%80%D1%82%20Classic.png',
         hasChildren: true,
         children: [
@@ -148,7 +148,7 @@ export const categories = [
         ]
       },
       { 
-        name: 'Classic Sport', 
+        name: 'Eco Sport', 
         image: 'https://cdn.poehali.dev/files/%D1%81%D0%BF%D0%BE%D1%80%D1%82%20Eco.png',
         hasChildren: true,
         children: [
