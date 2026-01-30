@@ -182,7 +182,8 @@ export const categories = [
       { name: 'Урны', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/1852bbcf-e8b0-40ef-9ffe-cd0c1e56668b.png' },
       { name: 'Беседки', image: '🏡' },
       { name: 'Навесы', image: '⛱️' },
-      { name: 'МАФ', image: '🎨' }
+      { name: 'МАФ', image: '🎨' },
+      { name: 'Благоустройство', image: '🛠️' }
     ]
   },
   {
