@@ -166,6 +166,17 @@ export function CategoryGrid({
                   const category = categories.find(c => c.id === value);
                   if (category) {
                     handleTreeCategorySelect(value, category);
+                    setTimeout(() => {
+                      if (productsRef.current) {
+                        const scrollContainer = document.querySelector('.flex-1.overflow-y-auto');
+                        if (scrollContainer) {
+                          const elementTop = productsRef.current.offsetTop;
+                          const isMobile = window.innerWidth < 640;
+                          const offset = isMobile ? 220 : 160;
+                          scrollContainer.scrollTo({ top: elementTop - offset, behavior: 'smooth' });
+                        }
+                      }
+                    }, 100);
                   }
                 }
               }}
