@@ -28,7 +28,7 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
             Производим качественное детское игровое, спортивное и парковое оборудование. 
             Безопасность, долговечность и яркий дизайн — наши главные приоритеты.
           </p>
-          <div className="flex flex-wrap gap-4 mx-0 px-0 my-0 py-0">
+          <div className="flex flex-wrap gap-4 mx-0 px-0 py-0 my-3.5">
             <Button size="lg" className="text-lg px-8 hover:brightness-90" style={{ backgroundColor: '#3eaa03' }} onClick={onOpenCatalog}>Каталог</Button>
           </div>
         </div>
