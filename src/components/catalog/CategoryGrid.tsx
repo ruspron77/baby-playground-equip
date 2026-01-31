@@ -113,7 +113,7 @@ export function CategoryGrid({
   return (
     <div id="products" className="container mx-auto pt-0 px-0">
       <div ref={filtersRef}>
-        <div className="fixed top-[76px] md:top-[85px] left-0 right-0 bg-gray-50 z-[60] shadow-md border-b border-gray-200 transition-all duration-300 px-2.5 py-2.5" style={{ top: 'var(--filters-top, 76px)' }}>
+        <div className="fixed top-[76px] md:top-[85px] left-0 right-0 z-[60] shadow-md border-b border-gray-200 transition-all duration-300 px-2.5 py-2.5 bg-[#00000005]" style={{ top: 'var(--filters-top, 76px)' }}>
           {/* Поиск и сброс - мобильная версия */}
           <div className="flex sm:hidden items-center gap-2 mb-1">
             <Select
