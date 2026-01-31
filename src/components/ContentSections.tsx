@@ -68,7 +68,7 @@ export function ContentSections() {
         <div className="container mx-auto py-0 px-3">
           <div className="text-center mb-12">
             <h2 className="font-heading mb-4 font-semibold text-3xl">Сертификаты</h2>
-            <p className="text-muted-foreground text-base">Вся продукция сертифицирована и соответствует стандартам качества</p>
+            <p className="text-muted-foreground text-base my-3">Вся продукция сертифицирована и соответствует стандартам качества</p>
           </div>
           <div className="grid grid-cols-3 gap-4 md:gap-6">
             {['ГОСТ Р', 'ТР ТС', 'ISO 9001'].map((cert, idx) => (
@@ -87,10 +87,10 @@ export function ContentSections() {
       </section>
 
       <section id="contacts" className="bg-muted/30 px-3 py-0">
-        <div className="container mx-auto px-0 py-[21px] my-[21px]">
+        <div className="container mx-auto px-0 my-[17px] py-[23px]">
           <div className="text-center mb-12">
-            <h2 className="font-heading font-semibold my-0 py-0 text-3xl">Контакты</h2>
-            <p className="text-muted-foreground py-0 text-base">Свяжитесь с нами любым удобным способом</p>
+            <h2 className="font-heading font-semibold py-0 text-3xl my-2">Контакты</h2>
+            <p className="text-muted-foreground py-0 text-base my-3">Свяжитесь с нами любым удобным способом</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6">
             <Card className="text-center hover:shadow-lg transition-shadow">

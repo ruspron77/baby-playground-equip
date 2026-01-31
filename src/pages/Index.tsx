@@ -244,7 +244,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       <section id="catalog" className={`pt-4 pb-8 bg-gray-50 order-2 md:order-2 ${catalogState.selectedCategory ? 'hidden' : ''}`}>
         <div className="container mx-auto px-3">
           <h2 className="font-heading text-center mb-4 font-semibold text-3xl">Каталог продукции</h2>
-          <p className="text-center text-muted-foreground mb-6 max-w-2xl mx-auto">
+          <p className="text-center text-muted-foreground max-w-2xl mx-auto my-3">
             Выберите категорию продукции для просмотра полного ассортимента
           </p>
           <div className="grid grid-cols-2 gap-4 md:gap-8">
