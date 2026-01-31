@@ -345,13 +345,13 @@ export function Header({
   return (
     <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-40 border-b">
       <div className="w-full mx-auto">
-        <div className="flex items-center justify-between px-2 md:px-[17px] rounded-none bg-[#ffffff] py-3">
+        <div className="flex items-center justify-between px-2 md:px-[17px] rounded-none bg-[#ffffff] py-3 max-[768px]:landscape:py-1">
           <div className="flex items-center gap-3">
             <a href="#hero" className="cursor-pointer" onClick={() => handleResetFilters?.()}>
               <img 
                 src="https://cdn.poehali.dev/files/photo_643632026-01-05_09-32-44.png" 
                 alt="Urban Play"
-                className="h-16 w-auto object-contain rounded-0 px-0"
+                className="h-16 w-auto object-contain rounded-0 px-0 max-[768px]:landscape:h-10"
               />
             </a>
           </div>
@@ -642,21 +642,21 @@ export function Header({
               </Sheet>
             </div>
           </div>
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center gap-2 max-[768px]:landscape:gap-1">
             <Button 
               size="sm" 
-              className="text-sm px-3 hover:brightness-90" 
+              className="text-sm px-3 hover:brightness-90 max-[768px]:landscape:text-xs max-[768px]:landscape:px-2 max-[768px]:landscape:h-8" 
               style={{ backgroundColor: '#3eaa03' }}
               onClick={() => window.location.href = 'tel:+79181151551'}
             >
-              <Icon name="Phone" size={16} className="mr-1" />
+              <Icon name="Phone" size={16} className="mr-1 max-[768px]:landscape:!w-3 max-[768px]:landscape:!h-3" />
               Позвонить
             </Button>
             <Link to="/favorites">
-              <Button variant="outline" size="icon" className="relative h-10 w-10 p-0 gap-0 hover:bg-transparent hover:border-primary hover:text-primary">
-                <Icon name="Heart" size={20} />
+              <Button variant="outline" size="icon" className="relative h-10 w-10 p-0 gap-0 hover:bg-transparent hover:border-primary hover:text-primary max-[768px]:landscape:h-8 max-[768px]:landscape:w-8">
+                <Icon name="Heart" size={20} className="max-[768px]:landscape:!w-4 max-[768px]:landscape:!h-4" />
                 {favoritesCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold max-[768px]:landscape:h-4 max-[768px]:landscape:w-4 max-[768px]:landscape:text-[10px]">
                     {favoritesCount}
                   </span>
                 )}
@@ -665,10 +665,10 @@ export function Header({
             <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
               <SheetTrigger asChild>
                 <div>
-                  <Button variant="outline" size="icon" className="relative h-10 w-10 p-0 gap-0 hover:bg-transparent hover:border-primary hover:text-primary">
-                    <Icon name="ShoppingCart" size={20} />
+                  <Button variant="outline" size="icon" className="relative h-10 w-10 p-0 gap-0 hover:bg-transparent hover:border-primary hover:text-primary max-[768px]:landscape:h-8 max-[768px]:landscape:w-8">
+                    <Icon name="ShoppingCart" size={20} className="max-[768px]:landscape:!w-4 max-[768px]:landscape:!h-4" />
                     {cart.length > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold max-[768px]:landscape:h-4 max-[768px]:landscape:w-4 max-[768px]:landscape:text-[10px]">
                         {cart.reduce((sum, item) => sum + item.quantity, 0)}
                       </span>
                     )}
@@ -893,8 +893,8 @@ export function Header({
             </Sheet>
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="hover:bg-transparent hover:border-[#3eaa03] hover:text-[#3eaa03]">
-                  <Icon name="Menu" size={24} />
+                <Button variant="outline" size="icon" className="hover:bg-transparent hover:border-[#3eaa03] hover:text-[#3eaa03] max-[768px]:landscape:h-8 max-[768px]:landscape:w-8">
+                  <Icon name="Menu" size={24} className="max-[768px]:landscape:!w-4 max-[768px]:landscape:!h-4" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right">
