@@ -51,6 +51,7 @@ interface CategoryGridProps {
   setSelectedSubSubcategory: (value: string | null) => void;
   selectedProduct: Product | null;
   handleTreeCategorySelect: (id: string, cat: Category) => void;
+  isProductDialogOpen: boolean;
 }
 
 const formatPrice = (price: string | number): string => {
@@ -78,6 +79,7 @@ export function CategoryGrid({
   setSelectedSubSubcategory,
   selectedProduct,
   handleTreeCategorySelect,
+  isProductDialogOpen,
 }: CategoryGridProps) {
   if (!selectedCategory) return null;
 
@@ -113,7 +115,7 @@ export function CategoryGrid({
   return (
     <div id="products" className="container mx-auto pt-0 px-0">
       <div ref={filtersRef}>
-        <div className="fixed top-[76px] md:top-[85px] left-0 right-0 z-[60] shadow-md border-b border-gray-200 transition-all duration-300 px-2.5 py-2.5 bg-[#ffffff]" style={{ top: 'var(--filters-top, 76px)' }}>
+        <div className={`fixed top-[76px] md:top-[85px] left-0 right-0 z-[60] shadow-md border-b border-gray-200 transition-all duration-300 px-2.5 py-2.5 bg-[#ffffff] ${isProductDialogOpen ? 'hidden' : ''}`} style={{ top: 'var(--filters-top, 76px)' }}>
           {/* Поиск и сброс - мобильная версия */}
           <div className="flex sm:hidden items-center gap-2 mb-1">
             <Select

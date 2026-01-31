@@ -297,6 +297,7 @@ export function CatalogSection({
         toggleFavorite={toggleFavorite}
         selectedProduct={selectedProduct}
         handleTreeCategorySelect={handleTreeCategorySelect}
+        isProductDialogOpen={isProductDialogOpen}
       />
 
       <ProductDialog
