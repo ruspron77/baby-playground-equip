@@ -160,7 +160,7 @@ export function CategoryGrid({
             </Button>
           </div>
           
-          <div className="flex items-center gap-1 sm:gap-2 mb-0 py-0 px-0">
+          <div className="flex items-center gap-1 sm:gap-2 py-0 px-0 my-0">
             <Select
               value={selectedCategory || 'all-categories'}
               onValueChange={(value) => {
