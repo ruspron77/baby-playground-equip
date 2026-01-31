@@ -119,23 +119,8 @@ export function Header({
   }, [cart]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const isMobile = window.innerWidth < 768;
-      
-      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        setIsHeaderVisible(false);
-        document.documentElement.style.setProperty('--filters-top', '0px');
-      } else if (currentScrollY < lastScrollY.current) {
-        setIsHeaderVisible(true);
-        document.documentElement.style.setProperty('--filters-top', isMobile ? '76px' : '85px');
-      }
-      
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const isMobile = window.innerWidth < 768;
+    document.documentElement.style.setProperty('--filters-top', isMobile ? '76px' : '85px');
   }, []);
 
   useEffect(() => {
