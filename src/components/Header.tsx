@@ -355,7 +355,7 @@ export function Header({
               />
             </a>
           </div>
-          <div className="hidden md:flex items-center gap-6 flex-1 justify-between ml-6">
+          <div className="hidden md:flex items-center gap-6 flex-1 justify-between ml-6 max-[1024px]:landscape:hidden">
             <nav className="flex gap-6">
               <a className="text-base font-medium hover:text-primary transition-colors cursor-pointer" href="#about" onClick={(e) => { e.preventDefault(); handleResetFilters?.(); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>
                 О компании
@@ -642,7 +642,7 @@ export function Header({
               </Sheet>
             </div>
           </div>
-          <div className="flex md:hidden items-center gap-2 max-[768px]:landscape:gap-1">
+          <div className="flex md:hidden items-center gap-2 max-[768px]:landscape:gap-1 max-[1024px]:landscape:flex">
             <Button 
               size="sm" 
               className="text-sm px-3 hover:brightness-90 max-[768px]:landscape:text-xs max-[768px]:landscape:px-2 max-[768px]:landscape:h-8" 
