@@ -168,13 +168,7 @@ export function CategoryGrid({
                     handleTreeCategorySelect(value, category);
                     setTimeout(() => {
                       if (productsRef.current) {
-                        const scrollContainer = document.querySelector('.flex-1.overflow-y-auto');
-                        if (scrollContainer) {
-                          const elementTop = productsRef.current.offsetTop;
-                          const isMobile = window.innerWidth < 640;
-                          const offset = isMobile ? 220 : 160;
-                          scrollContainer.scrollTo({ top: elementTop - offset, behavior: 'smooth' });
-                        }
+                        productsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }, 100);
                   }
@@ -199,13 +193,7 @@ export function CategoryGrid({
                   setSelectedSeries(value === 'all-series' ? null : value);
                   setTimeout(() => {
                     if (productsRef.current) {
-                      const scrollContainer = document.querySelector('.flex-1.overflow-y-auto');
-                      if (scrollContainer) {
-                        const elementTop = productsRef.current.offsetTop;
-                        const isMobile = window.innerWidth < 640;
-                        const offset = isMobile ? 220 : 160;
-                        scrollContainer.scrollTo({ top: elementTop - offset, behavior: 'smooth' });
-                      }
+                      productsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                   }, 100);
                 }}
@@ -230,13 +218,7 @@ export function CategoryGrid({
                   setSelectedSubSubcategory(value === 'all' ? null : value);
                   setTimeout(() => {
                     if (productsRef.current) {
-                      const scrollContainer = document.querySelector('.flex-1.overflow-y-auto');
-                      if (scrollContainer) {
-                        const elementTop = productsRef.current.offsetTop;
-                        const isMobile = window.innerWidth < 640;
-                        const offset = isMobile ? 220 : 160;
-                        scrollContainer.scrollTo({ top: elementTop - offset, behavior: 'smooth' });
-                      }
+                      productsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                   }, 100);
                 }}
@@ -265,13 +247,7 @@ export function CategoryGrid({
                   }
                   setTimeout(() => {
                     if (productsRef.current) {
-                      const scrollContainer = document.querySelector('.flex-1.overflow-y-auto');
-                      if (scrollContainer) {
-                        const elementTop = productsRef.current.offsetTop;
-                        const isMobile = window.innerWidth < 640;
-                        const offset = isMobile ? 220 : 160;
-                        scrollContainer.scrollTo({ top: elementTop - offset, behavior: 'smooth' });
-                      }
+                      productsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                   }, 100);
                 }}
