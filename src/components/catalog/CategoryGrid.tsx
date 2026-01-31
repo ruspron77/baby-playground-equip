@@ -309,7 +309,7 @@ export function CategoryGrid({
           </div>
         </div>
 
-        <div ref={productsRef} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 px-3 sm:pt-[70px] py-[110px]">
+        <div ref={productsRef} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 px-3 pt-[110px] sm:pt-4 pb-8">
           {(() => {
             console.log(`🎯 Отрисовка: ${filteredProducts.length} товаров, категория: "${selectedCategory}", серия: "${selectedSeries}", подкатегория: "${selectedSubSubcategory}"`);
             if (selectedSubSubcategory?.includes('Горки')) {
