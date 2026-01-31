@@ -200,7 +200,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background pt-[76px] md:pt-[85px]">
+    <div className="min-h-screen flex flex-col bg-background md:pt-[85px] py-[42px]">
       <Header
         cart={cart}
         isCartOpen={isCartOpen}
