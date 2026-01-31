@@ -360,7 +360,7 @@ export function Header({
   return (
     <header className={`bg-white shadow-sm fixed left-0 right-0 z-40 border-b transition-transform duration-300 ${isHeaderVisible ? 'top-0' : '-top-[86px] md:-top-[95px]'}`}>
       <div className="w-full mx-auto">
-        <div className="flex items-center justify-between px-2 md:px-[17px] py-2.5 bg-[#00000005] rounded-none">
+        <div className="flex items-center justify-between px-2 md:px-[17px] py-2.5 rounded-none bg-[#ffffff]">
           <div className="flex items-center gap-3">
             <a href="#hero" className="cursor-pointer" onClick={() => handleResetFilters?.()}>
               <img 
