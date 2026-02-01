@@ -132,7 +132,7 @@ export function ContentSections() {
       </section>
 
       <footer className="px-0 py-0 my-[65px]" style={{ backgroundColor: '#1a0129', color: '#ffffff' }}>
-        <div className="container mx-auto px-4 text-center my-0 py-3">
+        <div className="container mx-auto px-4 text-center py-[13px] my-[194px]">
           <p className="md:pb-0 my-0 py-0">&copy; 2026 Urban Play. Все права защищены.</p>
         </div>
       </footer>
