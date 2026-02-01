@@ -131,9 +131,9 @@ export function ContentSections() {
         </div>
       </section>
 
-      <footer className="my-0 py-[7px]" style={{ backgroundColor: '#1a0129', color: '#ffffff' }}>
-        <div className="container mx-auto px-4 text-center py-0 my-0">
-          <p className="md:pb-0 py-0 my-0">&copy; 2026 Urban Play. Все права защищены.</p>
+      <footer className="px-0 py-0 my-[65px]" style={{ backgroundColor: '#1a0129', color: '#ffffff' }}>
+        <div className="container mx-auto px-4 text-center my-0 py-3">
+          <p className="md:pb-0 my-0 py-0">&copy; 2026 Urban Play. Все права защищены.</p>
         </div>
       </footer>
 
