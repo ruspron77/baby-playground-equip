@@ -8,7 +8,7 @@ export function ContentSections() {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
 
   return (
-    <div className="order-4">
+    <div className="order-4 my-0 py-0">
       <section id="about" className="pt-4 pb-8 bg-muted/30">
         <div className="container mx-auto px-0">
           <div className="grid md:grid-cols-2 gap-12 items-center px-3">
@@ -132,7 +132,7 @@ export function ContentSections() {
       </section>
 
       <footer className="px-0 py-0 my-[65px]" style={{ backgroundColor: '#1a0129', color: '#ffffff' }}>
-        <div className="container mx-auto px-4 text-center py-[13px] my-[194px]">
+        <div className="container mx-auto px-4 text-center my-0 py-0 bg-[#67119800]">
           <p className="md:pb-0 my-0 py-0">&copy; 2026 Urban Play. Все права защищены.</p>
         </div>
       </footer>
