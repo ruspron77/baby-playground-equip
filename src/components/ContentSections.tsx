@@ -8,7 +8,7 @@ export function ContentSections() {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
 
   return (
-    <div className="order-4 my-0 py-0">
+    <div className="order-4 my-0 py-0 bg-[#49187100]">
       <section id="about" className="pt-4 pb-8 bg-muted/30">
         <div className="container mx-auto px-0">
           <div className="grid md:grid-cols-2 gap-12 items-center px-3">
