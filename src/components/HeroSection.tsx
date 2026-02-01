@@ -6,9 +6,9 @@ interface HeroSectionProps {
 
 export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
   return (
-    <section id="hero" className="relative pt-0 pb-2 md:pb-4 overflow-hidden min-h-[225px] md:min-h-[400px]">
+    <section id="hero" className="relative md:pb-4 overflow-hidden min-h-[225px] md:min-h-[400px] py-0 my-0">
       <div 
-        className="absolute inset-0"
+        className="absolute inset-0 my-[1px]"
         style={{ 
           backgroundImage: 'url(https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/3dfae01f-ed05-4e73-8732-003e8bd94840.png)',
           backgroundSize: 'cover',
@@ -16,10 +16,10 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 px-0 mx-0 bg-[#00000030] py-0 my-[87px]"></div>
+        <div className="absolute inset-0 px-0 mx-0 bg-[#00000030] my-0 py-2.5"></div>
       </div>
 
-      <div className="w-full relative z-10 md:my-[93px] mx-0 py-5 my-[82px]">
+      <div className="w-full relative z-10 md:my-[93px] mx-0 py-5 my-[103px]">
         <div className="max-w-3xl animate-fade-in mx-0 md:ml-[50px] px-[7px] py-0 my-0">
           <h2 className="md:text-4xl lg:text-6xl font-heading md:mb-6 text-white font-semibold px-0 mx-0 text-3xl py-0 my-2">
             Создаём пространство для игры и спорта
