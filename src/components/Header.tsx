@@ -345,7 +345,7 @@ export function Header({
   return (
     <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-40 border-b">
       <div className="w-full mx-auto">
-        <div className="flex items-center justify-between px-2 md:px-[17px] rounded-none bg-[#ffffff] max-[768px]:landscape:py-1 py-0 my-0">
+        <div className="flex items-center justify-between px-2 md:px-[17px] rounded-none bg-[#ffffff] max-[768px]:landscape:py-1 my-0 py-2.5">
           <div className="flex items-center gap-3">
             <a href="#hero" className="cursor-pointer" onClick={() => handleResetFilters?.()}>
               <img 
