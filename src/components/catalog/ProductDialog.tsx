@@ -214,15 +214,15 @@ export function ProductDialog({
 
             <div className="flex flex-col justify-start space-y-2 md:space-y-4 overflow-y-auto flex-1">
               <div>
-                <p className="sm:text-base sm:mb-2 text-[#5a098c] font-medium text-sm leading-tight my-[1px]">{selectedProduct.name.split('\n')[0]}</p>
-                <h2 className="font-heading sm:mb-4 font-semibold sm:text-3xl text-xl leading-tight line-clamp-2 sm:line-clamp-none py-0 my-0">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
+                <p className="sm:text-base sm:mb-2 text-[#5a098c] font-medium text-sm leading-tight my-[1px] select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{selectedProduct.name.split('\n')[0]}</p>
+                <h2 className="font-heading sm:mb-4 font-semibold sm:text-3xl text-xl leading-tight line-clamp-2 sm:line-clamp-none py-0 my-0 select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
                 
                 {/* Техническая информация */}
                 <div className="my-3">
                   {selectedProduct.dimensions && (
                     <div className="grid grid-cols-3 gap-1.5 sm:gap-4 my-1.5">
                       {selectedProduct.dimensions.split('х').map((dim, idx) => (
-                        <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-[11px] py-2">
+                        <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-[11px] py-2 select-none active:ring-2 active:ring-primary active:ring-offset-2 cursor-pointer">
                           <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
                             {idx === 0 ? 'Длина' : idx === 1 ? 'Ширина' : 'Высота'}
                           </p>
@@ -232,11 +232,11 @@ export function ProductDialog({
                     </div>
                   )}
                   {selectedProduct.description && (
-                    <p className="text-xs sm:text-sm text-muted-foreground mb-2">{selectedProduct.description}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-2 select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{selectedProduct.description}</p>
                   )}
                 </div>
 
-                <p className="font-bold text-primary sm:mb-4 text-2xl sm:text-3xl my-0 mt-2 mb-2 py-3">{formatPrice(selectedProduct.price)} ₽</p>
+                <p className="font-bold text-primary sm:mb-4 text-2xl sm:text-3xl my-0 mt-2 mb-2 py-3 select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{formatPrice(selectedProduct.price)} ₽</p>
                 
                 <div className="flex gap-2 sm:gap-3 justify-start items-center mt-4 mb-2 px-[5px]">
                   {quantityInCart > 0 ? (
