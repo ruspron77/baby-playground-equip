@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { optimizeImage } from '@/utils/imageOptimizer';
 
 interface CartItem {
@@ -76,6 +76,8 @@ export function ProductDialog({
   const cartItem = selectedProduct ? cart.find(item => item.id === selectedProduct.id) : null;
   const quantityInCart = cartItem?.quantity || 0;
   const step = selectedProduct?.article === '9027' ? 10 : 1;
+  const [prevQuantity, setPrevQuantity] = useState(quantityInCart);
+  const [isAnimating, setIsAnimating] = useState(false);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
   const touchStartY = useRef<number>(0);
@@ -119,6 +121,15 @@ export function ProductDialog({
       }
     }
   };
+
+  useEffect(() => {
+    if (quantityInCart !== prevQuantity) {
+      setIsAnimating(true);
+      setPrevQuantity(quantityInCart);
+      const timer = setTimeout(() => setIsAnimating(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [quantityInCart, prevQuantity]);
 
   return (
     <Dialog open={isProductDialogOpen} onOpenChange={setIsProductDialogOpen}>
@@ -218,7 +229,9 @@ export function ProductDialog({
                       >
                         <Icon name="Minus" size={18} />
                       </Button>
-                      <div className="flex items-center justify-center bg-primary/10 text-primary font-semibold rounded-md px-4 h-11 min-w-[60px] hidden md:flex">
+                      <div className={`flex items-center justify-center bg-primary/10 text-primary font-semibold rounded-md px-4 h-11 min-w-[60px] hidden md:flex transition-all duration-300 ${
+                        isAnimating ? 'scale-125 bg-primary/20' : 'scale-100'
+                      }`}>
                         {quantityInCart}
                       </div>
                       <Button
@@ -231,11 +244,13 @@ export function ProductDialog({
                       </Button>
                       <Button 
                         size="lg" 
-                        className="h-11 px-6 md:hidden flex items-center gap-2"
+                        className={`h-11 px-6 md:hidden flex items-center gap-2 transition-all duration-300 ${
+                          isAnimating ? 'scale-110' : 'scale-100'
+                        }`}
                         onClick={() => handleAddToCart(selectedProduct)}
                       >
                         <Icon name="ShoppingCart" size={18} />
-                        <span className="text-sm">{quantityInCart}</span>
+                        <span className="text-sm font-semibold">{quantityInCart}</span>
                       </Button>
                     </div>
                   ) : (
