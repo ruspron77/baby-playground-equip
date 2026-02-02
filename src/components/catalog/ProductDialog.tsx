@@ -46,6 +46,7 @@ interface ProductDialogProps {
   hasPreviousProduct?: boolean;
   cart: CartItem[];
   updateQuantity: (id: number, quantity: number) => void;
+  onCartAction?: () => void;
 }
 
 const formatPrice = (price: string | number): string => {
@@ -71,6 +72,7 @@ export function ProductDialog({
   hasPreviousProduct,
   cart,
   updateQuantity,
+  onCartAction,
 }: ProductDialogProps) {
   const isFavorite = selectedProduct ? favorites.some(f => f.id === selectedProduct.id) : false;
   const cartItem = selectedProduct ? cart.find(item => item.id === selectedProduct.id) : null;
@@ -231,7 +233,10 @@ export function ProductDialog({
                       isAnimating ? 'scale-105' : 'scale-100'
                     }`}>
                       <button
-                        onClick={() => updateQuantity(selectedProduct.id, Math.max(0, quantityInCart - step))}
+                        onClick={() => {
+                          updateQuantity(selectedProduct.id, Math.max(0, quantityInCart - step));
+                          if (onCartAction) onCartAction();
+                        }}
                         className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none"
                       >
                         <Icon name="Minus" size={18} />
@@ -240,7 +245,10 @@ export function ProductDialog({
                         <span className="text-sm font-semibold leading-tight">{quantityInCart} шт</span>
                       </div>
                       <button
-                        onClick={() => updateQuantity(selectedProduct.id, quantityInCart + step)}
+                        onClick={() => {
+                          updateQuantity(selectedProduct.id, quantityInCart + step);
+                          if (onCartAction) onCartAction();
+                        }}
                         className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none"
                       >
                         <Icon name="Plus" size={18} />
@@ -250,7 +258,10 @@ export function ProductDialog({
                     <Button 
                       size="lg" 
                       className="h-11 px-6 focus:outline-none active:ring-2 active:ring-primary active:ring-offset-2"
-                      onClick={() => handleAddToCart(selectedProduct)}
+                      onClick={() => {
+                        handleAddToCart(selectedProduct);
+                        if (onCartAction) onCartAction();
+                      }}
                     >
                       <Icon name="ShoppingCart" size={18} className="mr-2" />
                       <span className="text-sm sm:text-base">В корзину</span>

@@ -329,6 +329,11 @@ export function CatalogSection({
         hasPreviousProduct={hasPreviousProduct}
         cart={cart}
         updateQuantity={updateQuantity}
+        onCartAction={() => {
+          if (selectedProduct) {
+            setInitialSelectedProduct(selectedProduct);
+          }
+        }}
       />
 
       <ContactDialog 
