@@ -216,29 +216,9 @@ export function ProductDialog({
               <div>
                 <p className="sm:text-base sm:mb-2 text-[#5a098c] font-medium text-sm leading-tight my-[1px] select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{selectedProduct.name.split('\n')[0]}</p>
                 <h2 className="font-heading sm:mb-4 font-semibold sm:text-3xl text-xl leading-tight line-clamp-2 sm:line-clamp-none py-0 my-0 select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
-                
-                {/* Техническая информация */}
-                <div className="my-3">
-                  {selectedProduct.dimensions && (
-                    <div className="grid grid-cols-3 gap-1.5 sm:gap-4 my-1.5">
-                      {selectedProduct.dimensions.split('х').map((dim, idx) => (
-                        <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-[11px] py-2 select-none active:ring-2 active:ring-primary active:ring-offset-2 cursor-pointer">
-                          <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
-                            {idx === 0 ? 'Длина' : idx === 1 ? 'Ширина' : 'Высота'}
-                          </p>
-                          <p className="font-semibold sm:text-base text-xl">{dim.trim()}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {selectedProduct.description && (
-                    <p className="text-xs sm:text-sm text-muted-foreground mb-2 select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{selectedProduct.description}</p>
-                  )}
-                </div>
-
                 <p className="font-bold text-primary sm:mb-4 text-2xl sm:text-3xl my-0 mt-2 mb-2 py-3 select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{formatPrice(selectedProduct.price)} ₽</p>
                 
-                <div className="flex gap-2 sm:gap-3 justify-start items-center mt-4 mb-2 px-[5px]">
+                <div className="flex gap-2 sm:gap-3 justify-start items-center mt-0 mb-2 px-[5px]">
                   {quantityInCart > 0 ? (
                     <div className={`flex items-center w-full sm:w-auto h-11 rounded-md overflow-hidden transition-all duration-300 ${
                       isAnimating ? 'scale-105' : 'scale-100'
@@ -313,6 +293,26 @@ export function ProductDialog({
                 </Button>
               </div>
 
+              <div className="border-t sm:py-[5px] py-0 my-1 pb-0">
+                <h3 className="font-heading sm:mb-2 font-semibold sm:text-base my-1.5 text-base py-2">Техническая информация</h3>
+                {selectedProduct.dimensions && (
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-4 my-1.5">
+                    {selectedProduct.dimensions.split('х').map((dim, idx) => (
+                      <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-[11px] py-2">
+                        <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
+                          {idx === 0 ? 'Длина' : idx === 1 ? 'Ширина' : 'Высота'}
+                        </p>
+                        <p className="font-semibold sm:text-base text-xl">{dim.trim()}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {selectedProduct.description && (
+                  <p className="text-xs sm:text-sm text-muted-foreground">{selectedProduct.description}</p>
+                )}
+              </div>
+
+              <div className="border-t sm:py-3 mx-0 hidden md:block -mt-10 py-[85px]"></div>
             </div>
           </div>
         )}
