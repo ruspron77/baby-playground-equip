@@ -23,14 +23,26 @@ interface Product {
   article?: string;
 }
 
+interface CartItem {
+  id: number;
+  name: string;
+  price: string;
+  quantity: number;
+  image: string;
+  article?: string;
+  step?: number;
+}
+
 interface FavoritesPageProps {
   favorites: Product[];
   removeFromFavorites: (id: number) => void;
   addToCart: (product: Product) => void;
   toggleFavorite: (product: Product) => void;
+  cart: CartItem[];
+  updateQuantity: (id: number, quantity: number) => void;
 }
 
-export default function FavoritesPage({ favorites, removeFromFavorites, addToCart, toggleFavorite }: FavoritesPageProps) {
+export default function FavoritesPage({ favorites, removeFromFavorites, addToCart, toggleFavorite, cart, updateQuantity }: FavoritesPageProps) {
   const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   
@@ -177,6 +189,8 @@ export default function FavoritesPage({ favorites, removeFromFavorites, addToCar
         setIsContactDialogOpen={setIsContactDialogOpen}
         favorites={favorites}
         toggleFavorite={toggleFavorite}
+        cart={cart}
+        updateQuantity={updateQuantity}
       />
     </div>
   );

@@ -320,6 +320,8 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
           availableCategories={availableCategories}
           favorites={favorites}
           toggleFavorite={toggleFavorite}
+          cart={cart}
+          updateQuantity={updateQuantity}
         />
       </div>
       

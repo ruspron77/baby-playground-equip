@@ -5,6 +5,16 @@ import Icon from '@/components/ui/icon';
 import { useEffect, useRef } from 'react';
 import { optimizeImage } from '@/utils/imageOptimizer';
 
+interface CartItem {
+  id: number;
+  name: string;
+  price: string;
+  quantity: number;
+  image: string;
+  article?: string;
+  step?: number;
+}
+
 interface Product {
   id: number;
   name: string;
@@ -34,6 +44,8 @@ interface ProductDialogProps {
   onPreviousProduct?: () => void;
   hasNextProduct?: boolean;
   hasPreviousProduct?: boolean;
+  cart: CartItem[];
+  updateQuantity: (id: number, quantity: number) => void;
 }
 
 const formatPrice = (price: string | number): string => {
@@ -57,8 +69,13 @@ export function ProductDialog({
   onPreviousProduct,
   hasNextProduct,
   hasPreviousProduct,
+  cart,
+  updateQuantity,
 }: ProductDialogProps) {
   const isFavorite = selectedProduct ? favorites.some(f => f.id === selectedProduct.id) : false;
+  const cartItem = selectedProduct ? cart.find(item => item.id === selectedProduct.id) : null;
+  const quantityInCart = cartItem?.quantity || 0;
+  const step = selectedProduct?.article === '9027' ? 10 : 1;
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
   const touchStartY = useRef<number>(0);
@@ -191,17 +208,46 @@ export function ProductDialog({
                 <p className="font-bold text-primary sm:mb-4 text-2xl sm:text-3xl my-0 mt-2 mb-2 py-3">{formatPrice(selectedProduct.price)} ₽</p>
                 
                 <div className="flex gap-2 sm:gap-3 justify-start items-center mt-0 mb-2 px-0">
-                  <Button 
-                    size="lg" 
-                    className="h-11 px-6"
-                    onClick={() => {
-                      handleAddToCart(selectedProduct);
-                      setIsProductDialogOpen(false);
-                    }}
-                  >
-                    <Icon name="ShoppingCart" size={18} className="mr-2" />
-                    <span className="text-sm sm:text-base">В корзину</span>
-                  </Button>
+                  {quantityInCart > 0 ? (
+                    <div className="flex items-center gap-2 h-11">
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        className="h-11 w-11 hover:bg-primary/10 hidden md:flex"
+                        onClick={() => updateQuantity(selectedProduct.id, Math.max(0, quantityInCart - step))}
+                      >
+                        <Icon name="Minus" size={18} />
+                      </Button>
+                      <div className="flex items-center justify-center bg-primary/10 text-primary font-semibold rounded-md px-4 h-11 min-w-[60px] hidden md:flex">
+                        {quantityInCart}
+                      </div>
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        className="h-11 w-11 hover:bg-primary/10 hidden md:flex"
+                        onClick={() => updateQuantity(selectedProduct.id, quantityInCart + step)}
+                      >
+                        <Icon name="Plus" size={18} />
+                      </Button>
+                      <Button 
+                        size="lg" 
+                        className="h-11 px-6 md:hidden flex items-center gap-2"
+                        onClick={() => handleAddToCart(selectedProduct)}
+                      >
+                        <Icon name="ShoppingCart" size={18} />
+                        <span className="text-sm">{quantityInCart}</span>
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button 
+                      size="lg" 
+                      className="h-11 px-6"
+                      onClick={() => handleAddToCart(selectedProduct)}
+                    >
+                      <Icon name="ShoppingCart" size={18} className="mr-2" />
+                      <span className="text-sm sm:text-base">В корзину</span>
+                    </Button>
+                  )}
                   <Button
                     size="icon"
                     variant="outline"

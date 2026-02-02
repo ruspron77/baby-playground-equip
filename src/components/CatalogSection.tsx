@@ -94,6 +94,8 @@ interface CatalogSectionProps {
   availableCategories: string[];
   favorites: Product[];
   toggleFavorite: (product: Product) => void;
+  cart: any[];
+  updateQuantity: (id: number, quantity: number) => void;
 }
 
 export function CatalogSection({
@@ -140,6 +142,8 @@ export function CatalogSection({
   availableCategories,
   favorites,
   toggleFavorite,
+  cart,
+  updateQuantity,
 }: CatalogSectionProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [initialSelectedProduct, setInitialSelectedProduct] = useState<Product | null>(null);
@@ -321,6 +325,8 @@ export function CatalogSection({
         onPreviousProduct={handlePreviousProduct}
         hasNextProduct={hasNextProduct}
         hasPreviousProduct={hasPreviousProduct}
+        cart={cart}
+        updateQuantity={updateQuantity}
       />
 
       <ContactDialog 

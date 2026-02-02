@@ -140,6 +140,8 @@ const App = () => {
                   removeFromFavorites={removeFromFavorites}
                   addToCart={addToCart}
                   toggleFavorite={toggleFavorite}
+                  cart={cart}
+                  updateQuantity={updateQuantity}
                 />
               } 
             />
