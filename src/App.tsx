@@ -68,7 +68,7 @@ const App = () => {
     if (existingItem) {
       newCart = cart.map(item => 
         item.id === product.id 
-          ? { ...item, quantity: item.quantity + productStep }
+          ? { ...item, quantity: item.quantity + productStep, step: productStep, article: product.article }
           : item
       );
     } else {

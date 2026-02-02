@@ -578,6 +578,7 @@ export function Header({
                                     className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
                                     onClick={() => {
                                       const step = item.article === '9027' ? 10 : (item.step || 1);
+                                      console.log('🔻 Minus click:', { article: item.article, step, quantity: item.quantity });
                                       updateQuantity(item.id, Math.max(0, item.quantity - step));
                                     }}
                                   >
@@ -590,6 +591,7 @@ export function Header({
                                     className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
                                     onClick={() => {
                                       const step = item.article === '9027' ? 10 : (item.step || 1);
+                                      console.log('🔺 Plus click:', { article: item.article, step, quantity: item.quantity });
                                       updateQuantity(item.id, item.quantity + step);
                                     }}
                                   >
