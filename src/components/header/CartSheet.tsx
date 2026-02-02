@@ -309,7 +309,10 @@ export function CartSheet({
                           variant="outline"
                           size="icon"
                           className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
-                          onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - (item.step || 1)))}
+                          onClick={() => {
+                            const step = item.article === '9027' ? 10 : (item.step || 1);
+                            updateQuantity(item.id, Math.max(0, item.quantity - step));
+                          }}
                         >
                           <Icon name="Minus" size={16} />
                         </Button>
@@ -318,7 +321,10 @@ export function CartSheet({
                           variant="outline"
                           size="icon"
                           className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
-                          onClick={() => updateQuantity(item.id, item.quantity + (item.step || 1))}
+                          onClick={() => {
+                            const step = item.article === '9027' ? 10 : (item.step || 1);
+                            updateQuantity(item.id, item.quantity + step);
+                          }}
                         >
                           <Icon name="Plus" size={16} />
                         </Button>
