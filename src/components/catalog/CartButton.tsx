@@ -7,9 +7,10 @@ interface CartButtonProps {
   productId: number;
   updateQuantity: (id: number, quantity: number) => void;
   onStopPropagation: (e: React.MouseEvent) => void;
+  onOpenCart?: () => void;
 }
 
-export function CartButton({ quantityInCart, step, productId, updateQuantity, onStopPropagation }: CartButtonProps) {
+export function CartButton({ quantityInCart, step, productId, updateQuantity, onStopPropagation, onOpenCart }: CartButtonProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [prevQuantity, setPrevQuantity] = useState(quantityInCart);
 
@@ -35,10 +36,16 @@ export function CartButton({ quantityInCart, step, productId, updateQuantity, on
       >
         <Icon name="Minus" size={16} />
       </button>
-      <div className="flex-1 h-full bg-primary text-primary-foreground flex flex-col items-center justify-center px-1">
+      <button
+        onClick={(e) => {
+          onStopPropagation(e);
+          if (onOpenCart) onOpenCart();
+        }}
+        className="flex-1 h-full bg-primary hover:bg-primary/80 text-primary-foreground flex flex-col items-center justify-center px-1 transition-colors cursor-pointer"
+      >
         <span className="text-[10px] leading-none">В корзине {quantityInCart} шт</span>
         <span className="text-[9px] leading-none opacity-80">Перейти</span>
-      </div>
+      </button>
       <button
         onClick={(e) => {
           onStopPropagation(e);
