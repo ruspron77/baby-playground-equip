@@ -296,11 +296,15 @@ export function CartSheet({
                     >
                       <Icon name="GripVertical" size={20} className="text-muted-foreground" />
                     </div>
-                    <img 
-                      src={item.image} 
-                      alt={item.name}
-                      className={isMobile ? "w-16 h-16 object-cover rounded py-0 my-2.5" : "w-16 h-16 object-cover rounded"}
-                    />
+                    {item.image && item.image.startsWith('http') ? (
+                      <img 
+                        src={item.image} 
+                        alt={item.name}
+                        className={isMobile ? "w-16 h-16 object-cover rounded py-0 my-2.5" : "w-16 h-16 object-cover rounded"}
+                      />
+                    ) : (
+                      <div className={isMobile ? "w-16 h-16 bg-gray-100 rounded py-0 my-2.5" : "w-16 h-16 bg-gray-100 rounded"}></div>
+                    )}
                     <div className="flex-1 min-w-0 space-y-1">
                       <p className={isMobile ? "text-sm text-primary font-medium my-[3px]" : "text-sm text-primary font-medium"}>{item.name.split('\n')[0]}</p>
                       <h4 className={isMobile ? "font-medium text-sm my-0.5" : "font-medium text-sm"}>{item.name.split('\n').slice(1).join(' ')}</h4>

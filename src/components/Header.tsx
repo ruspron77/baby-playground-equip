@@ -563,11 +563,15 @@ export function Header({
                               >
                                 <Icon name="GripVertical" size={20} className="text-muted-foreground" />
                               </div>
-                              <img 
-                                src={item.image} 
-                                alt={item.name}
-                                className="w-16 h-16 object-cover rounded"
-                              />
+                              {item.image && item.image.startsWith('http') ? (
+                                <img 
+                                  src={item.image} 
+                                  alt={item.name}
+                                  className="w-16 h-16 object-cover rounded"
+                                />
+                              ) : (
+                                <div className="w-16 h-16 bg-gray-100 rounded"></div>
+                              )}
                               <div className="flex-1 min-w-0 space-y-1">
                                 <p className="text-sm text-primary font-medium">{item.name.split('\n')[0]}</p>
                                 <h4 className="font-medium text-sm">{item.name.split('\n').slice(1).join(' ')}</h4>
