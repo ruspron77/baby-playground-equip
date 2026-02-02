@@ -225,7 +225,7 @@ export function ProductDialog({
                     }`}>
                       <button
                         onClick={() => updateQuantity(selectedProduct.id, Math.max(0, quantityInCart - step))}
-                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 active:ring-2 active:ring-primary active:ring-offset-2"
+                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none"
                       >
                         <Icon name="Minus" size={18} />
                       </button>
@@ -234,7 +234,7 @@ export function ProductDialog({
                       </div>
                       <button
                         onClick={() => updateQuantity(selectedProduct.id, quantityInCart + step)}
-                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 active:ring-2 active:ring-primary active:ring-offset-2"
+                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none"
                       >
                         <Icon name="Plus" size={18} />
                       </button>
@@ -242,7 +242,7 @@ export function ProductDialog({
                   ) : (
                     <Button 
                       size="lg" 
-                      className="h-11 px-6 focus:ring-2 focus:ring-primary focus:ring-offset-2 active:ring-2 active:ring-primary active:ring-offset-2"
+                      className="h-11 px-6 focus:outline-none"
                       onClick={() => handleAddToCart(selectedProduct)}
                     >
                       <Icon name="ShoppingCart" size={18} className="mr-2" />
@@ -253,7 +253,7 @@ export function ProductDialog({
                     size="icon"
                     variant="outline"
                     onClick={() => toggleFavorite(selectedProduct)}
-                    className="hover:border-primary hover:text-primary hover:bg-transparent h-11 w-11 p-0 flex-shrink-0 focus:ring-2 focus:ring-primary focus:ring-offset-2 active:ring-2 active:ring-primary active:ring-offset-2"
+                    className="hover:border-primary hover:text-primary hover:bg-transparent h-11 w-11 p-0 flex-shrink-0 focus:outline-none"
                   >
                     <Icon name="Heart" size={20} className={isFavorite ? 'fill-red-500 text-red-500' : ''} />
                   </Button>
@@ -264,7 +264,7 @@ export function ProductDialog({
                     onTouchStart={(e) => e.stopPropagation()}
                     onTouchMove={(e) => e.stopPropagation()}
                     onTouchEnd={(e) => e.stopPropagation()}
-                    className="sm:hidden h-11 px-6 flex-shrink-0 ml-auto bg-transparent border-primary text-primary hover:bg-primary hover:text-white focus:ring-2 focus:ring-primary focus:ring-offset-2 active:ring-2 active:ring-primary active:ring-offset-2"
+                    className="sm:hidden h-11 px-6 flex-shrink-0 ml-auto bg-transparent border-primary text-primary hover:bg-primary hover:text-white focus:outline-none"
                   >
                     <Icon name="Phone" size={18} className="mr-2" />
                     <span className="text-sm">Позвонить</span>
