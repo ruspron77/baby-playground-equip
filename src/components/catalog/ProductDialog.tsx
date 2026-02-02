@@ -227,21 +227,21 @@ export function ProductDialog({
                 
                 <div className="flex gap-2 sm:gap-3 justify-start items-center mt-0 mb-2 px-[5px]">
                   {quantityInCart > 0 ? (
-                    <div className={`flex items-center w-full sm:w-auto h-11 rounded-md overflow-hidden transition-all duration-300 ${
+                    <div className={`flex items-center w-full sm:w-auto h-11 rounded-md overflow-hidden transition-all duration-300 active:ring-4 active:ring-primary active:ring-offset-2 ${
                       isAnimating ? 'scale-105' : 'scale-100'
                     }`}>
                       <button
                         onClick={() => updateQuantity(selectedProduct.id, Math.max(0, quantityInCart - step))}
-                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none active:ring-2 active:ring-primary active:ring-offset-2"
+                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none"
                       >
                         <Icon name="Minus" size={18} />
                       </button>
-                      <div className="flex-1 sm:min-w-[140px] h-full bg-primary text-primary-foreground flex items-center justify-center px-4">
+                      <div className="flex-1 sm:min-w-[140px] h-full bg-primary text-primary-foreground flex items-center justify-center px-4 active:bg-primary/90 cursor-pointer">
                         <span className="text-sm font-semibold leading-tight">{quantityInCart} шт</span>
                       </div>
                       <button
                         onClick={() => updateQuantity(selectedProduct.id, quantityInCart + step)}
-                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none active:ring-2 active:ring-primary active:ring-offset-2"
+                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none"
                       >
                         <Icon name="Plus" size={18} />
                       </button>
