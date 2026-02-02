@@ -196,7 +196,7 @@ export function CartSheet({
                           onAddToCart?.(product);
                           setCatalogSearchQuery('');
                         }}>
-                          {product.image && product.image.startsWith('http') ? (
+                          {product.image && product.image.trim() && product.image.startsWith('http') ? (
                             <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
                           ) : (
                             <div className="w-12 h-12 bg-gray-100 rounded"></div>
@@ -234,7 +234,7 @@ export function CartSheet({
                           onAddToCart?.(product);
                           setCatalogSearchQuery('');
                         }}>
-                          {product.image && product.image.startsWith('http') ? (
+                          {product.image && product.image.trim() && product.image.startsWith('http') ? (
                             <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
                           ) : (
                             <div className="w-12 h-12 bg-gray-100 rounded"></div>
@@ -304,7 +304,7 @@ export function CartSheet({
                     >
                       <Icon name="GripVertical" size={20} className="text-muted-foreground" />
                     </div>
-                    {item.image && item.image.startsWith('http') ? (
+                    {item.image && item.image.trim() && item.image.startsWith('http') ? (
                       <img 
                         src={item.image} 
                         alt={item.name}
