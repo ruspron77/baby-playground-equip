@@ -5,6 +5,7 @@ export interface CartItem {
   quantity: number;
   image: string;
   article?: string;
+  step?: number;
 }
 
 export interface SubSubSubcategory {

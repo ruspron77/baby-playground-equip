@@ -62,12 +62,13 @@ const App = () => {
 
   const addToCart = (product: Product) => {
     const existingItem = cart.find(item => item.id === product.id);
+    const productStep = product.article === '9027' ? 10 : 1;
     let newCart;
     
     if (existingItem) {
       newCart = cart.map(item => 
         item.id === product.id 
-          ? { ...item, quantity: item.quantity + 1 }
+          ? { ...item, quantity: item.quantity + productStep }
           : item
       );
     } else {
@@ -75,9 +76,10 @@ const App = () => {
         id: product.id, 
         name: product.name, 
         price: product.price, 
-        quantity: 1,
+        quantity: productStep,
         image: product.image,
-        article: product.article
+        article: product.article,
+        step: productStep
       }];
     }
     
