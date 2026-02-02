@@ -189,7 +189,7 @@ export function ProductDialog({
                     )}
                   </>
                 ) : selectedProduct.image.startsWith('http') ? (
-                  <img src={selectedProduct.image} alt={selectedProduct.name} loading="eager" decoding="async" className="w-full h-full p-4 px-0 object-contain my-0 py-0" style={{ contentVisibility: 'auto' }} />
+                  <img src={selectedProduct.image} alt={selectedProduct.name} loading="eager" decoding="async" className="w-full h-full p-4 px-0 object-contain py-0 my-0" style={{ contentVisibility: 'auto' }} />
                 ) : (
                   <span className="text-8xl">{selectedProduct.image}</span>
                 )}
@@ -218,7 +218,7 @@ export function ProductDialog({
                 <h2 className="font-heading sm:mb-4 font-semibold sm:text-3xl text-xl leading-tight line-clamp-2 sm:line-clamp-none py-0 my-0">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
                 <p className="font-bold text-primary sm:mb-4 text-2xl sm:text-3xl my-0 mt-2 mb-2 py-3">{formatPrice(selectedProduct.price)} ₽</p>
                 
-                <div className="flex gap-2 sm:gap-3 justify-start items-center mt-0 mb-2">
+                <div className="flex gap-2 sm:gap-3 justify-start items-center mt-0 mb-2 px-[5px]">
                   {quantityInCart > 0 ? (
                     <div className={`flex items-center w-full sm:w-auto h-11 rounded-md overflow-hidden transition-all duration-300 ${
                       isAnimating ? 'scale-105' : 'scale-100'
