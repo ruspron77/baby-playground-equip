@@ -148,6 +148,7 @@ export function CatalogSection({
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [initialSelectedProduct, setInitialSelectedProduct] = useState<Product | null>(null);
   const [isProductDialogOpen, setIsProductDialogOpen] = useState(false);
+  const [hadCartInteraction, setHadCartInteraction] = useState(false);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [productImages, setProductImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -200,6 +201,7 @@ export function CatalogSection({
     setSelectedProduct(product);
     setInitialSelectedProduct(product);
     setIsProductDialogOpen(true);
+    setHadCartInteraction(false);
     setCurrentImageIndex(0);
     setProductImages([]);
     
@@ -332,6 +334,7 @@ export function CatalogSection({
         onCartAction={() => {
           if (selectedProduct) {
             setInitialSelectedProduct(selectedProduct);
+            setHadCartInteraction(true);
           }
         }}
       />
