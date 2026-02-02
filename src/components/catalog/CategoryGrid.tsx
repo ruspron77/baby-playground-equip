@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { RefObject, useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input';
 import Icon from '@/components/ui/icon';
 import { optimizeImage } from '@/utils/imageOptimizer';
+import { CartButton } from './CartButton';
 
 interface Product {
   id: number;
@@ -31,6 +32,16 @@ interface Category {
   order?: number;
 }
 
+interface CartItem {
+  id: number;
+  name: string;
+  price: string;
+  quantity: number;
+  image: string;
+  article?: string;
+  step?: number;
+}
+
 interface CategoryGridProps {
   selectedCategory: string | null;
   categories: Category[];
@@ -52,6 +63,8 @@ interface CategoryGridProps {
   selectedProduct: Product | null;
   handleTreeCategorySelect: (id: string, cat: Category) => void;
   isProductDialogOpen: boolean;
+  cart: CartItem[];
+  updateQuantity: (id: number, quantity: number) => void;
 }
 
 const formatPrice = (price: string | number): string => {
@@ -80,6 +93,8 @@ export function CategoryGrid({
   selectedProduct,
   handleTreeCategorySelect,
   isProductDialogOpen,
+  cart,
+  updateQuantity,
 }: CategoryGridProps) {
   if (!selectedCategory) return null;
 
@@ -298,6 +313,9 @@ export function CategoryGrid({
           {filteredProducts.map((product) => {
             const isFavorite = favorites.some(f => f.id === product.id);
             const isSelected = selectedProduct?.id === product.id;
+            const cartItem = cart.find(item => item.id === product.id);
+            const quantityInCart = cartItem?.quantity || 0;
+            const step = product.article === '9027' ? 10 : 1;
             return (
               <Card 
                 key={product.id} 
@@ -338,17 +356,27 @@ export function CategoryGrid({
                   <p className="mb-0.5 leading-tight text-xs text-[#5a098c]">{product.name.split('\n')[0]}</p>
                   <h3 className="font-semibold line-clamp-1 mb-1 leading-tight text-sm sm:text-base">{product.name.split('\n')[1] || product.name}</h3>
                   <p className="text-sm sm:text-base font-bold text-primary mb-1.5">{formatPrice(product.price)} ₽</p>
-                  <Button 
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAddToCart(product);
-                    }}
-                    className="gap-1 w-full h-8 text-xs bg-primary text-primary-foreground hover:bg-primary/90"
-                  >
-                    <Icon name="ShoppingCart" size={14} />
-                    <span>В корзину</span>
-                  </Button>
+                  {quantityInCart > 0 ? (
+                    <CartButton
+                      quantityInCart={quantityInCart}
+                      step={step}
+                      productId={product.id}
+                      updateQuantity={updateQuantity}
+                      onStopPropagation={(e) => e.stopPropagation()}
+                    />
+                  ) : (
+                    <Button 
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddToCart(product);
+                      }}
+                      className="gap-1 w-full h-8 text-xs bg-primary text-primary-foreground hover:bg-primary/90"
+                    >
+                      <Icon name="ShoppingCart" size={14} />
+                      <span>В корзину</span>
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             );

@@ -220,38 +220,25 @@ export function ProductDialog({
                 
                 <div className="flex gap-2 sm:gap-3 justify-start items-center mt-0 mb-2 px-0">
                   {quantityInCart > 0 ? (
-                    <div className="flex items-center gap-2 h-11">
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        className="h-11 w-11 hover:bg-primary/10 hidden md:flex"
+                    <div className={`flex items-center w-full sm:w-auto h-11 rounded-md overflow-hidden transition-all duration-300 ${
+                      isAnimating ? 'scale-105' : 'scale-100'
+                    }`}>
+                      <button
                         onClick={() => updateQuantity(selectedProduct.id, Math.max(0, quantityInCart - step))}
+                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors"
                       >
                         <Icon name="Minus" size={18} />
-                      </Button>
-                      <div className={`flex items-center justify-center bg-primary/10 text-primary font-semibold rounded-md px-4 h-11 min-w-[60px] hidden md:flex transition-all duration-300 ${
-                        isAnimating ? 'scale-125 bg-primary/20' : 'scale-100'
-                      }`}>
-                        {quantityInCart}
+                      </button>
+                      <div className="flex-1 sm:min-w-[140px] h-full bg-primary text-primary-foreground flex flex-col items-center justify-center px-4">
+                        <span className="text-sm font-semibold leading-tight">В корзине {quantityInCart} шт</span>
+                        <span className="text-xs leading-tight opacity-90">Перейти</span>
                       </div>
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        className="h-11 w-11 hover:bg-primary/10 hidden md:flex"
+                      <button
                         onClick={() => updateQuantity(selectedProduct.id, quantityInCart + step)}
+                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors"
                       >
                         <Icon name="Plus" size={18} />
-                      </Button>
-                      <Button 
-                        size="lg" 
-                        className={`h-11 px-6 md:hidden flex items-center gap-2 transition-all duration-300 ${
-                          isAnimating ? 'scale-110' : 'scale-100'
-                        }`}
-                        onClick={() => handleAddToCart(selectedProduct)}
-                      >
-                        <Icon name="ShoppingCart" size={18} />
-                        <span className="text-sm font-semibold">{quantityInCart}</span>
-                      </Button>
+                      </button>
                     </div>
                   ) : (
                     <Button 

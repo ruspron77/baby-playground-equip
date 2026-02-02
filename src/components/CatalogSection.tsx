@@ -302,6 +302,8 @@ export function CatalogSection({
         selectedProduct={selectedProduct}
         handleTreeCategorySelect={handleTreeCategorySelect}
         isProductDialogOpen={isProductDialogOpen}
+        cart={cart}
+        updateQuantity={updateQuantity}
       />
 
       <ProductDialog
