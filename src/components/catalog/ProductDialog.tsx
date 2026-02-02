@@ -225,7 +225,7 @@ export function ProductDialog({
                     }`}>
                       <button
                         onClick={() => updateQuantity(selectedProduct.id, Math.max(0, quantityInCart - step))}
-                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none"
+                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none active:ring-2 active:ring-primary active:ring-offset-2"
                       >
                         <Icon name="Minus" size={18} />
                       </button>
@@ -234,7 +234,7 @@ export function ProductDialog({
                       </div>
                       <button
                         onClick={() => updateQuantity(selectedProduct.id, quantityInCart + step)}
-                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none"
+                        className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none active:ring-2 active:ring-primary active:ring-offset-2"
                       >
                         <Icon name="Plus" size={18} />
                       </button>
@@ -242,7 +242,7 @@ export function ProductDialog({
                   ) : (
                     <Button 
                       size="lg" 
-                      className="h-11 px-6 focus:outline-none"
+                      className="h-11 px-6 focus:outline-none active:ring-2 active:ring-primary active:ring-offset-2"
                       onClick={() => handleAddToCart(selectedProduct)}
                     >
                       <Icon name="ShoppingCart" size={18} className="mr-2" />
