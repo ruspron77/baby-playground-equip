@@ -230,7 +230,7 @@ export function ProductDialog({
                         <Icon name="Minus" size={18} />
                       </button>
                       <div className="flex-1 sm:min-w-[140px] h-full bg-primary text-primary-foreground flex items-center justify-center px-4">
-                        <span className="text-sm font-semibold leading-tight">В корзине {quantityInCart} шт</span>
+                        <span className="text-sm font-semibold leading-tight">{quantityInCart} шт</span>
                       </div>
                       <button
                         onClick={() => updateQuantity(selectedProduct.id, quantityInCart + step)}
