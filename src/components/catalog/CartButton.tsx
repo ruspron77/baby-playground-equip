@@ -41,10 +41,9 @@ export function CartButton({ quantityInCart, step, productId, updateQuantity, on
           onStopPropagation(e);
           if (onOpenCart) onOpenCart();
         }}
-        className="flex-1 h-full bg-primary hover:bg-primary/80 text-primary-foreground flex flex-col items-center justify-center px-1 transition-colors cursor-pointer"
+        className="flex-1 h-full bg-primary hover:bg-primary/80 text-primary-foreground flex items-center justify-center px-1 transition-colors cursor-pointer"
       >
-        <span className="text-[10px] leading-none">В корзине {quantityInCart} шт</span>
-        <span className="text-[9px] leading-none opacity-80">Перейти</span>
+        <span className="text-[11px] leading-none font-medium">В корзине {quantityInCart} шт</span>
       </button>
       <button
         onClick={(e) => {

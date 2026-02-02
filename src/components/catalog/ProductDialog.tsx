@@ -218,7 +218,7 @@ export function ProductDialog({
                 <h2 className="font-heading sm:mb-4 font-semibold sm:text-3xl text-xl leading-tight line-clamp-2 sm:line-clamp-none py-0 my-0">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
                 <p className="font-bold text-primary sm:mb-4 text-2xl sm:text-3xl my-0 mt-2 mb-2 py-3">{formatPrice(selectedProduct.price)} ₽</p>
                 
-                <div className="flex gap-2 sm:gap-3 justify-start items-center mt-0 mb-2 px-0">
+                <div className="flex gap-2 sm:gap-3 justify-start items-center mt-0 mb-2 px-0 mx-0">
                   {quantityInCart > 0 ? (
                     <div className={`flex items-center w-full sm:w-auto h-11 rounded-md overflow-hidden transition-all duration-300 ${
                       isAnimating ? 'scale-105' : 'scale-100'
@@ -229,9 +229,8 @@ export function ProductDialog({
                       >
                         <Icon name="Minus" size={18} />
                       </button>
-                      <div className="flex-1 sm:min-w-[140px] h-full bg-primary text-primary-foreground flex flex-col items-center justify-center px-4">
+                      <div className="flex-1 sm:min-w-[140px] h-full bg-primary text-primary-foreground flex items-center justify-center px-4">
                         <span className="text-sm font-semibold leading-tight">В корзине {quantityInCart} шт</span>
-                        <span className="text-xs leading-tight opacity-90">Перейти</span>
                       </div>
                       <button
                         onClick={() => updateQuantity(selectedProduct.id, quantityInCart + step)}
@@ -276,7 +275,7 @@ export function ProductDialog({
               <div className="border-t sm:py-[5px] py-0 my-1 pb-0">
                 <h3 className="font-heading sm:mb-2 font-semibold sm:text-base my-1.5 text-base py-2">Техническая информация</h3>
                 {selectedProduct.dimensions && (
-                  <div className="grid grid-cols-3 gap-1.5 sm:gap-4 my-1.5">
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-4 my-1.5 mx-0 px-0">
                     {selectedProduct.dimensions.split('х').map((dim, idx) => (
                       <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-[11px] py-2">
                         <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
