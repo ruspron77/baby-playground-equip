@@ -196,7 +196,11 @@ export function CartSheet({
                           onAddToCart?.(product);
                           setCatalogSearchQuery('');
                         }}>
-                          <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
+                          {product.image && product.image.startsWith('http') ? (
+                            <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
+                          ) : (
+                            <div className="w-12 h-12 bg-gray-100 rounded"></div>
+                          )}
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium line-clamp-2">{product.name}</p>
                             <p className="text-sm text-muted-foreground">{product.price} ₽</p>
@@ -230,7 +234,11 @@ export function CartSheet({
                           onAddToCart?.(product);
                           setCatalogSearchQuery('');
                         }}>
-                          <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
+                          {product.image && product.image.startsWith('http') ? (
+                            <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
+                          ) : (
+                            <div className="w-12 h-12 bg-gray-100 rounded"></div>
+                          )}
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium line-clamp-2">{product.name}</p>
                             <p className="text-sm text-muted-foreground">{product.price} ₽</p>
@@ -315,7 +323,6 @@ export function CartSheet({
                           className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
                           onClick={() => {
                             const step = item.article === '9027' ? 10 : (item.step || 1);
-                            console.log('🔻 CartSheet Minus:', { article: item.article, step, quantity: item.quantity });
                             updateQuantity(item.id, Math.max(0, item.quantity - step));
                           }}
                         >
@@ -328,7 +335,6 @@ export function CartSheet({
                           className="h-8 w-8 hover:bg-transparent hover:border-primary hover:text-primary"
                           onClick={() => {
                             const step = item.article === '9027' ? 10 : (item.step || 1);
-                            console.log('🔺 CartSheet Plus:', { article: item.article, step, quantity: item.quantity });
                             updateQuantity(item.id, item.quantity + step);
                           }}
                         >
