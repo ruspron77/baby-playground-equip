@@ -79,6 +79,11 @@ export function ProductDialog({
   const [prevQuantity, setPrevQuantity] = useState(quantityInCart);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isCardActive, setIsCardActive] = useState(false);
+
+  const handleCardInteraction = () => {
+    setIsCardActive(true);
+    setTimeout(() => setIsCardActive(false), 200);
+  };
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
   const touchStartY = useRef<number>(0);
@@ -135,13 +140,11 @@ export function ProductDialog({
   return (
     <Dialog open={isProductDialogOpen} onOpenChange={setIsProductDialogOpen}>
       <DialogContent 
-        className={`max-w-6xl max-h-[88vh] sm:max-h-[85vh] p-4 sm:p-6 overflow-hidden flex flex-col transition-all ${isCardActive ? 'ring-2 ring-primary' : ''}`}
+        className={`max-w-6xl max-h-[88vh] sm:max-h-[85vh] p-4 sm:p-6 overflow-hidden flex flex-col transition-all ${isCardActive ? 'ring-4 ring-primary' : ''}`}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        onMouseDown={() => setIsCardActive(true)}
-        onMouseUp={() => setIsCardActive(false)}
-        onMouseLeave={() => setIsCardActive(false)}
+        onClick={handleCardInteraction}
       >
         <DialogHeader>
           <DialogTitle className="sr-only">Информация о товаре</DialogTitle>
