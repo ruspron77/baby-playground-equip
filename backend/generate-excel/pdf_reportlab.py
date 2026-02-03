@@ -157,6 +157,17 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     # Если монтаж скрыт, распределяем его только на товары БЕЗ исключений
     installation_per_unit = (calculated_installation_cost / total_quantity_for_installation) if (hide_installation and calculated_installation_cost > 0 and total_quantity_for_installation > 0) else 0
     
+    # Стиль для названий товаров с переносом
+    name_style = ParagraphStyle(
+        'ProductName',
+        parent=getSampleStyleSheet()['Normal'],
+        fontName=font_name,
+        fontSize=10,
+        leading=12,
+        alignment=TA_LEFT,
+        wordWrap='CJK'
+    )
+    
     for idx, product in enumerate(products, 1):
         base_price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']
         quantity = product['quantity']
@@ -182,7 +193,9 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         
         article = product.get('article', '')
         name = product.get('name', '')
-        full_name = f"{name}\n{article}" if article else name
+        full_name = f"{name}<br/>{article}" if article else name
+        # Используем Paragraph для автоматического переноса
+        name_paragraph = Paragraph(full_name, name_style)
         
         # Добавляем изображение если есть
         img_placeholder = ''
@@ -211,7 +224,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         
         table_data.append([
             str(idx),
-            full_name,
+            name_paragraph,
             img_placeholder or '',
             str(quantity),
             'шт',
@@ -221,9 +234,10 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     # Монтаж (если не скрыт) - используем рассчитанное значение БЕЗ исключенных товаров
     if calculated_installation_cost > 0 and not hide_installation:
+        installation_paragraph = Paragraph(f'Монтаж ({installation_percent}%)', name_style)
         table_data.append([
             str(len(products) + 1),
-            f'Монтаж ({installation_percent}%)',
+            installation_paragraph,
             '',
             '1',
             'усл',
@@ -234,9 +248,10 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     # Доставка (если не скрыта)
     if delivery_cost > 0 and not hide_delivery:
         next_num = len(products) + (2 if (calculated_installation_cost > 0 and not hide_installation) else 1)
+        delivery_paragraph = Paragraph('Доставка', name_style)
         table_data.append([
             str(next_num),
-            'Доставка',
+            delivery_paragraph,
             '',
             '1',
             'усл',
@@ -308,9 +323,11 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#e8d9f0')),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-            ('ALIGN', (1, 1), (1, -1), 'LEFT'),
+            ('ALIGN', (1, 1), (1, -1), 'LEFT'),  # Наименование - слева
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
             ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
+            ('LEFTPADDING', (1, 1), (1, -1), 3),  # Отступ слева для наименования
+            ('RIGHTPADDING', (1, 1), (1, -1), 3),  # Отступ справа для наименования
         ]
         
         # Применяем границы ко всей таблице, КРОМЕ строк итого если это последняя страница
