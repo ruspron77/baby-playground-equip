@@ -153,10 +153,8 @@ export const categories = [
         image: 'https://cdn.poehali.dev/files/%D1%81%D0%BF%D0%BE%D1%80%D1%82%20Eco.png',
         hasChildren: true,
         children: [
-          { name: 'Workout', image: '🌳' },
-          { name: 'Спортивные комплексы', image: '🪵' },
-          { name: 'Тренажеры уличные', image: '🌲' },
-          { name: 'Брусья и перекладины', image: '🪜' }
+          { name: 'Воркаут', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/7b34f04e-d5d6-4851-b8a2-6c6f20c1d8eb.png' },
+          { name: 'Тренажеры', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4957bc0e-86d4-411b-a2b0-7902e369a099.png' }
         ]
       }
     ]
