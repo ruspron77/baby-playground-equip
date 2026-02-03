@@ -938,8 +938,11 @@ export function Header({
                         <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="flex-1" size="lg">
                           Оформить заказ
                         </Button>
-                        <Button onClick={() => setShowKPDialog(true)} variant="outline" className="border-primary text-primary hover:bg-transparent hover:text-primary" size="lg">
+                        <Button onClick={() => setShowSendKPDialog(true)} variant="outline" className="border-primary text-primary hover:bg-transparent hover:text-primary" size="lg">
                           КП
+                        </Button>
+                        <Button onClick={handleAdminButtonClick} variant="outline" size="icon" className="border-primary text-primary hover:bg-transparent hover:text-primary" title="Расширенная версия КП">
+                          <Icon name="Settings" size={20} />
                         </Button>
                       </div>
                     </div>
