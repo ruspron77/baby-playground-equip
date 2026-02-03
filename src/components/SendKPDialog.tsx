@@ -23,21 +23,10 @@ export function SendKPDialog({ open, onOpenChange }: SendKPDialogProps) {
     status: '',
     comment: ''
   });
-  const [sendEmail, setSendEmail] = useState(true);
-  const [sendWhatsApp, setSendWhatsApp] = useState(false);
-  const [sendTelegram, setSendTelegram] = useState(false);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!sendEmail && !sendWhatsApp && !sendTelegram) {
-      toast({
-        title: "Выберите способ отправки",
-        description: "Выберите хотя бы один способ для отправки КП",
-        variant: "destructive"
-      });
-      return;
-    }
 
     try {
       const response = await fetch('https://functions.poehali.dev/79b601c4-b94b-4c1b-a0d0-851dbad1734e', {
@@ -48,21 +37,16 @@ export function SendKPDialog({ open, onOpenChange }: SendKPDialogProps) {
         body: JSON.stringify({
           ...formData,
           type: 'kp',
-          sendEmail,
-          sendWhatsApp,
-          sendTelegram
+          sendEmail: true,
+          sendWhatsApp: false,
+          sendTelegram: false
         }),
       });
 
       if (response.ok) {
-        const methods = [];
-        if (sendEmail) methods.push('Email');
-        if (sendWhatsApp) methods.push('WhatsApp');
-        if (sendTelegram) methods.push('Telegram');
-        
         toast({
           title: "Заявка отправлена!",
-          description: `КП будет отправлено через: ${methods.join(', ')}`,
+          description: "КП будет отправлено на указанный Email",
         });
       } else {
         throw new Error('Failed to send request');
@@ -84,9 +68,6 @@ export function SendKPDialog({ open, onOpenChange }: SendKPDialogProps) {
       status: '',
       comment: ''
     });
-    setSendEmail(true);
-    setSendWhatsApp(false);
-    setSendTelegram(false);
     
     onOpenChange(false);
   };
@@ -165,52 +146,6 @@ export function SendKPDialog({ open, onOpenChange }: SendKPDialogProps) {
               rows={5}
               className="resize-none"
             />
-          </div>
-
-          <div className="space-y-3 border rounded-lg p-4 bg-muted/30">
-            <p className="text-sm font-medium">Способ отправки КП:</p>
-            <div className="flex items-center space-x-2">
-              <Checkbox 
-                id="email" 
-                checked={sendEmail}
-                onCheckedChange={(checked) => setSendEmail(checked as boolean)}
-              />
-              <label
-                htmlFor="email"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-2"
-              >
-                <Icon name="Mail" size={16} />
-                Email
-              </label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox 
-                id="whatsapp" 
-                checked={sendWhatsApp}
-                onCheckedChange={(checked) => setSendWhatsApp(checked as boolean)}
-              />
-              <label
-                htmlFor="whatsapp"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-2"
-              >
-                <Icon name="MessageCircle" size={16} />
-                WhatsApp
-              </label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox 
-                id="telegram" 
-                checked={sendTelegram}
-                onCheckedChange={(checked) => setSendTelegram(checked as boolean)}
-              />
-              <label
-                htmlFor="telegram"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-2"
-              >
-                <Icon name="Send" size={16} />
-                Telegram
-              </label>
-            </div>
           </div>
 
           <Button type="submit" size="lg" variant="outline" className="w-full border-[#3eaa03] text-[#3eaa03] hover:bg-[#3eaa03] hover:text-white hover:border-[#3eaa03] active:bg-[#3eaa03] active:text-white md:hover:bg-transparent md:hover:text-[#3eaa03] md:active:bg-transparent md:active:text-[#3eaa03]">
