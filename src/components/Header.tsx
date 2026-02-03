@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { OrderForm, OrderFormData } from './OrderForm';
 import { ContactDialog } from './ContactDialog';
 import { SendKPDialog } from './SendKPDialog';
+import { useToast } from '@/hooks/use-toast';
 
 interface Product {
   id: number;
@@ -89,12 +90,16 @@ export function Header({
   setSearchQuery,
   handleResetFilters
 }: HeaderProps) {
+  const { toast } = useToast();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showOrderForm, setShowOrderForm] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [orderNumber, setOrderNumber] = useState<string>('');
   const [showKPDialog, setShowKPDialog] = useState(false);
   const [showSendKPDialog, setShowSendKPDialog] = useState(false);
+  const [isAdminMode, setIsAdminMode] = useState(false);
+  const [showPasswordDialog, setShowPasswordDialog] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
   const [kpAddress, setKpAddress] = useState('');
   const [kpInstallationPercent, setKpInstallationPercent] = useState(0);
   const [kpDeliveryCost, setKpDeliveryCost] = useState(0);
@@ -119,6 +124,13 @@ export function Header({
   useEffect(() => {
     setSortedCart(cart);
   }, [cart]);
+
+  useEffect(() => {
+    const savedAdminMode = localStorage.getItem('kp_admin_mode');
+    if (savedAdminMode === 'true') {
+      setIsAdminMode(true);
+    }
+  }, []);
 
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
@@ -265,6 +277,35 @@ export function Header({
     const newDiscountAmount = (totalCost * value) / 100;
     setDiscountAmount(newDiscountAmount);
     setTargetTotal(totalCost - newDiscountAmount);
+  };
+
+  const handlePasswordSubmit = () => {
+    if (passwordInput === 'admin2024') {
+      setIsAdminMode(true);
+      localStorage.setItem('kp_admin_mode', 'true');
+      setShowPasswordDialog(false);
+      setPasswordInput('');
+      setShowKPDialog(true);
+      toast({
+        title: "Доступ разрешен",
+        description: "Открыто расширенное меню создания КП",
+      });
+    } else {
+      toast({
+        title: "Неверный пароль",
+        description: "Попробуйте еще раз",
+        variant: "destructive"
+      });
+      setPasswordInput('');
+    }
+  };
+
+  const handleAdminButtonClick = () => {
+    if (isAdminMode) {
+      setShowKPDialog(true);
+    } else {
+      setShowPasswordDialog(true);
+    }
   };
 
   const handleDiscountAmountChange = (value: number) => {
@@ -646,7 +687,7 @@ export function Header({
                           <Button onClick={() => setShowSendKPDialog(true)} variant="outline" className="border-primary text-primary hover:bg-transparent hover:text-primary" size="lg">
                             КП
                           </Button>
-                          <Button onClick={() => setShowKPDialog(true)} variant="outline" size="icon" className="border-primary text-primary hover:bg-transparent hover:text-primary" title="Расширенная версия КП">
+                          <Button onClick={handleAdminButtonClick} variant="outline" size="icon" className="border-primary text-primary hover:bg-transparent hover:text-primary" title="Расширенная версия КП">
                             <Icon name="Settings" size={20} />
                           </Button>
                         </div>
@@ -1222,6 +1263,38 @@ export function Header({
         open={showSendKPDialog}
         onOpenChange={setShowSendKPDialog}
       />
+
+      <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Доступ к расширенной версии КП</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <p className="text-sm text-muted-foreground">
+              Для доступа к расширенным настройкам создания КП введите пароль
+            </p>
+            <Input
+              type="password"
+              placeholder="Введите пароль..."
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handlePasswordSubmit();
+                }
+              }}
+            />
+          </div>
+          <div className="flex gap-2">
+            <Button onClick={() => setShowPasswordDialog(false)} variant="outline" className="flex-1">
+              Отмена
+            </Button>
+            <Button onClick={handlePasswordSubmit} className="flex-1">
+              Войти
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <ContactDialog 
         open={isContactDialogOpen}
