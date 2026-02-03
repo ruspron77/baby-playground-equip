@@ -140,7 +140,7 @@ export function ProductDialog({
   return (
     <Dialog open={isProductDialogOpen} onOpenChange={setIsProductDialogOpen}>
       <DialogContent 
-        className={`max-w-6xl max-h-[88vh] sm:max-h-[85vh] p-4 sm:p-6 overflow-hidden flex flex-col transition-all ${isCardActive ? 'ring-4 ring-primary' : ''}`}
+        className={`max-w-6xl max-h-[88vh] sm:max-h-[85vh] p-4 sm:p-6 overflow-hidden overflow-x-hidden flex flex-col transition-all ${isCardActive ? 'ring-4 ring-primary' : ''}`}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
