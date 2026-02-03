@@ -134,6 +134,8 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     # Рассчитываем сумму товаров для монтажа (исключая Благоустройство 9000-9050)
     equipment_total_for_installation = 0
+    total_quantity_for_installation = 0  # Количество товаров БЕЗ исключений
+    
     for p in products:
         article = p.get('article', '')
         exclude = False
@@ -147,12 +149,13 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         if not exclude:
             base_price = int(p['price'].replace(' ', '')) if isinstance(p['price'], str) else p['price']
             equipment_total_for_installation += base_price * p['quantity']
+            total_quantity_for_installation += p['quantity']
     
     # Рассчитываем монтаж ТОЛЬКО от товаров, к которым он применяется
     calculated_installation_cost = equipment_total_for_installation * (installation_percent / 100) if installation_percent > 0 else 0
     
     # Если монтаж скрыт, распределяем его только на товары БЕЗ исключений
-    installation_per_unit = (calculated_installation_cost / total_product_quantity) if (hide_installation and calculated_installation_cost > 0 and total_product_quantity > 0) else 0
+    installation_per_unit = (calculated_installation_cost / total_quantity_for_installation) if (hide_installation and calculated_installation_cost > 0 and total_quantity_for_installation > 0) else 0
     
     for idx, product in enumerate(products, 1):
         base_price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']

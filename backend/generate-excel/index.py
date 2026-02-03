@@ -266,6 +266,8 @@ def handler(event, context):
         
         # Сначала считаем оригинальную сумму товаров для расчета скидки
         equipment_total_for_installation = 0  # Сумма товаров для расчета монтажа (без исключений)
+        total_quantity_for_installation = 0  # Количество товаров БЕЗ исключений (для распределения монтажа)
+        
         for product in products:
             base_price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']
             product_sum = base_price * product['quantity']
@@ -283,6 +285,7 @@ def handler(event, context):
             
             if not exclude_from_installation:
                 equipment_total_for_installation += product_sum
+                total_quantity_for_installation += product['quantity']
         
         # Рассчитываем скидку от суммы товаров
         discount_value = 0
@@ -297,8 +300,8 @@ def handler(event, context):
         # Доставка на единицу товара (равномерное распределение, если скрыта)
         delivery_per_unit = (delivery_cost / total_product_quantity) if (hide_delivery and delivery_cost > 0 and total_product_quantity > 0) else 0
         
-        # Процент монтажа для добавления к цене (если скрыт)
-        installation_per_unit = (calculated_installation_cost / total_product_quantity) if (hide_installation and calculated_installation_cost > 0 and total_product_quantity > 0) else 0
+        # Процент монтажа для добавления к цене (если скрыт) - распределяем ТОЛЬКО на товары БЕЗ исключений
+        installation_per_unit = (calculated_installation_cost / total_quantity_for_installation) if (hide_installation and calculated_installation_cost > 0 and total_quantity_for_installation > 0) else 0
         
         equipment_total = 0  # Сумма товаров (полная, БЕЗ скидки)
         
