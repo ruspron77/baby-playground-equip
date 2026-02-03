@@ -140,7 +140,7 @@ export function ContactDialog({ open, onOpenChange }: ContactDialogProps) {
             />
           </div>
 
-          <Button type="submit" size="lg" variant="outline" className="w-full border-[#3eaa03] text-[#3eaa03] hover:bg-[#3eaa03] hover:text-white hover:border-[#3eaa03] active:bg-[#3eaa03] active:text-white md:hover:bg-transparent md:hover:text-[#3eaa03] md:active:bg-transparent md:active:text-[#3eaa03]">
+          <Button type="submit" size="lg" className="w-full bg-[#3eaa03] text-white hover:bg-[#3eaa03]/90">
             <Icon name="Phone" size={20} className="mr-2" />
             Перезвоните мне
           </Button>
