@@ -61,6 +61,7 @@ interface CategoryGridProps {
   toggleFavorite: (product: Product) => void;
   setSelectedSubSubcategory: (value: string | null) => void;
   selectedProduct: Product | null;
+  setSelectedProduct: (product: Product | null) => void;
   handleTreeCategorySelect: (id: string, cat: Category) => void;
   isProductDialogOpen: boolean;
   cart: CartItem[];
@@ -91,6 +92,7 @@ export function CategoryGrid({
   toggleFavorite,
   setSelectedSubSubcategory,
   selectedProduct,
+  setSelectedProduct,
   handleTreeCategorySelect,
   isProductDialogOpen,
   cart,
@@ -361,7 +363,10 @@ export function CategoryGrid({
                       quantityInCart={quantityInCart}
                       step={step}
                       productId={product.id}
-                      updateQuantity={updateQuantity}
+                      updateQuantity={(id, qty) => {
+                        updateQuantity(id, qty);
+                        setSelectedProduct(product);
+                      }}
                       onStopPropagation={(e) => e.stopPropagation()}
                     />
                   ) : (
@@ -370,6 +375,7 @@ export function CategoryGrid({
                       onClick={(e) => {
                         e.stopPropagation();
                         handleAddToCart(product);
+                        setSelectedProduct(product);
                       }}
                       className="gap-1 w-full h-8 text-xs bg-primary text-primary-foreground hover:bg-primary/90"
                     >
