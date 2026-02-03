@@ -146,9 +146,7 @@ export function CatalogSection({
   updateQuantity,
 }: CatalogSectionProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [initialSelectedProduct, setInitialSelectedProduct] = useState<Product | null>(null);
   const [isProductDialogOpen, setIsProductDialogOpen] = useState(false);
-  const [hadCartInteraction, setHadCartInteraction] = useState(false);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [productImages, setProductImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -199,9 +197,7 @@ export function CatalogSection({
 
   const handleProductClick = async (product: Product) => {
     setSelectedProduct(product);
-    setInitialSelectedProduct(product);
     setIsProductDialogOpen(true);
-    setHadCartInteraction(false);
     setCurrentImageIndex(0);
     setProductImages([]);
     
@@ -310,12 +306,7 @@ export function CatalogSection({
 
       <ProductDialog
         isProductDialogOpen={isProductDialogOpen}
-        setIsProductDialogOpen={(open) => {
-          setIsProductDialogOpen(open);
-          if (!open) {
-            setSelectedProduct(initialSelectedProduct);
-          }
-        }}
+        setIsProductDialogOpen={setIsProductDialogOpen}
         selectedProduct={selectedProduct}
         productImages={productImages}
         currentImageIndex={currentImageIndex}
@@ -331,12 +322,6 @@ export function CatalogSection({
         hasPreviousProduct={hasPreviousProduct}
         cart={cart}
         updateQuantity={updateQuantity}
-        onCartAction={() => {
-          if (selectedProduct) {
-            setInitialSelectedProduct(selectedProduct);
-            setHadCartInteraction(true);
-          }
-        }}
       />
 
       <ContactDialog 

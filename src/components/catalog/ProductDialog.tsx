@@ -46,7 +46,6 @@ interface ProductDialogProps {
   hasPreviousProduct?: boolean;
   cart: CartItem[];
   updateQuantity: (id: number, quantity: number) => void;
-  onCartAction?: () => void;
 }
 
 const formatPrice = (price: string | number): string => {
@@ -72,7 +71,6 @@ export function ProductDialog({
   hasPreviousProduct,
   cart,
   updateQuantity,
-  onCartAction,
 }: ProductDialogProps) {
   const isFavorite = selectedProduct ? favorites.some(f => f.id === selectedProduct.id) : false;
   const cartItem = selectedProduct ? cart.find(item => item.id === selectedProduct.id) : null;
@@ -235,7 +233,6 @@ export function ProductDialog({
                       <button
                         onClick={() => {
                           updateQuantity(selectedProduct.id, Math.max(0, quantityInCart - step));
-                          if (onCartAction) onCartAction();
                         }}
                         className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none"
                       >
@@ -247,7 +244,6 @@ export function ProductDialog({
                       <button
                         onClick={() => {
                           updateQuantity(selectedProduct.id, quantityInCart + step);
-                          if (onCartAction) onCartAction();
                         }}
                         className="flex-shrink-0 w-11 h-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-colors focus:outline-none"
                       >
@@ -260,7 +256,6 @@ export function ProductDialog({
                       className="h-11 px-6 focus:outline-none active:ring-2 active:ring-primary active:ring-offset-2"
                       onClick={() => {
                         handleAddToCart(selectedProduct);
-                        if (onCartAction) onCartAction();
                       }}
                     >
                       <Icon name="ShoppingCart" size={18} className="mr-2" />
