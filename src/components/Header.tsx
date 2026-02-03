@@ -10,6 +10,7 @@ import { CartItem } from './data/catalogData';
 import { Link } from 'react-router-dom';
 import { OrderForm, OrderFormData } from './OrderForm';
 import { ContactDialog } from './ContactDialog';
+import { KPDialog } from './KPDialog';
 
 interface Product {
   id: number;
@@ -93,6 +94,7 @@ export function Header({
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [orderNumber, setOrderNumber] = useState<string>('');
   const [showKPDialog, setShowKPDialog] = useState(false);
+  const [showKPSettingsDialog, setShowKPSettingsDialog] = useState(false);
   const [kpAddress, setKpAddress] = useState('');
   const [kpInstallationPercent, setKpInstallationPercent] = useState(0);
   const [kpDeliveryCost, setKpDeliveryCost] = useState(0);
@@ -644,6 +646,9 @@ export function Header({
                           <Button onClick={() => setShowKPDialog(true)} variant="outline" className="border-primary text-primary hover:bg-transparent hover:text-primary" size="lg">
                             КП
                           </Button>
+                          <Button onClick={() => setShowKPSettingsDialog(true)} variant="outline" size="icon" className="border-primary text-primary hover:bg-transparent hover:text-primary">
+                            <Icon name="Settings" size={20} />
+                          </Button>
                         </div>
                       </div>
                     </>
@@ -989,8 +994,8 @@ export function Header({
         </DialogContent>
       </Dialog>
 
-      <Sheet open={showKPDialog} onOpenChange={(open) => {
-        setShowKPDialog(open);
+      <Sheet open={showKPSettingsDialog} onOpenChange={(open) => {
+        setShowKPSettingsDialog(open);
         if (open) {
           setKpAddress('');
           setKpInstallationPercent(0);
@@ -1212,6 +1217,11 @@ export function Header({
           </div>
         </DialogContent>
       </Dialog>
+
+      <KPDialog 
+        open={showKPDialog}
+        onOpenChange={setShowKPDialog}
+      />
 
       <ContactDialog 
         open={isContactDialogOpen}
