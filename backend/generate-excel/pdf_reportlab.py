@@ -137,7 +137,21 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         base_price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']
         quantity = product['quantity']
         
-        price_with_installation = base_price * (1 + installation_percent_multiplier)
+        # Проверяем артикул: для Благоустройства (9000-9050) монтаж НЕ применяется
+        article = product.get('article', '')
+        exclude_installation = False
+        try:
+            article_num = int(article) if article.isdigit() else 0
+            if 9000 <= article_num <= 9050:
+                exclude_installation = True
+        except:
+            pass
+        
+        if exclude_installation:
+            price_with_installation = base_price
+        else:
+            price_with_installation = base_price * (1 + installation_percent_multiplier)
+        
         final_price = price_with_installation + delivery_per_unit
         final_sum = final_price * quantity
         equipment_total += final_sum

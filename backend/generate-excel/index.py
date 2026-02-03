@@ -384,8 +384,21 @@ def handler(event, context):
             # Цена ПОЛНАЯ (БЕЗ скидки)
             base_price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']
             
-            # Если монтаж скрыт - добавляем его равномерно на каждый товар
-            price_with_installation = base_price + (installation_per_unit / quantity if quantity > 0 else 0)
+            # Проверяем артикул: для Благоустройства (9000-9050) монтаж НЕ применяется
+            article = product.get('article', '')
+            exclude_installation = False
+            try:
+                article_num = int(article) if article.isdigit() else 0
+                if 9000 <= article_num <= 9050:
+                    exclude_installation = True
+            except:
+                pass
+            
+            # Если монтаж скрыт - добавляем его равномерно на каждый товар (кроме исключений)
+            if exclude_installation:
+                price_with_installation = base_price
+            else:
+                price_with_installation = base_price + (installation_per_unit / quantity if quantity > 0 else 0)
             
             # Если доставка скрыта - добавляем равномерно на единицу товара
             final_price = price_with_installation + delivery_per_unit
