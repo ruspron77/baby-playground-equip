@@ -29,7 +29,7 @@ export interface Subcategory {
   children?: SubSubcategory[];
 }
 
-export const categories = [
+const allCategories = [
   {
     id: 'playground',
     name: 'Игра',
@@ -245,3 +245,5 @@ export const categories = [
     ]
   }
 ];
+
+export const categories = allCategories.filter(cat => !['improvement', 'fencing'].includes(cat.id));
