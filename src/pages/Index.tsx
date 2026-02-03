@@ -137,10 +137,20 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     try {
       const finalInstallationPercent = options?.installationPercent ?? installationPercent;
       const finalDeliveryCost = options?.deliveryCost ?? deliveryCost;
-      const finalInstallationCost = Math.round(calculateTotal() * (finalInstallationPercent / 100));
-
+      
       // Используем sortedCart если передан, иначе обычный cart
       const itemsToExport = options?.sortedCart || cart;
+      
+      // Рассчитываем монтаж ТОЛЬКО от товаров БЕЗ артикулов 9000-9050
+      const totalForInstallation = itemsToExport.reduce((sum, item) => {
+        const article = item.article || '';
+        const articleNum = parseInt(article);
+        const isExcluded = !isNaN(articleNum) && articleNum >= 9000 && articleNum <= 9050;
+        if (isExcluded) return sum;
+        const price = typeof item.price === 'string' ? parseInt(item.price.replace(/\s/g, '')) : item.price;
+        return sum + (price * item.quantity);
+      }, 0);
+      const finalInstallationCost = Math.round(totalForInstallation * (finalInstallationPercent / 100));
       
       const cartProducts = itemsToExport.map(item => {
         const product = products.find(p => p.id === item.id);

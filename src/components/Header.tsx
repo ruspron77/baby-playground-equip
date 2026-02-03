@@ -317,6 +317,19 @@ export function Header({
     setTargetTotal(totalCost - value);
   };
 
+  // Helper: Рассчитать сумму товаров для монтажа (БЕЗ арт. 9000-9050)
+  const calculateTotalForInstallation = (installPercent: number) => {
+    const totalForInstallation = cart.reduce((sum, item) => {
+      const article = item.article || '';
+      const articleNum = parseInt(article);
+      const isExcluded = !isNaN(articleNum) && articleNum >= 9000 && articleNum <= 9050;
+      if (isExcluded) return sum;
+      const price = typeof item.price === 'string' ? parseInt(item.price.replace(/\s/g, '')) : item.price;
+      return sum + (price * item.quantity);
+    }, 0);
+    return Math.round((totalForInstallation * installPercent) / 100);
+  };
+
   const handleKpTargetTotalChange = (value: number) => {
     if (!value || value === 0) {
       setKpTargetTotal(0);
@@ -326,10 +339,9 @@ export function Header({
     }
     setKpTargetTotal(value);
     if (totalCost > 0) {
-      // Итого = товары + монтаж + доставка
-      const totalBeforeDiscount = totalCost + 
-        Math.round((totalCost * kpInstallationPercent) / 100) + 
-        kpDeliveryCost;
+      // Итого = товары + монтаж (ТОЛЬКО от товаров БЕЗ 9000-9050) + доставка
+      const calculatedInstallation = calculateTotalForInstallation(kpInstallationPercent);
+      const totalBeforeDiscount = totalCost + calculatedInstallation + kpDeliveryCost;
       
       // Скидка = Итого - Целевая сумма
       const newDiscountAmount = Math.max(0, totalBeforeDiscount - value);
@@ -353,10 +365,9 @@ export function Header({
     const newDiscountAmount = (totalCost * roundedValue) / 100;
     setKpDiscountAmount(newDiscountAmount);
     
-    // Итого = товары + монтаж + доставка
-    const totalBeforeDiscount = totalCost + 
-      Math.round((totalCost * kpInstallationPercent) / 100) + 
-      kpDeliveryCost;
+    // Итого = товары + монтаж (ТОЛЬКО от товаров БЕЗ 9000-9050) + доставка
+    const calculatedInstallation = calculateTotalForInstallation(kpInstallationPercent);
+    const totalBeforeDiscount = totalCost + calculatedInstallation + kpDeliveryCost;
     
     // Целевая сумма = Итого - Скидка
     setKpTargetTotal(totalBeforeDiscount - newDiscountAmount);
@@ -376,10 +387,9 @@ export function Header({
       setKpDiscountPercent(roundedPercent);
     }
     
-    // Итого = товары + монтаж + доставка
-    const totalBeforeDiscount = totalCost + 
-      Math.round((totalCost * kpInstallationPercent) / 100) + 
-      kpDeliveryCost;
+    // Итого = товары + монтаж (ТОЛЬКО от товаров БЕЗ 9000-9050) + доставка
+    const calculatedInstallation = calculateTotalForInstallation(kpInstallationPercent);
+    const totalBeforeDiscount = totalCost + calculatedInstallation + kpDeliveryCost;
     
     // Целевая сумма = Итого - Скидка
     setKpTargetTotal(totalBeforeDiscount - value);
@@ -1146,17 +1156,7 @@ export function Header({
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span>Монтаж ({kpInstallationPercent}%):</span>
-                <span>{formatPrice(Math.round((() => {
-                  const totalForInstallation = cart.reduce((sum, item) => {
-                    const article = item.article || '';
-                    const articleNum = parseInt(article);
-                    const isExcluded = !isNaN(articleNum) && articleNum >= 9000 && articleNum <= 9050;
-                    if (isExcluded) return sum;
-                    const price = typeof item.price === 'string' ? parseInt(item.price.replace(/\s/g, '')) : item.price;
-                    return sum + (price * item.quantity);
-                  }, 0);
-                  return (totalForInstallation * kpInstallationPercent) / 100;
-                })()))} ₽</span>
+                <span>{formatPrice(calculateTotalForInstallation(kpInstallationPercent))} ₽</span>
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span>Доставка:</span>
@@ -1164,17 +1164,7 @@ export function Header({
               </div>
               <div className="flex justify-between items-center text-sm font-bold border-t pt-2">
                 <span>Итого:</span>
-                <span>{formatPrice(Math.round(totalCost + (() => {
-                  const totalForInstallation = cart.reduce((sum, item) => {
-                    const article = item.article || '';
-                    const articleNum = parseInt(article);
-                    const isExcluded = !isNaN(articleNum) && articleNum >= 9000 && articleNum <= 9050;
-                    if (isExcluded) return sum;
-                    const price = typeof item.price === 'string' ? parseInt(item.price.replace(/\s/g, '')) : item.price;
-                    return sum + (price * item.quantity);
-                  }, 0);
-                  return (totalForInstallation * kpInstallationPercent) / 100;
-                })() + kpDeliveryCost))} ₽</span>
+                <span>{formatPrice(Math.round(totalCost + calculateTotalForInstallation(kpInstallationPercent) + kpDeliveryCost))} ₽</span>
               </div>
               {kpDiscountAmount > 0 && (
                 <div className="flex justify-between items-center text-sm text-red-600">
@@ -1187,17 +1177,7 @@ export function Header({
                 <span className="text-primary">
                   {kpTargetTotal > 0 
                     ? formatPrice(Math.round(kpTargetTotal))
-                    : formatPrice(Math.round(totalCost + (() => {
-                      const totalForInstallation = cart.reduce((sum, item) => {
-                        const article = item.article || '';
-                        const articleNum = parseInt(article);
-                        const isExcluded = !isNaN(articleNum) && articleNum >= 9000 && articleNum <= 9050;
-                        if (isExcluded) return sum;
-                        const price = typeof item.price === 'string' ? parseInt(item.price.replace(/\s/g, '')) : item.price;
-                        return sum + (price * item.quantity);
-                      }, 0);
-                      return (totalForInstallation * kpInstallationPercent) / 100;
-                    })() + kpDeliveryCost - kpDiscountAmount))
+                    : formatPrice(Math.round(totalCost + calculateTotalForInstallation(kpInstallationPercent) + kpDeliveryCost - kpDiscountAmount))
                   } ₽
                 </span>
               </div>

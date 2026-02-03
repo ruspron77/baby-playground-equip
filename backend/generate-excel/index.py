@@ -52,7 +52,7 @@ def get_next_kp_number():
 
 def handler(event, context):
     """Генерация Excel или PDF файла с коммерческим предложением"""
-    print(f'Function started. Memory limit: {context.memory_limit_in_mb} MB')
+    print(f'Function started. Memory: {context.memory_limit_in_mb} MB')
     
     if event.get('httpMethod') == 'OPTIONS':
         return {
@@ -483,7 +483,7 @@ def handler(event, context):
         if delivery_cost > 0 and not hide_delivery:
             ws.row_dimensions[current_row].height = 25
             
-            next_num = len(products) + (2 if (installation_cost > 0 and not hide_installation) else 1)
+            next_num = len(products) + (2 if (calculated_installation_cost > 0 and not hide_installation) else 1)
             cell = ws.cell(row=current_row, column=1, value=next_num)
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.border = thin_border
