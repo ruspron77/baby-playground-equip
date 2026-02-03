@@ -272,10 +272,9 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     # Скидка (если указана)
     if discount_amount > 0:
-        # Показываем скидку (процент и сумму)
-        discount_text = f'Скидка ({discount_percent:.1f}%)' if discount_percent > 0 else 'Скидка'
+        # Показываем только слово "Скидка" без процента, как в Excel
         table_data.append([
-            '', '', '', '', '', discount_text, f'-{abs(discount_amount):,.2f}'.replace(',', ' ')
+            '', '', '', '', '', 'Скидка:', f'-{abs(discount_amount):,.2f}'.replace(',', ' ')
         ])
         
         # Итого к оплате (итого - скидка)
