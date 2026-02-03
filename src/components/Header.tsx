@@ -280,7 +280,7 @@ export function Header({
   };
 
   const handlePasswordSubmit = () => {
-    if (passwordInput === 'admin2024') {
+    if (passwordInput === '1980') {
       setIsAdminMode(true);
       localStorage.setItem('kp_admin_mode', 'true');
       setShowPasswordDialog(false);
