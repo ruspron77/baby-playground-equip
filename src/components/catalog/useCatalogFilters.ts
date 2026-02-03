@@ -60,11 +60,19 @@ export function useCatalogFilters({
       console.log(`После фильтра по категории "${selectedCategory}":`, filtered.length, 'товаров');
     }
     
-    // Затем по серии (Classic/Eco)
+    // Затем по серии (Classic/Eco) или подкатегории для Парк/Благоустройство
     if (selectedSeries) {
       console.log(`Фильтруем по серии "${selectedSeries}"`);
       console.log('Примеры subcategory:', filtered.slice(0, 5).map(p => ({ name: p.name, subcategory: p.subcategory })));
-      filtered = filtered.filter(p => p.subcategory?.includes(selectedSeries));
+      
+      // Для категорий без серий (Парк, Благоустройство) проверяем точное совпадение
+      if (selectedCategory === 'park' || selectedCategory === 'improvement') {
+        filtered = filtered.filter(p => p.subcategory === selectedSeries);
+      } else {
+        // Для категорий с сериями (Игра, Спорт) проверяем вхождение
+        filtered = filtered.filter(p => p.subcategory?.includes(selectedSeries));
+      }
+      
       console.log(`После фильтра по серии "${selectedSeries}":`, filtered.length, 'товаров');
     }
     
