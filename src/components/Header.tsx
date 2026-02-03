@@ -10,6 +10,7 @@ import { CartItem } from './data/catalogData';
 import { Link } from 'react-router-dom';
 import { OrderForm, OrderFormData } from './OrderForm';
 import { ContactDialog } from './ContactDialog';
+import { SendKPDialog } from './SendKPDialog';
 
 interface Product {
   id: number;
@@ -93,6 +94,7 @@ export function Header({
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [orderNumber, setOrderNumber] = useState<string>('');
   const [showKPDialog, setShowKPDialog] = useState(false);
+  const [showSendKPDialog, setShowSendKPDialog] = useState(false);
   const [kpAddress, setKpAddress] = useState('');
   const [kpInstallationPercent, setKpInstallationPercent] = useState(0);
   const [kpDeliveryCost, setKpDeliveryCost] = useState(0);
@@ -641,8 +643,11 @@ export function Header({
                           <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="flex-1" size="lg">
                             Оформить заказ
                           </Button>
-                          <Button onClick={() => setShowKPDialog(true)} variant="outline" className="border-primary text-primary hover:bg-transparent hover:text-primary" size="lg">
+                          <Button onClick={() => setShowSendKPDialog(true)} variant="outline" className="border-primary text-primary hover:bg-transparent hover:text-primary" size="lg">
                             КП
+                          </Button>
+                          <Button onClick={() => setShowKPDialog(true)} variant="outline" size="icon" className="border-primary text-primary hover:bg-transparent hover:text-primary" title="Расширенная версия КП">
+                            <Icon name="Settings" size={20} />
                           </Button>
                         </div>
                       </div>
@@ -1212,6 +1217,11 @@ export function Header({
           </div>
         </DialogContent>
       </Dialog>
+
+      <SendKPDialog 
+        open={showSendKPDialog}
+        onOpenChange={setShowSendKPDialog}
+      />
 
       <ContactDialog 
         open={isContactDialogOpen}
