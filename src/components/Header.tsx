@@ -1146,7 +1146,17 @@ export function Header({
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span>Монтаж ({kpInstallationPercent}%):</span>
-                <span>{formatPrice(Math.round((totalCost * kpInstallationPercent) / 100))} ₽</span>
+                <span>{formatPrice(Math.round((() => {
+                  const totalForInstallation = cart.reduce((sum, item) => {
+                    const article = item.article || '';
+                    const articleNum = parseInt(article);
+                    const isExcluded = !isNaN(articleNum) && articleNum >= 9000 && articleNum <= 9050;
+                    if (isExcluded) return sum;
+                    const price = typeof item.price === 'string' ? parseInt(item.price.replace(/\s/g, '')) : item.price;
+                    return sum + (price * item.quantity);
+                  }, 0);
+                  return (totalForInstallation * kpInstallationPercent) / 100;
+                })()))} ₽</span>
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span>Доставка:</span>
@@ -1154,7 +1164,17 @@ export function Header({
               </div>
               <div className="flex justify-between items-center text-sm font-bold border-t pt-2">
                 <span>Итого:</span>
-                <span>{formatPrice(Math.round(totalCost + (totalCost * kpInstallationPercent) / 100 + kpDeliveryCost))} ₽</span>
+                <span>{formatPrice(Math.round(totalCost + (() => {
+                  const totalForInstallation = cart.reduce((sum, item) => {
+                    const article = item.article || '';
+                    const articleNum = parseInt(article);
+                    const isExcluded = !isNaN(articleNum) && articleNum >= 9000 && articleNum <= 9050;
+                    if (isExcluded) return sum;
+                    const price = typeof item.price === 'string' ? parseInt(item.price.replace(/\s/g, '')) : item.price;
+                    return sum + (price * item.quantity);
+                  }, 0);
+                  return (totalForInstallation * kpInstallationPercent) / 100;
+                })() + kpDeliveryCost))} ₽</span>
               </div>
               {kpDiscountAmount > 0 && (
                 <div className="flex justify-between items-center text-sm text-red-600">
@@ -1167,7 +1187,17 @@ export function Header({
                 <span className="text-primary">
                   {kpTargetTotal > 0 
                     ? formatPrice(Math.round(kpTargetTotal))
-                    : formatPrice(Math.round(totalCost + (totalCost * kpInstallationPercent) / 100 + kpDeliveryCost - kpDiscountAmount))
+                    : formatPrice(Math.round(totalCost + (() => {
+                      const totalForInstallation = cart.reduce((sum, item) => {
+                        const article = item.article || '';
+                        const articleNum = parseInt(article);
+                        const isExcluded = !isNaN(articleNum) && articleNum >= 9000 && articleNum <= 9050;
+                        if (isExcluded) return sum;
+                        const price = typeof item.price === 'string' ? parseInt(item.price.replace(/\s/g, '')) : item.price;
+                        return sum + (price * item.quantity);
+                      }, 0);
+                      return (totalForInstallation * kpInstallationPercent) / 100;
+                    })() + kpDeliveryCost - kpDiscountAmount))
                   } ₽
                 </span>
               </div>

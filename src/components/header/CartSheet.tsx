@@ -144,7 +144,20 @@ export function CartSheet({
 
   const totalCost = calculateTotal();
   const discountedTotal = totalCost - discountAmount;
-  const installationCost = Math.round((discountedTotal * installationPercent) / 100);
+  
+  // Рассчитываем монтаж ТОЛЬКО от товаров, которые не из категории Благоустройство (арт. 9000-9050)
+  const totalForInstallation = cart.reduce((sum, item) => {
+    const article = item.article || '';
+    const articleNum = parseInt(article);
+    const isExcluded = !isNaN(articleNum) && articleNum >= 9000 && articleNum <= 9050;
+    
+    if (isExcluded) return sum;
+    
+    const price = typeof item.price === 'string' ? parseInt(item.price.replace(/\s/g, '')) : item.price;
+    return sum + (price * item.quantity);
+  }, 0);
+  
+  const installationCost = Math.round((totalForInstallation * installationPercent) / 100);
   const finalTotal = Math.round(discountedTotal + installationCost + deliveryCost);
 
   return (

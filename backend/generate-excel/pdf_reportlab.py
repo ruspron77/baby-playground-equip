@@ -219,21 +219,21 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             f'{final_sum:,.2f}'.replace(',', ' ')
         ])
     
-    # Монтаж (если не скрыт)
-    if installation_cost > 0 and not hide_installation:
+    # Монтаж (если не скрыт) - используем рассчитанное значение БЕЗ исключенных товаров
+    if calculated_installation_cost > 0 and not hide_installation:
         table_data.append([
             str(len(products) + 1),
             f'Монтаж ({installation_percent}%)',
             '',
             '1',
             'усл',
-            f'{installation_cost:,.2f}'.replace(',', ' '),
-            f'{installation_cost:,.2f}'.replace(',', ' ')
+            f'{calculated_installation_cost:,.2f}'.replace(',', ' '),
+            f'{calculated_installation_cost:,.2f}'.replace(',', ' ')
         ])
     
     # Доставка (если не скрыта)
     if delivery_cost > 0 and not hide_delivery:
-        next_num = len(products) + (2 if (installation_cost > 0 and not hide_installation) else 1)
+        next_num = len(products) + (2 if (calculated_installation_cost > 0 and not hide_installation) else 1)
         table_data.append([
             str(next_num),
             'Доставка',
@@ -246,8 +246,8 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     # Итого (с учетом только видимых строк)
     total_sum = equipment_total
-    if installation_cost > 0 and not hide_installation:
-        total_sum += installation_cost
+    if calculated_installation_cost > 0 and not hide_installation:
+        total_sum += calculated_installation_cost
     if delivery_cost > 0 and not hide_delivery:
         total_sum += delivery_cost
     
