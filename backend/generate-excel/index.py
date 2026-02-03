@@ -265,9 +265,24 @@ def handler(event, context):
         total_product_quantity = sum(p['quantity'] for p in products)
         
         # Сначала считаем оригинальную сумму товаров для расчета скидки
+        equipment_total_for_installation = 0  # Сумма товаров для расчета монтажа (без исключений)
         for product in products:
             base_price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']
-            equipment_total_original += base_price * product['quantity']
+            product_sum = base_price * product['quantity']
+            equipment_total_original += product_sum
+            
+            # Проверяем артикул: для Благоустройства (9000-9050) НЕ учитываем в базе монтажа
+            article = product.get('article', '')
+            exclude_from_installation = False
+            try:
+                article_num = int(article) if article.isdigit() else 0
+                if 9000 <= article_num <= 9050:
+                    exclude_from_installation = True
+            except:
+                pass
+            
+            if not exclude_from_installation:
+                equipment_total_for_installation += product_sum
         
         # Рассчитываем скидку от суммы товаров
         discount_value = 0
@@ -276,8 +291,8 @@ def handler(event, context):
         elif discount_percent > 0:
             discount_value = equipment_total_original * (discount_percent / 100)
         
-        # Монтаж считается от суммы товаров ДО скидки
-        calculated_installation_cost = equipment_total_original * (installation_percent / 100) if installation_percent > 0 else 0
+        # Монтаж считается ТОЛЬКО от товаров, которые не в исключениях (без Благоустройства 9000-9050)
+        calculated_installation_cost = equipment_total_for_installation * (installation_percent / 100) if installation_percent > 0 else 0
         
         # Доставка на единицу товара (равномерное распределение, если скрыта)
         delivery_per_unit = (delivery_cost / total_product_quantity) if (hide_delivery and delivery_cost > 0 and total_product_quantity > 0) else 0

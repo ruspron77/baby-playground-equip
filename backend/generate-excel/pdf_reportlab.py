@@ -131,7 +131,28 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     equipment_total = 0
     total_product_quantity = sum(p['quantity'] for p in products)
     delivery_per_unit = (delivery_cost / total_product_quantity) if (hide_delivery and delivery_cost > 0 and total_product_quantity > 0) else 0
-    installation_percent_multiplier = (installation_percent / 100) if (hide_installation and installation_percent > 0) else 0
+    
+    # Рассчитываем сумму товаров для монтажа (исключая Благоустройство 9000-9050)
+    equipment_total_for_installation = 0
+    for p in products:
+        article = p.get('article', '')
+        exclude = False
+        try:
+            article_num = int(article) if article.isdigit() else 0
+            if 9000 <= article_num <= 9050:
+                exclude = True
+        except:
+            pass
+        
+        if not exclude:
+            base_price = int(p['price'].replace(' ', '')) if isinstance(p['price'], str) else p['price']
+            equipment_total_for_installation += base_price * p['quantity']
+    
+    # Рассчитываем монтаж ТОЛЬКО от товаров, к которым он применяется
+    calculated_installation_cost = equipment_total_for_installation * (installation_percent / 100) if installation_percent > 0 else 0
+    
+    # Если монтаж скрыт, распределяем его только на товары БЕЗ исключений
+    installation_per_unit = (calculated_installation_cost / total_product_quantity) if (hide_installation and calculated_installation_cost > 0 and total_product_quantity > 0) else 0
     
     for idx, product in enumerate(products, 1):
         base_price = int(product['price'].replace(' ', '')) if isinstance(product['price'], str) else product['price']
@@ -150,7 +171,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         if exclude_installation:
             price_with_installation = base_price
         else:
-            price_with_installation = base_price * (1 + installation_percent_multiplier)
+            price_with_installation = base_price + (installation_per_unit / quantity if quantity > 0 else 0)
         
         final_price = price_with_installation + delivery_per_unit
         final_sum = final_price * quantity
