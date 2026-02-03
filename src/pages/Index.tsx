@@ -322,6 +322,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
           toggleFavorite={toggleFavorite}
           cart={cart}
           updateQuantity={updateQuantity}
+          setIsCartOpen={setIsCartOpen}
         />
       </div>
       

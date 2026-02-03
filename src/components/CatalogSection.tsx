@@ -96,6 +96,7 @@ interface CatalogSectionProps {
   toggleFavorite: (product: Product) => void;
   cart: any[];
   updateQuantity: (id: number, quantity: number) => void;
+  setIsCartOpen: (open: boolean) => void;
 }
 
 export function CatalogSection({
@@ -144,6 +145,7 @@ export function CatalogSection({
   toggleFavorite,
   cart,
   updateQuantity,
+  setIsCartOpen,
 }: CatalogSectionProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProductDialogOpen, setIsProductDialogOpen] = useState(false);
@@ -303,6 +305,7 @@ export function CatalogSection({
         isProductDialogOpen={isProductDialogOpen}
         cart={cart}
         updateQuantity={updateQuantity}
+        setIsCartOpen={setIsCartOpen}
       />
 
       <ProductDialog

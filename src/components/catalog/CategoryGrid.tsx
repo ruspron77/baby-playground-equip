@@ -66,6 +66,7 @@ interface CategoryGridProps {
   isProductDialogOpen: boolean;
   cart: CartItem[];
   updateQuantity: (id: number, quantity: number) => void;
+  setIsCartOpen: (open: boolean) => void;
 }
 
 const formatPrice = (price: string | number): string => {
@@ -97,6 +98,7 @@ export function CategoryGrid({
   isProductDialogOpen,
   cart,
   updateQuantity,
+  setIsCartOpen,
 }: CategoryGridProps) {
   if (!selectedCategory) return null;
 
@@ -368,6 +370,7 @@ export function CategoryGrid({
                         setSelectedProduct(product);
                       }}
                       onStopPropagation={(e) => e.stopPropagation()}
+                      onOpenCart={() => setIsCartOpen(true)}
                     />
                   ) : (
                     <Button 
