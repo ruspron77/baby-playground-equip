@@ -219,7 +219,7 @@ export function ProductDialog({
               )}
             </div>
 
-            <div className="flex flex-col justify-start space-y-2 md:space-y-4 overflow-y-auto flex-1">
+            <div className="flex flex-col justify-start space-y-2 md:space-y-4 overflow-y-auto flex-1 mx-0 px-2.5">
               <div>
                 <p className="sm:text-base sm:mb-2 text-[#5a098c] font-medium text-sm leading-tight my-[1px] select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{selectedProduct.name.split('\n')[0]}</p>
                 <h2 className="font-heading sm:mb-4 font-semibold sm:text-3xl text-xl leading-tight line-clamp-2 sm:line-clamp-none py-0 my-0 select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
