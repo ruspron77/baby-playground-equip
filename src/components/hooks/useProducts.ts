@@ -38,8 +38,8 @@ export function useProducts() {
             // Обработка старого формата для Workout (без иерархии)
             if (p.category === 'Workout') {
               mappedCategory = 'sport';
-              subcategory = 'Серия "Classic Sport"';
-              subsubcategory = 'Workout';
+              subcategory = 'Classic Sport';
+              subsubcategory = 'Воркаут';
             }
             
             // Парсим категорию из формата "Категория > Подкатегория > Подподкатегория > ..."
@@ -70,15 +70,15 @@ export function useProducts() {
                   // Определяем серию из parts[1] для Игра/Спорт
                   const seriesName = parts[1];
                   if (seriesName === 'Classic' || seriesName === 'classic') {
-                    subcategory = 'Серия "Classic"';
+                    subcategory = 'Classic';
                   } else if (seriesName === 'Eco' || seriesName === 'eco') {
-                    subcategory = 'Серия "Eco"';
+                    subcategory = 'Eco';
                   } else if (seriesName === 'Classic Sport') {
-                    subcategory = 'Серия "Classic Sport"';
+                    subcategory = 'Classic Sport';
                   } else if (seriesName === 'Eco Sport') {
-                    subcategory = 'Серия "Eco Sport"';
+                    subcategory = 'Eco Sport';
                   } else {
-                    subcategory = 'Серия "Classic"'; // По умолчанию Classic
+                    subcategory = 'Classic'; // По умолчанию Classic
                   }
                 }
               }
@@ -176,13 +176,13 @@ export function useProducts() {
             } else {
               // Старая логика для обратной совместимости
               if (p.name.includes('Сиденье') || p.name.includes('Качели')) {
-                subcategory = 'Серия "Classic"';
+                subcategory = 'Classic';
                 subsubcategory = 'Качели';
               } else if (p.name.includes('Карусель')) {
-                subcategory = 'Серия "Classic"';
+                subcategory = 'Classic';
                 subsubcategory = 'Карусели';
               } else if (p.name.includes('Балансир')) {
-                subcategory = 'Серия "Classic"';
+                subcategory = 'Classic';
                 subsubcategory = 'Балансиры';
               } else if (p.name.includes('Горка')) {
                 subcategory = 'Серия "Classic"';

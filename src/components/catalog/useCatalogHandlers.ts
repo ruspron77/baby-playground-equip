@@ -86,11 +86,11 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
       setIsSubSubcategoryDialogOpen(false);
     } else {
       console.log('No children, showing products');
-      if (currentCategory) {
+      if (currentCategory && currentSubcategory) {
         setSelectedCategory(currentCategory.id);
-        setSelectedSubcategory(currentSubcategory?.name || null);
+        setSelectedSubcategory(currentSubcategory.name);
         setSelectedSubSubcategory(subSub.name);
-        setSelectedSeries(currentSubcategory?.name || null);
+        setSelectedSeries(currentSubcategory.name);
         setIsSubSubcategoryDialogOpen(false);
         setTimeout(() => {
           const productsSection = document.getElementById('products');

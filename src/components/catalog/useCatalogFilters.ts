@@ -69,8 +69,10 @@ export function useCatalogFilters({
       if (selectedCategory === 'park' || selectedCategory === 'improvement') {
         filtered = filtered.filter(p => p.subcategory === selectedSeries);
       } else {
-        // Для категорий с сериями (Игра, Спорт) проверяем вхождение
-        filtered = filtered.filter(p => p.subcategory?.includes(selectedSeries));
+        // Для категорий с сериями (Игра, Спорт) проверяем вхождение или равенство
+        filtered = filtered.filter(p => 
+          p.subcategory === selectedSeries || p.subcategory?.includes(selectedSeries)
+        );
       }
       
       console.log(`После фильтра по серии "${selectedSeries}":`, filtered.length, 'товаров');
