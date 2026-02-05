@@ -14,6 +14,8 @@ interface CartButtonProps {
 export function CartButton({ quantityInCart, step, productId, updateQuantity, onStopPropagation, onOpenCart, productCategory }: CartButtonProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [prevQuantity, setPrevQuantity] = useState(quantityInCart);
+  
+  console.log(`🔴 CartButton: productId=${productId}, productCategory="${productCategory}", quantityInCart=${quantityInCart}`);
 
   useEffect(() => {
     if (quantityInCart !== prevQuantity) {
