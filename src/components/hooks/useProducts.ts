@@ -40,6 +40,7 @@ export function useProducts() {
               mappedCategory = 'sport';
               subcategory = 'Classic Sport';
               subsubcategory = 'Воркаут';
+              console.log(`🏋️ Маппинг Workout товара: ${p.name} → subsubcategory: "Воркаут"`);
             }
             
             // Парсим категорию из формата "Категория > Подкатегория > Подподкатегория > ..."
@@ -162,14 +163,23 @@ export function useProducts() {
                   if (lowerNormalized === 'лабиринт') {
                     return 'Лабиринт';
                   }
+                  
+                  // Маппинг спортивных категорий (английский → русский)
+                  if (lowerNormalized === 'workout') {
+                    return 'Воркаут';
+                  }
+                  
                   return normalized;
                 });
                 
                 subsubcategory = subParts.join(' > ');
                 
-                // Лог для Горок
+                // Лог для Горок и Спорта
                 if (p.name.includes('Горк')) {
                   console.log(`🛝 Итоговая subsubcategory для "${p.name}": "${subsubcategory}"`);
+                }
+                if (mappedCategory === 'sport' && p.name.includes('Арт. 8')) {
+                  console.log(`🏋️ Eco Sport товар: "${p.name}", category: "${p.category}", subcategory: "${subcategory}", subsubcategory: "${subsubcategory}"`);
                 }
                 }
               }
