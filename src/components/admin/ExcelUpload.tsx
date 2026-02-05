@@ -12,6 +12,7 @@ export function ExcelUpload({ onStatusChange }: ExcelUploadProps) {
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [updateMode, setUpdateMode] = useState<'new' | 'update'>('update');
+  const [isDownloadingTemplate, setIsDownloadingTemplate] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -22,6 +23,36 @@ export function ExcelUpload({ onStatusChange }: ExcelUploadProps) {
       } else {
         onStatusChange('error', 'Пожалуйста, выберите файл Excel (.xls или .xlsx)');
       }
+    }
+  };
+
+  const handleDownloadTemplate = async () => {
+    setIsDownloadingTemplate(true);
+    try {
+      const response = await fetch('https://functions.poehali.dev/917765db-45ab-4e16-aab0-381a5f51201c', {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка загрузки шаблона');
+      }
+
+      const result = await response.json();
+      
+      if (result.file) {
+        const link = document.createElement('a');
+        link.href = `data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,${result.file}`;
+        link.download = 'Шаблон_загрузки_товаров.xlsx';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        onStatusChange('success', 'Шаблон успешно скачан!');
+      }
+    } catch (error) {
+      console.error('Error downloading template:', error);
+      onStatusChange('error', 'Ошибка при скачивании шаблона');
+    } finally {
+      setIsDownloadingTemplate(false);
     }
   };
 
@@ -111,6 +142,24 @@ export function ExcelUpload({ onStatusChange }: ExcelUploadProps) {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
+        <Button
+          onClick={handleDownloadTemplate}
+          disabled={isDownloadingTemplate}
+          variant="outline"
+          className="w-full"
+        >
+          {isDownloadingTemplate ? (
+            <>
+              <Icon name="Loader2" size={16} className="mr-2 animate-spin" />
+              Скачивание...
+            </>
+          ) : (
+            <>
+              <Icon name="Download" size={16} className="mr-2" />
+              Скачать шаблон Excel
+            </>
+          )}
+        </Button>
         <div className="space-y-2">
           <label className="text-sm font-medium">Режим загрузки:</label>
           <div className="flex gap-2">
