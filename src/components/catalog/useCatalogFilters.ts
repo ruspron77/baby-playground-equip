@@ -95,20 +95,22 @@ export function useCatalogFilters({
       filtered = filtered.filter(p => {
         if (!p.subsubcategory) return false;
         
-        // Если выбрано просто "Комплексы 3-7 лет" (все серии) или "Комплексы 5-12 лет" или "Воркаут"
+        // Если выбрано просто "Комплексы 3-7 лет" (все категории) или "Комплексы 5-12 лет" или "Воркаут"
         if (parts.length === 1) {
           // Показываем все товары, у которых subsubcategory начинается с выбранной категории или равна ей
-          return p.subsubcategory === parts[0] || p.subsubcategory.startsWith(parts[0]);
+          return p.subsubcategory === parts[0] || p.subsubcategory.startsWith(parts[0] + ' >');
         }
         
         // Если выбрано "Комплексы 3-7 лет > Классик" или "Тренажеры уличные > Одиночные"
         if (parts.length === 2) {
-          // Проверяем точное совпадение обеих частей
-          return p.subsubcategory === selectedSubSubcategory;
+          // Проверяем точное совпадение ИЛИ начало строки (для вложенных категорий)
+          return p.subsubcategory === selectedSubSubcategory || 
+                 p.subsubcategory.startsWith(selectedSubSubcategory + ' >');
         }
         
         // Для других категорий (не игровые комплексы)
-        return p.subsubcategory === selectedSubSubcategory;
+        return p.subsubcategory === selectedSubSubcategory || 
+               p.subsubcategory.startsWith(selectedSubSubcategory + ' >');
       });
       console.log(`После фильтра по подкатегории "${selectedSubSubcategory}":`, filtered.length, 'товаров');
     }
