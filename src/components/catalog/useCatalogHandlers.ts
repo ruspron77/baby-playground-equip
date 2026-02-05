@@ -51,17 +51,22 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
   };
 
   const handleSubcategorySelect = (sub: Subcategory) => {
+    console.log(`🟡 handleSubcategorySelect: name="${sub.name}", hasChildren=${sub.hasChildren}`);
+    
     if (sub.hasChildren && sub.children) {
+      console.log(`🟡 Открываем диалог подподкатегорий для "${sub.name}"`);
       setCurrentSubcategory(sub);
       setIsSubSubcategoryDialogOpen(true);
       setIsCategoryDialogOpen(false);
     } else {
+      console.log(`🟡 Выбрана подкатегория БЕЗ детей: "${sub.name}", сбрасываем selectedSubSubcategory`);
       if (currentCategory) {
         setSelectedCategory(currentCategory.id);
         setSelectedSubcategory(sub.name);
         setSelectedSubSubcategory(null);
         setSelectedSeries(sub.name);
         setIsCategoryDialogOpen(false);
+        console.log(`🟡 State обновлен: category="${currentCategory.id}", subcategory="${sub.name}", subSubcategory=null`);
         setTimeout(() => {
           const productsSection = document.getElementById('products');
           if (productsSection) {
