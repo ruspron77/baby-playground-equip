@@ -26,6 +26,12 @@ export function useCatalogFilters({
   selectedSubSubcategory,
   searchQuery,
 }: UseCatalogFiltersProps) {
+  console.log(`🔵 useCatalogFilters вызван с:`, {
+    selectedCategory,
+    selectedSeries,
+    selectedSubSubcategory,
+    searchQuery
+  });
   const availableCategories = (() => {
     let filtered = products;
     

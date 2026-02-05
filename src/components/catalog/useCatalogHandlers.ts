@@ -119,6 +119,7 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
 
   const handleTreeSubcategorySelect = (categoryId: string, categoryData: typeof categories[0], subName: string, sub: Subcategory) => {
     console.log(`🎯 handleTreeSubcategorySelect: category="${categoryId}", subcategory="${subName}", hasChildren=${sub.hasChildren}`);
+    console.log(`🔴 ПЕРЕД СБРОСОМ: selectedSubSubcategory будет сброшена`);
     
     // Всегда показываем товары при клике на подкатегорию
     setSelectedCategory(categoryId);
@@ -126,6 +127,8 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
     setSelectedSubSubcategory(null); // КРИТИЧНО: всегда сбрасываем подподкатегорию
     setSelectedSeries(subName);
     setCurrentCategory(categoryData);
+    
+    console.log(`✅ ПОСЛЕ СБРОСА: selectedSubSubcategory установлена в null`);
     
     if (sub.hasChildren) {
       const key = `${categoryId}-${subName}`;
