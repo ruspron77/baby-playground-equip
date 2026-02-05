@@ -91,32 +91,20 @@ export function useCatalogFilters({
       const parts = selectedSubSubcategory.split(' > ');
       console.log(`Фильтруем по подкатегории "${selectedSubSubcategory}"`);
       console.log('Примеры subsubcategory:', filtered.slice(0, 5).map(p => ({ name: p.name, subsubcategory: p.subsubcategory })));
-      console.log(`Parts.length: ${parts.length}, parts:`, parts);
       
       filtered = filtered.filter(p => {
-        if (!p.subsubcategory) {
-          console.log(`❌ Товар "${p.name}" пропущен: нет subsubcategory`);
-          return false;
-        }
+        if (!p.subsubcategory) return false;
         
         // Если выбрано просто "Комплексы 3-7 лет" (все серии) или "Комплексы 5-12 лет" или "Воркаут"
         if (parts.length === 1) {
           // Показываем все товары, у которых subsubcategory начинается с выбранной категории или равна ей
-          const match = p.subsubcategory === parts[0] || p.subsubcategory.startsWith(parts[0]);
-          if (!match) {
-            console.log(`❌ Товар "${p.name}": "${p.subsubcategory}" !== "${parts[0]}" и не startsWith`);
-          }
-          return match;
+          return p.subsubcategory === parts[0] || p.subsubcategory.startsWith(parts[0]);
         }
         
         // Если выбрано "Комплексы 3-7 лет > Классик" или "Тренажеры уличные > Одиночные"
         if (parts.length === 2) {
           // Проверяем точное совпадение обеих частей
-          const match = p.subsubcategory === selectedSubSubcategory;
-          if (!match) {
-            console.log(`❌ Товар "${p.name}": "${p.subsubcategory}" !== "${selectedSubSubcategory}"`);
-          }
-          return match;
+          return p.subsubcategory === selectedSubSubcategory;
         }
         
         // Для других категорий (не игровые комплексы)

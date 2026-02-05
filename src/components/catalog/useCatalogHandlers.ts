@@ -118,25 +118,32 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
   };
 
   const handleTreeSubcategorySelect = (categoryId: string, categoryData: typeof categories[0], subName: string, sub: Subcategory) => {
+    console.log(`🎯 handleTreeSubcategorySelect: category="${categoryId}", subcategory="${subName}", hasChildren=${sub.hasChildren}`);
+    
+    // Всегда показываем товары при клике на подкатегорию
+    setSelectedCategory(categoryId);
+    setSelectedSubcategory(subName);
+    setSelectedSubSubcategory(null); // КРИТИЧНО: всегда сбрасываем подподкатегорию
+    setSelectedSeries(subName);
+    setCurrentCategory(categoryData);
+    
     if (sub.hasChildren) {
       const key = `${categoryId}-${subName}`;
+      // Разворачиваем меню если свернуто
       setExpandedSubcategories(prev => 
-        prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]
+        prev.includes(key) ? prev : [...prev, key]
       );
     } else {
-      setSelectedCategory(categoryId);
-      setSelectedSubcategory(subName);
-      setSelectedSubSubcategory(null);
-      setSelectedSeries(subName);
-      setCurrentCategory(categoryData);
       setIsSideMenuOpen(false);
-      setTimeout(() => {
-        const productsSection = document.getElementById('products');
-        if (productsSection) {
-          productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 300);
     }
+    
+    // Прокручиваем к товарам
+    setTimeout(() => {
+      const productsSection = document.getElementById('products');
+      if (productsSection) {
+        productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 300);
   };
 
   const handleTreeSubSubcategorySelect = (categoryId: string, categoryData: typeof categories[0], subName: string, subSubName: string, subSub: SubSubcategory) => {
