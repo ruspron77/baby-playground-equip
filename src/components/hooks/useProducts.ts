@@ -11,6 +11,7 @@ interface Product {
   image: string;
   description?: string;
   dimensions?: string;
+  unit?: string;
 }
 
 export function useProducts() {
@@ -216,7 +217,8 @@ export function useProducts() {
               price: p.price?.toString() || '0',
               image: p.image,
               description: p.description,
-              dimensions: p.dimensions
+              dimensions: p.dimensions,
+              unit: p.unit || 'шт'
             };
           }));
         }

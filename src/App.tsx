@@ -69,7 +69,7 @@ const App = () => {
     if (existingItem) {
       newCart = cart.map(item => 
         item.id === product.id 
-          ? { ...item, quantity: item.quantity + productStep, step: productStep, article: product.article }
+          ? { ...item, quantity: item.quantity + productStep, step: productStep, article: product.article, unit: product.unit }
           : item
       );
     } else {
@@ -80,7 +80,8 @@ const App = () => {
         quantity: productStep,
         image: product.image,
         article: product.article,
-        step: productStep
+        step: productStep,
+        unit: product.unit
       }];
     }
     

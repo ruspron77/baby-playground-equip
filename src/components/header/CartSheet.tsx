@@ -341,7 +341,7 @@ export function CartSheet({
                         >
                           <Icon name="Minus" size={16} />
                         </Button>
-                        <span className={isMobile ? "w-8 text-center font-medium my-0 py-0" : "w-8 text-center font-medium"}>{item.quantity}</span>
+                        <span className={isMobile ? "min-w-[60px] text-center font-medium my-0 py-0" : "min-w-[60px] text-center font-medium"}>{item.quantity} {item.unit || 'шт'}</span>
                         <Button
                           variant="outline"
                           size="icon"
