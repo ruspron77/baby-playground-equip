@@ -5,7 +5,7 @@ export function ServicesSection() {
   return (
     <section id="services" className="bg-muted/30 order-1 md:order-1 py-2.5">
       <div className="container mx-auto px-3">
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 my-0 py-2">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 py-2 my-[5px]">
           {[
             { icon: 'Ruler', title: 'Проектирование', desc: 'Разработка индивидуальных проектов детских площадок', color: 'text-[#44aa02]', bg: 'bg-[#44aa02]/10' },
             { icon: 'Factory', title: 'Производство', desc: 'Собственное производство из качественных материалов', color: 'text-[#ea580c]', bg: 'bg-[#ea580c]/10' },
