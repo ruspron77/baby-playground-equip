@@ -44,7 +44,7 @@ export function CartButton({ quantityInCart, step, productId, updateQuantity, on
         }}
         className="flex-1 h-full bg-primary hover:bg-primary/80 text-primary-foreground flex items-center justify-center px-1 transition-colors cursor-pointer"
       >
-        <span className="text-[11px] leading-none font-medium">В корзине {productCategory === 'improvement' ? '1' : quantityInCart} шт</span>
+        <span className="text-[11px] leading-none font-medium">В корзине {quantityInCart} шт</span>
       </button>
       <button
         onClick={(e) => {
