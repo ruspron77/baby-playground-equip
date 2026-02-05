@@ -368,7 +368,7 @@ export function CategoryGrid({
                       quantityInCart={quantityInCart}
                       step={step}
                       productId={product.id}
-                      productCategory={product.category}
+                      productCategory={selectedSeries === 'Благоустройство' ? 'improvement' : product.category}
                       updateQuantity={(id, qty) => {
                         updateQuantity(id, qty);
                         setSelectedProduct(product);
