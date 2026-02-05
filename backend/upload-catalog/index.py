@@ -143,6 +143,8 @@ def handler(event: dict, context) -> dict:
                             col_indices['name'] = col_idx
                         elif 'габарит' in val or 'размер' in val:
                             col_indices['dimensions'] = col_idx
+                        elif 'ед.' in val and 'изм' in val:
+                            col_indices['unit'] = col_idx
                         elif 'цена' in val:
                             col_indices['price'] = col_idx
                     break
@@ -180,9 +182,10 @@ def handler(event: dict, context) -> dict:
                 article = str(row[col_indices.get('article', 4)]).strip() if col_indices.get('article') is not None and len(row) > col_indices.get('article', 4) and row[col_indices.get('article', 4)] else ''
                 name = str(row[col_indices.get('name', 5)]).strip() if col_indices.get('name') is not None and len(row) > col_indices.get('name', 5) and row[col_indices.get('name', 5)] else ''
                 dimensions = str(row[col_indices.get('dimensions', 6)]).strip() if col_indices.get('dimensions') is not None and len(row) > col_indices.get('dimensions', 6) and row[col_indices.get('dimensions', 6)] else ''
+                unit = str(row[col_indices.get('unit', 8)]).strip() if col_indices.get('unit') is not None and len(row) > col_indices.get('unit', 8) and row[col_indices.get('unit', 8)] else 'шт'
                 
                 # Обработка цены
-                price_val = row[col_indices.get('price', 7)] if col_indices.get('price') is not None and len(row) > col_indices.get('price', 7) else 0
+                price_val = row[col_indices.get('price', 9)] if col_indices.get('price') is not None and len(row) > col_indices.get('price', 9) else 0
                 try:
                     price = int(float(str(price_val).replace(' ', '').replace(',', '.').replace('₽', '').strip())) if price_val else 0
                 except:
@@ -202,6 +205,7 @@ def handler(event: dict, context) -> dict:
                 safe_category = full_category.replace("'", "''")
                 safe_dimensions = dimensions.replace("'", "''")
                 safe_image_url = (image_url or '').replace("'", "''")
+                safe_unit = unit.replace("'", "''")
                 
                 # Проверяем существует ли товар
                 cursor.execute(f"SELECT id FROM {schema}.products WHERE article = '{safe_article}'")
@@ -216,22 +220,23 @@ def handler(event: dict, context) -> dict:
                                 category = '{safe_category}',
                                 price = {price},
                                 dimensions = '{safe_dimensions}',
+                                unit = '{safe_unit}',
                                 image_url = CASE WHEN '{safe_image_url}' != '' THEN '{safe_image_url}' ELSE image_url END
                             WHERE article = '{safe_article}'
                         """)
                         updated_count += 1
                     else:
                         cursor.execute(f"""
-                            INSERT INTO {schema}.products (article, name, category, price, dimensions, image_url)
-                            VALUES ('{safe_article}', '{safe_name}', '{safe_category}', {price}, '{safe_dimensions}', '{safe_image_url}')
+                            INSERT INTO {schema}.products (article, name, category, price, dimensions, unit, image_url)
+                            VALUES ('{safe_article}', '{safe_name}', '{safe_category}', {price}, '{safe_dimensions}', '{safe_unit}', '{safe_image_url}')
                         """)
                         added_count += 1
                 else:
                     # Режим добавления - только новые товары
                     if not existing:
                         cursor.execute(f"""
-                            INSERT INTO {schema}.products (article, name, category, price, dimensions, image_url)
-                            VALUES ('{safe_article}', '{safe_name}', '{safe_category}', {price}, '{safe_dimensions}', '{safe_image_url}')
+                            INSERT INTO {schema}.products (article, name, category, price, dimensions, unit, image_url)
+                            VALUES ('{safe_article}', '{safe_name}', '{safe_category}', {price}, '{safe_dimensions}', '{safe_unit}', '{safe_image_url}')
                         """)
                         added_count += 1
                 

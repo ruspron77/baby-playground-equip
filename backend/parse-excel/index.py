@@ -69,45 +69,43 @@ def handler(event: dict, context) -> dict:
                     continue
                 
                 # Извлекаем данные из колонок
-                # Обычно структура: [пусто, пусто/артикул, название+артикул, габариты, вес, объем, цена, ед.изм]
-                name_and_code = str(row_values[2]).strip() if len(row_values) > 2 else ''
-                dimensions = str(row_values[3]).strip() if len(row_values) > 3 else ''
-                weight = str(row_values[4]).strip() if len(row_values) > 4 else ''
-                volume = str(row_values[5]).strip() if len(row_values) > 5 else ''
-                price = str(row_values[6]).strip() if len(row_values) > 6 else ''
-                unit = str(row_values[7]).strip() if len(row_values) > 7 else 'шт'
+                # Структура: A-картинка, B-категория, C-подкатегория, D-подподкатегория, E-подподподкатегория, F-артикул, G-название, H-размеры, I-ед.изм, J-цена
+                image_url = str(row_values[0]).strip() if len(row_values) > 0 else ''
+                category = str(row_values[1]).strip() if len(row_values) > 1 else ''
+                subcategory = str(row_values[2]).strip() if len(row_values) > 2 else ''
+                subsubcategory = str(row_values[3]).strip() if len(row_values) > 3 else ''
+                subsubsubcategory = str(row_values[4]).strip() if len(row_values) > 4 else ''
+                article = str(row_values[5]).strip() if len(row_values) > 5 else ''
+                name = str(row_values[6]).strip() if len(row_values) > 6 else ''
+                dimensions = str(row_values[7]).strip() if len(row_values) > 7 else ''
+                unit = str(row_values[8]).strip() if len(row_values) > 8 else 'шт'
+                price = str(row_values[9]).strip() if len(row_values) > 9 else ''
                 
                 # Пропускаем если нет названия
-                if not name_and_code:
+                if not name:
                     continue
                 
                 # Пропускаем заголовки подразделов
-                if any(word in name_and_code.lower() for word in ['workout, комплексы', 'workout, снаряды', 'тренажеры']):
+                if any(word in name.lower() for word in ['workout, комплексы', 'workout, снаряды', 'тренажеры']):
                     continue
-                
-                # Извлекаем артикул из названия (обычно формат "Название     КОД-12")
-                article_match = re.search(r'([А-Яа-яA-Za-z]{2,4}-\d+)', name_and_code)
-                article = article_match.group(1) if article_match else ''
-                
-                # Очищаем название от артикула
-                if article:
-                    name = re.sub(r'\s*[А-Яа-яA-Za-z]{2,4}-\d+\s*', '', name_and_code).strip()
-                else:
-                    name = name_and_code
                 
                 # Создаём товар
                 product = {
                     'article': article,
                     'name': name,
-                    'category': sheet_name,
+                    'category': category or sheet_name,
                 }
                 
+                if image_url:
+                    product['image'] = image_url
+                if subcategory:
+                    product['subcategory'] = subcategory
+                if subsubcategory:
+                    product['subsubcategory'] = subsubcategory
+                if subsubsubcategory:
+                    product['subsubsubcategory'] = subsubsubcategory
                 if dimensions:
                     product['dimensions'] = dimensions
-                if weight:
-                    product['weight'] = weight
-                if volume:
-                    product['volume'] = volume
                 if price:
                     product['price'] = price
                 if unit:
