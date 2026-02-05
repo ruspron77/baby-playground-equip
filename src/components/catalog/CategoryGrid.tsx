@@ -211,7 +211,10 @@ export function CategoryGrid({
               <Select
                 value={selectedSeries || 'all-series'}
                 onValueChange={(value) => {
+                  console.log(`🟢 CategoryGrid: setSelectedSeries вызван с value="${value}"`);
                   setSelectedSeries(value === 'all-series' ? null : value);
+                  setSelectedSubSubcategory(null); // КРИТИЧНО: сбрасываем подподкатегорию
+                  console.log(`🟢 CategoryGrid: selectedSubSubcategory сброшена в null`);
                   setTimeout(() => {
                     if (productsRef.current) {
                       productsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
