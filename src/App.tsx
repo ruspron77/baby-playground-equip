@@ -22,6 +22,7 @@ interface Product {
   image: string;
   description?: string;
   article?: string;
+  unit?: string;
 }
 
 const App = () => {

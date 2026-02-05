@@ -24,6 +24,7 @@ interface Product {
   description?: string;
   dimensions?: string;
   article?: string;
+  unit?: string;
 }
 
 interface HeaderProps {

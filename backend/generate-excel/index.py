@@ -394,7 +394,8 @@ def handler(event, context):
             cell.font = Font(name='Calibri', size=11)
             
             # Ед. изм
-            cell = ws.cell(row=current_row, column=5, value='шт')
+            unit = product.get('unit', 'шт')
+            cell = ws.cell(row=current_row, column=5, value=unit)
             cell.alignment = Alignment(horizontal='center', vertical='center')
             cell.border = thin_border
             cell.font = Font(name='Calibri', size=11)

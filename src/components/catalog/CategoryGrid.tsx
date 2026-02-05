@@ -19,6 +19,7 @@ interface Product {
   description?: string;
   dimensions?: string;
   article?: string;
+  unit?: string;
 }
 
 interface Category {
@@ -369,6 +370,7 @@ export function CategoryGrid({
                       step={step}
                       productId={product.id}
                       productCategory={selectedSeries === 'Благоустройство' ? 'improvement' : product.category}
+                      unit={product.unit}
                       updateQuantity={(id, qty) => {
                         updateQuantity(id, qty);
                         setSelectedProduct(product);

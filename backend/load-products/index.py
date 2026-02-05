@@ -153,6 +153,7 @@ def handler(event: dict, context) -> dict:
             dimensions = product.get('dimensions', '').replace("'", "''")
             image_url = product.get('image', '').replace("'", "''")
             price_str = product.get('price', '')
+            unit = product.get('unit', 'шт').replace("'", "''")
             
             # Пропускаем если нет имени
             if not name:
@@ -166,10 +167,10 @@ def handler(event: dict, context) -> dict:
                 except:
                     pass
             
-            # Вставляем товар с image_url
+            # Вставляем товар с image_url и unit
             cursor.execute(f"""
-                INSERT INTO {schema}.products (article, name, category, dimensions, price, image_url)
-                VALUES ('{article}', '{name}', '{category}', '{dimensions}', {price}, '{image_url}')
+                INSERT INTO {schema}.products (article, name, category, dimensions, price, image_url, unit)
+                VALUES ('{article}', '{name}', '{category}', '{dimensions}', {price}, '{image_url}', '{unit}')
             """)
             inserted += 1
         

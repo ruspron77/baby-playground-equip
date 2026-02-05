@@ -21,6 +21,7 @@ interface Product {
   image: string;
   description?: string;
   dimensions?: string;
+  unit?: string;
 }
 
 interface IndexProps {
@@ -159,7 +160,8 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
           name: product?.name.split('\n')[1] || product?.name || '',
           price: product?.price || '0',
           quantity: item.quantity,
-          image: product?.image || ''
+          image: product?.image || '',
+          unit: product?.unit || 'шт'
         };
       });
 

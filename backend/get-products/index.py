@@ -33,14 +33,14 @@ def handler(event: dict, context) -> dict:
             # Escape single quotes for Simple Query Protocol
             safe_category = category.replace("'", "''")
             cursor.execute(f"""
-                SELECT id, article, name, category, dimensions, price, image_url, description
+                SELECT id, article, name, category, dimensions, price, image_url, description, unit
                 FROM {schema}.products
                 WHERE category = '{safe_category}'
                 ORDER BY id
             """)
         else:
             cursor.execute(f"""
-                SELECT id, article, name, category, dimensions, price, image_url, description
+                SELECT id, article, name, category, dimensions, price, image_url, description, unit
                 FROM {schema}.products
                 ORDER BY id
             """)
@@ -55,7 +55,8 @@ def handler(event: dict, context) -> dict:
                 'dimensions': row[4],
                 'price': row[5],
                 'image': row[6] or '',
-                'description': row[7] or ''
+                'description': row[7] or '',
+                'unit': row[8] or 'шт'
             })
         
         cursor.close()

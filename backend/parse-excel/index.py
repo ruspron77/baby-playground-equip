@@ -69,12 +69,13 @@ def handler(event: dict, context) -> dict:
                     continue
                 
                 # Извлекаем данные из колонок
-                # Обычно структура: [пусто, пусто/артикул, название+артикул, габариты, вес, объем, цена]
+                # Обычно структура: [пусто, пусто/артикул, название+артикул, габариты, вес, объем, цена, ед.изм]
                 name_and_code = str(row_values[2]).strip() if len(row_values) > 2 else ''
                 dimensions = str(row_values[3]).strip() if len(row_values) > 3 else ''
                 weight = str(row_values[4]).strip() if len(row_values) > 4 else ''
                 volume = str(row_values[5]).strip() if len(row_values) > 5 else ''
                 price = str(row_values[6]).strip() if len(row_values) > 6 else ''
+                unit = str(row_values[7]).strip() if len(row_values) > 7 else 'шт'
                 
                 # Пропускаем если нет названия
                 if not name_and_code:
@@ -109,6 +110,8 @@ def handler(event: dict, context) -> dict:
                     product['volume'] = volume
                 if price:
                     product['price'] = price
+                if unit:
+                    product['unit'] = unit
                 
                 # Добавляем только если есть артикул или хотя бы имя
                 if article or name:

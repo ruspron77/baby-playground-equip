@@ -242,12 +242,13 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
                 print(f'Image {idx} error: {e}')
                 img_placeholder = ''
         
+        unit = product.get('unit', 'шт')
         table_data.append([
             str(idx),
             name_paragraph,
             img_placeholder or '',
             str(quantity),
-            'шт',
+            unit,
             f'{final_price:,.2f}'.replace(',', ' '),
             f'{final_sum:,.2f}'.replace(',', ' ')
         ])

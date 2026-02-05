@@ -26,6 +26,7 @@ interface Product {
   description?: string;
   dimensions?: string;
   article?: string;
+  unit?: string;
 }
 
 interface ProductDialogProps {
@@ -239,7 +240,7 @@ export function ProductDialog({
                         <Icon name="Minus" size={18} />
                       </button>
                       <div className="flex-1 sm:min-w-[140px] h-full bg-primary text-primary-foreground flex items-center justify-center px-4 active:bg-primary/90 cursor-pointer">
-                        <span className="text-sm font-semibold leading-tight">{quantityInCart} шт</span>
+                        <span className="text-sm font-semibold leading-tight">{quantityInCart} {selectedProduct.unit || 'шт'}</span>
                       </div>
                       <button
                         onClick={() => {
@@ -309,7 +310,7 @@ export function ProductDialog({
               <div className="border-t sm:py-[5px] py-0 my-1 pb-0">
                 <h3 className="font-heading sm:mb-2 font-semibold sm:text-base my-1.5 text-base py-2">Техническая информация</h3>
                 {selectedProduct.dimensions && (
-                  <div className="grid grid-cols-3 gap-1.5 sm:gap-4 my-1.5">
+                  <div className={`grid ${selectedProduct.subcategory === 'Благоустройство' ? 'grid-cols-4' : 'grid-cols-3'} gap-1.5 sm:gap-4 my-1.5`}>
                     {selectedProduct.dimensions.split('х').map((dim, idx) => (
                       <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-[11px] py-2">
                         <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
@@ -318,6 +319,14 @@ export function ProductDialog({
                         <p className="font-semibold sm:text-base text-xl">{dim.trim()}</p>
                       </div>
                     ))}
+                    {selectedProduct.subcategory === 'Благоустройство' && (
+                      <div className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-[11px] py-2">
+                        <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
+                          Ед. изм.
+                        </p>
+                        <p className="font-semibold sm:text-base text-xl">{selectedProduct.unit || 'шт'}</p>
+                      </div>
+                    )}
                   </div>
                 )}
                 {selectedProduct.description && (
