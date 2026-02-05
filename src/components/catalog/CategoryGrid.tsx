@@ -363,7 +363,7 @@ export function CategoryGrid({
                 <CardContent className="py-1.5 px-2 sm:p-3">
                   <p className="mb-0.5 leading-tight text-xs text-[#5a098c]">{product.name.split('\n')[0]}</p>
                   <h3 className="font-semibold line-clamp-1 mb-1 leading-tight text-sm sm:text-base">{product.name.split('\n')[1] || product.name}</h3>
-                  <p className="text-sm sm:text-base font-bold text-primary mb-1.5">{formatPrice(product.price)} ₽</p>
+                  <p className="text-sm sm:text-base font-bold text-primary mb-1.5">{formatPrice(product.price)} ₽{product.unit && product.unit !== 'шт' ? `/${product.unit}` : ''}</p>
                   {quantityInCart > 0 ? (
                     <CartButton
                       quantityInCart={quantityInCart}
