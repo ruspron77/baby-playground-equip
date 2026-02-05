@@ -482,7 +482,11 @@ export function Header({
                       <Icon name="ShoppingCart" size={20} />
                       {cart.length > 0 && (
                         <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
-                          {cart.reduce((sum, item) => sum + item.quantity, 0)}
+                          {cart.reduce((sum, item) => {
+                            const product = allProducts.find(p => p.id === item.id);
+                            const isImprovement = product?.subcategory === 'Благоустройство';
+                            return sum + (isImprovement ? 1 : item.quantity);
+                          }, 0)}
                         </span>
                       )}
                     </Button>

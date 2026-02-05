@@ -14,8 +14,6 @@ interface CartButtonProps {
 export function CartButton({ quantityInCart, step, productId, updateQuantity, onStopPropagation, onOpenCart, productCategory }: CartButtonProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [prevQuantity, setPrevQuantity] = useState(quantityInCart);
-  
-  console.log(`🔴 CartButton: productId=${productId}, productCategory="${productCategory}", quantityInCart=${quantityInCart}`);
 
   useEffect(() => {
     if (quantityInCart !== prevQuantity) {
@@ -46,13 +44,7 @@ export function CartButton({ quantityInCart, step, productId, updateQuantity, on
         }}
         className="flex-1 h-full bg-primary hover:bg-primary/80 text-primary-foreground flex items-center justify-center px-1 transition-colors cursor-pointer"
       >
-        <span className="text-[11px] leading-none font-medium">
-          В корзине {(() => {
-            const displayQty = productCategory === 'improvement' ? 1 : quantityInCart;
-            console.log(`🟣 Render badge: productCategory="${productCategory}", quantityInCart=${quantityInCart}, displayQty=${displayQty}`);
-            return displayQty;
-          })()} шт
-        </span>
+        <span className="text-[11px] leading-none font-medium">В корзине {productCategory === 'improvement' ? '1' : quantityInCart} шт</span>
       </button>
       <button
         onClick={(e) => {
