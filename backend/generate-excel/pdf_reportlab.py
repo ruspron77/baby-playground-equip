@@ -210,14 +210,34 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
                 ))
                 
                 req = urllib.request.Request(safe_url, headers={'User-Agent': 'Mozilla/5.0'})
-                with urllib.request.urlopen(req, timeout=3) as response:
+                with urllib.request.urlopen(req, timeout=5) as response:
                     img_data = io.BytesIO(response.read())
                     pil_img = PILImage.open(img_data)
-                    # Ресайзим для ВЫСОКОГО качества
-                    pil_img.thumbnail((400, 300), PILImage.Resampling.LANCZOS)
-                    temp_img = f'/tmp/prod_{idx}.png'
-                    pil_img.save(temp_img, 'PNG', optimize=False, quality=95)
-                    img_placeholder = RLImage(temp_img, width=35*mm, height=25*mm)
+                    
+                    # Конвертируем в RGB если нужно
+                    if pil_img.mode in ('RGBA', 'LA', 'P'):
+                        rgb_img = PILImage.new('RGB', pil_img.size, (255, 255, 255))
+                        if pil_img.mode == 'P':
+                            pil_img = pil_img.convert('RGBA')
+                        rgb_img.paste(pil_img, mask=pil_img.split()[-1] if pil_img.mode == 'RGBA' else None)
+                        pil_img = rgb_img
+                    
+                    # Высокое разрешение для печати: 300 DPI
+                    # 35mm = ~413px при 300 DPI, 25mm = ~295px при 300 DPI
+                    target_width = 800
+                    target_height = int(target_width * pil_img.height / pil_img.width)
+                    
+                    # Используем высококачественный ресайз
+                    pil_img = pil_img.resize((target_width, target_height), PILImage.Resampling.LANCZOS)
+                    
+                    # Применяем повышение резкости
+                    from PIL import ImageEnhance
+                    enhancer = ImageEnhance.Sharpness(pil_img)
+                    pil_img = enhancer.enhance(1.2)
+                    
+                    temp_img = f'/tmp/prod_{idx}.jpg'
+                    pil_img.save(temp_img, 'JPEG', quality=95, optimize=False, dpi=(300, 300))
+                    img_placeholder = RLImage(temp_img, width=38*mm, height=28*mm)
             except Exception as e:
                 print(f'Image {idx} error: {e}')
                 img_placeholder = ''
@@ -284,8 +304,8 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         ])
     
     # Создаем таблицу с правильными пропорциями (как в XLSX)
-    # Колонки: №(4), Наименование(27), Рисунок(20), Кол-во(7), Ед.изм(7), Цена(13), Сумма(14)
-    col_widths = [8*mm, 55*mm, 40*mm, 15*mm, 15*mm, 28*mm, 30*mm]
+    # Колонки: №(4), Наименование(24), Рисунок(23), Кол-во(7), Ед.изм(7), Цена(13), Сумма(14)
+    col_widths = [8*mm, 52*mm, 43*mm, 15*mm, 15*mm, 28*mm, 30*mm]
     
     # Отделяем заголовок от данных
     header = table_data[0:1]
@@ -298,8 +318,8 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     data_rows = table_data[1:-footer_rows_count]  # Все кроме заголовка и итого
     footer = table_data[-footer_rows_count:]  # Строки итого
     
-    # Высота одной строки ~25mm (с учётом изображений)
-    row_height = 25*mm
+    # Высота одной строки ~30mm (с учётом изображений большего размера)
+    row_height = 30*mm
     # Для всех страниц оставляем 50мм снизу
     first_page_height = y_pos - 50*mm
     next_page_height = height - 70*mm  # На новых страницах 70мм снизу (таблица еще выше)
