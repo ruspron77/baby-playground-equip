@@ -344,7 +344,7 @@ export function ProductDialog({
                 )}
               </div>
 
-              <div className="border-t sm:py-3 mx-0 hidden md:block -mt-10 py-[85px]"></div>
+              <div className="border-t sm:py-3 mx-0 hidden md:block -mt-10 py-0 my-0"></div>
             </div>
           </div>
         )}
