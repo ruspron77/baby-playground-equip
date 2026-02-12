@@ -308,7 +308,7 @@ export function ProductDialog({
               </div>
 
               <div className="border-t sm:py-[5px] py-0 pb-0 my-0.5">
-                <h3 className="font-heading sm:mb-2 font-semibold sm:text-base my-1.5 text-base py-2">Техническая информация</h3>
+                <h3 className="font-heading sm:mb-2 font-semibold sm:text-base text-base my-0 py-0">Техническая информация</h3>
                 {selectedProduct.dimensions && (
                   <div className={`grid ${(selectedProduct.unit && selectedProduct.unit !== 'шт') ? 'grid-cols-4' : 'grid-cols-3'} gap-1.5 sm:gap-4 my-1.5`}>
                     {selectedProduct.dimensions.split('х').map((dim, idx) => (
