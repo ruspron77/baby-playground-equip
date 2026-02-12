@@ -288,8 +288,8 @@ export function ProductDialog({
 
 
 
-              <div className="border-t sm:py-3 mx-0 hidden md:block -mt-10 py-[85px]">
-                <p className="text-muted-foreground text-sm pt-3 pb-3 leading-relaxed">
+              <div className="border-t sm:py-3 mx-0 hidden md:block -mt-10 my-[9px] py-0">
+                <p className="text-muted-foreground text-sm leading-relaxed py-4">
                   Если появились вопросы, вы можете получить консультацию менеджера по телефону <span className="inline-block"><a href="tel:+79181151551" className="text-primary hover:underline">+7 918 115 15 51</a></span> или заказать обратный звонок.
                 </p>
                 <Button 
