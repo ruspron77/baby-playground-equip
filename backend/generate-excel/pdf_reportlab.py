@@ -87,7 +87,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     y_pos -= 5*mm  # Увеличено с 4mm до 5mm
     
     c.setFont(font_name, 11)
-    c.drawRightString(right_x, y_pos, 'ИНН 110209455200 ОГРНИП 32377460012482')
+    c.drawRightString(right_x, y_pos, 'ИНН 110209455200 ОГРНИП 323774600102482')
     y_pos -= 5*mm  # Увеличено с 4mm до 5mm
     c.drawRightString(right_x, y_pos, '350005, г. Краснодар, ул. Кореновская, д. 57 оф.7')
     y_pos -= 5*mm  # Увеличено с 4mm до 5mm

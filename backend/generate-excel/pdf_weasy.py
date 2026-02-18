@@ -186,7 +186,7 @@ def generate_pdf_weasy(products, address, installation_percent, installation_cos
             </div>
             <div class="header-right">
                 <strong>ИП ПРОНИН РУСЛАН ОЛЕГОВИЧ</strong><br>
-                ИНН 110209455200 ОГРНИП 32377460012482<br>
+                ИНН 110209455200 ОГРНИП 323774600102482<br>
                 350005, г. Краснодар, ул. Кореновская, д. 57 оф.7<br>
                 тел: +7 918 115 15 51 e-mail: info@urban-play.ru<br>
                 <a href="https://www.urban-play.ru">www.urban-play.ru</a>

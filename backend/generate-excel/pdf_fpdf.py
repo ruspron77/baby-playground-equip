@@ -36,7 +36,7 @@ def generate_pdf_fpdf(products, address, installation_percent, installation_cost
     
     pdf.set_font('Helvetica', '', 9)
     pdf.set_xy(120, 15)
-    pdf.cell(0, 5, 'INN 110209455200 OGRNIP 32377460012482', align='R')
+    pdf.cell(0, 5, 'INN 110209455200 OGRNIP 323774600102482', align='R')
     
     pdf.set_xy(120, 20)
     pdf.cell(0, 5, '350005, Krasnodar, ul. Korenovskaya, 57-7', align='R')

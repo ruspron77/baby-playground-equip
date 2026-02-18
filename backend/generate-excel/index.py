@@ -163,7 +163,7 @@ def handler(event, context):
         
         # ИНН и ОГРНИП
         ws.merge_cells(f'C{current_row}:G{current_row}')
-        cell = ws.cell(row=current_row, column=3, value='ИНН 110209455200 ОГРНИП 32377460012482')
+        cell = ws.cell(row=current_row, column=3, value='ИНН 110209455200 ОГРНИП 323774600102482')
         cell.font = Font(name='Calibri', size=11)
         cell.alignment = Alignment(horizontal='right', vertical='center', wrap_text=True)
         ws.row_dimensions[current_row].height = 15
@@ -345,36 +345,35 @@ def handler(event, context):
                         # Открываем и сразу ресайзим
                         pil_img = PILImage.open(io.BytesIO(img_data))
                         
-                        # Целевые размеры
-                        target_width = 130
-                        target_height = 90
+                        target_width = 400
+                        target_height = 300
                         
-                        # Ресайзим сразу для экономии памяти
                         pil_img.thumbnail((target_width, target_height), PILImage.Resampling.LANCZOS)
                         
-                        # Сохраняем в буфер
                         img_buffer = io.BytesIO()
-                        pil_img.save(img_buffer, format='PNG', optimize=True)
+                        pil_img.save(img_buffer, format='PNG', quality=95)
                         img_buffer.seek(0)
                         
                         img = XLImage(img_buffer)
-                        img.width = pil_img.width
-                        img.height = pil_img.height
+                        display_width = 130
+                        display_height = int(pil_img.height * (display_width / pil_img.width)) if pil_img.width > 0 else 90
+                        if display_height > 90:
+                            display_height = 90
+                            display_width = int(pil_img.width * (display_height / pil_img.height)) if pil_img.height > 0 else 130
+                        img.width = display_width
+                        img.height = display_height
                         
-                        # Центрируем изображение (EMU: 1 px ≈ 9525 EMU)
                         from openpyxl.drawing.spreadsheet_drawing import AnchorMarker, TwoCellAnchor
                         
                         col_width_pixels = 140
                         row_height_pixels = 100
                         
-                        # Рассчитываем отступы для центрирования
-                        offset_x = int((col_width_pixels - pil_img.width) / 2 * 9525)
-                        offset_y = int((row_height_pixels - pil_img.height) / 2 * 9525)
+                        offset_x = int((col_width_pixels - display_width) / 2 * 9525)
+                        offset_y = int((row_height_pixels - display_height) / 2 * 9525)
                         
-                        # Привязка к колонке C (индекс 2)
                         anchor = TwoCellAnchor()
-                        anchor._from = AnchorMarker(col=2, colOff=offset_x, row=current_row-1, rowOff=offset_y)
-                        anchor.to = AnchorMarker(col=2, colOff=offset_x + pil_img.width * 9525, row=current_row-1, rowOff=offset_y + pil_img.height * 9525)
+                        anchor._from = AnchorMarker(col=2, colOff=max(0, offset_x), row=current_row-1, rowOff=max(0, offset_y))
+                        anchor.to = AnchorMarker(col=2, colOff=max(0, offset_x) + display_width * 9525, row=current_row-1, rowOff=max(0, offset_y) + display_height * 9525)
                         img.anchor = anchor
                         
                         ws.add_image(img)
