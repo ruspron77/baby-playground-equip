@@ -220,11 +220,11 @@ export function ProductDialog({
               )}
             </div>
 
-            <div className="flex flex-col justify-start space-y-2 md:space-y-4 overflow-y-auto flex-1 mx-0 px-2.5">
+            <div className="flex flex-col justify-start space-y-1 md:space-y-2 overflow-y-auto flex-1 mx-0 px-2.5">
               <div>
                 <p className="sm:text-base sm:mb-2 text-[#5a098c] font-medium text-sm leading-tight my-[1px] select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{selectedProduct.name.split('\n')[0]}</p>
                 <h2 className="font-heading sm:mb-4 font-semibold sm:text-3xl text-xl leading-tight line-clamp-2 sm:line-clamp-none py-0 my-0 select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{selectedProduct.name.split('\n')[1] || selectedProduct.name}</h2>
-                <p className="font-bold text-primary sm:mb-4 text-2xl sm:text-3xl my-0 mt-2 mb-2 py-3 select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{formatPrice(selectedProduct.price)} ₽{selectedProduct.unit && selectedProduct.unit !== 'шт' ? `/${selectedProduct.unit}` : ''}</p>
+                <p className="font-bold text-primary sm:mb-2 text-2xl sm:text-3xl my-0 mt-1 mb-1 py-2 select-none active:ring-2 active:ring-primary active:ring-offset-2 rounded px-1 -mx-1">{formatPrice(selectedProduct.price)} ₽{selectedProduct.unit && selectedProduct.unit !== 'шт' ? `/${selectedProduct.unit}` : ''}</p>
                 
                 <div className="flex gap-2 sm:gap-3 justify-start items-center mt-0 mb-2 px-[5px]">
                   {quantityInCart > 0 ? (
@@ -288,8 +288,8 @@ export function ProductDialog({
 
 
 
-              <div className="border-t sm:py-3 mx-0 hidden md:block -mt-10 my-[9px] py-0">
-                <p className="text-muted-foreground text-sm leading-relaxed py-4">
+              <div className="border-t sm:py-2 mx-0 hidden md:block -mt-6 my-0 py-0">
+                <p className="text-muted-foreground text-sm leading-relaxed py-2">
                   Если появились вопросы, вы можете получить консультацию менеджера по телефону <span className="inline-block"><a href="tel:+79181151551" className="text-primary hover:underline">+7 918 115 15 51</a></span> или заказать обратный звонок.
                 </p>
                 <Button 
@@ -307,12 +307,12 @@ export function ProductDialog({
                 </Button>
               </div>
 
-              <div className="border-t sm:py-[5px] py-0 pb-0 my-0.5">
+              <div className="border-t sm:py-1 py-0 pb-0 my-0">
                 <h3 className="font-heading sm:mb-2 font-semibold sm:text-base text-base py-0 my-1.5">Техническая информация</h3>
                 {selectedProduct.dimensions && (
                   <div className={`grid ${(selectedProduct.unit && selectedProduct.unit !== 'шт') ? 'grid-cols-4' : 'grid-cols-3'} gap-1.5 sm:gap-4 my-1.5`}>
                     {selectedProduct.dimensions.split('х').map((dim, idx) => (
-                      <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-[11px] py-2">
+                      <div key={idx} className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-1 py-2">
                         <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
                           {idx === 0 ? 'Длина' : idx === 1 ? 'Ширина' : 'Высота'}
                         </p>
@@ -320,7 +320,7 @@ export function ProductDialog({
                       </div>
                     ))}
                     {(selectedProduct.unit && selectedProduct.unit !== 'шт') && (
-                      <div className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-[11px] py-2">
+                      <div className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-1 py-2">
                         <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
                           Ед. изм.
                         </p>
@@ -331,7 +331,7 @@ export function ProductDialog({
                 )}
                 {!selectedProduct.dimensions && (selectedProduct.unit && selectedProduct.unit !== 'шт') && (
                   <div className="grid grid-cols-1 gap-1.5 sm:gap-4 my-1.5">
-                    <div className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-[11px] py-2">
+                    <div className="bg-muted/30 p-1.5 sm:p-3 rounded-lg text-center my-1 py-2">
                       <p className="text-[9px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
                         Единица измерения
                       </p>
@@ -344,7 +344,7 @@ export function ProductDialog({
                 )}
               </div>
 
-              <div className="border-t sm:py-3 hidden md:block -mt-10 mx-0 my-0 py-0"></div>
+
             </div>
           </div>
         )}
