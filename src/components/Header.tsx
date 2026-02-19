@@ -696,6 +696,9 @@ export function Header({
                           <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="flex-1" size="lg">
                             Оформить заказ
                           </Button>
+                          <Button onClick={handleAdminButtonClick} variant="outline" size="icon" className="border-primary text-primary hover:bg-transparent hover:text-primary" title="Расширенная версия КП">
+                            <Icon name="Settings" size={20} />
+                          </Button>
                         </div>
                       </div>
                     </>
@@ -929,6 +932,9 @@ export function Header({
                       <div className="flex gap-2">
                         <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="flex-1" size="lg">
                           Оформить заказ
+                        </Button>
+                        <Button onClick={handleAdminButtonClick} variant="outline" size="icon" className="border-primary text-primary hover:bg-transparent hover:text-primary" title="Расширенная версия КП">
+                          <Icon name="Settings" size={20} />
                         </Button>
                       </div>
                     </div>
