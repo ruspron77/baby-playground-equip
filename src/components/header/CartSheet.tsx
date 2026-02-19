@@ -372,31 +372,14 @@ export function CartSheet({
             </div>
 
             <div className={`sticky bottom-0 bg-background border-t ${isMobile ? 'space-y-3 py-0' : 'pt-4 space-y-3'}`}>
-              <div className={isMobile ? "flex items-center gap-2 border-b py-1" : "flex items-center gap-2 pb-3 border-b"}>
-                <span className="text-sm">Монтаж:</span>
-                <Input
-                  type="number"
-                  value={installationPercent || ''}
-                  onChange={(e) => setInstallationPercent(parseFloat(e.target.value) || 0)}
-                  className={isMobile ? "w-20 text-sm h-9 text-center" : "w-20 text-base h-9 text-center"}
-                />
-                <span className="text-sm">%</span>
-                <span className="ml-auto text-sm font-medium">
-                  {formatPrice(installationCost)} ₽
-                </span>
-              </div>
-
               <div className={isMobile ? "flex justify-between text-lg font-bold my-0" : "flex justify-between text-lg font-bold"}>
                 <span>Итого:</span>
-                <span className="text-primary">{formatPrice(finalTotal)} ₽</span>
+                <span className="text-primary">{formatPrice(Math.round(discountedTotal + deliveryCost))} ₽</span>
               </div>
 
               <div className="flex gap-2">
                 <Button ref={orderButtonRef} onClick={onOrderClick} className="flex-1" size="lg">
                   Оформить заказ
-                </Button>
-                <Button onClick={onKPClick} variant="outline" className="border-primary text-primary hover:bg-transparent hover:text-primary" size="lg">
-                  КП
                 </Button>
               </div>
             </div>
