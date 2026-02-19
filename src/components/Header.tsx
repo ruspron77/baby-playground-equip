@@ -687,34 +687,14 @@ export function Header({
                       </div>
 
                       <div className="sticky bottom-0 bg-background border-t pt-4 space-y-3">
-                        <div className="flex items-center gap-2 pb-3 border-b">
-                          <span className="text-sm">Монтаж:</span>
-                          <Input
-                            type="number"
-                            value={installationPercent || ''}
-                            onChange={(e) => setInstallationPercent(parseFloat(e.target.value) || 0)}
-                            className="w-20 text-base h-9 text-center"
-                          />
-                          <span className="text-sm">%</span>
-                          <span className="ml-auto text-sm font-medium">
-                            {formatPrice(installationCost)} ₽
-                          </span>
-                        </div>
-
                         <div className="flex justify-between text-lg font-bold">
                           <span>Итого:</span>
-                          <span className="text-primary">{formatPrice(finalTotal)} ₽</span>
+                          <span className="text-primary">{formatPrice(Math.round(discountedTotal + deliveryCost))} ₽</span>
                         </div>
 
                         <div className="flex gap-2">
                           <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="flex-1" size="lg">
                             Оформить заказ
-                          </Button>
-                          <Button onClick={() => setShowSendKPDialog(true)} variant="outline" className="border-primary text-primary hover:bg-transparent hover:text-primary" size="lg">
-                            КП
-                          </Button>
-                          <Button onClick={handleAdminButtonClick} variant="outline" size="icon" className="border-primary text-primary hover:bg-transparent hover:text-primary" title="Расширенная версия КП">
-                            <Icon name="Settings" size={20} />
                           </Button>
                         </div>
                       </div>
@@ -941,34 +921,14 @@ export function Header({
                     </div>
 
                     <div className="sticky bottom-0 bg-background border-t space-y-3 py-0">
-                      <div className="flex items-center gap-1 border-b py-1 min-w-0 overflow-hidden">
-                        <span className="text-xs whitespace-nowrap shrink-0">Монтаж:</span>
-                        <Input
-                          type="number"
-                          value={installationPercent || ''}
-                          onChange={(e) => setInstallationPercent(parseFloat(e.target.value) || 0)}
-                          className="w-14 text-base h-9 text-center min-w-0 max-w-14 shrink-0"
-                        />
-                        <span className="text-xs shrink-0">%</span>
-                        <span className="ml-auto text-xs font-medium whitespace-nowrap text-right overflow-hidden text-ellipsis">
-                          {formatPrice(installationCost)} ₽
-                        </span>
-                      </div>
-
                       <div className="flex justify-between text-lg font-bold my-0 min-w-0">
                         <span className="shrink-0">Итого:</span>
-                        <span className="text-primary text-right overflow-hidden text-ellipsis">{formatPrice(finalTotal)} ₽</span>
+                        <span className="text-primary text-right overflow-hidden text-ellipsis">{formatPrice(Math.round(discountedTotal + deliveryCost))} ₽</span>
                       </div>
 
                       <div className="flex gap-2">
                         <Button ref={orderButtonRef} onClick={() => setShowOrderForm(true)} className="flex-1" size="lg">
                           Оформить заказ
-                        </Button>
-                        <Button onClick={() => setShowSendKPDialog(true)} variant="outline" className="border-primary text-primary hover:bg-transparent hover:text-primary" size="lg">
-                          КП
-                        </Button>
-                        <Button onClick={handleAdminButtonClick} variant="outline" size="icon" className="border-primary text-primary hover:bg-transparent hover:text-primary" title="Расширенная версия КП">
-                          <Icon name="Settings" size={20} />
                         </Button>
                       </div>
                     </div>
