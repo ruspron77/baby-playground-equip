@@ -203,6 +203,12 @@ def handler(event: dict, context) -> dict:
                     category_parts.append(subcategory4)
                 full_category = ' > '.join(category_parts)
                 
+                # Нормализуем категорию: убираем уровень Classic/Classic Sport, Workout → Воркаут
+                full_category = full_category.replace('Игра > Classic > ', 'Игра > ')
+                full_category = full_category.replace('Спорт > Classic Sport > ', 'Спорт > ')
+                full_category = full_category.replace('Workout', 'Воркаут')
+                full_category = full_category.replace('Eco Sport', 'Eco')  # нормализация Eco Sport → Eco если нужно
+                
                 article = str(row[col_indices.get('article', 4)]).strip() if col_indices.get('article') is not None and len(row) > col_indices.get('article', 4) and row[col_indices.get('article', 4)] else ''
                 name = str(row[col_indices.get('name', 5)]).strip() if col_indices.get('name') is not None and len(row) > col_indices.get('name', 5) and row[col_indices.get('name', 5)] else ''
                 dimensions = str(row[col_indices.get('dimensions', 6)]).strip() if col_indices.get('dimensions') is not None and len(row) > col_indices.get('dimensions', 6) and row[col_indices.get('dimensions', 6)] else ''
