@@ -40,13 +40,7 @@ export function useCatalogFilters({
     }
     
     if (selectedSeries) {
-      if (selectedCategory === 'park' || selectedCategory === 'improvement') {
-        filtered = filtered.filter(p => p.subcategory === selectedSeries);
-      } else {
-        filtered = filtered.filter(p => 
-          p.subcategory === selectedSeries || p.subcategory?.includes(selectedSeries)
-        );
-      }
+      filtered = filtered.filter(p => p.subcategory === selectedSeries);
     }
     
     const categories = new Set(filtered.map(p => p.subsubcategory).filter(Boolean));
@@ -72,8 +66,8 @@ export function useCatalogFilters({
       console.log(`После фильтра по категории "${selectedCategory}":`, filtered.length, 'товаров');
     }
     
-    // Для Парк/Благоустройство — фильтр по subcategory (selectedSeries используется для обратной совместимости)
-    if (selectedSeries && (selectedCategory === 'park' || selectedCategory === 'improvement')) {
+    // Фильтр по подкатегории (subcategory) через selectedSeries
+    if (selectedSeries) {
       filtered = filtered.filter(p => p.subcategory === selectedSeries);
     }
     
