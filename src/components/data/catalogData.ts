@@ -84,11 +84,11 @@ const allCategories = [
       { name: 'Игровые элементы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/6b219d44-4f58-4412-91d2-f3ed6a0256be.png' },
       { name: 'Теневые навесы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/88a2a993-e5fe-40d3-9722-30f8d99564c2.png' },
       { name: 'Столики и скамейки', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/3b03c9f0-0fe1-4bfe-ad38-fa775834a0e5.png' },
-      { name: 'Игровые комплексы Eco', image: 'https://cdn.poehali.dev/files/%D0%B8%D0%B3%D1%80%D0%B0%20Eco.png' },
-      { name: 'Балансиры Eco', image: '🪵' },
-      { name: 'Горки Eco', image: '🛝' },
-      { name: 'Качели Eco', image: '🌲' },
-      { name: 'Карусели Eco', image: '🌿' },
+      { name: 'Игровые комплексы Eco', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/dc56ec00-cf33-4dfa-943d-e498c1b2c7fe.jpg' },
+      { name: 'Балансиры Eco', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/54f7efac-4e69-4866-97cd-71d7068d8fe1.jpg' },
+      { name: 'Горки Eco', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4e5a3640-bb82-41a3-a8eb-f2a307733303.jpg' },
+      { name: 'Качели Eco', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/96caaf92-8241-4453-86d7-9e2668a9ebf8.jpg' },
+      { name: 'Карусели Eco', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4696ad9c-ca8b-4ac4-b13d-511046f58f71.jpg' },
       { name: 'Лазы Eco', image: '🪜' }
     ]
   },
