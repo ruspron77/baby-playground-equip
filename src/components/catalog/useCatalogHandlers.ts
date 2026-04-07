@@ -53,7 +53,10 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
   const handleSubcategorySelect = (sub: Subcategory) => {
     console.log(`🟡 handleSubcategorySelect: name="${sub.name}", hasChildren=${sub.hasChildren}`);
     
-    if (sub.hasChildren && sub.children) {
+    // Для Classic и Classic Sport — сразу переходим к товарам без показа диалога подподкатегорий
+    const skipDialogCategories = ['Classic', 'Classic Sport'];
+    
+    if (sub.hasChildren && sub.children && !skipDialogCategories.includes(sub.name)) {
       console.log(`🟡 Открываем диалог подподкатегорий для "${sub.name}"`);
       setCurrentSubcategory(sub);
       setIsSubSubcategoryDialogOpen(true);
@@ -124,20 +127,15 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
 
   const handleTreeSubcategorySelect = (categoryId: string, categoryData: typeof categories[0], subName: string, sub: Subcategory) => {
     console.log(`🎯 handleTreeSubcategorySelect: category="${categoryId}", subcategory="${subName}", hasChildren=${sub.hasChildren}`);
-    console.log(`🔴 ПЕРЕД СБРОСОМ: selectedSubSubcategory будет сброшена`);
     
-    // Всегда показываем товары при клике на подкатегорию
     setSelectedCategory(categoryId);
-    setSelectedSubcategory(subName);
-    setSelectedSubSubcategory(null); // КРИТИЧНО: всегда сбрасываем подподкатегорию
-    setSelectedSeries(subName);
+    setSelectedSubcategory(null);
+    setSelectedSubSubcategory(subName); // подкатегория теперь напрямую = фильтр subsubcategory
+    setSelectedSeries(null);
     setCurrentCategory(categoryData);
-    
-    console.log(`✅ ПОСЛЕ СБРОСА: selectedSubSubcategory установлена в null`);
     
     if (sub.hasChildren) {
       const key = `${categoryId}-${subName}`;
-      // Разворачиваем меню если свернуто
       setExpandedSubcategories(prev => 
         prev.includes(key) ? prev : [...prev, key]
       );
@@ -145,7 +143,6 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
       setIsSideMenuOpen(false);
     }
     
-    // Прокручиваем к товарам
     setTimeout(() => {
       const productsSection = document.getElementById('products');
       if (productsSection) {
@@ -219,13 +216,13 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
   const handleSubSubSubcategorySelect = (subSubSubName: string) => {
     if (currentCategory && currentSubSubcategory) {
       setSelectedCategory(currentCategory.id);
-      setSelectedSubcategory(currentSubcategory?.name || null);
+      setSelectedSubcategory(null);
       
-      // Теперь путь простой: "Комплексы 3-7 лет > Классик"
+      // Путь: "Комплексы 3-7 лет > Классик" (подкатегория > тема)
       const finalPath = `${currentSubSubcategory.name} > ${subSubSubName}`;
       
       setSelectedSubSubcategory(finalPath);
-      setSelectedSeries(currentSubcategory?.name || null);
+      setSelectedSeries(null);
       setIsSubSubSubcategoryDialogOpen(false);
       setTimeout(() => {
         const productsSection = document.getElementById('products');
