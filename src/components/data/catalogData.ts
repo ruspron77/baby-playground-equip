@@ -89,7 +89,7 @@ const allCategories = [
       { name: 'Горки Eco', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4e5a3640-bb82-41a3-a8eb-f2a307733303.jpg' },
       { name: 'Качели Eco', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/96caaf92-8241-4453-86d7-9e2668a9ebf8.jpg' },
       { name: 'Карусели Eco', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4696ad9c-ca8b-4ac4-b13d-511046f58f71.jpg' },
-      { name: 'Лазы Eco', image: '🪜' }
+      { name: 'Лазы Eco', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/dd86fb16-0e46-46fc-8407-d348c89aad9b.jpg' }
     ]
   },
   {
