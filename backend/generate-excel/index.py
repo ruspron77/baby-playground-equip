@@ -342,16 +342,24 @@ def handler(event, context):
                     with urllib.request.urlopen(req, timeout=3) as response:
                         img_data = response.read()
                         
-                        # Открываем и сразу ресайзим
+                        # Открываем с максимальным качеством
                         pil_img = PILImage.open(io.BytesIO(img_data))
                         
-                        target_width = 400
-                        target_height = 300
+                        # Конвертируем в RGB если нужно
+                        if pil_img.mode in ('RGBA', 'LA', 'P'):
+                            rgb_img = PILImage.new('RGB', pil_img.size, (255, 255, 255))
+                            if pil_img.mode == 'P':
+                                pil_img = pil_img.convert('RGBA')
+                            rgb_img.paste(pil_img, mask=pil_img.split()[-1] if pil_img.mode == 'RGBA' else None)
+                            pil_img = rgb_img
                         
-                        pil_img.thumbnail((target_width, target_height), PILImage.Resampling.LANCZOS)
+                        # Высокое разрешение — не уменьшаем, только если изображение слишком большое
+                        max_dim = 1200
+                        if pil_img.width > max_dim or pil_img.height > max_dim:
+                            pil_img.thumbnail((max_dim, max_dim), PILImage.Resampling.LANCZOS)
                         
                         img_buffer = io.BytesIO()
-                        pil_img.save(img_buffer, format='PNG', quality=95)
+                        pil_img.save(img_buffer, format='JPEG', quality=100, optimize=False, dpi=(300, 300))
                         img_buffer.seek(0)
                         
                         img = XLImage(img_buffer)
@@ -560,24 +568,25 @@ def handler(event, context):
             cell.border = thin_border
             current_row += 1
         
-        # К оплате = Итого - Скидка (должно равняться целевой сумме)
-        total_to_pay = total_before_discount - discount_value
-        
-        for col in range(1, 6):
-            cell = ws.cell(row=current_row, column=col, value='')
-        
-        cell = ws.cell(row=current_row, column=6, value='К оплате:')
-        cell.alignment = Alignment(horizontal='center', vertical='center')
-        cell.font = Font(name='Calibri', bold=True, size=11)
-        cell.border = thin_border
-        
-        cell = ws.cell(row=current_row, column=7, value=total_to_pay)
-        cell.alignment = Alignment(horizontal='center', vertical='center')
-        cell.number_format = '#,##0.00\ ""'
-        cell.font = Font(name='Calibri', bold=True, size=11)
-        cell.border = thin_border
-        
-        current_row += 1
+        # К оплате — только если есть скидка
+        if discount_value > 0:
+            total_to_pay = total_before_discount - discount_value
+            
+            for col in range(1, 6):
+                cell = ws.cell(row=current_row, column=col, value='')
+            
+            cell = ws.cell(row=current_row, column=6, value='К оплате:')
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.font = Font(name='Calibri', bold=True, size=11)
+            cell.border = thin_border
+            
+            cell = ws.cell(row=current_row, column=7, value=total_to_pay)
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.number_format = '#,##0.00\ ""'
+            cell.font = Font(name='Calibri', bold=True, size=11)
+            cell.border = thin_border
+            
+            current_row += 1
         
         # Футер с условиями
         ws.merge_cells(f'A{current_row}:G{current_row}')

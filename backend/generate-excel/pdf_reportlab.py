@@ -222,21 +222,13 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
                         rgb_img.paste(pil_img, mask=pil_img.split()[-1] if pil_img.mode == 'RGBA' else None)
                         pil_img = rgb_img
                     
-                    # Высокое разрешение для печати: 300 DPI
-                    # 35mm = ~413px при 300 DPI, 25mm = ~295px при 300 DPI
-                    target_width = 800
-                    target_height = int(target_width * pil_img.height / pil_img.width)
-                    
-                    # Используем высококачественный ресайз
-                    pil_img = pil_img.resize((target_width, target_height), PILImage.Resampling.LANCZOS)
-                    
-                    # Применяем повышение резкости
-                    from PIL import ImageEnhance
-                    enhancer = ImageEnhance.Sharpness(pil_img)
-                    pil_img = enhancer.enhance(1.2)
+                    # Максимальное качество — не уменьшаем, только если слишком большое
+                    max_dim = 1600
+                    if pil_img.width > max_dim or pil_img.height > max_dim:
+                        pil_img.thumbnail((max_dim, max_dim), PILImage.Resampling.LANCZOS)
                     
                     temp_img = f'/tmp/prod_{idx}.jpg'
-                    pil_img.save(temp_img, 'JPEG', quality=95, optimize=False, dpi=(300, 300))
+                    pil_img.save(temp_img, 'JPEG', quality=100, optimize=False, dpi=(300, 300))
                     img_placeholder = RLImage(temp_img, width=38*mm, height=28*mm)
             except Exception as e:
                 print(f'Image {idx} error: {e}')
@@ -293,12 +285,11 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     # Скидка (если указана)
     if discount_amount > 0:
-        # Показываем только слово "Скидка" без процента, как в Excel
         table_data.append([
             '', '', '', '', '', 'Скидка:', f'-{abs(discount_amount):,.2f}'.replace(',', ' ')
         ])
         
-        # Итого к оплате (итого - скидка)
+        # К оплате — только если есть скидка
         total_with_discount = total_sum - discount_amount
         table_data.append([
             '', '', '', '', '', 'К оплате:', f'{total_with_discount:,.2f}'.replace(',', ' ')
