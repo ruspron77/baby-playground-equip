@@ -65,6 +65,7 @@ def handler(event: dict, context) -> dict:
         images_uploaded = 0
         updated_count = 0
         added_count = 0
+        rows_to_process = []
         
         # Словарь для сопоставления позиций изображений с артикулами
         image_map = {}
@@ -220,50 +221,72 @@ def handler(event: dict, context) -> dict:
                 # Ищем изображение для этой строки
                 image_url = image_map.get(row_idx, None)
                 
-                print(f'Processing: article={article}, name={name[:30] if len(name) > 30 else name}, category={full_category}, image={bool(image_url)}')
-                
-                # Escape для Simple Query Protocol
-                safe_article = article.replace("'", "''")
-                safe_name = name.replace("'", "''")
-                safe_category = full_category.replace("'", "''")
-                safe_dimensions = dimensions.replace("'", "''")
-                safe_image_url = (image_url or '').replace("'", "''")
-                safe_unit = unit.replace("'", "''")
-                
-                # Проверяем существует ли товар
-                cursor.execute(f"SELECT id FROM {schema}.products WHERE article = '{safe_article}'")
-                existing = cursor.fetchone()
-                
-                if update_mode == 'update':
-                    # Режим обновления - обновляем существующие или добавляем новые
-                    if existing:
-                        cursor.execute(f"""
-                            UPDATE {schema}.products 
-                            SET name = '{safe_name}',
-                                category = '{safe_category}',
-                                price = {price},
-                                dimensions = '{safe_dimensions}',
-                                unit = '{safe_unit}',
-                                image_url = CASE WHEN '{safe_image_url}' != '' THEN '{safe_image_url}' ELSE image_url END
-                            WHERE article = '{safe_article}'
-                        """)
-                        updated_count += 1
-                    else:
-                        cursor.execute(f"""
-                            INSERT INTO {schema}.products (article, name, category, price, dimensions, unit, image_url)
-                            VALUES ('{safe_article}', '{safe_name}', '{safe_category}', {price}, '{safe_dimensions}', '{safe_unit}', '{safe_image_url}')
-                        """)
-                        added_count += 1
-                else:
-                    # Режим добавления - только новые товары
-                    if not existing:
-                        cursor.execute(f"""
-                            INSERT INTO {schema}.products (article, name, category, price, dimensions, unit, image_url)
-                            VALUES ('{safe_article}', '{safe_name}', '{safe_category}', {price}, '{safe_dimensions}', '{safe_unit}', '{safe_image_url}')
-                        """)
-                        added_count += 1
-                
+                rows_to_process.append({
+                    'article': article,
+                    'name': name,
+                    'category': full_category,
+                    'price': price,
+                    'dimensions': dimensions,
+                    'unit': unit,
+                    'image_url': image_url or ''
+                })
                 products_count += 1
+        
+        print(f'Total rows to process: {products_count}, mode: {update_mode}')
+        
+        if update_mode == 'new':
+            # Удаляем все товары и вставляем новые одним batch
+            cursor.execute(f"DELETE FROM {schema}.products")
+            
+            if rows_to_process:
+                values_parts = []
+                for r in rows_to_process:
+                    sa = r['article'].replace("'", "''")
+                    sn = r['name'].replace("'", "''")
+                    sc = r['category'].replace("'", "''")
+                    sd = r['dimensions'].replace("'", "''")
+                    su = r['unit'].replace("'", "''")
+                    si = r['image_url'].replace("'", "''")
+                    values_parts.append(f"('{sa}', '{sn}', '{sc}', {r['price']}, '{sd}', '{su}', '{si}')")
+                
+                # Вставляем батчами по 500
+                batch_size = 500
+                for i in range(0, len(values_parts), batch_size):
+                    batch = values_parts[i:i+batch_size]
+                    cursor.execute(f"""
+                        INSERT INTO {schema}.products (article, name, category, price, dimensions, unit, image_url)
+                        VALUES {', '.join(batch)}
+                    """)
+                added_count = len(rows_to_process)
+        
+        else:
+            # Режим update: используем INSERT ... ON CONFLICT DO UPDATE
+            if rows_to_process:
+                values_parts = []
+                for r in rows_to_process:
+                    sa = r['article'].replace("'", "''")
+                    sn = r['name'].replace("'", "''")
+                    sc = r['category'].replace("'", "''")
+                    sd = r['dimensions'].replace("'", "''")
+                    su = r['unit'].replace("'", "''")
+                    si = r['image_url'].replace("'", "''")
+                    values_parts.append(f"('{sa}', '{sn}', '{sc}', {r['price']}, '{sd}', '{su}', '{si}')")
+                
+                batch_size = 500
+                for i in range(0, len(values_parts), batch_size):
+                    batch = values_parts[i:i+batch_size]
+                    cursor.execute(f"""
+                        INSERT INTO {schema}.products (article, name, category, price, dimensions, unit, image_url)
+                        VALUES {', '.join(batch)}
+                        ON CONFLICT (article) DO UPDATE SET
+                            name = EXCLUDED.name,
+                            category = EXCLUDED.category,
+                            price = EXCLUDED.price,
+                            dimensions = EXCLUDED.dimensions,
+                            unit = EXCLUDED.unit,
+                            image_url = CASE WHEN EXCLUDED.image_url != '' THEN EXCLUDED.image_url ELSE {schema}.products.image_url END
+                    """)
+                updated_count = len(rows_to_process)
         
         conn.commit()
         cursor.close()

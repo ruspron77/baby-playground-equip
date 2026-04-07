@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX IF NOT EXISTS products_article_unique ON t_p92226548_baby_playground_equi.products (article);
