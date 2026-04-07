@@ -91,19 +91,6 @@ const allCategories = [
           { name: 'Столики и скамейки', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/3b03c9f0-0fe1-4bfe-ad38-fa775834a0e5.png' }
         ]
       },
-      { 
-        name: 'Eco', 
-        image: 'https://cdn.poehali.dev/files/%D0%B8%D0%B3%D1%80%D0%B0%20Eco.png',
-        hasChildren: true,
-        children: [
-          { name: 'Игровые комплексы', image: '🌳' },
-          { name: 'Балансиры', image: '🪵' },
-          { name: 'Горки', image: '🛝' },
-          { name: 'Качели', image: '🌲' },
-          { name: 'Карусели', image: '🌿' },
-          { name: 'Лазы', image: '🪜' }
-        ]
-      }
     ]
   },
   {
@@ -149,15 +136,6 @@ const allCategories = [
           { name: 'Ограждение спортивных площадок', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/6266d373-1838-4a85-bbee-463caded9fc2.jpg' }
         ]
       },
-      { 
-        name: 'Eco Sport', 
-        image: 'https://cdn.poehali.dev/files/%D1%81%D0%BF%D0%BE%D1%80%D1%82%20Eco.png',
-        hasChildren: true,
-        children: [
-          { name: 'Воркаут', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2c1b4f14-29ff-4727-b119-5f26f2ad689d.png' },
-          { name: 'Тренажеры', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/07c0c1d0-0a52-442f-89b5-0781d4b5617b.png' }
-        ]
-      }
     ]
   },
   {
