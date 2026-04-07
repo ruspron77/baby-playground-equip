@@ -113,14 +113,19 @@ def handler(event: dict, context) -> dict:
             else:
                 print(f'Sheet {sheet_name}: NO _images attribute found!')
             
-            # Ищем заголовки
+            # Ищем заголовки (ищем в первых 20 строках)
             header_row_idx = None
             col_indices = {}
             
-            for row_idx, row in enumerate(sheet.iter_rows(max_row=10, values_only=False), start=1):
+            for row_idx, row in enumerate(sheet.iter_rows(max_row=20, values_only=False), start=1):
                 row_values = [str(cell.value).lower() if cell.value else '' for cell in row]
                 
-                if any('артикул' in val for val in row_values):
+                # Ищем строку с артикулом ИЛИ с несколькими характерными заголовками
+                has_article = any('артикул' in val for val in row_values)
+                has_name = any('название' in val or 'наименование' in val for val in row_values)
+                has_price = any('цена' in val for val in row_values)
+                
+                if has_article or (has_name and has_price):
                     header_row_idx = row_idx
                     
                     # Определяем индексы колонок
@@ -137,20 +142,22 @@ def handler(event: dict, context) -> dict:
                             col_indices['subcategory1'] = col_idx
                         elif 'категория' in val:
                             col_indices['category'] = col_idx
-                        elif 'артикул' in val:
+                        elif 'артикул' in val or 'арт.' in val or 'код' in val:
                             col_indices['article'] = col_idx
                         elif 'название' in val or 'наименование' in val:
                             col_indices['name'] = col_idx
                         elif 'габарит' in val or 'размер' in val:
                             col_indices['dimensions'] = col_idx
-                        elif 'ед.' in val and 'изм' in val:
+                        elif 'ед.' in val or ('ед' in val and 'изм' in val):
                             col_indices['unit'] = col_idx
-                        elif 'цена' in val:
+                        elif 'цена' in val or 'стоим' in val:
                             col_indices['price'] = col_idx
+                    
+                    print(f'Sheet {sheet_name}: found header at row {header_row_idx}, columns: {col_indices}')
                     break
             
             if header_row_idx is None:
-                print(f'Sheet {sheet_name}: header not found')
+                print(f'Sheet {sheet_name}: header not found, skipping')
                 continue
             
             print(f'Sheet {sheet_name}: found header at row {header_row_idx}, columns: {col_indices}')
