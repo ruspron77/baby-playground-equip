@@ -159,9 +159,9 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
       );
     } else {
       setSelectedCategory(categoryId);
-      setSelectedSubcategory(subName);
-      setSelectedSubSubcategory(subSubName);
-      setSelectedSeries(subName);
+      setSelectedSubcategory(null);
+      setSelectedSubSubcategory(`${subName} > ${subSubName}`);
+      setSelectedSeries(null);
       setCurrentCategory(categoryData);
       setIsSideMenuOpen(false);
       setTimeout(() => {
