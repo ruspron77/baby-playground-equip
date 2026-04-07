@@ -40,7 +40,6 @@ export function useCatalogFilters({
     }
     
     if (selectedSeries) {
-      // Используем ту же логику что и в filteredProducts
       if (selectedCategory === 'park' || selectedCategory === 'improvement') {
         filtered = filtered.filter(p => p.subcategory === selectedSeries);
       } else {
@@ -51,7 +50,6 @@ export function useCatalogFilters({
     }
     
     const categories = new Set(filtered.map(p => p.subsubcategory).filter(Boolean));
-    console.log(`📊 Доступные подкатегории для серии "${selectedSeries}":`, Array.from(categories));
     return Array.from(categories);
   })();
 
@@ -74,51 +72,29 @@ export function useCatalogFilters({
       console.log(`После фильтра по категории "${selectedCategory}":`, filtered.length, 'товаров');
     }
     
-    // Затем по серии (Classic/Eco) или подкатегории для Парк/Благоустройство
-    if (selectedSeries) {
-      console.log(`Фильтруем по серии "${selectedSeries}"`);
-      console.log('Примеры subcategory:', filtered.slice(0, 5).map(p => ({ name: p.name, subcategory: p.subcategory })));
-      
-      // Для категорий без серий (Парк, Благоустройство) проверяем точное совпадение
-      if (selectedCategory === 'park' || selectedCategory === 'improvement') {
-        filtered = filtered.filter(p => p.subcategory === selectedSeries);
-      } else {
-        // Для категорий с сериями (Игра, Спорт) проверяем вхождение или равенство
-        filtered = filtered.filter(p => 
-          p.subcategory === selectedSeries || p.subcategory?.includes(selectedSeries)
-        );
-      }
-      
-      console.log(`После фильтра по серии "${selectedSeries}":`, filtered.length, 'товаров');
+    // Для Парк/Благоустройство — фильтр по subcategory (selectedSeries используется для обратной совместимости)
+    if (selectedSeries && (selectedCategory === 'park' || selectedCategory === 'improvement')) {
+      filtered = filtered.filter(p => p.subcategory === selectedSeries);
     }
     
-    // И только потом по подподкатегории
+    // Фильтр по подподкатегории (теперь основной фильтр для Игра/Спорт)
     if (selectedSubSubcategory) {
       const parts = selectedSubSubcategory.split(' > ');
-      console.log(`Фильтруем по подкатегории "${selectedSubSubcategory}"`);
-      console.log('Примеры subsubcategory:', filtered.slice(0, 5).map(p => ({ name: p.name, subsubcategory: p.subsubcategory })));
+      console.log(`Фильтруем по subsubcategory "${selectedSubSubcategory}"`);
       
       filtered = filtered.filter(p => {
         if (!p.subsubcategory) return false;
         
-        // Если выбрано просто "Комплексы 3-7 лет" (все категории) или "Комплексы 5-12 лет" или "Воркаут"
         if (parts.length === 1) {
-          // Показываем все товары, у которых subsubcategory начинается с выбранной категории или равна ей
+          // Простой фильтр: "Воркаут", "Балансиры", "Качели" и т.д.
           return p.subsubcategory === parts[0] || p.subsubcategory.startsWith(parts[0] + ' >');
         }
         
-        // Если выбрано "Комплексы 3-7 лет > Классик" или "Тренажеры уличные > Одиночные"
-        if (parts.length === 2) {
-          // Проверяем точное совпадение ИЛИ начало строки (для вложенных категорий)
-          return p.subsubcategory === selectedSubSubcategory || 
-                 p.subsubcategory.startsWith(selectedSubSubcategory + ' >');
-        }
-        
-        // Для других категорий (не игровые комплексы)
+        // Составной фильтр: "Комплексы 3-7 лет > Классик" или "Тренажеры уличные > Одиночные"
         return p.subsubcategory === selectedSubSubcategory || 
                p.subsubcategory.startsWith(selectedSubSubcategory + ' >');
       });
-      console.log(`После фильтра по подкатегории "${selectedSubSubcategory}":`, filtered.length, 'товаров');
+      console.log(`После фильтра по subsubcategory "${selectedSubSubcategory}":`, filtered.length, 'товаров');
     }
     
     // Временно отключил фильтр по цене, чтобы показывать товары без цены
