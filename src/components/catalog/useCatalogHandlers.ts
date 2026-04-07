@@ -53,10 +53,7 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
   const handleSubcategorySelect = (sub: Subcategory) => {
     console.log(`🟡 handleSubcategorySelect: name="${sub.name}", hasChildren=${sub.hasChildren}`);
     
-    // Для Classic и Classic Sport — сразу переходим к товарам без показа диалога подподкатегорий
-    const skipDialogCategories = ['Classic', 'Classic Sport'];
-    
-    if (sub.hasChildren && sub.children && !skipDialogCategories.includes(sub.name)) {
+    if (sub.hasChildren && sub.children) {
       console.log(`🟡 Открываем диалог подподкатегорий для "${sub.name}"`);
       setCurrentSubcategory(sub);
       setIsSubSubcategoryDialogOpen(true);

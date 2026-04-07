@@ -90,68 +90,29 @@ export function CategoryDialogs({
   return (
     <>
       <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
-        <DialogContent className={`sm:max-w-4xl overflow-hidden m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full flex flex-col ${
-          currentCategory?.id === 'playground' || currentCategory?.id === 'sport' 
-            ? 'max-h-[85vh]' 
-            : 'h-[85vh] sm:h-[85vh]'
-        }`}>
+        <DialogContent className="sm:max-w-4xl h-[85vh] sm:h-[85vh] overflow-hidden m-0 sm:m-4 rounded-none sm:rounded-lg max-w-full flex flex-col">
           <DialogHeader className="sticky top-0 bg-white z-10 pb-2 sm:pb-2 flex-shrink-0">
             <DialogTitle className="text-2xl sm:text-4xl font-heading font-semibold text-center mb-2 sm:mb-2">
               {currentCategory?.name}
             </DialogTitle>
           </DialogHeader>
-          <div className={`grid gap-4 sm:gap-6 sm:px-6 px-0 py-0 overflow-y-auto content-start ${
-            currentCategory?.id === 'playground' || currentCategory?.id === 'sport' 
-              ? 'pb-0 sm:pb-0 flex-shrink-0' 
-              : 'pb-4 sm:pb-6 flex-1'
-          } ${
-            currentCategory?.id === 'park' || currentCategory?.id === 'improvement' || currentCategory?.id === 'coating' || currentCategory?.id === 'fencing'
-              ? 'grid-cols-2 sm:grid-cols-3'
-              : 'grid-cols-1 sm:grid-cols-2'
-          }`}>
+          <div className="grid grid-cols-2 gap-4 pb-4 sm:grid-cols-3 sm:gap-6 sm:px-6 sm:pb-6 overflow-y-auto px-0 flex-1 content-start">
             {currentCategory?.subcategories.map((sub) => (
               <div
                 key={sub.name}
-                className={`cursor-pointer group ${
-                  currentCategory?.id === 'park' || currentCategory?.id === 'improvement' || currentCategory?.id === 'coating' || currentCategory?.id === 'fencing'
-                    ? 'transition-all hover:shadow-xl overflow-hidden rounded-md flex flex-col relative border-2 border-gray-200 min-h-[190px] sm:min-h-[240px]'
-                    : ''
-                }`}
+                className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group rounded-md flex flex-col relative border-2 border-gray-200 min-h-[190px] sm:min-h-[240px]"
                 onClick={() => handleSubcategoryClick(sub)}
               >
-                {currentCategory?.id === 'park' || currentCategory?.id === 'improvement' || currentCategory?.id === 'coating' || currentCategory?.id === 'fencing' ? (
-                  <>
-                    <div className="aspect-square overflow-hidden flex items-center justify-center p-4 sm:p-6">
-                      {sub.image.startsWith('http') ? (
-                        <img src={sub.image} alt={sub.name} loading="lazy" className="w-full h-full object-contain px-0 mx-0 py-0 my-0" />
-                      ) : (
-                        <span className="text-9xl sm:text-8xl">{sub.image}</span>
-                      )}
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 px-3 sm:px-4 py-2">
-                      <h4 className="font-semibold text-center sm:text-base break-words leading-tight text-[#1d2025] text-sm px-0">{sub.name}</h4>
-                    </div>
-                  </>
-                ) : (
-                  <div className="relative overflow-hidden rounded-md bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 aspect-[16/13] border-2 border-gray-200 hover:border-gray-200">
-                    <div className="absolute inset-0">
-                      {sub.image.startsWith('http') ? (
-                        <img src={sub.image} alt={sub.name} loading="lazy" className="w-full h-full group-hover:scale-110 transition-transform duration-300 object-fill" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <span className="text-8xl group-hover:scale-110 transition-transform duration-300">{sub.image}</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 py-1 px-2 -mb-px">
-                      <h4 className={`font-heading text-white sm:text-xl leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-xl ${
-                        (currentCategory?.id === 'playground' || currentCategory?.id === 'sport')
-                          ? 'font-light text-center py-1 sm:my-[17px]'
-                          : 'font-light text-center py-1'
-                      }`}>{sub.name}</h4>
-                    </div>
-                  </div>
-                )}
+                <div className="aspect-square overflow-hidden flex items-center justify-center p-4 sm:p-6">
+                  {sub.image.startsWith('http') ? (
+                    <img src={sub.image} alt={sub.name} loading="lazy" className="w-full h-full object-contain px-0 mx-0 py-0 my-0" />
+                  ) : (
+                    <span className="text-9xl sm:text-8xl">{sub.image}</span>
+                  )}
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 px-3 sm:px-4 py-2">
+                  <h4 className="font-semibold text-center sm:text-base break-words leading-tight text-[#1d2025] text-sm px-0">{sub.name}</h4>
+                </div>
               </div>
             ))}
           </div>

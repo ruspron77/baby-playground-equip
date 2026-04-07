@@ -104,25 +104,34 @@ export function CategoryGrid({
   if (!selectedCategory) return null;
 
   const currentCategory = categories.find(c => c.id === selectedCategory);
-  const availableSeries = currentCategory?.subcategories || [];
-  const currentSubcategory = currentCategory?.subcategories.find(s => s.name === selectedSeries);
-  const availableSubSubcategories = currentSubcategory?.children || [];
+  const isPlaygroundOrSport = selectedCategory === 'playground' || selectedCategory === 'sport';
   
+  // Для Игра/Спорт подкатегории = прямой фильтр по subsubcategory
+  // Для остальных — серии (Парк, Покрытие и т.д.)
+  const availableSeries = isPlaygroundOrSport ? [] : (currentCategory?.subcategories || []);
+  
+  // Для Игра/Спорт: первый уровень подкатегорий (без детей или с детьми)
+  const availableSubcategoriesForSelect = isPlaygroundOrSport ? (currentCategory?.subcategories || []) : [];
+  
+  // Найти текущую выбранную подкатегорию для Игра/Спорт
   const selectedSubSubParts = selectedSubSubcategory?.split(' > ') || [];
   const selectedSubSubLevel1 = selectedSubSubParts[0] || null;
   const selectedSubSubLevel2 = selectedSubSubParts[1] || null;
   
-  // Найти текущую категорию
-  const currentSubSub = availableSubSubcategories.find(s => s.name === selectedSubSubLevel1);
+  const currentSubSub = availableSubcategoriesForSelect.find((s: any) => s.name === selectedSubSubLevel1);
   let availableSubSubSubcategories: any[] = [];
   
-  // Если у выбранной категории есть дети (темы)
+  // Если у выбранной подкатегории есть дети (темы: Классик, Джунгли и т.д.)
   if (selectedSubSubLevel1 && currentSubSub?.children) {
     availableSubSubSubcategories = currentSubSub.children;
   }
   
-  // Значение для первого селекта
+  // Значение для первого подкат. селекта
   const firstSelectValue = selectedSubSubLevel1 || 'all';
+  
+  // Для не-Игра/Спорт: старая логика subsubcategories
+  const currentSubcategory = !isPlaygroundOrSport ? currentCategory?.subcategories.find((s: any) => s.name === selectedSeries) : null;
+  const availableSubSubcategories = currentSubcategory?.children || [];
 
   const handleReset = () => {
     if (searchQuery) {
@@ -212,10 +221,8 @@ export function CategoryGrid({
               <Select
                 value={selectedSeries || 'all-series'}
                 onValueChange={(value) => {
-                  console.log(`🟢 CategoryGrid: setSelectedSeries вызван с value="${value}"`);
                   setSelectedSeries(value === 'all-series' ? null : value);
-                  setSelectedSubSubcategory(null); // КРИТИЧНО: сбрасываем подподкатегорию
-                  console.log(`🟢 CategoryGrid: selectedSubSubcategory сброшена в null`);
+                  setSelectedSubSubcategory(null);
                   setTimeout(() => {
                     if (productsRef.current) {
                       productsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -228,15 +235,15 @@ export function CategoryGrid({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all-series">Все серии</SelectItem>
-                  {availableSeries.map((series) => (
+                  {availableSeries.map((series: { name: string }) => (
                     <SelectItem key={series.name} value={series.name}>
-                      {series.name.replace('Серия "', '').replace('"', '')}
+                      {series.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             )}
-            {availableSubSubcategories.length > 0 && (
+            {isPlaygroundOrSport && availableSubcategoriesForSelect.length > 0 && (
               <Select
                 value={firstSelectValue}
                 onValueChange={(value) => {
@@ -253,7 +260,32 @@ export function CategoryGrid({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">Все категории</SelectItem>
-                  {availableSubSubcategories.map((subSub) => (
+                  {availableSubcategoriesForSelect.map((sub: { name: string }) => (
+                    <SelectItem key={sub.name} value={sub.name}>
+                      {sub.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+            {!isPlaygroundOrSport && availableSubSubcategories.length > 0 && (
+              <Select
+                value={firstSelectValue}
+                onValueChange={(value) => {
+                  setSelectedSubSubcategory(value === 'all' ? null : value);
+                  setTimeout(() => {
+                    if (productsRef.current) {
+                      productsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 100);
+                }}
+              >
+                <SelectTrigger className={`w-[35%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm font-normal ${selectedSubSubLevel1 ? 'text-[#1d2025]' : ''}`}>
+                  <SelectValue placeholder="Категории" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Все категории</SelectItem>
+                  {availableSubSubcategories.map((subSub: { name: string }) => (
                     <SelectItem key={subSub.name} value={subSub.name}>
                       {subSub.name}
                     </SelectItem>

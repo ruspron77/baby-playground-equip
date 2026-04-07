@@ -123,7 +123,13 @@ export function CatalogSideMenu({
                               className={`flex-1 text-left px-2 py-1.5 rounded-lg hover:bg-muted transition-colors text-sm ${
                                 selectedSubcategory === sub.name ? 'bg-primary/10 text-primary font-semibold' : ''
                               } ${!sub.hasChildren ? 'ml-7' : ''}`}
-                              onClick={() => handleTreeSubcategorySelect(cat.id, cat, sub.name, sub)}
+                              onClick={() => {
+                                if (sub.hasChildren) {
+                                  handleTreeSubcategorySelect(cat.id, cat, sub.name, sub);
+                                } else {
+                                  handleTreeSubcategorySelect(cat.id, cat, sub.name, sub);
+                                }
+                              }}
                             >
                               {sub.name}
                             </button>
