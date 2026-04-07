@@ -118,18 +118,20 @@ def handler(event: dict, context) -> dict:
             col_indices = {}
             
             for row_idx, row in enumerate(sheet.iter_rows(max_row=20, values_only=False), start=1):
-                row_values = [str(cell.value).lower() if cell.value else '' for cell in row]
+                row_values = [str(cell.value).strip() if cell.value else '' for cell in row]
+                row_values_lower = [v.lower() for v in row_values]
                 
-                # Ищем строку с артикулом ИЛИ с несколькими характерными заголовками
-                has_article = any('артикул' in val for val in row_values)
-                has_name = any('название' in val or 'наименование' in val for val in row_values)
-                has_price = any('цена' in val for val in row_values)
+                # Ищем строку-заголовок: содержит артикул, или название+цена, или категория+название
+                has_article = any('артикул' in val or 'арт' == val.rstrip('.') for val in row_values_lower)
+                has_name = any('название' in val or 'наименование' in val for val in row_values_lower)
+                has_price = any('цена' in val or 'стоим' in val for val in row_values_lower)
+                has_category = any('категория' in val for val in row_values_lower)
                 
-                if has_article or (has_name and has_price):
+                if has_article or (has_name and has_price) or (has_category and has_name):
                     header_row_idx = row_idx
                     
                     # Определяем индексы колонок
-                    for col_idx, val in enumerate(row_values):
+                    for col_idx, val in enumerate(row_values_lower):
                         if 'картинк' in val or 'фото' in val or 'изображен' in val:
                             col_indices['image'] = col_idx
                         elif 'подподподподкатегория' in val:
@@ -142,16 +144,30 @@ def handler(event: dict, context) -> dict:
                             col_indices['subcategory1'] = col_idx
                         elif 'категория' in val:
                             col_indices['category'] = col_idx
-                        elif 'артикул' in val or 'арт.' in val or 'код' in val:
+                        elif 'артикул' in val or val.rstrip('.') == 'арт' or val == 'код':
                             col_indices['article'] = col_idx
                         elif 'название' in val or 'наименование' in val:
                             col_indices['name'] = col_idx
                         elif 'габарит' in val or 'размер' in val:
                             col_indices['dimensions'] = col_idx
-                        elif 'ед.' in val or ('ед' in val and 'изм' in val):
+                        elif 'ед.' in val or ('ед' in val and 'изм' in val) or val == 'ед':
                             col_indices['unit'] = col_idx
                         elif 'цена' in val or 'стоим' in val:
                             col_indices['price'] = col_idx
+                    
+                    # Fallback: если не нашли артикул, ищем по позиции
+                    # Формат: Картинка-Категория-Подкатегория-Артикул-Название-Размер-Цена
+                    non_empty_cols = [i for i, v in enumerate(row_values) if v]
+                    if non_empty_cols and 'article' not in col_indices and 'name' not in col_indices:
+                        # Пытаемся определить по количеству колонок
+                        if len(non_empty_cols) >= 4:
+                            col_indices.setdefault('image', 0)
+                            col_indices.setdefault('category', 1)
+                            col_indices.setdefault('subcategory1', 2)
+                            col_indices.setdefault('article', 3)
+                            col_indices.setdefault('name', 4)
+                            col_indices.setdefault('dimensions', 5)
+                            col_indices.setdefault('price', 6)
                     
                     print(f'Sheet {sheet_name}: found header at row {header_row_idx}, columns: {col_indices}')
                     break
