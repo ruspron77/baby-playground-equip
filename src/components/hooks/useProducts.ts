@@ -59,48 +59,49 @@ export function useProducts() {
                 mappedCategory = 'park';
               }
               
-              // parts[1] - серия (Classic, Eco и т.д.)
-              // parts[2] - подкатегория (Игровые комплексы, Качели и т.д.)
-              // parts[3+] - глубокая вложенность (3-7 лет > Замок)
+              // Новая структура (без уровня Classic/Classic Sport):
+              // Игра > Горки > h-1.0
+              // Игра > Комплексы 3-7 лет > Классик
+              // Спорт > Воркаут
+              // Парк > Скамейки > Скамья уличная 1.5 м
+              
+              // Устаревшая структура (с уровнем Classic):
+              // Игра > Classic > Горки > h-1.0
+              // Спорт > Classic Sport > Воркаут
+              
+              const SERIES_NAMES = ['Classic', 'classic', 'Eco', 'eco', 'Classic Sport', 'Eco Sport'];
+              const hasSeriesLevel = parts.length >= 2 && SERIES_NAMES.includes(parts[1]);
               
               if (parts.length >= 2) {
-                // Для категории "Парк" структура другая: Парк > Скамейки > Скамья уличная 1.5 м
-                // Здесь нет серий, parts[1] - это уже подкатегория
                 if (parts[0] === 'Парк') {
                   subcategory = parts[1]; // "Скамейки", "Урны" и т.д.
+                } else if (hasSeriesLevel) {
+                  // Старый формат: Игра > Classic > ...
+                  subcategory = parts[1];
                 } else {
-                  // Определяем серию из parts[1] для Игра/Спорт
-                  const seriesName = parts[1];
-                  if (seriesName === 'Classic' || seriesName === 'classic') {
-                    subcategory = 'Classic';
-                  } else if (seriesName === 'Eco' || seriesName === 'eco') {
-                    subcategory = 'Eco';
-                  } else if (seriesName === 'Classic Sport') {
-                    subcategory = 'Classic Sport';
-                  } else if (seriesName === 'Eco Sport') {
-                    subcategory = 'Eco Sport';
-                  } else {
-                    subcategory = 'Classic'; // По умолчанию Classic
-                  }
+                  // Новый формат: Игра > Горки > ...  — subcategory не нужен (фильтрация по subsubcategory)
+                  subcategory = undefined;
                 }
               }
               
               if (parts.length === 2) {
-                // Простой случай: Категория > Подкатегория
-                // НО! Для категорий со сериями (Игра, Спорт) parts[1] - это серия, а не подкатегория
-                // Для Парк: parts[1] - это уже подкатегория (Урны, Скамейки)
-                // Поэтому устанавливаем subsubcategory = subcategory для Парк
                 if (parts[0] === 'Парк') {
                   subsubcategory = parts[1]; // "Урны", "Скамейки"
-                } else if (parts[0] !== 'Игра' && parts[0] !== 'Детские площадки' && parts[0] !== 'Спорт') {
+                } else if (!hasSeriesLevel) {
+                  // Новый формат: Игра > Качели → subsubcategory = "Качели"
                   subsubcategory = parts[1];
                 }
               } else if (parts.length >= 3) {
-                // Специальная обработка для "Парк": Парк > Скамейки > Скамья уличная 1.5 м
                 if (parts[0] === 'Парк') {
                   subsubcategory = parts[2]; // "Скамья уличная 1.5 м"
+                } else if (!hasSeriesLevel) {
+                  // Новый формат: Игра > Горки > h-1.0 → subsubcategory = "Горки > h-1.0"
+                  // или Игра > Комплексы 3-7 лет > Классик → "Комплексы 3-7 лет > Классик"
+                  let subParts = parts.slice(1); // всё начиная с parts[1]
+                  subParts = subParts.map(p => p.replace(/\s+/g, ' ').trim());
+                  subsubcategory = subParts.join(' > ');
                 } else {
-                  // Сложный случай: Категория > Серия > Подкатегория > Подподкатегория > ...
+                  // Старый формат: Игра > Classic > Горки > h-1.0
                   // Объединяем всё после серии (начиная с parts[2])
                   let subParts = parts.slice(2);
                 
