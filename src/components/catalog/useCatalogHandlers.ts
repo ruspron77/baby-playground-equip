@@ -59,14 +59,12 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
       setIsSubSubcategoryDialogOpen(true);
       setIsCategoryDialogOpen(false);
     } else {
-      console.log(`🟡 Выбрана подкатегория БЕЗ детей: "${sub.name}", сбрасываем selectedSubSubcategory`);
       if (currentCategory) {
         setSelectedCategory(currentCategory.id);
-        setSelectedSubcategory(sub.name);
-        setSelectedSubSubcategory(null);
-        setSelectedSeries(sub.name);
+        setSelectedSubcategory(null);
+        setSelectedSubSubcategory(sub.name);
+        setSelectedSeries(null);
         setIsCategoryDialogOpen(false);
-        console.log(`🟡 State обновлен: category="${currentCategory.id}", subcategory="${sub.name}", subSubcategory=null`);
         setTimeout(() => {
           const productsSection = document.getElementById('products');
           if (productsSection) {
@@ -90,12 +88,12 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
       setIsSubSubSubcategoryDialogOpen(true);
       setIsSubSubcategoryDialogOpen(false);
     } else {
-      console.log('No children, showing products');
       if (currentCategory && currentSubcategory) {
         setSelectedCategory(currentCategory.id);
-        setSelectedSubcategory(currentSubcategory.name);
-        setSelectedSubSubcategory(subSub.name);
-        setSelectedSeries(currentSubcategory.name);
+        setSelectedSubcategory(null);
+        // subsubcategory = "Горки > h-1.0" чтобы фильтр нашёл правильные товары
+        setSelectedSubSubcategory(`${currentSubcategory.name} > ${subSub.name}`);
+        setSelectedSeries(null);
         setIsSubSubcategoryDialogOpen(false);
         setTimeout(() => {
           const productsSection = document.getElementById('products');
