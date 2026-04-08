@@ -14,7 +14,7 @@ export function ContentSections() {
           <div className="grid md:grid-cols-2 gap-12 items-center px-3">
             <div className="animate-fade-in px-3">
               <h2 className="font-heading mb-6 font-semibold text-center md:text-left text-3xl">О компании</h2>
-              <p className="text-muted-foreground mb-4 text-base">Мы специализируемся на производстве детского игрового и спортивного оборудования на протяжении 5 лет. За это время мы оснастили более 500 детских площадок по всей России.</p>
+              <p className="text-muted-foreground mb-4 text-base">Мы специализируемся на производстве детского игрового и спортивного оборудования на протяжении 5 лет. За это время мы оснастили более 300 детских площадок по всей России.</p>
               <p className="text-muted-foreground mb-6 text-base">
                 Наша продукция соответствует всем стандартам безопасности и имеет необходимые сертификаты. 
                 Мы используем только качественные материалы и современные технологии производства.
@@ -25,11 +25,11 @@ export function ContentSections() {
                   <div className="text-sm text-muted-foreground">лет на рынке</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-secondary mb-2">500+</div>
+                  <div className="text-4xl font-bold text-secondary mb-2">300+</div>
                   <div className="text-sm text-muted-foreground">площадок</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-[#0284c7] mb-2">700+</div>
+                  <div className="text-4xl font-bold text-[#0284c7] mb-2">500+</div>
                   <div className="text-sm text-muted-foreground">товаров</div>
                 </div>
               </div>
