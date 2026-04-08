@@ -588,6 +588,9 @@ def handler(event, context):
             
             current_row += 1
         
+        # Отступ перед футером
+        current_row += 2
+        
         # Футер с условиями
         ws.merge_cells(f'A{current_row}:G{current_row}')
         cell = ws.cell(row=current_row, column=1, value='Вся продукция сертифицирована и соответствует стандартам качества')
