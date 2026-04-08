@@ -207,7 +207,12 @@ def handler(event: dict, context) -> dict:
                 full_category = full_category.replace('Игра > Classic > ', 'Игра > ')
                 full_category = full_category.replace('Спорт > Classic Sport > ', 'Спорт > ')
                 full_category = full_category.replace('Workout', 'Воркаут')
-                full_category = full_category.replace('Eco Sport', 'Eco')  # нормализация Eco Sport → Eco если нужно
+                full_category = full_category.replace('Eco Sport', 'Eco')
+                # "Игровой комплекс X-Y лет" → "Комплексы X-Y лет"
+                import re as _re
+                full_category = _re.sub(r'Игровой комплекс\s+', 'Комплексы ', full_category)
+                # Убираем двойные пробелы
+                full_category = _re.sub(r'\s{2,}', ' ', full_category)
                 
                 article = str(row[col_indices.get('article', 4)]).strip() if col_indices.get('article') is not None and len(row) > col_indices.get('article', 4) and row[col_indices.get('article', 4)] else ''
                 name = str(row[col_indices.get('name', 5)]).strip() if col_indices.get('name') is not None and len(row) > col_indices.get('name', 5) and row[col_indices.get('name', 5)] else ''

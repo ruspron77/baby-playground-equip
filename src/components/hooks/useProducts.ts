@@ -89,7 +89,10 @@ export function useProducts() {
                   subsubcategory = parts[1]; // "Урны", "Скамейки"
                 } else if (!hasSeriesLevel) {
                   // Новый формат: Игра > Качели → subsubcategory = "Качели"
-                  subsubcategory = parts[1];
+                  let val = parts[1].replace(/\s+/g, ' ').trim();
+                  // "Игровой комплекс 3-7 лет" → "Комплексы 3-7 лет"
+                  val = val.replace(/^Игровой комплекс\s+/, 'Комплексы ');
+                  subsubcategory = val;
                 }
               } else if (parts.length >= 3) {
                 if (parts[0] === 'Парк') {
