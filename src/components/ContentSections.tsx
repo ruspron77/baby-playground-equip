@@ -68,7 +68,7 @@ export function ContentSections() {
         <div className="container mx-auto py-0 px-3">
           <div className="text-center mb-12">
             <h2 className="font-heading mb-4 font-semibold text-3xl">Сертификаты</h2>
-            <p className="text-muted-foreground text-base my-3">Вся продукция сертифицирована и соответствует стандартам качества</p>
+            <p className="text-muted-foreground text-base mt-8 mb-3">Вся продукция сертифицирована и соответствует стандартам качества</p>
           </div>
           <div className="grid grid-cols-3 gap-4 md:gap-6 my-0 py-0">
             {['ГОСТ Р', 'ТР ТС', 'ISO 9001'].map((cert, idx) => (
