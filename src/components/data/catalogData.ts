@@ -43,16 +43,7 @@ const allCategories = [
       { name: 'Комплексы 3-7 лет', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/39628bd3-88b4-466d-b88e-79736f7f6893.png' },
       { name: 'Комплексы 5-12 лет', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4cd730e4-fd3b-4b60-b4c4-0be4b80e5671.png' },
       { name: 'Балансиры', image: 'https://cdn.poehali.dev/files/мишкаа.png' },
-      {
-        name: 'Горки',
-        image: 'https://cdn.poehali.dev/files/0100.png',
-        hasChildren: true,
-        children: [
-          { name: 'h-0.6', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/d229149f-a0b2-4a96-95d3-e644246ea9a5.png' },
-          { name: 'h-1.0', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/dd1cced9-136c-4884-8909-b202200caedb.png' },
-          { name: 'h-1.5', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/5376ba5a-d25f-426a-bf2e-ea8e7ef50d56.png' }
-        ]
-      },
+      { name: 'Горки', image: 'https://cdn.poehali.dev/files/0100.png' },
       { name: 'Домики', image: 'https://cdn.poehali.dev/files/%D0%B4%D0%BE%D0%BC%D0%B8%D0%BA%202.png' },
       { name: 'Качели', image: 'https://cdn.poehali.dev/files/%D0%BA%D0%B0%D1%87%D0%B5%D0%BB%D0%B8.png' },
       { name: 'Карусели', image: 'https://cdn.poehali.dev/files/%D0%BA%D0%B0%D1%80%D1%83%D1%81%D0%B5%D0%BB%D1%8C.png' },
