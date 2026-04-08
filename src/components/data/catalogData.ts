@@ -40,28 +40,8 @@ const allCategories = [
     bgImage: 'https://cdn.poehali.dev/files/%D0%B8%D0%B3%D1%80%D0%B0%20(2).png',
     order: 1,
     subcategories: [
-      {
-        name: 'Комплексы 3-7 лет',
-        image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/39628bd3-88b4-466d-b88e-79736f7f6893.png',
-        hasChildren: true,
-        children: [
-          { name: 'Классик', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/809d9978-1cc9-4164-b1bf-00682ebb7ac8.png' },
-          { name: 'Джунгли', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/6bc179a5-ec3f-4cc4-a8a5-9478913fad63.png' },
-          { name: 'Замок', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/6de7cba4-b5ec-44f4-8f52-bc4656fc0189.png' }
-        ]
-      },
-      {
-        name: 'Комплексы 5-12 лет',
-        image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4cd730e4-fd3b-4b60-b4c4-0be4b80e5671.png',
-        hasChildren: true,
-        children: [
-          { name: 'Классик', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/b51dd912-5e72-4d57-b5e8-be0e17e01066.png' },
-          { name: 'Замок', image: '🏯' },
-          { name: 'Джунгли', image: '🌴' },
-          { name: 'Морская', image: '🌊' },
-          { name: 'Лабиринт', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/227215e9-4c5a-4c37-ae12-1d1a7a7549bc.png' }
-        ]
-      },
+      { name: 'Комплексы 3-7 лет', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/39628bd3-88b4-466d-b88e-79736f7f6893.png' },
+      { name: 'Комплексы 5-12 лет', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4cd730e4-fd3b-4b60-b4c4-0be4b80e5671.png' },
       { name: 'Балансиры', image: 'https://cdn.poehali.dev/files/мишкаа.png' },
       {
         name: 'Горки',
