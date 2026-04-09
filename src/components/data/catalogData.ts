@@ -133,7 +133,20 @@ const allCategories = [
       },
       { name: 'Урны', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/1852bbcf-e8b0-40ef-9ffe-cd0c1e56668b.png' },
       { name: 'Беседки', image: '🏡' },
-      { name: 'Благоустройство', image: '🛠️' },
+      { 
+        name: 'Благоустройство', 
+        image: '🛠️',
+        hasChildren: true,
+        children: [
+          { name: 'Асфальт', image: '🛣️' },
+          { name: 'Бетон', image: '🏗️' },
+          { name: 'Бордюр', image: '🧱' },
+          { name: 'Геотекстиль', image: '📦' },
+          { name: 'Плитка', image: '🟫' },
+          { name: 'Работа', image: '🔧' },
+          { name: 'Сыпучие материалы', image: '⚪' },
+        ]
+      },
       { name: 'Вазоны', image: '🪴' },
       { name: 'Перголы', image: '🌿' },
       { name: 'Качели', image: '🎪' },

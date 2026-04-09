@@ -96,7 +96,9 @@ export function useProducts() {
                 }
               } else if (parts.length >= 3) {
                 if (parts[0] === 'Парк') {
-                  subsubcategory = parts[2]; // "Скамья уличная 1.5 м"
+                  // "Парк > Скамейки > Скамья уличная 1.5 м" → subsubcategory = "Скамейки > Скамья уличная 1.5 м"
+                  // "Парк > Благоустройство > Асфальт" → subsubcategory = "Благоустройство > Асфальт"
+                  subsubcategory = parts.slice(1).join(' > ');
                 } else if (!hasSeriesLevel) {
                   // Новый формат: Игра > Горки > h-1.0 → subsubcategory = "Горки > h-1.0"
                   // или Игра > Комплексы 3-7 лет > Классик → "Комплексы 3-7 лет > Классик"
