@@ -3,9 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { ContactDialog } from './ContactDialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 export function ContentSections() {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
 
   return (
     <div className="order-4 bg-[#49187100] my-0 py-0 px-0 mx-0">
@@ -134,6 +136,12 @@ export function ContentSections() {
       <footer className="px-0 py-4 mt-auto" style={{ backgroundColor: '#1a0129', color: '#ffffff' }}>
         <div className="container text-center px-4 mx-auto">
           <p>&copy; 2026 Urban Play. Все права защищены.</p>
+          <button
+            onClick={() => setIsPrivacyOpen(true)}
+            className="mt-2 text-sm underline opacity-70 hover:opacity-100 transition-opacity"
+          >
+            Политика конфиденциальности
+          </button>
         </div>
       </footer>
 
@@ -141,6 +149,31 @@ export function ContentSections() {
         open={isContactDialogOpen} 
         onOpenChange={setIsContactDialogOpen}
       />
+
+      <Dialog open={isPrivacyOpen} onOpenChange={setIsPrivacyOpen}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Политика конфиденциальности</DialogTitle>
+          </DialogHeader>
+          <div className="text-sm text-muted-foreground space-y-4">
+            <p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей сайта Urban Play.</p>
+            <h3 className="font-semibold text-foreground">1. Сбор информации</h3>
+            <p>Мы собираем персональные данные (имя, телефон, email), которые вы добровольно предоставляете при заполнении форм обратной связи на сайте.</p>
+            <h3 className="font-semibold text-foreground">2. Использование информации</h3>
+            <p>Собранные данные используются исключительно для обработки ваших запросов, связи с вами по вопросам заказов и улучшения качества обслуживания.</p>
+            <h3 className="font-semibold text-foreground">3. Передача данных третьим лицам</h3>
+            <p>Мы не передаём ваши персональные данные третьим лицам без вашего согласия, за исключением случаев, предусмотренных действующим законодательством РФ.</p>
+            <h3 className="font-semibold text-foreground">4. Защита данных</h3>
+            <p>Мы принимаем необходимые организационные и технические меры для защиты ваших персональных данных от несанкционированного доступа, изменения, раскрытия или уничтожения.</p>
+            <h3 className="font-semibold text-foreground">5. Cookies</h3>
+            <p>Сайт может использовать файлы cookie для улучшения работы сервиса. Вы можете отключить cookies в настройках браузера.</p>
+            <h3 className="font-semibold text-foreground">6. Согласие</h3>
+            <p>Используя наш сайт и заполняя формы обратной связи, вы даёте согласие на обработку ваших персональных данных в соответствии с настоящей политикой.</p>
+            <h3 className="font-semibold text-foreground">7. Контакты</h3>
+            <p>По вопросам обработки персональных данных обращайтесь: <a href="mailto:info@urban-play.ru" className="text-primary hover:underline">info@urban-play.ru</a></p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
