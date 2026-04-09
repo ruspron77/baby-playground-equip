@@ -312,9 +312,9 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     
     # Высота одной строки ~30mm (с учётом изображений большего размера)
     row_height = 30*mm
-    # Для всех страниц оставляем 50мм снизу
-    first_page_height = y_pos - 50*mm
-    next_page_height = height - 70*mm  # На новых страницах 70мм снизу (таблица еще выше)
+    # Для всех страниц оставляем 25мм снизу (футер: 3 строки текста ~22мм + подпись)
+    first_page_height = y_pos - 35*mm
+    next_page_height = height - 35*mm  # На новых страницах тоже 35мм снизу
     first_page_rows = int(first_page_height / row_height)
     next_page_rows = int(next_page_height / row_height)
     
@@ -422,10 +422,10 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             # На новой странице начинаем с отступом сверху 10мм (таблица выше)
             current_y = height - 10*mm
     
-    y_pos = current_y - 10*mm
+    y_pos = current_y - 5*mm
     
-    # Проверяем, хватает ли места для футера (нужно ~30мм)
-    if y_pos < 40*mm:
+    # Проверяем, хватает ли места для футера (нужно ~25мм)
+    if y_pos < 30*mm:
         c.showPage()
         y_pos = height - 30*mm
         # Нумерация для новой страницы
@@ -433,14 +433,14 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         c.setFont(font_name, 9)
         c.drawRightString(width - 10*mm, 10*mm, f'Страница {total_pages} из {total_pages}')
     
-    # Футер с условиями - исходные интервалы
+    # Футер с условиями
     c.setFont(font_name, 11)
     c.drawString(10*mm, y_pos, 'Вся продукция сертифицирована и соответствует стандартам качества')
     y_pos -= 5*mm
     c.drawString(10*mm, y_pos, 'Срок действия коммерческого предложения 15 дней')
     y_pos -= 5*mm
     c.drawString(10*mm, y_pos, 'Срок изготовления оборудования 30 дней')
-    y_pos -= 12*mm
+    y_pos -= 8*mm
     
     # Подпись
     c.setFont(font_name, 11)
