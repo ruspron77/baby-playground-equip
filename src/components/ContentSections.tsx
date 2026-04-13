@@ -104,12 +104,12 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
                   className="h-14 w-auto object-contain"
                 />
               </div>
-              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-foreground hover:text-primary transition-colors">
+              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-foreground hover:text-primary transition-colors self-start">
                 +7 (918) 115-15-51
               </a>
               <Button
                 onClick={() => setIsContactDialogOpen(true)}
-                className="rounded-full font-semibold px-6 py-2 w-fit bg-primary text-primary-foreground hover:bg-primary/90"
+                className="bg-primary hover:bg-primary/90 h-9 w-fit"
               >
                 Получить КП
               </Button>
@@ -121,7 +121,6 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
                 { label: 'Каталог', href: '#catalog' },
                 { label: 'О компании', href: '#about' },
                 { label: 'Сертификаты', href: '#certificates' },
-                { label: 'Контакты', href: '#contacts' },
               ].map(link => (
                 <a
                   key={link.label}
