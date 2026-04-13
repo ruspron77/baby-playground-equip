@@ -92,9 +92,9 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
         </div>
       </section>
 
-      <footer id="contacts" className="px-0 pt-10 pb-0 bg-muted/30 my-[22px]">
+      <footer id="contacts" className="px-0 bg-muted/30 my-3.5 py-[1px]">
         <div className="container mx-auto px-6">
-          <div className="mb-8 text-center">
+          <div className="text-center my-[34px] py-1">
             <h2 className="font-heading font-semibold text-3xl mb-2">Контакты</h2>
             <p className="text-muted-foreground text-base">Свяжитесь с нами любым удобным способом</p>
           </div>
