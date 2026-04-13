@@ -97,7 +97,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
             {/* Телефон */}
             <div className="flex flex-col gap-2 items-start">
-              <a href="tel:+79181151551" className="text-xl font-heading font-bold text-foreground hover:text-primary transition-colors whitespace-nowrap">
+              <a href="tel:+79181151551" className="text-xl font-heading font-bold text-foreground hover:text-primary transition-colors whitespace-nowrap mx-0">
                 +7 (918) 115-15-51
               </a>
               <a href="mailto:info@urban-play.ru" className="text-foreground font-semibold text-sm hover:text-primary transition-colors">
@@ -114,7 +114,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
             </div>
 
             {/* Навигация колонка 1 */}
-            <div className="flex flex-col gap-3 mx-[90px]">
+            <div className="flex flex-col gap-3 mx-0">
               {[
                 { label: 'Каталог', href: '#catalog' },
                 { label: 'О компании', href: '#about' },
