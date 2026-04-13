@@ -133,7 +133,7 @@ const allCategories = [
         ]
       },
       { name: 'Урны', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/1852bbcf-e8b0-40ef-9ffe-cd0c1e56668b.png' },
-      { name: 'Беседки', image: '🏡' },
+      { name: 'Беседки', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/d4021645-d5ba-4539-9b27-7e233c34df08.png' },
       { 
         name: 'Благоустройство', 
         image: '🛠️',
@@ -148,16 +148,15 @@ const allCategories = [
           { name: 'Сыпучие материалы', image: '⚪' },
         ]
       },
-      { name: 'Вазоны', image: '🪴' },
+      { name: 'Вазоны', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/df968bff-9faa-4a1c-a376-b765460579cc.png' },
       { name: 'Перголы', image: '🌿' },
-      { name: 'Качели', image: '🎪' },
+      { name: 'Качели', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/cc707f1e-7b18-4d74-a121-b9dbf5381328.png' },
       { name: 'Столы', image: '🪑' },
       { name: 'Настилы', image: '🟫' },
       { name: 'Лежаки', image: '🛋️' },
-      { name: 'Велопарковки', image: '🚲' },
+      { name: 'Велопарковки', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/09f75027-15a0-421a-a4da-f06ccbf392ab.png' },
       { name: 'Ограждения', image: '🚧' },
-      { name: 'Аджилити', image: '🐕' },
-      { name: 'Светильники', image: '💡' },
+      { name: 'Аджилити', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/61a187dd-22f8-4312-985f-f6558c72e63a.png' },
       { name: 'Решетки', image: '⚙️' },
       { name: 'Сбор мусора', image: '♻️' }
     ]
