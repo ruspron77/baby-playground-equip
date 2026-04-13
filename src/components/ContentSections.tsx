@@ -96,8 +96,8 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
             {/* Телефон + кнопка */}
-            <div className="flex flex-col gap-2">
-              <a href="tel:+79181151551" className="text-xl font-heading font-bold text-foreground hover:text-primary transition-colors">
+            <div className="inline-flex flex-col gap-2 w-fit">
+              <a href="tel:+79181151551" className="text-xl font-heading font-bold text-foreground hover:text-primary transition-colors whitespace-nowrap">
                 +7 (918) 115-15-51
               </a>
               <Button
