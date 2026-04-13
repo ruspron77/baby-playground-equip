@@ -76,10 +76,10 @@ def handler(event, context):
             smtp_port = int(''.join(filter(str.isdigit, smtp_port_str)) or '587')
         except:
             smtp_port = 587
-        smtp_user = os.environ.get('SMTP_USER')
-        smtp_password = os.environ.get('SMTP_PASSWORD')
+        smtp_user = os.environ.get('SMTP_USER', '').strip()
+        smtp_password = os.environ.get('SMTP_PASSWORD', '').strip()
         
-        print(f'SMTP config: host={smtp_host}, port={smtp_port}, user={smtp_user[:5]}***')
+        print(f'SMTP config: host={smtp_host}, port={smtp_port}, user_len={len(smtp_user)}, pass_len={len(smtp_password)}')
         
         if not smtp_user or not smtp_password:
             print('ERROR: SMTP credentials not configured')
