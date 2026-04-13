@@ -338,7 +338,16 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         />
       </div>
       
-      {!catalogState.selectedCategory && <ContentSections />}
+      {!catalogState.selectedCategory && (
+        <ContentSections
+          onCategorySelect={(categoryName) => {
+            catalogState.setSelectedCategory(categoryName);
+            setTimeout(() => {
+              document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+          }}
+        />
+      )}
       </div>
       </div>
     </div>

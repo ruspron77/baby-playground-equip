@@ -5,7 +5,11 @@ import Icon from '@/components/ui/icon';
 import { ContactDialog } from './ContactDialog';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
-export function ContentSections() {
+interface ContentSectionsProps {
+  onCategorySelect?: (categoryName: string) => void;
+}
+
+export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
 
@@ -88,7 +92,7 @@ export function ContentSections() {
         </div>
       </section>
 
-      <footer id="contacts" className="px-0 pt-10 pb-0 mt-auto" style={{ backgroundColor: '#1a0129', color: '#ffffff' }}>
+      <footer id="contacts" className="px-0 pt-10 pb-0 mt-auto bg-muted/30">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
             {/* Лого + телефон + кнопка */}
@@ -100,13 +104,12 @@ export function ContentSections() {
                   className="h-14 w-auto object-contain"
                 />
               </div>
-              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-white hover:text-purple-300 transition-colors">
+              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-foreground hover:text-primary transition-colors">
                 +7 (918) 115-15-51
               </a>
               <Button
                 onClick={() => setIsContactDialogOpen(true)}
-                className="rounded-full text-white font-semibold px-6 py-2 w-fit"
-                style={{ backgroundColor: '#2196c4' }}
+                className="rounded-full font-semibold px-6 py-2 w-fit bg-primary text-primary-foreground hover:bg-primary/90"
               >
                 Получить КП
               </Button>
@@ -123,7 +126,7 @@ export function ContentSections() {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-white/80 hover:text-white transition-colors text-sm"
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >
                   {link.label}
                 </a>
@@ -133,18 +136,23 @@ export function ContentSections() {
             {/* Навигация колонка 2 */}
             <div className="flex flex-col gap-3">
               {[
-                { label: 'Детские площадки', href: '#catalog' },
-                { label: 'Спортивное оборудование', href: '#catalog' },
-                { label: 'Малые архитектурные формы', href: '#catalog' },
-                { label: 'Уличная мебель', href: '#catalog' },
+                { label: 'Игровое оборудование', category: 'Игра' },
+                { label: 'Спортивное оборудование', category: 'Спорт' },
+                { label: 'Парковое оборудование', category: 'Парк' },
+                { label: 'Покрытие для площадок', category: 'Покрытие' },
               ].map(link => (
-                <a
+                <button
                   key={link.label}
-                  href={link.href}
-                  className="text-white/80 hover:text-white transition-colors text-sm"
+                  onClick={() => {
+                    onCategorySelect?.(link.category);
+                    setTimeout(() => {
+                      document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 50);
+                  }}
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
                 >
                   {link.label}
-                </a>
+                </button>
               ))}
             </div>
 
@@ -186,26 +194,26 @@ export function ContentSections() {
                   <Icon name="MapPin" size={18} className="text-white" />
                 </a>
               </div>
-              <a href="mailto:info@urban-play.ru" className="text-white/90 font-semibold text-sm hover:text-white transition-colors">
+              <a href="mailto:info@urban-play.ru" className="text-foreground font-semibold text-sm hover:text-primary transition-colors">
                 info@urban-play.ru
               </a>
-              <p className="text-sm font-medium text-[#ffffff]">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+              <p className="text-sm text-muted-foreground">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
             </div>
           </div>
 
           {/* Нижняя строка */}
-          <div className="border-t border-white/10 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-white text-xs">
+          <div className="border-t border-border py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-muted-foreground text-xs">
             <span>&copy; 2026 Urban Play. Все права защищены.</span>
             <div className="flex gap-4">
               <button
                 onClick={() => setIsPrivacyOpen(true)}
-                className="text-white hover:text-white/70 transition-colors underline"
+                className="hover:text-foreground transition-colors underline"
               >
                 Политика конфиденциальности
               </button>
               <button
                 onClick={() => setIsPrivacyOpen(true)}
-                className="text-white hover:text-white/70 transition-colors underline"
+                className="hover:text-foreground transition-colors underline"
               >
                 Обработка персональных данных
               </button>
