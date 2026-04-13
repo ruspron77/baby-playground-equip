@@ -6,9 +6,9 @@ interface HeroSectionProps {
 
 export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
   return (
-    <section id="hero" className="relative md:pb-4 overflow-hidden min-h-[340px] md:min-h-[400px] my-0 py-0">
+    <section id="hero" className="relative md:pb-4 overflow-hidden min-h-[420px] md:min-h-[400px] my-0 py-0">
       <div 
-        className="absolute inset-0 py-0 mx-0 my-0"
+        className="absolute inset-0 py-0 mx-0 my-0 hidden md:block"
         style={{ 
           backgroundImage: 'url(https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/3dfae01f-ed05-4e73-8732-003e8bd94840.png)',
           backgroundSize: 'cover',
@@ -18,6 +18,7 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
       >
         <div className="absolute inset-0 px-0 mx-0 py-0 my-0 bg-[#0000001c]"></div>
       </div>
+      <div className="absolute inset-0 py-0 mx-0 my-0 md:hidden bg-[#1d2025]"></div>
 
       <div className="w-full relative z-10 md:my-[93px] mx-0 py-0 my-[102px]">
         <div className="max-w-3xl animate-fade-in mx-0 md:ml-[50px] px-[7px] py-0 my-0">
