@@ -159,7 +159,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
             <div className="flex flex-col gap-4 my-0 mx-0">
               <div className="flex gap-3">
                 <a
-                  href="https://t.me/"
+                  href="https://t.me/+79181151551"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
@@ -184,11 +184,11 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
                   <Icon name="Mail" size={18} className="text-white" />
                 </a>
                 <a
-                  href="https://yandex.ru/maps/?pt=38.973389,45.053547&z=16&l=map"
+                  href="https://yandex.ru/maps/35/krasnodar/house/korenovskaya_ulitsa_57/Z0EYfw9hS0BWQFpvfXx2c3lgZA==/?ll=38.973389%2C45.053547&z=17"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
-                  style={{ backgroundColor: '#7c4dff' }}
+                  style={{ backgroundColor: '#ff3d00' }}
                 >
                   <Icon name="MapPin" size={18} className="text-white" />
                 </a>
@@ -196,7 +196,14 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
               <a href="mailto:info@urban-play.ru" className="text-foreground font-semibold text-sm hover:text-primary transition-colors">
                 info@urban-play.ru
               </a>
-              <p className="text-muted-foreground text-sm">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+              <a
+                href="https://yandex.ru/maps/35/krasnodar/house/korenovskaya_ulitsa_57/Z0EYfw9hS0BWQFpvfXx2c3lgZA==/?ll=38.973389%2C45.053547&z=17"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground text-sm hover:text-foreground transition-colors"
+              >
+                г. Краснодар, ул. Кореновская, д. 57 оф. 7
+              </a>
             </div>
           </div>
 
