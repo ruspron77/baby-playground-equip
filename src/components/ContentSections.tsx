@@ -134,10 +134,10 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
             {/* Навигация колонка 2 */}
             <div className="flex flex-col gap-3">
               {[
-                { label: 'Игровое оборудование', category: 'Игра' },
-                { label: 'Спортивное оборудование', category: 'Спорт' },
-                { label: 'Парковое оборудование', category: 'Парк' },
-                { label: 'Покрытие для площадок', category: 'Покрытие' },
+                { label: 'Игровое оборудование', category: 'playground' },
+                { label: 'Спортивное оборудование', category: 'sport' },
+                { label: 'Парковое оборудование', category: 'park' },
+                { label: 'Покрытие для площадок', category: 'coating' },
               ].map(link => (
                 <button
                   key={link.label}

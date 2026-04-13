@@ -340,11 +340,14 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       
       {!catalogState.selectedCategory && (
         <ContentSections
-          onCategorySelect={(categoryName) => {
-            catalogState.setSelectedCategory(categoryName);
+          onCategorySelect={(categoryId) => {
+            const cat = categories.find(c => c.id === categoryId);
+            if (cat) {
+              handlers.handleTreeCategorySelect(cat.id, cat);
+            }
             setTimeout(() => {
-              document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
+              document.getElementById('products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 150);
           }}
         />
       )}
