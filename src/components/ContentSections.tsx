@@ -88,7 +88,7 @@ export function ContentSections() {
         </div>
       </section>
 
-      <footer id="contacts" className="px-0 pt-10 pb-0 mt-auto" style={{ backgroundColor: '#0d2137', color: '#ffffff' }}>
+      <footer id="contacts" className="px-0 pt-10 pb-0 mt-auto bg-[#331449]" style={{ backgroundColor: '#0d2137', color: '#ffffff' }}>
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
             {/* Лого + телефон + кнопка */}
@@ -99,7 +99,7 @@ export function ContentSections() {
                 </div>
                 <span className="font-heading font-semibold text-base leading-tight">Urban Play<br/><span className="text-sm font-normal opacity-80">детское оборудование</span></span>
               </div>
-              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-white hover:text-[#38bdf8] transition-colors">
+              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-white hover:text-[#38bdf8] transition-colors mx-0 px-0 my-0">
                 +7 (918) 115-15-51
               </a>
               <Button
@@ -188,7 +188,7 @@ export function ContentSections() {
               <a href="mailto:info@urban-play.ru" className="text-white/90 font-semibold text-sm hover:text-white transition-colors">
                 info@urban-play.ru
               </a>
-              <p className="text-white/60 text-xs">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+              <p className="text-white/60 text-sm font-medium">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
             </div>
           </div>
 
