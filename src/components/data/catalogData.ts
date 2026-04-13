@@ -149,13 +149,13 @@ const allCategories = [
         ]
       },
       { name: 'Вазоны', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/df968bff-9faa-4a1c-a376-b765460579cc.png' },
-      { name: 'Перголы', image: '🌿' },
+      { name: 'Перголы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/48e4a217-5b62-4b2f-bc20-8ff534a6a273.png' },
       { name: 'Качели', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/cc707f1e-7b18-4d74-a121-b9dbf5381328.png' },
-      { name: 'Столы', image: '🪑' },
-      { name: 'Настилы', image: '🟫' },
-      { name: 'Лежаки', image: '🛋️' },
+      { name: 'Столы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/764c2788-2e1a-4c01-a317-9e12a264ab0a.png' },
+      { name: 'Настилы', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/24fc84f2-1e1b-4b83-ae3d-428d3949d931.png' },
+      { name: 'Лежаки', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/1f32caeb-cb77-43c3-a98d-573ed085b013.png' },
       { name: 'Велопарковки', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/09f75027-15a0-421a-a4da-f06ccbf392ab.png' },
-      { name: 'Ограждения', image: '🚧' },
+      { name: 'Ограждения', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/e8af629b-b405-4cbd-89e2-b9bf3df745f1.png' },
       { name: 'Аджилити', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/61a187dd-22f8-4312-985f-f6558c72e63a.png' },
       { name: 'Решетки', image: '⚙️' },
       { name: 'Сбор мусора', image: '♻️' }
