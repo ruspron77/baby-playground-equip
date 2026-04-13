@@ -109,7 +109,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
                 rel="noopener noreferrer"
                 className="text-muted-foreground text-sm hover:text-foreground transition-colors"
               >
-                г. Краснодар, ул. Молодёжная, д. 8
+                г. Краснодар, ул. Кореновская, д. 57, оф. 7
               </a>
             </div>
 
