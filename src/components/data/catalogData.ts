@@ -190,10 +190,9 @@ const allCategories = [
     bgImage: 'https://cdn.poehali.dev/files/%D0%BF%D0%BE%D0%BA%D1%80%D1%8B%D1%82%D0%B8%D0%B5.png',
     order: 5,
     subcategories: [
-      { name: 'Резиновое покрытие', image: '🟦' },
-      { name: 'Наливное покрытие', image: '🟩' },
-      { name: 'Модульная плитка', image: '🟨' },
-      { name: 'Искусственная трава', image: '🟢' }
+      { name: 'Резиновое покрытие', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/0f59ce82-6d53-4f71-84b4-99da7935b23b.jpg' },
+      { name: 'Модульная плитка', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/536eff87-8685-432b-b6a6-dd7d3c387915.jpg' },
+      { name: 'Искусственная трава', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/ff191f37-bd85-4462-aa16-c1580c079543.jpg' }
     ]
   },
   {
