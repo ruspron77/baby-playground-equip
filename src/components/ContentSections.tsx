@@ -104,12 +104,12 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
                 info@urban-play.ru
               </a>
               <a
-                href="https://yandex.ru/maps/35/krasnodar/house/korenovskaya_ulitsa_57/Z0EYfw9hS0BWQFpvfXx2c3lgZA==/?ll=38.973389%2C45.053547&z=17"
+                href="https://yandex.ru/maps/?pt=38.988186,45.096559&z=17&l=map"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground text-sm hover:text-foreground transition-colors"
               >
-                г. Краснодар, ул. Кореновская, д. 57 оф. 7
+                г. Краснодар, ул. Молодёжная, д. 8
               </a>
             </div>
 
@@ -182,7 +182,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
                   <Icon name="Mail" size={18} className="text-white" />
                 </a>
                 <a
-                  href="https://yandex.ru/maps/35/krasnodar/house/korenovskaya_ulitsa_57/Z0EYfw9hS0BWQFpvfXx2c3lgZA==/?ll=38.973389%2C45.053547&z=17"
+                  href="https://yandex.ru/maps/?pt=38.988186,45.096559&z=17&l=map"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
