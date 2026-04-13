@@ -189,7 +189,7 @@ export function ContentSections() {
               <a href="mailto:info@urban-play.ru" className="text-white/90 font-semibold text-sm hover:text-white transition-colors">
                 info@urban-play.ru
               </a>
-              <p className="text-white/60 text-sm font-medium">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+              <p className="text-sm font-medium text-[#ffffff]">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
             </div>
           </div>
 
