@@ -136,7 +136,7 @@ const allCategories = [
       { name: 'Беседки', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/d4021645-d5ba-4539-9b27-7e233c34df08.png' },
       { 
         name: 'Благоустройство', 
-        image: '🛠️',
+        image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/6f5856a5-6c93-4bd6-819f-4587e6f7c020.jpg',
         hasChildren: true,
         children: [
           { name: 'Асфальт', image: '🛣️' },
@@ -157,8 +157,8 @@ const allCategories = [
       { name: 'Велопарковки', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/09f75027-15a0-421a-a4da-f06ccbf392ab.png' },
       { name: 'Ограждения', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/e8af629b-b405-4cbd-89e2-b9bf3df745f1.png' },
       { name: 'Аджилити', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/61a187dd-22f8-4312-985f-f6558c72e63a.png' },
-      { name: 'Решетки', image: '⚙️' },
-      { name: 'Сбор мусора', image: '♻️' }
+      { name: 'Решетки', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/b6b5808c-0a7c-4067-ba73-506773a5d9bb.png' },
+      { name: 'Сбор мусора', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4aedf1c6-4b18-4054-a6fe-2ce3c10d04f0.png' }
     ]
   },
   {
