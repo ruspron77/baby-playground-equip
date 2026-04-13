@@ -96,15 +96,13 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
             {/* Лого + телефон + кнопка */}
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <img
-                  src="https://cdn.poehali.dev/files/photo_643632026-01-05_09-32-44.png"
-                  alt="Urban Play"
-                  className="h-14 w-auto object-contain"
-                />
-              </div>
-              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-foreground hover:text-primary transition-colors self-start">
+            <div className="flex flex-col gap-4 items-start">
+              <img
+                src="https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/18e86aba-1013-49c2-b81f-ea612c1819cc.png"
+                alt="Urban Play"
+                className="h-20 w-auto object-contain"
+              />
+              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-foreground hover:text-primary transition-colors">
                 +7 (918) 115-15-51
               </a>
               <Button
