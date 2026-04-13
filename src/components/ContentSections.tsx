@@ -88,60 +88,128 @@ export function ContentSections() {
         </div>
       </section>
 
-      <section id="contacts" className="bg-muted/30 px-3 py-0">
-        <div className="container mx-auto px-0 py-5 my-2.5">
-          <div className="text-center mb-12">
-            <h2 className="font-heading font-semibold py-0 text-3xl my-2">Контакты</h2>
-            <p className="text-muted-foreground py-0 text-base my-3">Свяжитесь с нами любым удобным способом</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6">
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-4 md:py-4 md:px-6 my-0 py-[5px]">
-                <div className="w-12 h-12 bg-primary/10 flex items-center justify-center mx-auto md:mb-4 rounded-[0.25rem] my-0">
-                  <Icon name="Phone" size={24} className="text-primary" />
+      <footer id="contacts" className="px-0 pt-10 pb-0 mt-auto" style={{ backgroundColor: '#0d2137', color: '#ffffff' }}>
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
+            {/* Лого + телефон + кнопка */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 flex items-center justify-center">
+                  <Icon name="Layers" size={28} className="text-[#38bdf8]" />
                 </div>
-                <h3 className="text-base md:text-base font-bold md:mb-2 my-0">Телефон</h3>
-                <a href="tel:+79181151551" className="md:text-base text-primary hover:underline break-words block text-lg">+7 (918) 115-15-51</a>
-              </CardContent>
-            </Card>
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-4 md:py-4 md:px-6 py-[5px]">
-                <div className="w-12 h-12 bg-secondary/10 flex items-center justify-center mx-auto md:mb-4 rounded-[0.25rem] my-0">
-                  <Icon name="Mail" size={24} className="text-secondary" />
-                </div>
-                <h3 className="text-base md:text-base font-bold md:mb-2 my-0">Email</h3>
-                <a href="mailto:info@urban-play.ru" className="md:text-base text-secondary hover:underline break-words block text-lg">info@urban-play.ru</a>
-              </CardContent>
-            </Card>
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-4 md:py-4 md:px-6 py-[5px]">
-                <div className="w-12 h-12 bg-[#0284c7]/10 flex items-center justify-center mx-auto md:mb-4 my-0 py-0 rounded-[0.25rem]">
-                  <Icon name="MapPin" size={24} className="text-[#0284c7]" />
-                </div>
-                <h3 className="text-base md:text-base font-bold md:mb-2 my-0">Адрес</h3>
-                <a 
-                  href="https://yandex.ru/maps/?pt=38.973389,45.053547&z=16&l=map&text=г.%20Краснодар%2C%20ул.%20Кореновская%2C%20д.%2057" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="md:text-base text-blue-600 hover:underline break-words block text-lg"
-                >
-                  г. Краснодар, ул. Кореновская, д. 57 оф. 7
-                </a>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+                <span className="font-heading font-semibold text-base leading-tight">Urban Play<br/><span className="text-sm font-normal opacity-80">детское оборудование</span></span>
+              </div>
+              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-white hover:text-[#38bdf8] transition-colors">
+                +7 (918) 115-15-51
+              </a>
+              <Button
+                onClick={() => setIsContactDialogOpen(true)}
+                className="rounded-full text-white font-semibold px-6 py-2 w-fit"
+                style={{ backgroundColor: '#2196c4' }}
+              >
+                Получить КП
+              </Button>
+            </div>
 
-      <footer className="px-0 py-4 mt-auto" style={{ backgroundColor: '#1a0129', color: '#ffffff' }}>
-        <div className="container text-center px-4 mx-auto">
-          <p>&copy; 2026 Urban Play. Все права защищены.</p>
-          <button
-            onClick={() => setIsPrivacyOpen(true)}
-            className="mt-2 text-sm underline opacity-70 hover:opacity-100 transition-opacity"
-          >
-            Политика конфиденциальности
-          </button>
+            {/* Навигация колонка 1 */}
+            <div className="flex flex-col gap-3">
+              {[
+                { label: 'Каталог', href: '#catalog' },
+                { label: 'О компании', href: '#about' },
+                { label: 'Сертификаты', href: '#certificates' },
+                { label: 'Контакты', href: '#contacts' },
+              ].map(link => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-white/80 hover:text-white transition-colors text-sm"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            {/* Навигация колонка 2 */}
+            <div className="flex flex-col gap-3">
+              {[
+                { label: 'Детские площадки', href: '#catalog' },
+                { label: 'Спортивное оборудование', href: '#catalog' },
+                { label: 'Малые архитектурные формы', href: '#catalog' },
+                { label: 'Уличная мебель', href: '#catalog' },
+              ].map(link => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-white/80 hover:text-white transition-colors text-sm"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            {/* Соцсети + email */}
+            <div className="flex flex-col gap-4">
+              <div className="flex gap-3">
+                <a
+                  href="https://t.me/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
+                  style={{ backgroundColor: '#29a9eb' }}
+                >
+                  <Icon name="Send" size={18} className="text-white" />
+                </a>
+                <a
+                  href="https://wa.me/79181151551"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
+                  style={{ backgroundColor: '#25d366' }}
+                >
+                  <Icon name="MessageCircle" size={18} className="text-white" />
+                </a>
+                <a
+                  href="mailto:info@urban-play.ru"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
+                  style={{ backgroundColor: '#4f8ef7' }}
+                >
+                  <Icon name="Mail" size={18} className="text-white" />
+                </a>
+                <a
+                  href="https://yandex.ru/maps/?pt=38.973389,45.053547&z=16&l=map"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
+                  style={{ backgroundColor: '#7c4dff' }}
+                >
+                  <Icon name="MapPin" size={18} className="text-white" />
+                </a>
+              </div>
+              <a href="mailto:info@urban-play.ru" className="text-white/90 font-semibold text-sm hover:text-white transition-colors">
+                info@urban-play.ru
+              </a>
+              <p className="text-white/60 text-xs">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+            </div>
+          </div>
+
+          {/* Нижняя строка */}
+          <div className="border-t border-white/10 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-white/40 text-xs">
+            <span>&copy; 2026 Urban Play. Все права защищены.</span>
+            <div className="flex gap-4">
+              <button
+                onClick={() => setIsPrivacyOpen(true)}
+                className="hover:text-white/70 transition-colors underline"
+              >
+                Политика конфиденциальности
+              </button>
+              <button
+                onClick={() => setIsPrivacyOpen(true)}
+                className="hover:text-white/70 transition-colors underline"
+              >
+                Обработка персональных данных
+              </button>
+            </div>
+          </div>
         </div>
       </footer>
 
