@@ -94,6 +94,10 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
 
       <footer id="contacts" className="px-0 pt-10 pb-0 bg-muted/30 my-[22px]">
         <div className="container mx-auto px-6">
+          <div className="mb-8">
+            <h2 className="font-heading font-semibold text-3xl mb-2">Контакты</h2>
+            <p className="text-muted-foreground text-base">Свяжитесь с нами любым удобным способом</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
             {/* Телефон */}
             <div className="flex flex-col gap-2 items-start text-left">
