@@ -117,6 +117,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
             <div className="flex flex-col gap-3 mx-0">
               {[
                 { label: 'Каталог', href: '#catalog' },
+                { label: 'Услуги', href: '#services' },
                 { label: 'О компании', href: '#about' },
                 { label: 'Сертификаты', href: '#certificates' },
               ].map(link => (
