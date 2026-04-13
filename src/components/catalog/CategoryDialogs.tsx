@@ -105,7 +105,7 @@ export function CategoryDialogs({
               >
                 <div className="aspect-square overflow-hidden flex items-center justify-center p-4 sm:p-6">
                   {sub.image.startsWith('http') ? (
-                    <img src={sub.image} alt={sub.name} loading="lazy" className="w-full h-full object-contain px-0 mx-0 py-0 my-0" />
+                    <img src={sub.image} alt={sub.name} loading="lazy" className="w-full h-full px-0 mx-0 py-0 my-0 object-contain rounded-sm" />
                   ) : (
                     <span className="text-9xl sm:text-8xl">{sub.image}</span>
                   )}
