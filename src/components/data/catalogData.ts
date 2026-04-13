@@ -192,7 +192,7 @@ const allCategories = [
     order: 5,
     subcategories: [
       { name: 'Резиновое покрытие', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/0339e09f-579c-4dea-ae7b-128a7f37120e.jpg', imageSize: 'small' },
-      { name: 'Модульная плитка', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/536eff87-8685-432b-b6a6-dd7d3c387915.jpg', imageSize: 'small' },
+      { name: 'Модульная плитка', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/536eff87-8685-432b-b6a6-dd7d3c387915.jpg' },
       { name: 'Искусственная трава', image: 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/4792fa8b-172d-4363-bd68-af2f4e63a261.jpg', imageSize: 'small' }
     ]
   },
