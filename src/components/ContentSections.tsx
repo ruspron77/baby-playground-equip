@@ -95,17 +95,22 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
       <footer id="contacts" className="px-0 pt-10 pb-0 bg-muted/30 my-[22px]">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
-            {/* Телефон + кнопка */}
+            {/* Телефон */}
             <div className="inline-flex flex-col gap-2 w-fit">
               <a href="tel:+79181151551" className="text-xl font-heading font-bold text-foreground hover:text-primary transition-colors whitespace-nowrap">
                 +7 (918) 115-15-51
               </a>
-              <Button
-                onClick={() => setIsContactDialogOpen(true)}
-                className="bg-primary hover:bg-primary/90 h-9 w-full"
+              <a href="mailto:info@urban-play.ru" className="text-foreground font-semibold text-sm hover:text-primary transition-colors">
+                info@urban-play.ru
+              </a>
+              <a
+                href="https://yandex.ru/maps/35/krasnodar/house/korenovskaya_ulitsa_57/Z0EYfw9hS0BWQFpvfXx2c3lgZA==/?ll=38.973389%2C45.053547&z=17"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground text-sm hover:text-foreground transition-colors"
               >
-                Получить КП
-              </Button>
+                г. Краснодар, ул. Кореновская, д. 57 оф. 7
+              </a>
             </div>
 
             {/* Навигация колонка 1 */}
@@ -148,7 +153,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
               ))}
             </div>
 
-            {/* Соцсети + email */}
+            {/* Соцсети + кнопка */}
             <div className="flex flex-col gap-4 my-0 mx-0">
               <div className="flex gap-3">
                 <a
@@ -186,17 +191,12 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
                   <Icon name="MapPin" size={18} className="text-white" />
                 </a>
               </div>
-              <a href="mailto:info@urban-play.ru" className="text-foreground font-semibold text-sm hover:text-primary transition-colors">
-                info@urban-play.ru
-              </a>
-              <a
-                href="https://yandex.ru/maps/35/krasnodar/house/korenovskaya_ulitsa_57/Z0EYfw9hS0BWQFpvfXx2c3lgZA==/?ll=38.973389%2C45.053547&z=17"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground text-sm hover:text-foreground transition-colors"
+              <Button
+                onClick={() => setIsContactDialogOpen(true)}
+                className="bg-primary hover:bg-primary/90 h-9 w-fit"
               >
-                г. Краснодар, ул. Кореновская, д. 57 оф. 7
-              </a>
+                Получить КП
+              </Button>
             </div>
           </div>
 
