@@ -12,7 +12,7 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
         style={{ 
           backgroundImage: 'url(https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/3dfae01f-ed05-4e73-8732-003e8bd94840.png)',
           backgroundSize: 'cover',
-          backgroundPosition: 'center 30%',
+          backgroundPosition: 'center top',
           backgroundRepeat: 'no-repeat'
         }}
       >
