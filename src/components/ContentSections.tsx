@@ -88,18 +88,19 @@ export function ContentSections() {
         </div>
       </section>
 
-      <footer id="contacts" className="px-0 pt-10 pb-0 mt-auto bg-[#331449]" style={{ backgroundColor: '#0d2137', color: '#ffffff' }}>
+      <footer id="contacts" className="px-0 pt-10 pb-0 mt-auto" style={{ backgroundColor: '#1a0129', color: '#ffffff' }}>
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
             {/* Лого + телефон + кнопка */}
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <Icon name="Layers" size={28} className="text-[#38bdf8]" />
-                </div>
-                <span className="font-heading font-semibold text-base leading-tight">Urban Play<br/><span className="text-sm font-normal opacity-80">детское оборудование</span></span>
+                <img
+                  src="https://cdn.poehali.dev/files/photo_643632026-01-05_09-32-44.png"
+                  alt="Urban Play"
+                  className="h-14 w-auto object-contain"
+                />
               </div>
-              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-white hover:text-[#38bdf8] transition-colors mx-0 px-0 my-0">
+              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-white hover:text-purple-300 transition-colors">
                 +7 (918) 115-15-51
               </a>
               <Button
@@ -193,18 +194,18 @@ export function ContentSections() {
           </div>
 
           {/* Нижняя строка */}
-          <div className="border-t border-white/10 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-white/40 text-xs">
+          <div className="border-t border-white/10 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-white text-xs">
             <span>&copy; 2026 Urban Play. Все права защищены.</span>
             <div className="flex gap-4">
               <button
                 onClick={() => setIsPrivacyOpen(true)}
-                className="hover:text-white/70 transition-colors underline"
+                className="text-white hover:text-white/70 transition-colors underline"
               >
                 Политика конфиденциальности
               </button>
               <button
                 onClick={() => setIsPrivacyOpen(true)}
-                className="hover:text-white/70 transition-colors underline"
+                className="text-white hover:text-white/70 transition-colors underline"
               >
                 Обработка персональных данных
               </button>
