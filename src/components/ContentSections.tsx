@@ -92,7 +92,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
         </div>
       </section>
 
-      <footer id="contacts" className="px-0 pt-10 pb-0 mt-auto bg-muted/30">
+      <footer id="contacts" className="px-0 pt-10 pb-0 bg-muted/30 my-[22px]">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
             {/* Лого + телефон + кнопка */}
@@ -102,7 +102,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
                 alt="Urban Play"
                 className="h-20 w-auto object-contain"
               />
-              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-foreground hover:text-primary transition-colors">
+              <a href="tel:+79181151551" className="text-2xl font-heading font-bold text-foreground hover:text-primary transition-colors my-0 py-0 px-0 mx-0">
                 +7 (918) 115-15-51
               </a>
               <Button
@@ -114,7 +114,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
             </div>
 
             {/* Навигация колонка 1 */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 mx-[90px]">
               {[
                 { label: 'Каталог', href: '#catalog' },
                 { label: 'О компании', href: '#about' },
@@ -154,7 +154,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
             </div>
 
             {/* Соцсети + email */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 my-0 mx-0">
               <div className="flex gap-3">
                 <a
                   href="https://t.me/"
@@ -194,7 +194,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
               <a href="mailto:info@urban-play.ru" className="text-foreground font-semibold text-sm hover:text-primary transition-colors">
                 info@urban-play.ru
               </a>
-              <p className="text-sm text-muted-foreground">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
+              <p className="text-muted-foreground text-sm">г. Краснодар, ул. Кореновская, д. 57 оф. 7</p>
             </div>
           </div>
 
