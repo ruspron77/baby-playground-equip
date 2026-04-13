@@ -95,24 +95,17 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
       <footer id="contacts" className="px-0 pt-10 pb-0 bg-muted/30 my-[22px]">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
-            {/* Лого + телефон + кнопка */}
-            <div className="flex flex-row items-center gap-4">
-              <img
-                src="https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/18e86aba-1013-49c2-b81f-ea612c1819cc.png"
-                alt="Urban Play"
-                className="h-20 w-auto object-contain flex-shrink-0"
-              />
-              <div className="flex flex-col gap-2 justify-center">
-                <a href="tel:+79181151551" className="text-xl font-heading font-bold text-foreground hover:text-primary transition-colors">
-                  +7 (918) 115-15-51
-                </a>
-                <Button
-                  onClick={() => setIsContactDialogOpen(true)}
-                  className="bg-primary hover:bg-primary/90 h-9 w-fit"
-                >
-                  Получить КП
-                </Button>
-              </div>
+            {/* Телефон + кнопка */}
+            <div className="flex flex-col gap-2">
+              <a href="tel:+79181151551" className="text-xl font-heading font-bold text-foreground hover:text-primary transition-colors">
+                +7 (918) 115-15-51
+              </a>
+              <Button
+                onClick={() => setIsContactDialogOpen(true)}
+                className="bg-primary hover:bg-primary/90 h-9 w-full"
+              >
+                Получить КП
+              </Button>
             </div>
 
             {/* Навигация колонка 1 */}
