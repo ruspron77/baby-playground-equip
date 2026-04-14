@@ -1,0 +1,2 @@
+UPDATE products SET category = 'Игра > Горки > h-0.6' WHERE article IN ('0122','0125','0133','0134','0135','0136','0137','0138','0139','0140','0141','0142');
+UPDATE products SET category = 'Игра > Горки > h-1.0' WHERE article IN ('0120','0129','0130','0131');
