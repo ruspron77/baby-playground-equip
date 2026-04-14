@@ -92,26 +92,26 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
         </div>
       </section>
 
-      <footer id="contacts" className="px-0 bg-secondary my-3.5 py-[1px] text-white">
+      <footer id="contacts" className="px-0 bg-muted/30 my-3.5 py-[1px]">
         <div className="container mx-auto px-6">
           <div className="text-center py-0 my-12">
             <h2 className="font-heading font-semibold text-3xl mb-2">Контакты</h2>
-            <p className="text-white/80 text-base">Свяжитесь с нами любым удобным способом</p>
+            <p className="text-muted-foreground text-base">Свяжитесь с нами любым удобным способом</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
             {/* Телефон */}
             <div className="flex flex-col gap-2 items-start text-left">
-              <a href="tel:+79181151551" className="text-xl font-heading font-bold text-white hover:text-white/80 transition-colors self-start">
+              <a href="tel:+79181151551" className="text-xl font-heading font-bold text-foreground hover:text-primary transition-colors self-start">
                 +7 (918) 115-15-51
               </a>
-              <a href="mailto:info@urban-play.ru" className="text-white font-semibold text-sm hover:text-white/80 transition-colors">
+              <a href="mailto:info@urban-play.ru" className="text-foreground font-semibold text-sm hover:text-primary transition-colors">
                 info@urban-play.ru
               </a>
               <a
                 href="https://yandex.ru/maps/?pt=38.988186,45.096559&z=17&l=map"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 text-sm hover:text-white transition-colors"
+                className="text-muted-foreground text-sm hover:text-foreground transition-colors"
               >
                 г. Краснодар, ул. Кореновская, д. 57, оф. 7
               </a>
@@ -128,7 +128,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-white/70 hover:text-white transition-colors text-sm"
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >
                   {link.label}
                 </a>
@@ -151,7 +151,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
                       document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                     }, 50);
                   }}
-                  className="text-white/70 hover:text-white transition-colors text-sm text-left"
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
                 >
                   {link.label}
                 </button>
@@ -206,23 +206,26 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
             </div>
           </div>
 
-          {/* Нижняя строка */}
-          <div className="border-t border-white/20 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-white/60 text-xs">
+        </div>
+
+        {/* Нижняя строка */}
+        <div className="bg-secondary text-white text-xs py-4 px-6">
+          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
             <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 order-2 md:order-1">
               <button
                 onClick={() => setIsPrivacyOpen(true)}
-                className="hover:text-white transition-colors"
+                className="text-white/80 hover:text-white transition-colors"
               >
                 Политика конфиденциальности
               </button>
               <button
                 onClick={() => setIsPrivacyOpen(true)}
-                className="hover:text-white transition-colors"
+                className="text-white/80 hover:text-white transition-colors"
               >
                 Обработка персональных данных
               </button>
             </div>
-            <span className="order-3 md:order-2">&copy; 2026 Urban Play. Все права защищены.</span>
+            <span className="order-3 md:order-2 text-white/80">&copy; 2026 Urban Play. Все права защищены.</span>
           </div>
         </div>
       </footer>
