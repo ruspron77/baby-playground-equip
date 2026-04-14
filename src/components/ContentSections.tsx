@@ -209,7 +209,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
         </div>
 
         {/* Нижняя строка */}
-        <div className="bg-secondary text-white text-xs py-4 px-6">
+        <div className="bg-secondary text-white text-xs px-6 py-[26px] my-[3px]">
           <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
             <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 order-2 md:order-1">
               <button
