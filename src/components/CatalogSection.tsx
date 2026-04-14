@@ -4,6 +4,7 @@ import { CatalogSideMenu } from './catalog/CatalogSideMenu';
 import { CategoryDialogs } from './catalog/CategoryDialogs';
 import { CategoryGrid } from './catalog/CategoryGrid';
 import { ProductDialog } from './catalog/ProductDialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface SubSubSubcategory {
   name: string;
@@ -152,6 +153,7 @@ export function CatalogSection({
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [productImages, setProductImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const productsRef = useRef<HTMLDivElement>(null);
   const filtersRef = useRef<HTMLDivElement>(null);
 
@@ -332,6 +334,52 @@ export function CatalogSection({
         open={isContactDialogOpen} 
         onOpenChange={setIsContactDialogOpen}
       />
+
+      {/* Нижняя полоска */}
+      <div className="bg-secondary text-white text-xs py-4 px-6">
+        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 order-2 md:order-1">
+            <button onClick={() => setIsPrivacyOpen(true)} className="text-white/80 hover:text-white transition-colors">
+              Политика конфиденциальности
+            </button>
+            <button onClick={() => setIsPrivacyOpen(true)} className="text-white/80 hover:text-white transition-colors">
+              Обработка персональных данных
+            </button>
+          </div>
+          <span className="order-3 md:order-2 text-white/80">&copy; 2026 Urban Play. Все права защищены.</span>
+        </div>
+      </div>
+
+      <Dialog open={isPrivacyOpen} onOpenChange={setIsPrivacyOpen}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Политика конфиденциальности</DialogTitle>
+          </DialogHeader>
+          <div className="text-sm text-muted-foreground space-y-4">
+            <h3 className="font-semibold text-foreground">1. Общие положения</h3>
+            <p>1.1. Настоящий документ «Пользовательское соглашение» (далее - «Соглашение») представляет собой предложение Индивидуальный предприниматель Пронин Руслан Олегович, ИНН: 110209455200 ОГРНИП 323774600102482 (далее – Продавец), размещенное на сайте www.urban-play.ru (далее - «Сайт»), использовать Сайт на условиях, изложенных в настоящем Соглашении.</p>
+            <p>1.2. Настоящая Политика применяется в отношении персональных данных следующих категорий лиц:</p>
+            <p>— Покупателей, оформивших заказ товаров или услуг на Сайте;</p>
+            <p>— Посетителей Сайта, предоставивших свои персональные данные (в том числе при заполнении форм обратной связи, регистрации, использовании сервисов Сайта или принятии Сookie).</p>
+            <p>Все указанные лица именуются в настоящем документе как «Пользователи».</p>
+            <h3 className="font-semibold text-foreground">2. Основные понятия, используемые в Политике</h3>
+            <p>2.1. Автоматизированная обработка Персональных данных — обработка Персональных данных с помощью средств вычислительной техники.</p>
+            <p>2.2. Сайт — веб-сайт urban-play.ru, посредством которого ИП Пронин Р.О. реализует свои товары / услуги.</p>
+            <p>2.3. Обработка Персональных данных — любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с Персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение Персональных данных.</p>
+            <p>2.4. Оператор — лицо, осуществляющее обработку Персональных данных, а также определяющее цели обработки Персональных данных, состав Персональных данных, подлежащих обработке, действия (операции), совершаемые с Персональными данными.</p>
+            <p>2.5. Персональные данные — любая информация, относящаяся прямо или косвенно к определенному или определяемому Субъекту Персональных данных.</p>
+            <p>2.6. Субъект Персональных данных — физическое лицо, которое прямо или косвенно определено или определяемо с помощью Персональных данных.</p>
+            <p>2.7. Трансграничная передача Персональных данных — передача Персональных данных на территорию иностранного государства органу власти иностранного государства, иностранному физическому или иностранному юридическому лицу.</p>
+            <h3 className="font-semibold text-foreground">3. Права и обязанности Оператора</h3>
+            <p>3.1. Оператор имеет право получать от Субъекта Персональных данных достоверные информацию и / или документы, содержащие Персональные данные; самостоятельно определять состав и перечень мер, необходимых и достаточных для обеспечения выполнения обязанностей.</p>
+            <p>3.2. Оператор обязан предоставлять Субъекту Персональных данных по его просьбе информацию, касающуюся обработки его Персональных данных; организовывать обработку Персональных данных в порядке, установленном действующим законодательством Российской Федерации.</p>
+            <h3 className="font-semibold text-foreground">12. Заключительные положения</h3>
+            <p>12.1. Пользователь может получить разъяснения по вопросам обработки его Персональных данных, обратившись по электронной почте <a href="mailto:info@urban-play.ru" className="text-primary hover:underline">info@urban-play.ru</a></p>
+            <p>12.2. Оператор имеет право вносить изменения в настоящую Политику. Новая редакция Политики вступает в силу с момента её размещения на Сайте.</p>
+            <p>По почтовому адресу: 350005, Россия, г. Краснодар, ул. Кореновская, д. 57, оф. 7</p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
