@@ -460,27 +460,27 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             img.save(tmp_path, 'PNG')
             return img.size
 
-        # Подпись: по центру между "Индивидуальный предприниматель" и "/Пронин Р.О./"
+        # Подпись: колонка C в Excel начинается на ~57мм от левого края (A=7.4мм + B=50мм)
+        # Ширина подписи ~32мм (как в Excel 120px)
         try:
             sig_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/062a05b5-fa43-4616-aa05-81ad551e8b79.png'
             sig_w_px, sig_h_px = load_transparent(sig_url, '/tmp/sig.png')
-            sig_w = 45*mm
+            sig_w = 32*mm
             sig_h = sig_w * sig_h_px / sig_w_px
-            # "Инд. предприниматель" ~75мм, "/Пронин Р.О./" начинается с (width-55мм) ~150мм
-            # Центр промежутка: (75 + 150) / 2 = 112.5мм
-            sig_x = 112.5*mm - sig_w / 2
+            sig_x = 57*mm
             sig_y = y_pos - sig_h + 4*mm
             c.drawImage('/tmp/sig.png', sig_x, sig_y, width=sig_w, height=sig_h, mask='auto')
         except Exception as e:
             print(f'Error adding signature: {e}')
 
-        # Печать: ширина 40мм, круглая, рядом с подписью
+        # Печать: колонка D начинается на ~94мм (A=7.4 + B=50 + C=37мм)
+        # Ширина печати ~40мм (как в Excel 150px)
         try:
             seal_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2e775982-d528-4801-bb18-b5cc289852cf.png'
             seal_w_px, seal_h_px = load_transparent(seal_url, '/tmp/seal.png')
             seal_w = 40*mm
             seal_h = seal_w * seal_h_px / seal_w_px
-            seal_x = 108*mm
+            seal_x = 94*mm
             seal_y = y_pos - seal_h + 4*mm
             c.drawImage('/tmp/seal.png', seal_x, seal_y, width=seal_w, height=seal_h, mask='auto')
         except Exception as e:
