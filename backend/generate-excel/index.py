@@ -612,11 +612,40 @@ def handler(event, context):
         cell.alignment = Alignment(horizontal='left', vertical='center')
         current_row += 2
         
-        # Подпись
-        ws.merge_cells(f'A{current_row}:G{current_row}')
-        cell = ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель___________________________/Пронин Р.О./')
-        cell.alignment = Alignment(horizontal='center', vertical='center')
-        cell.font = Font(name='Calibri', size=11)
+        # Подпись: текст слева (A-B), изображение по центру (C-D), текст справа (G)
+        sig_row_h = 40
+        ws.row_dimensions[current_row].height = sig_row_h
+        ws.merge_cells(f'A{current_row}:B{current_row}')
+        cell_left = ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель')
+        cell_left.font = Font(name='Calibri', size=11)
+        cell_left.alignment = Alignment(horizontal='left', vertical='center')
+        ws.cell(row=current_row, column=7, value='/Пронин Р.О./').font = Font(name='Calibri', size=11)
+        ws.cell(row=current_row, column=7).alignment = Alignment(horizontal='right', vertical='center')
+
+        # Изображение подписи по центру (колонка C)
+        try:
+            sig_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/ee1e7ee5-357f-4863-a507-88cf7a878fae.png'
+            req_sig = urllib.request.Request(sig_url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req_sig, timeout=5) as resp:
+                sig_data = resp.read()
+            pil_sig = PILImage.open(io.BytesIO(sig_data)).convert('RGBA')
+            sw, sh = pil_sig.size
+            px = pil_sig.getdata()
+            pil_sig.putdata([(r, g, b, 0) if (r > 210 and g > 210 and b > 210) else (r, g, b, a) for r, g, b, a in px])
+            # Высота = высота строки (40pt ≈ 53px), ширина пропорционально
+            target_h = 53
+            target_w = int(target_h * sw / sh)
+            pil_sig = pil_sig.resize((target_w, target_h), PILImage.Resampling.LANCZOS)
+            sig_buf = io.BytesIO()
+            pil_sig.save(sig_buf, 'PNG')
+            sig_buf.seek(0)
+            sig_img = XLImage(sig_buf)
+            sig_img.width = target_w
+            sig_img.height = target_h
+            ws.add_image(sig_img, f'C{current_row}')
+            print('Signature added to Excel')
+        except Exception as e:
+            print(f'Error adding signature to Excel: {e}')
         
         # Сохранение
         print('Saving Excel file...')

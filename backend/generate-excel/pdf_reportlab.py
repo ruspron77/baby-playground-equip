@@ -443,9 +443,32 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     c.drawString(10*mm, y_pos, 'Срок изготовления оборудования 30 дней')
     y_pos -= 14*mm
     
-    # Строка подписи
+    # Строка подписи: текст слева, изображение по центру, текст справа
     c.setFont(font_name, 11)
-    c.drawCentredString(width / 2, y_pos, 'Индивидуальный предприниматель___________________________/Пронин Р.О./')
+    c.drawString(10*mm, y_pos, 'Индивидуальный предприниматель')
+    c.drawString(width - 50*mm, y_pos, '/Пронин Р.О./')
+
+    # Подпись — изображение по центру между текстами
+    try:
+        sig_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/ee1e7ee5-357f-4863-a507-88cf7a878fae.png'
+        req_sig = urllib.request.Request(sig_url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req_sig, timeout=5) as resp:
+            sig_data = resp.read()
+        pil_sig = PILImage.open(io.BytesIO(sig_data)).convert('RGBA')
+        sw, sh = pil_sig.size
+        # Убираем белый фон
+        px = pil_sig.getdata()
+        pil_sig.putdata([(r, g, b, 0) if (r > 210 and g > 210 and b > 210) else (r, g, b, a) for r, g, b, a in px])
+        pil_sig.save('/tmp/sig.png', 'PNG')
+        # Высота подписи = высота строки (~15мм), ширина пропорционально
+        sig_h = 15*mm
+        sig_w = sig_h * sw / sh
+        # Центр между концом левого текста (~82мм) и началом правого (~160мм) = 121мм
+        sig_x = 121*mm - sig_w / 2
+        sig_y = y_pos - sig_h + 3*mm
+        c.drawImage('/tmp/sig.png', sig_x, sig_y, width=sig_w, height=sig_h, mask='auto')
+    except Exception as e:
+        print(f'Error adding signature: {e}')
     
     c.save()
     buffer.seek(0)
