@@ -434,13 +434,14 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         c.drawRightString(width - 10*mm, 10*mm, f'Страница {total_pages} из {total_pages}')
     
     # Футер с условиями
+    y_pos -= 6*mm
     c.setFont(font_name, 11)
     c.drawString(10*mm, y_pos, 'Вся продукция сертифицирована и соответствует стандартам качества')
     y_pos -= 5*mm
     c.drawString(10*mm, y_pos, 'Срок действия коммерческого предложения 15 дней')
     y_pos -= 5*mm
     c.drawString(10*mm, y_pos, 'Срок изготовления оборудования 30 дней')
-    y_pos -= 8*mm
+    y_pos -= 14*mm
     
     # Строка подписи
     c.setFont(font_name, 11)
