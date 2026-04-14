@@ -58,7 +58,7 @@ export function ProductDelete({ onStatusChange }: ProductDeleteProps) {
     onStatusChange('idle', '');
 
     try {
-      const response = await fetch('https://functions.poehali.dev/e93f95d7-e11d-4883-bf7e-1f41cb0b3bbb', {
+      const response = await fetch('https://functions.poehali.dev/86a5f270-0e5f-4fc8-8762-1839512f352a', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
