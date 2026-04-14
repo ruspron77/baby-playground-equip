@@ -198,8 +198,10 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
               </div>
               <Button
                 onClick={() => setIsContactDialogOpen(true)}
-                className="h-9 bg-transparent hover:bg-transparent border-2 font-semibold"
+                className="h-9 bg-transparent border-2 font-semibold transition-all duration-300 hover:text-white hover:shadow-lg hover:scale-105"
                 style={{ width: 'calc(4 * 2.5rem + 3 * 0.75rem)', borderColor: '#25d366', color: '#25d366' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#25d366'; (e.currentTarget as HTMLButtonElement).style.borderColor = '#25d366'; (e.currentTarget as HTMLButtonElement).style.color = 'white'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.borderColor = '#25d366'; (e.currentTarget as HTMLButtonElement).style.color = '#25d366'; }}
               >
                 Получить КП
               </Button>
