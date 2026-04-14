@@ -442,11 +442,12 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     c.drawString(10*mm, y_pos, 'Срок изготовления оборудования 30 дней')
     y_pos -= 8*mm
     
-    # Подпись
+    # Строка подписи
     c.setFont(font_name, 11)
-    c.drawCentredString(width / 2, y_pos, 'Индивидуальный предприниматель___________________________/Пронин Р.О./')
+    c.drawString(10*mm, y_pos, 'Индивидуальный предприниматель')
+    c.drawString(width - 60*mm, y_pos, '/Пронин Р.О./')
     
-    # Печать и подпись (изображение)
+    # Печать и подпись (изображение) — поверх строки по центру
     if add_stamp:
         try:
             stamp_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/87030c82-44ad-4876-86dd-c44c596b64d2.jpg'
@@ -456,20 +457,33 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             stamp_path = '/tmp/stamp.jpg'
             with open(stamp_path, 'wb') as f:
                 f.write(stamp_data)
-            # Обрезаем только нижнюю часть с печатью и подписью
-            pil_stamp = PILImage.open(stamp_path)
+            # Обрезаем верхнюю часть скана где находятся подпись и печать
+            pil_stamp = PILImage.open(stamp_path).convert('RGBA')
             sw, sh = pil_stamp.size
-            # Берём левую треть для подписи и правую часть для печати
-            # Исходный скан примерно 2480x3508, нас интересует верхняя четверть где подпись+печать
-            crop_bottom = int(sh * 0.45)
-            pil_stamp_crop = pil_stamp.crop((0, 0, sw, crop_bottom))
-            pil_stamp_crop.save(stamp_path, 'JPEG', quality=95)
-            # Размещаем изображение: ширина ~100мм, слева
-            stamp_w = 100*mm
-            stamp_h = stamp_w * crop_bottom / sw
-            stamp_x = 10*mm
-            stamp_y = y_pos - stamp_h - 5*mm
-            c.drawImage(stamp_path, stamp_x, stamp_y, width=stamp_w, height=stamp_h, mask='auto')
+            # Скан А4: подпись+печать в верхней трети (примерно первые 35% высоты)
+            crop_h = int(sh * 0.35)
+            pil_stamp_crop = pil_stamp.crop((0, 0, sw, crop_h))
+            # Делаем белый фон прозрачным
+            pil_stamp_rgb = pil_stamp_crop.convert('RGB')
+            data = pil_stamp_rgb.getdata()
+            new_data = []
+            for pixel in data:
+                r, g, b = pixel
+                # Белые и почти белые пиксели делаем прозрачными
+                if r > 220 and g > 220 and b > 220:
+                    new_data.append((255, 255, 255, 0))
+                else:
+                    new_data.append((r, g, b, 255))
+            pil_stamp_crop.putdata(new_data)
+            stamp_png_path = '/tmp/stamp.png'
+            pil_stamp_crop.save(stamp_png_path, 'PNG')
+            # Размер: ширина 90мм, высота пропорционально
+            stamp_w = 90*mm
+            stamp_h = stamp_w * crop_h / sw
+            # Позиция: горизонтально по центру страницы, вертикально — центр на строке подписи
+            stamp_x = (width - stamp_w) / 2
+            stamp_y = y_pos - stamp_h + 8*mm
+            c.drawImage(stamp_png_path, stamp_x, stamp_y, width=stamp_w, height=stamp_h, mask='auto')
             print('Stamp image added successfully')
         except Exception as e:
             print(f'Error adding stamp: {e}')
