@@ -297,10 +297,10 @@ export function ServicesSection() {
   const active = openIdx !== null ? services[openIdx] : null;
 
   return (
-    <section id="services" className="bg-muted/30 order-1 md:order-1 py-2.5">
+    <section id="services" className="bg-muted/30 order-1 md:order-1 py-2.5 my-[9px]">
       <div className="container mx-auto px-3">
-        <h2 className="text-2xl font-bold text-center mb-1">Услуги</h2>
-        <p className="text-center text-muted-foreground mb-4">Полный цикл — от проектирования до монтажа</p>
+        <h2 className="text-2xl font-bold text-center py-0 my-3">Услуги</h2>
+        <p className="text-center text-muted-foreground my-3">Полный цикл — от проектирования до монтажа</p>
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 py-2 my-[5px]">
           {services.map((service, idx) => (
             <Card
