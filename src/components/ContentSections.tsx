@@ -165,41 +165,41 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
                   href="https://t.me/+79181151551"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
-                  style={{ backgroundColor: '#29a9eb' }}
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80 border-2"
+                  style={{ backgroundColor: 'transparent', borderColor: '#29a9eb' }}
                 >
-                  <Icon name="Send" size={18} className="text-white" />
+                  <Icon name="Send" size={18} style={{ color: '#29a9eb' }} />
                 </a>
                 <a
                   href="https://wa.me/79181151551"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
-                  style={{ backgroundColor: '#25d366' }}
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80 border-2"
+                  style={{ backgroundColor: 'transparent', borderColor: '#25d366' }}
                 >
-                  <Icon name="MessageCircle" size={18} className="text-white" />
+                  <Icon name="MessageCircle" size={18} style={{ color: '#25d366' }} />
                 </a>
                 <a
                   href="mailto:info@urban-play.ru"
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
-                  style={{ backgroundColor: '#4f8ef7' }}
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80 border-2"
+                  style={{ backgroundColor: 'transparent', borderColor: '#4f8ef7' }}
                 >
-                  <Icon name="Mail" size={18} className="text-white" />
+                  <Icon name="Mail" size={18} style={{ color: '#4f8ef7' }} />
                 </a>
                 <a
                   href="https://yandex.ru/maps/?pt=38.988186,45.096559&z=17&l=map"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
-                  style={{ backgroundColor: '#ff3d00' }}
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80 border-2"
+                  style={{ backgroundColor: 'transparent', borderColor: '#ff3d00' }}
                 >
-                  <Icon name="MapPin" size={18} className="text-white" />
+                  <Icon name="MapPin" size={18} style={{ color: '#ff3d00' }} />
                 </a>
               </div>
               <Button
                 onClick={() => setIsContactDialogOpen(true)}
-                className="bg-primary hover:bg-primary/90 h-9"
-                style={{ width: 'calc(4 * 2.5rem + 3 * 0.75rem)' }}
+                className="h-9 bg-transparent hover:bg-transparent border-2 font-semibold"
+                style={{ width: 'calc(4 * 2.5rem + 3 * 0.75rem)', borderColor: '#25d366', color: '#25d366' }}
               >
                 Получить КП
               </Button>
