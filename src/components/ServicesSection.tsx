@@ -118,6 +118,7 @@ export function ServicesSection() {
   return (
     <section id="services" className="bg-muted/30 order-1 md:order-1 py-2.5">
       <div className="container mx-auto px-3">
+        <h2 className="text-2xl font-bold text-center mb-4">Наши услуги</h2>
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 py-2 my-[5px]">
           {services.map((service, idx) => (
             <Card
