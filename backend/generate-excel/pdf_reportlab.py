@@ -461,29 +461,33 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             img.save(tmp_path, 'PNG')
             return img.size
 
-        # Подпись: ширина 30мм, x=78мм (сразу после текста "Индивидуальный предприниматель")
-        # нижний край совпадает со строкой подписи, уходит вверх
+        # Подпись: ширина 32мм
+        # x=88мм — сразу после конца текста "Индивидуальный предприниматель"
+        # y: нижний край на уровне строки (y_pos), изображение уходит вверх на sig_h
         try:
             sig_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/062a05b5-fa43-4616-aa05-81ad551e8b79.png'
             sig_w_px, sig_h_px = load_transparent(sig_url, '/tmp/sig.png')
-            sig_w = 30*mm
+            sig_w = 32*mm
             sig_h = sig_w * sig_h_px / sig_w_px
-            sig_x = 78*mm
-            sig_y = y_pos - sig_h + 5*mm
+            sig_x = 88*mm
+            sig_y = y_pos - sig_h + 2*mm   # нижний край чуть ниже базовой линии
             c.drawImage('/tmp/sig.png', sig_x, sig_y, width=sig_w, height=sig_h, mask='auto')
+            print(f'Signature: x={sig_x/mm:.1f}mm y={sig_y/mm:.1f}mm w={sig_w/mm:.1f}mm h={sig_h/mm:.1f}mm')
         except Exception as e:
             print(f'Error adding signature: {e}')
 
-        # Печать: ширина 38мм, x=84мм (перекрывает подпись, центр ~103мм)
-        # нижний край чуть ниже строки подписи
+        # Печать: диаметр 42мм, квадратный PNG -> ширина=высота=42мм
+        # x=84мм — центр печати на ~105мм, перекрывает подпись
+        # y: центр печати на уровне строки подписи (y_pos + 3мм), нижний край = y_pos + 3 - 21 = y_pos - 18мм
         try:
             seal_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2e775982-d528-4801-bb18-b5cc289852cf.png'
             seal_w_px, seal_h_px = load_transparent(seal_url, '/tmp/seal.png')
-            seal_w = 38*mm
+            seal_w = 42*mm
             seal_h = seal_w * seal_h_px / seal_w_px
             seal_x = 84*mm
-            seal_y = y_pos - seal_h + 8*mm
+            seal_y = y_pos - seal_h/2 + 3*mm   # центр печати на уровне строки
             c.drawImage('/tmp/seal.png', seal_x, seal_y, width=seal_w, height=seal_h, mask='auto')
+            print(f'Seal: x={seal_x/mm:.1f}mm y={seal_y/mm:.1f}mm w={seal_w/mm:.1f}mm h={seal_h/mm:.1f}mm')
         except Exception as e:
             print(f'Error adding seal: {e}')
     
