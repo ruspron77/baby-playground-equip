@@ -134,7 +134,6 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
     sortedCart?: CartItem[];
     discountPercent?: number;
     discountAmount?: number;
-    addStamp?: boolean;
   }) => {
     try {
       const finalInstallationPercent = options?.installationPercent ?? installationPercent;
@@ -183,8 +182,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
           imageRowHeight,
           format: options?.format || 'xlsx',
           discountPercent: options?.discountPercent || 0,
-          discountAmount: options?.discountAmount || 0,
-          addStamp: options?.addStamp ?? true
+          discountAmount: options?.discountAmount || 0
         }),
       });
 

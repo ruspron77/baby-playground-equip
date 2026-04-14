@@ -612,55 +612,11 @@ def handler(event, context):
         cell.alignment = Alignment(horizontal='left', vertical='center')
         current_row += 2
         
-        # Подпись — левая часть и правая отдельно
-        ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель').font = Font(name='Calibri', size=11)
-        ws.cell(row=current_row, column=1).alignment = Alignment(horizontal='left', vertical='center')
-        ws.cell(row=current_row, column=7, value='/Пронин Р.О./').font = Font(name='Calibri', size=11)
-        ws.cell(row=current_row, column=7).alignment = Alignment(horizontal='right', vertical='center')
-        ws.row_dimensions[current_row].height = 18
-        
-        # Печать и подпись поверх строки — отдельные PNG
-        if add_stamp:
-            def make_transparent_buf(url):
-                req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-                with urllib.request.urlopen(req, timeout=5) as resp:
-                    raw = resp.read()
-                img = PILImage.open(io.BytesIO(raw)).convert('RGBA')
-                px = img.getdata()
-                new_px = [(r, g, b, 0) if (r > 210 and g > 210 and b > 210) else (r, g, b, a) for r, g, b, a in px]
-                img.putdata(new_px)
-                buf = io.BytesIO()
-                img.save(buf, 'PNG')
-                buf.seek(0)
-                return buf, img.size
-
-            # Подпись: ~120px ширина (≈32мм), якорь колонка C
-            try:
-                sig_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/062a05b5-fa43-4616-aa05-81ad551e8b79.png'
-                sig_buf, (sw, sh) = make_transparent_buf(sig_url)
-                sig_target_w = 120
-                sig_target_h = int(sig_target_w * sh / sw)
-                sig_img = XLImage(sig_buf)
-                sig_img.width = sig_target_w
-                sig_img.height = sig_target_h
-                ws.add_image(sig_img, f'C{current_row}')
-                print('Signature added to Excel')
-            except Exception as e:
-                print(f'Error adding signature to Excel: {e}')
-
-            # Печать: ~150px ширина (≈40мм), якорь колонка D
-            try:
-                seal_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2e775982-d528-4801-bb18-b5cc289852cf.png'
-                seal_buf, (pw, ph) = make_transparent_buf(seal_url)
-                seal_target_w = 150
-                seal_target_h = int(seal_target_w * ph / pw)
-                seal_img = XLImage(seal_buf)
-                seal_img.width = seal_target_w
-                seal_img.height = seal_target_h
-                ws.add_image(seal_img, f'D{current_row}')
-                print('Seal added to Excel')
-            except Exception as e:
-                print(f'Error adding seal to Excel: {e}')
+        # Подпись
+        ws.merge_cells(f'A{current_row}:G{current_row}')
+        cell = ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель___________________________/Пронин Р.О./')
+        cell.alignment = Alignment(horizontal='center', vertical='center')
+        cell.font = Font(name='Calibri', size=11)
         
         # Сохранение
         print('Saving Excel file...')

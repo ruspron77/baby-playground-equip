@@ -42,7 +42,7 @@ interface HeaderProps {
   setInstallationPercent: (percent: number) => void;
   calculateInstallationCost: () => number;
   calculateGrandTotal: () => number;
-  generateKP: (options?: { address?: string; installationPercent?: number; deliveryCost?: number; hideInstallation?: boolean; hideDelivery?: boolean; format?: 'xlsx' | 'pdf'; sortedCart?: CartItem[]; discountPercent?: number; discountAmount?: number; addStamp?: boolean }) => void;
+  generateKP: (options?: { address?: string; installationPercent?: number; deliveryCost?: number; hideInstallation?: boolean; hideDelivery?: boolean; format?: 'xlsx' | 'pdf'; sortedCart?: CartItem[]; discountPercent?: number; discountAmount?: number }) => void;
   isExcelSettingsOpen: boolean;
   setIsExcelSettingsOpen: (open: boolean) => void;
   imageColumnWidth: number;
@@ -106,7 +106,7 @@ export function Header({
   const [kpDeliveryCost, setKpDeliveryCost] = useState(0);
   const [hideInstallationInKP, setHideInstallationInKP] = useState(false);
   const [hideDeliveryInKP, setHideDeliveryInKP] = useState(false);
-  const [addStampInKP, setAddStampInKP] = useState(true);
+
   const [kpFormat, setKpFormat] = useState<'xlsx' | 'pdf'>('xlsx');
   const [kpDiscountPercent, setKpDiscountPercent] = useState(0);
   const [kpDiscountAmount, setKpDiscountAmount] = useState(0);
@@ -1187,16 +1187,6 @@ export function Header({
                 </Button>
               </div>
             </div>
-            <div className="flex items-center space-x-2 pt-2">
-              <Checkbox
-                id="addStamp"
-                checked={addStampInKP}
-                onCheckedChange={(checked) => setAddStampInKP(checked as boolean)}
-              />
-              <label htmlFor="addStamp" className="text-sm cursor-pointer">
-                Печать и подпись
-              </label>
-            </div>
           </div>
           <div className="bg-background border-t pt-4">
             <Button onClick={() => {
@@ -1209,8 +1199,7 @@ export function Header({
                 format: kpFormat,
                 sortedCart: sortedCart,
                 discountPercent: kpDiscountPercent,
-                discountAmount: kpDiscountAmount,
-                addStamp: addStampInKP
+                discountAmount: kpDiscountAmount
               });
               setShowKPDialog(false);
             }} className="w-full">
