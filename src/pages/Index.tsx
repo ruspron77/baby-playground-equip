@@ -243,7 +243,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         handleResetFilters={handlers.handleResetFilters}
       />
       
-      <div className="flex-1 py-0">
+      <div className="flex-1 py-0 my-0">
       {!catalogState.selectedCategory && (
         <>
           <HeroSection onOpenCatalog={() => catalogState.setIsSideMenuOpen(true)} />
@@ -255,7 +255,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
       
       <section id="catalog" className={`pt-4 pb-8 bg-gray-50 order-2 md:order-2 ${catalogState.selectedCategory ? 'hidden' : ''}`}>
         <div className="container mx-auto px-3 my-2">
-          <h2 className="font-heading text-center font-semibold text-3xl my-[7px]">Каталог продукции</h2>
+          <h2 className="font-heading text-center font-semibold text-3xl my-0">Каталог продукции</h2>
           <p className="text-center text-muted-foreground max-w-2xl mx-auto py-0 my-3 mb-8">
             Выберите категорию продукции для просмотра полного ассортимента
           </p>
