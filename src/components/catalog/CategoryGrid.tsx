@@ -238,28 +238,7 @@ export function CategoryGrid({
                   </SelectContent>
                 </Select>
               )}
-              {availableSubSubSubcategories.length > 0 && selectedSubSubLevel1 && (
-                <Select
-                  value={selectedSubSubLevel2 || 'all-themes'}
-                  onValueChange={(value) => {
-                    if (value === 'all-themes') {
-                      setSelectedSubSubcategory(selectedSubSubLevel1);
-                    } else {
-                      setSelectedSubSubcategory(`${selectedSubSubLevel1} > ${value}`);
-                    }
-                  }}
-                >
-                  <SelectTrigger className={`flex-1 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm font-normal ${selectedSubSubLevel2 ? 'text-[#1d2025]' : ''}`}>
-                    <SelectValue placeholder="Темы" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all-themes">Все серии</SelectItem>
-                    {availableSubSubSubcategories.map((subSubSub) => (
-                      <SelectItem key={subSubSub.name} value={subSubSub.name}>{subSubSub.name}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
+
             </div>
           </div>
           
