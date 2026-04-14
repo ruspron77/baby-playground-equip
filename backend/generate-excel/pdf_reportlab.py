@@ -447,42 +447,34 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     c.drawString(10*mm, y_pos, 'Индивидуальный предприниматель')
     c.drawString(width - 60*mm, y_pos, '/Пронин Р.О./')
     
-    # Печать и подпись (изображение) — поверх строки по центру
+    # Печать и подпись (изображение) — поверх строки подписи по центру
     if add_stamp:
         try:
             stamp_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/87030c82-44ad-4876-86dd-c44c596b64d2.jpg'
             req_stamp = urllib.request.Request(stamp_url, headers={'User-Agent': 'Mozilla/5.0'})
             with urllib.request.urlopen(req_stamp, timeout=5) as resp:
                 stamp_data = resp.read()
-            stamp_path = '/tmp/stamp.jpg'
-            with open(stamp_path, 'wb') as f:
-                f.write(stamp_data)
-            # Обрезаем верхнюю часть скана где находятся подпись и печать
-            pil_stamp = PILImage.open(stamp_path).convert('RGBA')
+            pil_stamp = PILImage.open(io.BytesIO(stamp_data)).convert('RGBA')
             sw, sh = pil_stamp.size
-            # Скан А4: подпись+печать в верхней трети (примерно первые 35% высоты)
-            crop_h = int(sh * 0.35)
-            pil_stamp_crop = pil_stamp.crop((0, 0, sw, crop_h))
-            # Делаем белый фон прозрачным
-            pil_stamp_rgb = pil_stamp_crop.convert('RGB')
-            data = pil_stamp_rgb.getdata()
-            new_data = []
-            for pixel in data:
-                r, g, b = pixel
-                # Белые и почти белые пиксели делаем прозрачными
-                if r > 220 and g > 220 and b > 220:
-                    new_data.append((255, 255, 255, 0))
-                else:
-                    new_data.append((r, g, b, 255))
-            pil_stamp_crop.putdata(new_data)
+            # Скан А4: подпись слева ~20-45% ширины, печать ~55-85% ширины, всё в верхних ~38% высоты
+            crop_top = int(sh * 0.12)
+            crop_bottom = int(sh * 0.38)
+            crop_left = int(sw * 0.15)
+            crop_right = int(sw * 0.92)
+            pil_crop = pil_stamp.crop((crop_left, crop_top, crop_right, crop_bottom))
+            cw, ch = pil_crop.size
+            # Удаляем белый фон
+            data = pil_crop.getdata()
+            new_data = [(r, g, b, 0) if (r > 215 and g > 215 and b > 215) else (r, g, b, a) for r, g, b, a in data]
+            pil_crop.putdata(new_data)
             stamp_png_path = '/tmp/stamp.png'
-            pil_stamp_crop.save(stamp_png_path, 'PNG')
-            # Размер: ширина 90мм, высота пропорционально
-            stamp_w = 90*mm
-            stamp_h = stamp_w * crop_h / sw
-            # Позиция: горизонтально по центру страницы, вертикально — центр на строке подписи
+            pil_crop.save(stamp_png_path, 'PNG')
+            # Размер в PDF: ширина 80мм, высота пропорционально
+            stamp_w = 80*mm
+            stamp_h = stamp_w * ch / cw
+            # Позиция: по центру страницы, низ изображения совпадает с низом строки подписи минус 3мм
             stamp_x = (width - stamp_w) / 2
-            stamp_y = y_pos - stamp_h + 8*mm
+            stamp_y = y_pos - stamp_h + 3*mm
             c.drawImage(stamp_png_path, stamp_x, stamp_y, width=stamp_w, height=stamp_h, mask='auto')
             print('Stamp image added successfully')
         except Exception as e:

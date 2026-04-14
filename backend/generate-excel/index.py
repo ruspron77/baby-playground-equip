@@ -612,11 +612,46 @@ def handler(event, context):
         cell.alignment = Alignment(horizontal='left', vertical='center')
         current_row += 2
         
-        # Подпись
-        ws.merge_cells(f'A{current_row}:G{current_row}')
-        cell = ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель___________________________/Пронин Р.О./')
-        cell.alignment = Alignment(horizontal='center', vertical='center')
-        cell.font = Font(name='Calibri', size=11)
+        # Подпись — левая часть и правая отдельно
+        ws.cell(row=current_row, column=1, value='Индивидуальный предприниматель').font = Font(name='Calibri', size=11)
+        ws.cell(row=current_row, column=1).alignment = Alignment(horizontal='left', vertical='center')
+        ws.cell(row=current_row, column=7, value='/Пронин Р.О./').font = Font(name='Calibri', size=11)
+        ws.cell(row=current_row, column=7).alignment = Alignment(horizontal='right', vertical='center')
+        ws.row_dimensions[current_row].height = 18
+        
+        # Печать и подпись поверх строки
+        if add_stamp:
+            try:
+                stamp_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/87030c82-44ad-4876-86dd-c44c596b64d2.jpg'
+                req_stamp = urllib.request.Request(stamp_url, headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req_stamp, timeout=5) as resp:
+                    stamp_data = resp.read()
+                pil_stamp = PILImage.open(io.BytesIO(stamp_data))
+                sw, sh = pil_stamp.size
+                # Обрезаем верхние 35% скана — там подпись и печать
+                crop_h = int(sh * 0.35)
+                pil_stamp_crop = pil_stamp.crop((0, 0, sw, crop_h))
+                # Удаляем белый фон
+                pil_stamp_rgba = pil_stamp_crop.convert('RGBA')
+                data = pil_stamp_rgba.getdata()
+                new_data = [(r, g, b, 0) if (r > 220 and g > 220 and b > 220) else (r, g, b, 255) for r, g, b, a in data]
+                pil_stamp_rgba.putdata(new_data)
+                # Целевой размер: 220px ширина (≈58мм при 96dpi)
+                target_w = 220
+                target_h = int(target_w * crop_h / sw)
+                pil_stamp_rgba = pil_stamp_rgba.resize((target_w, target_h), PILImage.Resampling.LANCZOS)
+                stamp_buf = io.BytesIO()
+                pil_stamp_rgba.save(stamp_buf, 'PNG')
+                stamp_buf.seek(0)
+                stamp_img = XLImage(stamp_buf)
+                stamp_img.width = target_w
+                stamp_img.height = target_h
+                # Якорь: колонка C, строка подписи - 2
+                anchor_row = max(1, current_row - 2)
+                ws.add_image(stamp_img, f'C{anchor_row}')
+                print('Stamp added to Excel')
+            except Exception as e:
+                print(f'Error adding stamp to Excel: {e}')
         
         # Сохранение
         print('Saving Excel file...')
