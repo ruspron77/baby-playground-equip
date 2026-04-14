@@ -145,17 +145,37 @@ export function CategoryGrid({
     <div id="products" className="container mx-auto pt-0 px-0">
       <div ref={filtersRef}>
         <div className={`fixed top-[76px] md:top-[85px] left-0 right-0 z-[40] shadow-md border-t border-b border-gray-200 transition-all duration-300 px-2.5 py-2.5 md:py-1.5 bg-[#ffffff] ${isProductDialogOpen ? 'hidden' : ''}`} style={{ top: 'var(--filters-top, 76px)' }}>
-          {/* Мобильная версия: строка 1 — категории + сброс, строка 2 — поиск */}
+          {/* Мобильная версия: строка 1 — поиск + сбросить, строка 2 — категории + подкатегории */}
           <div className="flex sm:hidden flex-col gap-1.5 mb-1">
+            {/* Строка 1: поиск + сбросить */}
+            <div className="flex items-center gap-2">
+              <div className="relative flex-1">
+                <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Поиск"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 h-9 text-sm w-full"
+                />
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleReset}
+                className="hover:border-primary hover:text-primary hover:bg-transparent text-sm shrink-0"
+              >
+                Сбросить
+              </Button>
+            </div>
+            {/* Строка 2: категории + подкатегории */}
             <div className="flex items-center gap-2">
               <Select
                 value={selectedCategory || 'all-categories'}
                 onValueChange={(value) => {
                   if (value !== 'all-categories') {
                     const category = categories.find(c => c.id === value);
-                    if (category) {
-                      handleTreeCategorySelect(value, category);
-                    }
+                    if (category) handleTreeCategorySelect(value, category);
                   }
                 }}
               >
@@ -170,24 +190,54 @@ export function CategoryGrid({
                   ))}
                 </SelectContent>
               </Select>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleReset}
-                className="hover:border-primary hover:text-primary hover:bg-transparent text-sm"
-              >
-                Сбросить
-              </Button>
-            </div>
-            <div className="relative w-full">
-              <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Поиск"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 h-9 text-sm w-full"
-              />
+              {availableSeries.length > 0 && (
+                <Select
+                  value={selectedSeries || 'all-series'}
+                  onValueChange={(value) => { setSelectedSeries(value === 'all-series' ? null : value); setSelectedSubSubcategory(null); }}
+                >
+                  <SelectTrigger className={`flex-1 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm font-normal ${selectedSeries ? 'text-[#1d2025]' : ''}`}>
+                    <SelectValue placeholder="Серии" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all-series">Все серии</SelectItem>
+                    {availableSeries.map((series: { name: string }) => (
+                      <SelectItem key={series.name} value={series.name}>{series.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+              {isPlaygroundOrSport && availableSubcategoriesForSelect.length > 0 && (
+                <Select
+                  value={firstSelectValue}
+                  onValueChange={(value) => setSelectedSubSubcategory(value === 'all' ? null : value)}
+                >
+                  <SelectTrigger className={`flex-1 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm font-normal ${selectedSubSubLevel1 ? 'text-[#1d2025]' : ''}`}>
+                    <SelectValue placeholder="Подкатегории" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Все категории</SelectItem>
+                    {availableSubcategoriesForSelect.map((sub: { name: string }) => (
+                      <SelectItem key={sub.name} value={sub.name}>{sub.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+              {!isPlaygroundOrSport && availableSubSubcategories.length > 0 && (
+                <Select
+                  value={firstSelectValue}
+                  onValueChange={(value) => setSelectedSubSubcategory(value === 'all' ? null : value)}
+                >
+                  <SelectTrigger className={`flex-1 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm font-normal ${selectedSubSubLevel1 ? 'text-[#1d2025]' : ''}`}>
+                    <SelectValue placeholder="Подкатегории" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Все категории</SelectItem>
+                    {availableSubSubcategories.map((subSub: { name: string }) => (
+                      <SelectItem key={subSub.name} value={subSub.name}>{subSub.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
             </div>
           </div>
           
