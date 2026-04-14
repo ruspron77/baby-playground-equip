@@ -445,40 +445,44 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     # Строка подписи
     c.setFont(font_name, 11)
     c.drawString(10*mm, y_pos, 'Индивидуальный предприниматель')
-    c.drawString(width - 60*mm, y_pos, '/Пронин Р.О./')
-    
-    # Печать и подпись (изображение) — поверх строки подписи по центру
+    c.drawString(width - 55*mm, y_pos, '/Пронин Р.О./')
+
+    # Печать и подпись — отдельные PNG с прозрачным фоном
     if add_stamp:
+        def load_transparent(url, tmp_path):
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=5) as resp:
+                data = resp.read()
+            img = PILImage.open(io.BytesIO(data)).convert('RGBA')
+            px = img.getdata()
+            new_px = [(r, g, b, 0) if (r > 210 and g > 210 and b > 210) else (r, g, b, a) for r, g, b, a in px]
+            img.putdata(new_px)
+            img.save(tmp_path, 'PNG')
+            return img.size
+
+        # Подпись: ширина 45мм, размещается правее текста "Индивидуальный предприниматель"
         try:
-            stamp_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/87030c82-44ad-4876-86dd-c44c596b64d2.jpg'
-            req_stamp = urllib.request.Request(stamp_url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req_stamp, timeout=5) as resp:
-                stamp_data = resp.read()
-            pil_stamp = PILImage.open(io.BytesIO(stamp_data)).convert('RGBA')
-            sw, sh = pil_stamp.size
-            # Скан А4: подпись слева ~20-45% ширины, печать ~55-85% ширины, всё в верхних ~38% высоты
-            crop_top = int(sh * 0.12)
-            crop_bottom = int(sh * 0.38)
-            crop_left = int(sw * 0.15)
-            crop_right = int(sw * 0.92)
-            pil_crop = pil_stamp.crop((crop_left, crop_top, crop_right, crop_bottom))
-            cw, ch = pil_crop.size
-            # Удаляем белый фон
-            data = pil_crop.getdata()
-            new_data = [(r, g, b, 0) if (r > 215 and g > 215 and b > 215) else (r, g, b, a) for r, g, b, a in data]
-            pil_crop.putdata(new_data)
-            stamp_png_path = '/tmp/stamp.png'
-            pil_crop.save(stamp_png_path, 'PNG')
-            # Размер в PDF: ширина 80мм, высота пропорционально
-            stamp_w = 80*mm
-            stamp_h = stamp_w * ch / cw
-            # Позиция: по центру страницы, низ изображения совпадает с низом строки подписи минус 3мм
-            stamp_x = (width - stamp_w) / 2
-            stamp_y = y_pos - stamp_h + 3*mm
-            c.drawImage(stamp_png_path, stamp_x, stamp_y, width=stamp_w, height=stamp_h, mask='auto')
-            print('Stamp image added successfully')
+            sig_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/062a05b5-fa43-4616-aa05-81ad551e8b79.png'
+            sig_w_px, sig_h_px = load_transparent(sig_url, '/tmp/sig.png')
+            sig_w = 45*mm
+            sig_h = sig_w * sig_h_px / sig_w_px
+            sig_x = 68*mm
+            sig_y = y_pos - sig_h + 4*mm
+            c.drawImage('/tmp/sig.png', sig_x, sig_y, width=sig_w, height=sig_h, mask='auto')
         except Exception as e:
-            print(f'Error adding stamp: {e}')
+            print(f'Error adding signature: {e}')
+
+        # Печать: ширина 40мм, круглая, рядом с подписью
+        try:
+            seal_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2e775982-d528-4801-bb18-b5cc289852cf.png'
+            seal_w_px, seal_h_px = load_transparent(seal_url, '/tmp/seal.png')
+            seal_w = 40*mm
+            seal_h = seal_w * seal_h_px / seal_w_px
+            seal_x = 108*mm
+            seal_y = y_pos - seal_h + 4*mm
+            c.drawImage('/tmp/seal.png', seal_x, seal_y, width=seal_w, height=seal_h, mask='auto')
+        except Exception as e:
+            print(f'Error adding seal: {e}')
     
     c.save()
     buffer.seek(0)

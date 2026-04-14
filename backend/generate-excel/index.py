@@ -619,39 +619,48 @@ def handler(event, context):
         ws.cell(row=current_row, column=7).alignment = Alignment(horizontal='right', vertical='center')
         ws.row_dimensions[current_row].height = 18
         
-        # Печать и подпись поверх строки
+        # Печать и подпись поверх строки — отдельные PNG
         if add_stamp:
+            def make_transparent_buf(url):
+                req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req, timeout=5) as resp:
+                    raw = resp.read()
+                img = PILImage.open(io.BytesIO(raw)).convert('RGBA')
+                px = img.getdata()
+                new_px = [(r, g, b, 0) if (r > 210 and g > 210 and b > 210) else (r, g, b, a) for r, g, b, a in px]
+                img.putdata(new_px)
+                buf = io.BytesIO()
+                img.save(buf, 'PNG')
+                buf.seek(0)
+                return buf, img.size
+
+            # Подпись: ~120px ширина (≈32мм), якорь колонка C
             try:
-                stamp_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/87030c82-44ad-4876-86dd-c44c596b64d2.jpg'
-                req_stamp = urllib.request.Request(stamp_url, headers={'User-Agent': 'Mozilla/5.0'})
-                with urllib.request.urlopen(req_stamp, timeout=5) as resp:
-                    stamp_data = resp.read()
-                pil_stamp = PILImage.open(io.BytesIO(stamp_data))
-                sw, sh = pil_stamp.size
-                # Обрезаем верхние 35% скана — там подпись и печать
-                crop_h = int(sh * 0.35)
-                pil_stamp_crop = pil_stamp.crop((0, 0, sw, crop_h))
-                # Удаляем белый фон
-                pil_stamp_rgba = pil_stamp_crop.convert('RGBA')
-                data = pil_stamp_rgba.getdata()
-                new_data = [(r, g, b, 0) if (r > 220 and g > 220 and b > 220) else (r, g, b, 255) for r, g, b, a in data]
-                pil_stamp_rgba.putdata(new_data)
-                # Целевой размер: 220px ширина (≈58мм при 96dpi)
-                target_w = 220
-                target_h = int(target_w * crop_h / sw)
-                pil_stamp_rgba = pil_stamp_rgba.resize((target_w, target_h), PILImage.Resampling.LANCZOS)
-                stamp_buf = io.BytesIO()
-                pil_stamp_rgba.save(stamp_buf, 'PNG')
-                stamp_buf.seek(0)
-                stamp_img = XLImage(stamp_buf)
-                stamp_img.width = target_w
-                stamp_img.height = target_h
-                # Якорь: колонка C, строка подписи - 2
-                anchor_row = max(1, current_row - 2)
-                ws.add_image(stamp_img, f'C{anchor_row}')
-                print('Stamp added to Excel')
+                sig_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/062a05b5-fa43-4616-aa05-81ad551e8b79.png'
+                sig_buf, (sw, sh) = make_transparent_buf(sig_url)
+                sig_target_w = 120
+                sig_target_h = int(sig_target_w * sh / sw)
+                sig_img = XLImage(sig_buf)
+                sig_img.width = sig_target_w
+                sig_img.height = sig_target_h
+                ws.add_image(sig_img, f'C{current_row}')
+                print('Signature added to Excel')
             except Exception as e:
-                print(f'Error adding stamp to Excel: {e}')
+                print(f'Error adding signature to Excel: {e}')
+
+            # Печать: ~150px ширина (≈40мм), якорь колонка D
+            try:
+                seal_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/2e775982-d528-4801-bb18-b5cc289852cf.png'
+                seal_buf, (pw, ph) = make_transparent_buf(seal_url)
+                seal_target_w = 150
+                seal_target_h = int(seal_target_w * ph / pw)
+                seal_img = XLImage(seal_buf)
+                seal_img.width = seal_target_w
+                seal_img.height = seal_target_h
+                ws.add_image(seal_img, f'D{current_row}')
+                print('Seal added to Excel')
+            except Exception as e:
+                print(f'Error adding seal to Excel: {e}')
         
         # Сохранение
         print('Saving Excel file...')
