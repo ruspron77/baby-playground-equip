@@ -238,10 +238,32 @@ export function CategoryGrid({
                   </SelectContent>
                 </Select>
               )}
+              {availableSubSubSubcategories.length > 0 && selectedSubSubLevel1 && (
+                <Select
+                  value={selectedSubSubLevel2 || 'all-themes'}
+                  onValueChange={(value) => {
+                    if (value === 'all-themes') {
+                      setSelectedSubSubcategory(selectedSubSubLevel1);
+                    } else {
+                      setSelectedSubSubcategory(`${selectedSubSubLevel1} > ${value}`);
+                    }
+                  }}
+                >
+                  <SelectTrigger className={`flex-1 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm font-normal ${selectedSubSubLevel2 ? 'text-[#1d2025]' : ''}`}>
+                    <SelectValue placeholder="Темы" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all-themes">Все темы</SelectItem>
+                    {availableSubSubSubcategories.map((s) => (
+                      <SelectItem key={s.name} value={s.name}>{s.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
             </div>
           </div>
           
-          <div className="flex items-center gap-1 sm:gap-2 py-0 px-0 my-0">
+          <div className="hidden sm:flex items-center gap-1 sm:gap-2 py-0 px-0 my-0">
             <Select
               value={selectedCategory || 'all-categories'}
               onValueChange={(value) => {
