@@ -297,7 +297,7 @@ export function ServicesSection() {
   const active = openIdx !== null ? services[openIdx] : null;
 
   return (
-    <section id="services" className="bg-muted/30 order-1 md:order-1 my-[9px] py-0">
+    <section id="services" className="bg-muted/30 order-1 md:order-1 my-0 py-0">
       <div className="container mx-auto px-3 my-0 py-8">
         <h2 className="text-2xl font-bold text-center my-0 py-0">Услуги</h2>
         <p className="text-center text-muted-foreground py-[13px] my-0">Полный цикл — от проектирования до монтажа</p>
