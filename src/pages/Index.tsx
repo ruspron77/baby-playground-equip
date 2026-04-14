@@ -243,7 +243,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         handleResetFilters={handlers.handleResetFilters}
       />
       
-      <div className="flex-1">
+      <div className="flex-1 py-0">
       {!catalogState.selectedCategory && (
         <>
           <HeroSection onOpenCatalog={() => catalogState.setIsSideMenuOpen(true)} />
