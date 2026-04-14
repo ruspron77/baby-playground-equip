@@ -208,21 +208,21 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
 
           {/* Нижняя строка */}
           <div className="border-t border-border py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-muted-foreground text-xs">
-            <span>&copy; 2026 Urban Play. Все права защищены.</span>
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 order-2 md:order-1">
               <button
                 onClick={() => setIsPrivacyOpen(true)}
-                className="hover:text-foreground transition-colors underline"
+                className="hover:text-foreground transition-colors"
               >
                 Политика конфиденциальности
               </button>
               <button
                 onClick={() => setIsPrivacyOpen(true)}
-                className="hover:text-foreground transition-colors underline"
+                className="hover:text-foreground transition-colors"
               >
                 Обработка персональных данных
               </button>
             </div>
+            <span className="order-3 md:order-2">&copy; 2026 Urban Play. Все права защищены.</span>
           </div>
         </div>
       </footer>
