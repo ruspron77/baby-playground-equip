@@ -460,13 +460,15 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
             img.save(tmp_path, 'PNG')
             return img.size
 
-        # Подпись: ширина 45мм, размещается правее текста "Индивидуальный предприниматель"
+        # Подпись: по центру между "Индивидуальный предприниматель" и "/Пронин Р.О./"
         try:
             sig_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/062a05b5-fa43-4616-aa05-81ad551e8b79.png'
             sig_w_px, sig_h_px = load_transparent(sig_url, '/tmp/sig.png')
             sig_w = 45*mm
             sig_h = sig_w * sig_h_px / sig_w_px
-            sig_x = 68*mm
+            # "Инд. предприниматель" ~75мм, "/Пронин Р.О./" начинается с (width-55мм) ~150мм
+            # Центр промежутка: (75 + 150) / 2 = 112.5мм
+            sig_x = 112.5*mm - sig_w / 2
             sig_y = y_pos - sig_h + 4*mm
             c.drawImage('/tmp/sig.png', sig_x, sig_y, width=sig_w, height=sig_h, mask='auto')
         except Exception as e:
