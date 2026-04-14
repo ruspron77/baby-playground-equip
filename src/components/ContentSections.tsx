@@ -92,7 +92,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
         </div>
       </section>
 
-      <footer id="contacts" className="px-0 bg-muted/30 my-3.5 py-[1px]">
+      <footer id="contacts" className="px-0 bg-muted/30 mt-3.5 mb-0 py-[1px]">
         <div className="container mx-auto px-6">
           <div className="text-center py-0 my-12">
             <h2 className="font-heading font-semibold text-3xl mb-2">Контакты</h2>
