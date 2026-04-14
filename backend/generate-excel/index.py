@@ -78,9 +78,11 @@ def handler(event, context):
         file_format = body.get('format', 'xlsx')
         discount_percent = body.get('discountPercent', 0)
         discount_amount = body.get('discountAmount', 0)
+        add_stamp = body.get('addStamp', True)
         
         print(f'Discount percent: {discount_percent}')
         print(f'Discount amount: {discount_amount}')
+        print(f'Add stamp: {add_stamp}')
         
         # Получаем номер КП
         kp_number = get_next_kp_number()
@@ -92,7 +94,7 @@ def handler(event, context):
             pdf_content = generate_pdf_reportlab(
                 products, address, installation_percent, installation_cost,
                 delivery_cost, hide_installation, hide_delivery, kp_number,
-                discount_percent, discount_amount
+                discount_percent, discount_amount, add_stamp
             )
             
             return {

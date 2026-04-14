@@ -17,7 +17,7 @@ from PIL import Image as PILImage
 
 
 def generate_pdf_reportlab(products, address, installation_percent, installation_cost, delivery_cost, 
-                           hide_installation, hide_delivery, kp_number, discount_percent=0, discount_amount=0):
+                           hide_installation, hide_delivery, kp_number, discount_percent=0, discount_amount=0, add_stamp=True):
     """Генерация PDF с использованием ReportLab (кириллица через DejaVu)"""
     print(f'PDF generation started for {len(products)} products')
     buffer = io.BytesIO()
@@ -445,6 +445,34 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     # Подпись
     c.setFont(font_name, 11)
     c.drawCentredString(width / 2, y_pos, 'Индивидуальный предприниматель___________________________/Пронин Р.О./')
+    
+    # Печать и подпись (изображение)
+    if add_stamp:
+        try:
+            stamp_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/87030c82-44ad-4876-86dd-c44c596b64d2.jpg'
+            req_stamp = urllib.request.Request(stamp_url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req_stamp, timeout=5) as resp:
+                stamp_data = resp.read()
+            stamp_path = '/tmp/stamp.jpg'
+            with open(stamp_path, 'wb') as f:
+                f.write(stamp_data)
+            # Обрезаем только нижнюю часть с печатью и подписью
+            pil_stamp = PILImage.open(stamp_path)
+            sw, sh = pil_stamp.size
+            # Берём левую треть для подписи и правую часть для печати
+            # Исходный скан примерно 2480x3508, нас интересует верхняя четверть где подпись+печать
+            crop_bottom = int(sh * 0.45)
+            pil_stamp_crop = pil_stamp.crop((0, 0, sw, crop_bottom))
+            pil_stamp_crop.save(stamp_path, 'JPEG', quality=95)
+            # Размещаем изображение: ширина ~100мм, слева
+            stamp_w = 100*mm
+            stamp_h = stamp_w * crop_bottom / sw
+            stamp_x = 10*mm
+            stamp_y = y_pos - stamp_h - 5*mm
+            c.drawImage(stamp_path, stamp_x, stamp_y, width=stamp_w, height=stamp_h, mask='auto')
+            print('Stamp image added successfully')
+        except Exception as e:
+            print(f'Error adding stamp: {e}')
     
     c.save()
     buffer.seek(0)
