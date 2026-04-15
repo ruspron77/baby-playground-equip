@@ -20,7 +20,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
           <div className="grid md:grid-cols-2 gap-12 items-center px-3 my-0">
             <div className="animate-fade-in px-3">
               <h2 className="font-heading mb-6 font-semibold text-center md:text-left text-3xl">О компании</h2>
-              <p className="text-muted-foreground mb-4 text-base">Мы специализируемся на производстве детского игрового и спортивного оборудования на протяжении 5 лет. За это время мы оснастили более 300 детских площадок по всей России.</p>
+              <p className="text-muted-foreground mb-4 text-base">Мы специализируемся на производстве детского игрового и спортивного оборудования на протяжении 5 лет. За это время мы оснастили более 300 детских площадок по ЮФО.</p>
               <p className="text-muted-foreground mb-6 text-base">
                 Наша продукция соответствует всем стандартам безопасности и имеет необходимые сертификаты. 
                 Мы используем только качественные материалы и современные технологии производства.
