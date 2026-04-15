@@ -132,6 +132,8 @@ export function CategoryGrid({
   // Для не-Игра/Спорт: старая логика subsubcategories
   const currentSubcategory = !isPlaygroundOrSport ? currentCategory?.subcategories.find((s: any) => s.name === selectedSeries) : null;
   const availableSubSubcategories = currentSubcategory?.children || [];
+  // Значение второго селекта для не-Игра/Спорт (подподкатегория внутри серии)
+  const secondSelectValue = selectedSubSubLevel2 || 'all';
 
   const handleReset = () => {
     if (searchQuery) {
@@ -224,10 +226,10 @@ export function CategoryGrid({
               )}
               {!isPlaygroundOrSport && availableSubSubcategories.length > 0 && (
                 <Select
-                  value={firstSelectValue}
-                  onValueChange={(value) => setSelectedSubSubcategory(value === 'all' ? null : value)}
+                  value={secondSelectValue}
+                  onValueChange={(value) => setSelectedSubSubcategory(value === 'all' ? null : `${selectedSeries} > ${value}`)}
                 >
-                  <SelectTrigger className={`flex-1 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm font-normal ${selectedSubSubLevel1 ? 'text-[#1d2025]' : ''}`}>
+                  <SelectTrigger className={`flex-1 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm font-normal ${secondSelectValue !== 'all' ? 'text-[#1d2025]' : ''}`}>
                     <SelectValue placeholder="Подкатегории" />
                   </SelectTrigger>
                   <SelectContent>
@@ -344,9 +346,9 @@ export function CategoryGrid({
             )}
             {!isPlaygroundOrSport && availableSubSubcategories.length > 0 && (
               <Select
-                value={firstSelectValue}
+                value={secondSelectValue}
                 onValueChange={(value) => {
-                  setSelectedSubSubcategory(value === 'all' ? null : value);
+                  setSelectedSubSubcategory(value === 'all' ? null : `${selectedSeries} > ${value}`);
                   setTimeout(() => {
                     if (productsRef.current) {
                       productsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -354,7 +356,7 @@ export function CategoryGrid({
                   }, 100);
                 }}
               >
-                <SelectTrigger className={`w-[35%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm font-normal ${selectedSubSubLevel1 ? 'text-[#1d2025]' : ''}`}>
+                <SelectTrigger className={`w-[35%] sm:w-52 h-9 hover:border-secondary hover:text-secondary hover:bg-white focus:ring-0 focus:ring-offset-0 text-sm font-normal ${secondSelectValue !== 'all' ? 'text-[#1d2025]' : ''}`}>
                   <SelectValue placeholder="Категории" />
                 </SelectTrigger>
                 <SelectContent>

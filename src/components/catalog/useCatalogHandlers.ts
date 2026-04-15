@@ -95,11 +95,11 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
       setIsSubSubcategoryDialogOpen(false);
     } else {
       if (currentCategory && currentSubcategory) {
+        const isPS = currentCategory.id === 'playground' || currentCategory.id === 'sport';
         setSelectedCategory(currentCategory.id);
         setSelectedSubcategory(null);
-        // subsubcategory = "Горки > h-1.0" чтобы фильтр нашёл правильные товары
         setSelectedSubSubcategory(`${currentSubcategory.name} > ${subSub.name}`);
-        setSelectedSeries(null);
+        setSelectedSeries(isPS ? null : currentSubcategory.name);
         setIsSubSubcategoryDialogOpen(false);
         setTimeout(() => {
           const productsSection = document.getElementById('products');
@@ -166,10 +166,11 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
         prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]
       );
     } else {
+      const isPlaygroundOrSport2 = categoryId === 'playground' || categoryId === 'sport';
       setSelectedCategory(categoryId);
       setSelectedSubcategory(null);
       setSelectedSubSubcategory(`${subName} > ${subSubName}`);
-      setSelectedSeries(null);
+      setSelectedSeries(isPlaygroundOrSport2 ? null : subName);
       setCurrentCategory(categoryData);
       setIsSideMenuOpen(false);
       setTimeout(() => {
