@@ -161,7 +161,10 @@ def handler(event, context):
         smtp_user = os.environ.get('SMTP_USER')
         smtp_password = os.environ.get('SMTP_PASSWORD')
         
+        print(f'SMTP_HOST={smtp_host}, SMTP_PORT={smtp_port}, SMTP_USER={smtp_user}, HAS_PASSWORD={bool(smtp_password)}')
+        
         if not smtp_user or not smtp_password:
+            print('ERROR: SMTP credentials not configured')
             return {
                 'statusCode': 500,
                 'headers': {
