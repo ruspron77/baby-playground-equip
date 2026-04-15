@@ -734,7 +734,7 @@ export function Header({
                   <Button variant="outline" size="icon" className="relative h-10 w-10 p-0 gap-0 hover:bg-transparent hover:border-primary hover:text-primary max-[768px]:landscape:h-8 max-[768px]:landscape:w-8">
                     <Icon name="ShoppingCart" size={20} className="max-[768px]:landscape:!w-4 max-[768px]:landscape:!h-4" />
                     {cart.length > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold max-[768px]:landscape:h-4 max-[768px]:landscape:w-4 max-[768px]:landscape:text-[10px]">
+                      <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold max-[768px]:landscape:h-4 max-[768px]:landscape:w-4 max-[768px]:landscape:text-[10px]">
                         {cart.reduce((sum, item) => sum + item.quantity, 0)}
                       </span>
                     )}
