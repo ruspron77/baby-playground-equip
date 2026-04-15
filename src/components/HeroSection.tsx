@@ -16,7 +16,7 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 px-0 mx-0 py-0 bg-[#0000001c] my-[35px]"></div>
+        <div className="absolute inset-0 px-0 mx-0 py-0 bg-[#0000001c] my-0"></div>
       </div>
 
 
@@ -26,7 +26,7 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
             Создаём пространство для игры и спорта
           </h2>
           <p className="md:text-xl text-white/90 md:mb-8 font-normal mx-0 px-0.5 md:px-0 text-left text-base py-0 my-0">Производим качественное детское игровое, спортивное и парковое оборудование. Безопасность, долговечность и яркий дизайн — наши главные приоритеты.</p>
-          <div className="flex flex-wrap gap-4 mx-0 px-0 py-0 my-[102px]">
+          <div className="flex flex-wrap gap-4 mx-0 px-0 py-0 my-[58px]">
             <Button size="lg" className="text-lg px-8 hover:brightness-90" style={{ backgroundColor: '#3eaa03' }} onClick={onOpenCatalog}>Каталог</Button>
           </div>
         </div>
