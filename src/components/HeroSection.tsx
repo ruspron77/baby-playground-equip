@@ -8,7 +8,7 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
   return (
     <section id="hero" className="relative md:pb-4 overflow-hidden min-h-[500px] md:min-h-[400px] my-0 py-0">
       <div 
-        className="absolute inset-0 py-0 mx-0 my-0"
+        className="absolute inset-0 mx-0 my-0 py-0"
         style={{ 
           backgroundImage: 'url(https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/34a47243-e094-4741-9cbd-53b2a5f67139.png)',
           backgroundSize: 'cover',
@@ -16,17 +16,17 @@ export function HeroSection({ onOpenCatalog }: HeroSectionProps) {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 px-0 mx-0 py-0 my-0 bg-[#0000001c]"></div>
+        <div className="absolute inset-0 px-0 mx-0 py-0 bg-[#0000001c] my-[35px]"></div>
       </div>
 
 
       <div className="w-full relative z-10 md:my-[93px] mx-0 py-0 my-[102px]">
         <div className="max-w-3xl animate-fade-in mx-0 md:ml-[50px] px-[7px] py-0 my-0">
-          <h2 className="md:text-4xl lg:text-6xl font-heading md:mb-6 text-white font-semibold px-0 mx-0 text-3xl my-4 py-2">
+          <h2 className="md:text-4xl lg:text-6xl font-heading md:mb-6 text-white font-semibold px-0 mx-0 text-3xl py-2 my-[113px]">
             Создаём пространство для игры и спорта
           </h2>
-          <p className="md:text-xl text-white/90 md:mb-8 font-normal mx-0 px-0.5 md:px-0 text-left text-base py-0 my-0">Производим качественное детское игровое, спортивное и парковое оборудование. Безопасность, долговечность и яркий дизайн — наши главные приоритеты.</p>
-          <div className="flex flex-wrap gap-4 mx-0 px-0 py-0 my-2.5">
+          <p className="md:text-xl text-white/90 md:mb-8 font-normal mx-0 px-0.5 md:px-0 text-left text-base py-0 my-[77px]">Производим качественное детское игровое, спортивное и парковое оборудование. Безопасность, долговечность и яркий дизайн — наши главные приоритеты.</p>
+          <div className="flex flex-wrap gap-4 mx-0 px-0 py-0 my-[84px]">
             <Button size="lg" className="text-lg px-8 hover:brightness-90" style={{ backgroundColor: '#3eaa03' }} onClick={onOpenCatalog}>Каталог</Button>
           </div>
         </div>
