@@ -60,10 +60,16 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
       setIsCategoryDialogOpen(false);
     } else {
       if (currentCategory) {
+        const isPlaygroundOrSport = currentCategory.id === 'playground' || currentCategory.id === 'sport';
         setSelectedCategory(currentCategory.id);
         setSelectedSubcategory(null);
-        setSelectedSubSubcategory(sub.name);
-        setSelectedSeries(null);
+        if (isPlaygroundOrSport) {
+          setSelectedSubSubcategory(sub.name);
+          setSelectedSeries(null);
+        } else {
+          setSelectedSeries(sub.name);
+          setSelectedSubSubcategory(null);
+        }
         setIsCategoryDialogOpen(false);
         setTimeout(() => {
           const productsSection = document.getElementById('products');
@@ -123,10 +129,17 @@ export function useCatalogHandlers(props: CatalogHandlersProps) {
   const handleTreeSubcategorySelect = (categoryId: string, categoryData: typeof categories[0], subName: string, sub: Subcategory) => {
     console.log(`🎯 handleTreeSubcategorySelect: category="${categoryId}", subcategory="${subName}", hasChildren=${sub.hasChildren}`);
     
+    const isPlaygroundOrSport = categoryId === 'playground' || categoryId === 'sport';
+    
     setSelectedCategory(categoryId);
     setSelectedSubcategory(null);
-    setSelectedSubSubcategory(subName); // подкатегория теперь напрямую = фильтр subsubcategory
-    setSelectedSeries(null);
+    if (isPlaygroundOrSport) {
+      setSelectedSubSubcategory(subName);
+      setSelectedSeries(null);
+    } else {
+      setSelectedSeries(subName);
+      setSelectedSubSubcategory(null);
+    }
     setCurrentCategory(categoryData);
     
     if (sub.hasChildren) {
