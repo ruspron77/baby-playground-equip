@@ -105,7 +105,7 @@ export function CategoryDialogs({
               >
                 <div className="aspect-square overflow-hidden flex items-center justify-center p-4 sm:p-6">
                   {sub.image.startsWith('http') ? (
-                    <img src={sub.image} alt={sub.name} loading="lazy" className={`px-0 mx-0 py-0 my-0 object-cover rounded-sm ${sub.imageSize === 'small' ? 'w-3/4 h-3/4' : 'w-full h-full'}`} />
+                    <img src={sub.image} alt={sub.name} loading="lazy" className={`px-0 mx-0 py-0 my-0 object-cover rounded-sm ${sub.imageSize === 'small' ? 'w-1/2 h-1/2' : 'w-3/4 h-3/4'}`} />
                   ) : (
                     <span className="text-9xl sm:text-8xl">{sub.image}</span>
                   )}
@@ -131,7 +131,7 @@ export function CategoryDialogs({
               <div key={subSub.name} className="cursor-pointer transition-all hover:shadow-xl overflow-hidden group rounded-md flex flex-col relative border-2 border-gray-200 min-h-[190px] sm:min-h-[240px]" onClick={() => handleSubSubcategoryClick(subSub)}>
                 <div className="aspect-square overflow-hidden flex items-center justify-center p-4 sm:p-6">
                   {subSub.image.startsWith('http') ? (
-                    <img src={subSub.image} alt={subSub.name} loading="lazy" className="w-full h-full object-contain px-0 mx-0 py-0 my-0" />
+                    <img src={subSub.image} alt={subSub.name} loading="lazy" className="w-3/4 h-3/4 object-contain px-0 mx-0 py-0 my-0" />
                   ) : (
                     <span className="text-9xl sm:text-8xl">{subSub.image}</span>
                   )}
