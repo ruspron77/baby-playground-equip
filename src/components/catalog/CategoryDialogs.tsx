@@ -105,7 +105,7 @@ export function CategoryDialogs({
               >
                 <div className="aspect-square overflow-hidden flex items-center justify-center p-6 sm:p-10">
                   {sub.image.startsWith('http') ? (
-                    <img src={sub.image} alt={sub.name} loading="lazy" className={`px-0 mx-0 py-0 my-0 object-cover rounded-sm ${sub.imageSize === 'small' ? 'w-1/2 h-1/2' : 'w-2/3 h-2/3'}`} />
+                    <img src={sub.image} alt={sub.name} loading="lazy" className={`px-0 mx-0 py-0 my-0 object-contain rounded-sm ${sub.imageSize === 'small' ? 'w-1/2 h-1/2' : 'w-2/3 h-2/3'}`} />
                   ) : (
                     <span className="text-9xl sm:text-8xl">{sub.image}</span>
                   )}
