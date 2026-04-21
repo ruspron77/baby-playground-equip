@@ -212,11 +212,12 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
         </div>
 
         {/* Ссылки на документы — только на мобиле над полоской */}
-        <div className="flex md:hidden justify-center gap-4 px-6 py-3 text-xs text-muted-foreground">
-          <button onClick={() => setIsPrivacyOpen(true)} className="hover:text-foreground transition-colors">
+        <div className="flex md:hidden justify-center gap-3 px-4 py-3 text-muted-foreground" style={{fontSize: '10px'}}>
+          <button onClick={() => setIsPrivacyOpen(true)} className="hover:text-foreground transition-colors whitespace-nowrap">
             Политика конфиденциальности
           </button>
-          <button onClick={() => setIsPrivacyOpen(true)} className="hover:text-foreground transition-colors">
+          <span className="text-muted-foreground">·</span>
+          <button onClick={() => setIsPrivacyOpen(true)} className="hover:text-foreground transition-colors whitespace-nowrap">
             Обработка персональных данных
           </button>
         </div>
