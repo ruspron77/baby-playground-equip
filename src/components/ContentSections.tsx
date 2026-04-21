@@ -118,7 +118,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
             </div>
 
             {/* Навигация — на мобиле два столбца, на десктопе два отдельных */}
-            <div className="grid grid-cols-2 gap-3 md:contents">
+            <div className="grid grid-cols-2 gap-x-2 gap-y-3 md:contents text-xs leading-tight"  style={{fontSize: '11px'}}>
               {/* Колонка 1 */}
               <div className="flex flex-col gap-3 mx-0">
                 {[
