@@ -211,19 +211,29 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
 
         </div>
 
+        {/* Ссылки на документы — только на мобиле над полоской */}
+        <div className="flex md:hidden justify-center gap-4 px-6 py-3 text-xs text-muted-foreground">
+          <button onClick={() => setIsPrivacyOpen(true)} className="hover:text-foreground transition-colors">
+            Политика конфиденциальности
+          </button>
+          <button onClick={() => setIsPrivacyOpen(true)} className="hover:text-foreground transition-colors">
+            Обработка персональных данных
+          </button>
+        </div>
+
         {/* Нижняя строка */}
         <div className="bg-secondary text-white text-xs px-6 py-3 my-0">
           <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
             <button
               onClick={() => setIsPrivacyOpen(true)}
-              className="text-white/80 hover:text-white transition-colors order-1"
+              className="text-white/80 hover:text-white transition-colors order-1 hidden md:block"
             >
               Политика конфиденциальности
             </button>
             <span className="text-white/80 order-3 md:order-2">&copy; 2026 Urban Play. Все права защищены.</span>
             <button
               onClick={() => setIsPrivacyOpen(true)}
-              className="text-white/80 hover:text-white transition-colors order-2 md:order-3"
+              className="text-white/80 hover:text-white transition-colors order-2 md:order-3 hidden md:block"
             >
               Обработка персональных данных
             </button>
