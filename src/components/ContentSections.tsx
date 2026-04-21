@@ -162,7 +162,7 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
             </div>
 
             {/* Соцсети + кнопка */}
-            <div className="flex flex-col gap-4 my-0 mx-0 items-start">
+            <div className="flex flex-col gap-4 my-0 mx-0 items-center md:items-start">
               <div className="flex gap-3" id="social-icons-row">
                 <a
                   href="https://t.me/+79181151551"
