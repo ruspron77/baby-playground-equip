@@ -117,45 +117,48 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
               </a>
             </div>
 
-            {/* Навигация колонка 1 */}
-            <div className="flex flex-col gap-3 mx-0">
-              {[
-                { label: 'Каталог', href: '#catalog' },
-                { label: 'Услуги', href: '#services' },
-                { label: 'О компании', href: '#about' },
-                { label: 'Сертификаты', href: '#certificates' },
-              ].map(link => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
+            {/* Навигация — на мобиле два столбца, на десктопе два отдельных */}
+            <div className="grid grid-cols-2 gap-3 md:contents">
+              {/* Колонка 1 */}
+              <div className="flex flex-col gap-3 mx-0">
+                {[
+                  { label: 'Каталог', href: '#catalog' },
+                  { label: 'Услуги', href: '#services' },
+                  { label: 'О компании', href: '#about' },
+                  { label: 'Сертификаты', href: '#certificates' },
+                ].map(link => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
 
-            {/* Навигация колонка 2 */}
-            <div className="flex flex-col gap-3">
-              {[
-                { label: 'Игровое оборудование', category: 'playground' },
-                { label: 'Спортивное оборудование', category: 'sport' },
-                { label: 'Парковое оборудование', category: 'park' },
-                { label: 'Покрытие для площадок', category: 'coating' },
-              ].map(link => (
-                <button
-                  key={link.label}
-                  onClick={() => {
-                    onCategorySelect?.(link.category);
-                    setTimeout(() => {
-                      document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
-                    }, 50);
-                  }}
-                  className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
-                >
-                  {link.label}
-                </button>
-              ))}
+              {/* Колонка 2 */}
+              <div className="flex flex-col gap-3">
+                {[
+                  { label: 'Игровое оборудование', category: 'playground' },
+                  { label: 'Спортивное оборудование', category: 'sport' },
+                  { label: 'Парковое оборудование', category: 'park' },
+                  { label: 'Покрытие для площадок', category: 'coating' },
+                ].map(link => (
+                  <button
+                    key={link.label}
+                    onClick={() => {
+                      onCategorySelect?.(link.category);
+                      setTimeout(() => {
+                        document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
+                      }, 50);
+                    }}
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Соцсети + кнопка */}
