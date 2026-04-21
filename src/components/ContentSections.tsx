@@ -100,8 +100,8 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
             {/* Телефон */}
-            <div className="flex flex-col gap-2 items-start text-left">
-              <a href="tel:+79181151551" className="text-xl font-heading font-bold text-foreground hover:text-primary transition-colors self-start">
+            <div className="flex flex-col gap-2 items-center text-center md:items-start md:text-left">
+              <a href="tel:+79181151551" className="text-xl font-heading font-bold text-foreground hover:text-primary transition-colors">
                 +7 (918) 115-15-51
               </a>
               <a href="mailto:info@urban-play.ru" className="text-foreground font-semibold text-sm hover:text-primary transition-colors">
