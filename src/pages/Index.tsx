@@ -36,6 +36,7 @@ interface IndexProps {
 
 export default function Index({ favorites, toggleFavorite, cart, addToCart, removeFromCart, updateQuantity, clearCart }: IndexProps) {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [productToOpen, setProductToOpen] = useState<Product | null>(null);
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [installationPercent, setInstallationPercent] = useState(0);
   const [isExcelSettingsOpen, setIsExcelSettingsOpen] = useState(false);
@@ -77,6 +78,11 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
 
   const handleAddToCart = (product: Product) => {
     addToCart(product);
+  };
+
+  const handleProductClickFromCart = (product: Product) => {
+    setIsCartOpen(false);
+    setProductToOpen(product);
   };
 
   const handleSearchQuery = (query: string) => {
@@ -237,6 +243,7 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         favoritesCount={favorites.length}
         allProducts={products}
         onAddToCart={handleAddToCart}
+        onProductClick={handleProductClickFromCart}
         clearCart={clearCart}
         searchQuery={catalogState.searchQuery}
         setSearchQuery={handleSearchQuery}
@@ -335,6 +342,8 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
           cart={cart}
           updateQuantity={updateQuantity}
           setIsCartOpen={setIsCartOpen}
+          productToOpen={productToOpen}
+          onProductToOpenHandled={() => setProductToOpen(null)}
         />
       </div>
       

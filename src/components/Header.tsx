@@ -52,6 +52,7 @@ interface HeaderProps {
   favoritesCount?: number;
   allProducts?: Product[];
   onAddToCart?: (product: Product) => void;
+  onProductClick?: (product: Product) => void;
   searchQuery?: string;
   setSearchQuery?: (query: string) => void;
   handleResetFilters?: () => void;
@@ -87,6 +88,7 @@ export function Header({
   favoritesCount = 0,
   allProducts = [],
   onAddToCart,
+  onProductClick,
   searchQuery = '',
   setSearchQuery,
   handleResetFilters
@@ -637,14 +639,15 @@ export function Header({
                                 <img 
                                   src={item.image} 
                                   alt={item.name}
-                                  className="w-16 h-16 object-cover rounded"
+                                  className={`w-16 h-16 object-cover rounded ${onProductClick ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''}`}
+                                  onClick={() => onProductClick && onProductClick(item as unknown as Product)}
                                 />
                               ) : (
                                 <div className="w-16 h-16 bg-gray-100 rounded"></div>
                               )}
                               <div className="flex-1 min-w-0 space-y-1">
-                                <p className="text-sm text-primary font-medium">{item.name.split('\n')[0]}</p>
-                                <h4 className="font-medium text-sm">{item.name.split('\n').slice(1).join(' ')}</h4>
+                                <p className={`text-sm text-primary font-medium ${onProductClick ? 'cursor-pointer hover:underline' : ''}`} onClick={() => onProductClick && onProductClick(item as unknown as Product)}>{item.name.split('\n')[0]}</p>
+                                <h4 className={`font-medium text-sm ${onProductClick ? 'cursor-pointer hover:underline' : ''}`} onClick={() => onProductClick && onProductClick(item as unknown as Product)}>{item.name.split('\n').slice(1).join(' ')}</h4>
                                 <div className="flex items-center gap-2">
                                   <Button
                                     variant="outline"
@@ -672,7 +675,7 @@ export function Header({
                                 </div>
                               </div>
                               <div className="flex flex-col items-end gap-2">
-                                <p className="font-bold text-primary text-sm">{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
+                                <p className={`font-bold text-primary text-sm ${onProductClick ? 'cursor-pointer hover:underline' : ''}`} onClick={() => onProductClick && onProductClick(item as unknown as Product)}>{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
                                 <Button
                                   variant="ghost"
                                   size="icon"

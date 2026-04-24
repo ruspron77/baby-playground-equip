@@ -29,6 +29,7 @@ interface CartSheetProps {
   setInstallationPercent: (percent: number) => void;
   allProducts?: Product[];
   onAddToCart?: (product: Product) => void;
+  onProductClick?: (product: Product) => void;
   onOrderClick: () => void;
   onKPClick: () => void;
   calculateTotal: () => number;
@@ -52,6 +53,7 @@ export function CartSheet({
   setInstallationPercent,
   allProducts = [],
   onAddToCart,
+  onProductClick,
   onOrderClick,
   onKPClick,
   calculateTotal,
@@ -321,14 +323,21 @@ export function CartSheet({
                       <img 
                         src={item.image} 
                         alt={item.name}
-                        className={isMobile ? "w-16 h-16 object-cover rounded py-0 my-2.5" : "w-16 h-16 object-cover rounded"}
+                        className={`${isMobile ? "w-16 h-16 object-cover rounded py-0 my-2.5" : "w-16 h-16 object-cover rounded"} ${onProductClick ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''}`}
+                        onClick={() => onProductClick && onProductClick(item as unknown as Product)}
                       />
                     ) : (
                       <div className={isMobile ? "w-16 h-16 bg-gray-100 rounded py-0 my-2.5" : "w-16 h-16 bg-gray-100 rounded"}></div>
                     )}
                     <div className="flex-1 min-w-0 space-y-1">
-                      <p className={isMobile ? "text-sm text-primary font-medium my-[3px]" : "text-sm text-primary font-medium"}>{item.name.split('\n')[0]}</p>
-                      <h4 className={isMobile ? "font-medium text-sm my-0.5" : "font-medium text-sm"}>{item.name.split('\n').slice(1).join(' ')}</h4>
+                      <p
+                        className={`${isMobile ? "text-sm text-primary font-medium my-[3px]" : "text-sm text-primary font-medium"} ${onProductClick ? 'cursor-pointer hover:underline' : ''}`}
+                        onClick={() => onProductClick && onProductClick(item as unknown as Product)}
+                      >{item.name.split('\n')[0]}</p>
+                      <h4
+                        className={`${isMobile ? "font-medium text-sm my-0.5" : "font-medium text-sm"} ${onProductClick ? 'cursor-pointer hover:underline' : ''}`}
+                        onClick={() => onProductClick && onProductClick(item as unknown as Product)}
+                      >{item.name.split('\n').slice(1).join(' ')}</h4>
                       <div className={isMobile ? "flex items-center gap-2 my-0" : "flex items-center gap-2"}>
                         <Button
                           variant="outline"
@@ -356,7 +365,10 @@ export function CartSheet({
                       </div>
                     </div>
                     <div className="flex flex-col items-end gap-2">
-                      <p className={isMobile ? "font-bold text-primary my-[11px] text-base" : "font-bold text-primary text-sm"}>{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
+                      <p
+                        className={`${isMobile ? "font-bold text-primary my-[11px] text-base" : "font-bold text-primary text-sm"} ${onProductClick ? 'cursor-pointer hover:underline' : ''}`}
+                        onClick={() => onProductClick && onProductClick(item as unknown as Product)}
+                      >{formatPrice(parseInt(item.price.replace(/\s/g, '')) * item.quantity)} ₽</p>
                       <Button
                         variant="ghost"
                         size="icon"

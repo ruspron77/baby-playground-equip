@@ -95,9 +95,11 @@ interface CatalogSectionProps {
   availableCategories: string[];
   favorites: Product[];
   toggleFavorite: (product: Product) => void;
-  cart: any[];
+  cart: Product[];
   updateQuantity: (id: number, quantity: number) => void;
   setIsCartOpen: (open: boolean) => void;
+  productToOpen?: Product | null;
+  onProductToOpenHandled?: () => void;
 }
 
 export function CatalogSection({
@@ -147,6 +149,8 @@ export function CatalogSection({
   cart,
   updateQuantity,
   setIsCartOpen,
+  productToOpen,
+  onProductToOpenHandled,
 }: CatalogSectionProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProductDialogOpen, setIsProductDialogOpen] = useState(false);
@@ -198,6 +202,13 @@ export function CatalogSection({
   }, [selectedCategory]);
 
 
+
+  useEffect(() => {
+    if (productToOpen) {
+      handleProductClick(productToOpen);
+      onProductToOpenHandled?.();
+    }
+  }, [productToOpen]);
 
   const handleProductClick = async (product: Product) => {
     setSelectedProduct(product);
