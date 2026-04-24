@@ -53,7 +53,7 @@ def handler(event: dict, context) -> dict:
         
         msg = MIMEMultipart()
         msg['From'] = smtp_user
-        msg['To'] = 'zakaz@urban-play.ru'
+        msg['To'] = 'urban-play@mail.ru'
         
         if order_type == 'callback':
             msg['Subject'] = f'Заявка на обратный звонок - {name}'

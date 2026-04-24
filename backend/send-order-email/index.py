@@ -178,7 +178,7 @@ def handler(event, context):
         msg = MIMEMultipart('alternative')
         msg['Subject'] = f'Новый заказ #{order_number} от {customer_name}'
         msg['From'] = smtp_user
-        msg['To'] = 'ruspro23@mail.ru'
+        msg['To'] = 'urban-play@mail.ru'
         
         html_part = MIMEText(html_content, 'html', 'utf-8')
         msg.attach(html_part)

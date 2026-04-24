@@ -104,8 +104,8 @@ export function ContentSections({ onCategorySelect }: ContentSectionsProps) {
               <a href="tel:+79181151551" className="text-xl font-heading font-bold text-foreground hover:text-primary transition-colors">
                 +7 (918) 115-15-51
               </a>
-              <a href="mailto:info@urban-play.ru" className="text-foreground font-semibold text-sm hover:text-primary transition-colors">
-                info@urban-play.ru
+              <a href="mailto:urban-play@mail.ru" className="text-foreground font-semibold text-sm hover:text-primary transition-colors">
+                urban-play@mail.ru
               </a>
               <a
                 href="https://yandex.ru/maps/?pt=38.988186,45.096559&z=17&l=map"
