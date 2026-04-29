@@ -485,7 +485,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         stamp_data_transparent = make_transparent(stamp_data)
         stamp_img = ImageReader(stamp_data_transparent)
         stamp_size = 38*mm
-        stamp_x = 35*mm
+        stamp_x = 65*mm
         stamp_y = y_pos - stamp_size + 10*mm
         c.drawImage(stamp_img, stamp_x, stamp_y, width=stamp_size, height=stamp_size, mask='auto')
     except Exception as e:
