@@ -448,12 +448,12 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     from io import BytesIO as _BytesIO
     
     c.setFont(font_name, 11)
-    c.drawString(20*mm, y_pos, 'Индивидуальный')
+    c.drawString(30*mm, y_pos, 'Индивидуальный')
     y_pos -= 5*mm
-    c.drawString(20*mm, y_pos, 'предприниматель')
+    c.drawString(30*mm, y_pos, 'предприниматель')
     
     # Линия для подписи
-    line_x_start = 48*mm
+    line_x_start = 68*mm
     line_x_end = 145*mm
     c.line(line_x_start, y_pos, line_x_end, y_pos)
     
