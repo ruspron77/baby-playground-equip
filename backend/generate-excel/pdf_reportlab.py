@@ -443,9 +443,50 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     c.drawString(10*mm, y_pos, 'Срок изготовления оборудования 30 дней')
     y_pos -= 14*mm
     
-    # Строка подписи
+    # Строка подписи с печатью и подписью
+    c.setFont(font_bold, 11)
+    c.drawString(10*mm, y_pos, 'Индивидуальный')
+    y_pos -= 5*mm
+    c.drawString(10*mm, y_pos, 'предприниматель')
+    
+    # Линия для подписи
+    line_x_start = 48*mm
+    line_x_end = 145*mm
+    c.line(line_x_start, y_pos, line_x_end, y_pos)
+    
+    # Текст /Пронин Р.О./
     c.setFont(font_name, 11)
-    c.drawCentredString(width / 2, y_pos, 'Индивидуальный предприниматель___________________________/Пронин Р.О./')
+    c.drawString(line_x_end + 2*mm, y_pos, '/Пронин Р.О./')
+    
+    # Загружаем и размещаем печать (слева, поверх линии, как на образце)
+    stamp_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/06fe805e-0379-4b53-836d-8d87ae415ec4.png'
+    try:
+        import urllib.request
+        from io import BytesIO
+        from reportlab.lib.utils import ImageReader
+        stamp_response = urllib.request.urlopen(stamp_url, timeout=10)
+        stamp_data = BytesIO(stamp_response.read())
+        stamp_img = ImageReader(stamp_data)
+        stamp_size = 38*mm
+        stamp_x = 12*mm
+        stamp_y = y_pos - stamp_size + 10*mm
+        c.drawImage(stamp_img, stamp_x, stamp_y, width=stamp_size, height=stamp_size, mask='auto')
+    except Exception as e:
+        print(f'Stamp load error: {e}')
+    
+    # Загружаем и размещаем подпись (правее печати, поверх линии)
+    sign_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/d58f32e0-4045-477e-b960-e0a2f326d726.png'
+    try:
+        sign_response = urllib.request.urlopen(sign_url, timeout=10)
+        sign_data = BytesIO(sign_response.read())
+        sign_img = ImageReader(sign_data)
+        sign_w = 40*mm
+        sign_h = 22*mm
+        sign_x = 85*mm
+        sign_y = y_pos - sign_h + 12*mm
+        c.drawImage(sign_img, sign_x, sign_y, width=sign_w, height=sign_h, mask='auto')
+    except Exception as e:
+        print(f'Sign load error: {e}')
     
     c.save()
     buffer.seek(0)
