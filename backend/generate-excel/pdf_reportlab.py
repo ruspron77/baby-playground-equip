@@ -447,7 +447,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     from reportlab.lib.utils import ImageReader
     from io import BytesIO as _BytesIO
     
-    c.setFont(font_name_bold, 11)
+    c.setFont(font_name, 11)
     c.drawString(10*mm, y_pos, 'Индивидуальный')
     y_pos -= 5*mm
     c.drawString(10*mm, y_pos, 'предприниматель')
