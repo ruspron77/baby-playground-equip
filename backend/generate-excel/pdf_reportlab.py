@@ -461,25 +461,43 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     c.setFont(font_name, 11)
     c.drawString(line_x_end + 2*mm, y_pos, '/Пронин Р.О./')
     
-    # Загружаем и размещаем печать (слева, поверх линии, как на образце)
+    def make_transparent(img_data, threshold=240):
+        """Делает белый/светлый фон прозрачным"""
+        img = PILImage.open(img_data).convert('RGBA')
+        data = img.getdata()
+        new_data = []
+        for r, g, b, a in data:
+            if r >= threshold and g >= threshold and b >= threshold:
+                new_data.append((r, g, b, 0))
+            else:
+                new_data.append((r, g, b, a))
+        img.putdata(new_data)
+        out = _BytesIO()
+        img.save(out, format='PNG')
+        out.seek(0)
+        return out
+
+    # Загружаем и размещаем печать (сдвинута правее, прозрачный фон)
     stamp_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/06fe805e-0379-4b53-836d-8d87ae415ec4.png'
     try:
         stamp_response = urllib.request.urlopen(stamp_url, timeout=10)
         stamp_data = _BytesIO(stamp_response.read())
-        stamp_img = ImageReader(stamp_data)
+        stamp_data_transparent = make_transparent(stamp_data)
+        stamp_img = ImageReader(stamp_data_transparent)
         stamp_size = 38*mm
-        stamp_x = 12*mm
+        stamp_x = 35*mm
         stamp_y = y_pos - stamp_size + 10*mm
         c.drawImage(stamp_img, stamp_x, stamp_y, width=stamp_size, height=stamp_size, mask='auto')
     except Exception as e:
         print(f'Stamp load error: {e}')
     
-    # Загружаем и размещаем подпись (правее печати, поверх линии)
+    # Загружаем и размещаем подпись (поверх линии, прозрачный фон)
     sign_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/d58f32e0-4045-477e-b960-e0a2f326d726.png'
     try:
         sign_response = urllib.request.urlopen(sign_url, timeout=10)
         sign_data = _BytesIO(sign_response.read())
-        sign_img = ImageReader(sign_data)
+        sign_data_transparent = make_transparent(sign_data)
+        sign_img = ImageReader(sign_data_transparent)
         sign_w = 40*mm
         sign_h = 22*mm
         sign_x = 85*mm
