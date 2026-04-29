@@ -484,8 +484,8 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         stamp_data = _BytesIO(stamp_response.read())
         stamp_data_transparent = make_transparent(stamp_data)
         stamp_img = ImageReader(stamp_data_transparent)
-        stamp_w = 42*mm
-        stamp_h = 38*mm
+        stamp_w = 46*mm
+        stamp_h = 42*mm
         stamp_x = 65*mm
         stamp_y = y_pos - stamp_h + 10*mm
         c.drawImage(stamp_img, stamp_x, stamp_y, width=stamp_w, height=stamp_h, mask='auto')
