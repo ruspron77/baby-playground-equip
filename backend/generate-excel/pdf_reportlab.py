@@ -501,7 +501,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
         sign_w = 40*mm
         sign_h = 22*mm
         sign_x = 85*mm
-        sign_y = y_pos - sign_h + 12*mm
+        sign_y = y_pos - sign_h + 18*mm
         c.drawImage(sign_img, sign_x, sign_y, width=sign_w, height=sign_h, mask='auto')
     except Exception as e:
         print(f'Sign load error: {e}')
