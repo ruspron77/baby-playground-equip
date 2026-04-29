@@ -444,7 +444,10 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     y_pos -= 14*mm
     
     # Строка подписи с печатью и подписью
-    c.setFont(font_bold, 11)
+    from reportlab.lib.utils import ImageReader
+    from io import BytesIO as _BytesIO
+    
+    c.setFont(font_name_bold, 11)
     c.drawString(10*mm, y_pos, 'Индивидуальный')
     y_pos -= 5*mm
     c.drawString(10*mm, y_pos, 'предприниматель')
@@ -461,11 +464,8 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     # Загружаем и размещаем печать (слева, поверх линии, как на образце)
     stamp_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/06fe805e-0379-4b53-836d-8d87ae415ec4.png'
     try:
-        import urllib.request
-        from io import BytesIO
-        from reportlab.lib.utils import ImageReader
         stamp_response = urllib.request.urlopen(stamp_url, timeout=10)
-        stamp_data = BytesIO(stamp_response.read())
+        stamp_data = _BytesIO(stamp_response.read())
         stamp_img = ImageReader(stamp_data)
         stamp_size = 38*mm
         stamp_x = 12*mm
@@ -478,7 +478,7 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
     sign_url = 'https://cdn.poehali.dev/projects/ffd62df4-6e6a-420c-99f5-4d24cf68fcf3/bucket/d58f32e0-4045-477e-b960-e0a2f326d726.png'
     try:
         sign_response = urllib.request.urlopen(sign_url, timeout=10)
-        sign_data = BytesIO(sign_response.read())
+        sign_data = _BytesIO(sign_response.read())
         sign_img = ImageReader(sign_data)
         sign_w = 40*mm
         sign_h = 22*mm
