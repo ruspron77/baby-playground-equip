@@ -109,7 +109,7 @@ def handler(event, context):
                 aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY']
             )
             file_key = f'pdf/{uuid.uuid4()}.pdf'
-            s3.put_object(Bucket='files', Key=file_key, Body=pdf_content, ContentType='application/pdf')
+            s3.put_object(Bucket='files', Key=file_key, Body=pdf_content, ContentType='application/pdf', ContentDisposition='attachment; filename="commercial_offer.pdf"')
             cdn_url = f"https://cdn.poehali.dev/projects/{os.environ['AWS_ACCESS_KEY_ID']}/bucket/{file_key}"
             
             return {
