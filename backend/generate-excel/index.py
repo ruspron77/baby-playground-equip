@@ -101,21 +101,15 @@ def handler(event, context):
             
             print(f'PDF generated, size: {len(pdf_content)} bytes')
             
-            # Сохраняем в S3 и возвращаем ссылку
-            s3 = boto3.client(
-                's3',
-                endpoint_url='https://bucket.poehali.dev',
-                aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
-                aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY']
-            )
-            file_key = f'pdf/{uuid.uuid4()}.pdf'
-            s3.put_object(Bucket='files', Key=file_key, Body=pdf_content, ContentType='application/pdf', ContentDisposition='attachment; filename="commercial_offer.pdf"')
-            cdn_url = f"https://cdn.poehali.dev/projects/{os.environ['AWS_ACCESS_KEY_ID']}/bucket/{file_key}"
-            
             return {
                 'statusCode': 200,
-                'headers': {'Access-Control-Allow-Origin': '*'},
-                'body': json.dumps({'url': cdn_url})
+                'headers': {
+                    'Content-Type': 'application/pdf',
+                    'Content-Disposition': 'attachment; filename="commercial_offer.pdf"',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                'body': base64.b64encode(pdf_content).decode('utf-8'),
+                'isBase64Encoded': True
             }
         
         # Генерация Excel (по умолчанию)

@@ -222,11 +222,11 @@ def generate_pdf_reportlab(products, address, installation_percent, installation
                         rgb_img.paste(pil_img, mask=pil_img.split()[-1] if pil_img.mode == 'RGBA' else None)
                         pil_img = rgb_img
                     
-                    # Уменьшаем до разумного размера для PDF
-                    pil_img.thumbnail((400, 400), PILImage.Resampling.LANCZOS)
+                    # Уменьшаем до минимального размера для PDF
+                    pil_img.thumbnail((200, 200), PILImage.Resampling.LANCZOS)
                     
                     temp_img = f'/tmp/prod_{idx}.jpg'
-                    pil_img.save(temp_img, 'JPEG', quality=72, optimize=True)
+                    pil_img.save(temp_img, 'JPEG', quality=40, optimize=True)
                     img_placeholder = RLImage(temp_img, width=38*mm, height=28*mm)
             except Exception as e:
                 print(f'Image {idx} error: {e}')
