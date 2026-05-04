@@ -196,21 +196,30 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
         throw new Error('Failed to generate Excel');
       }
 
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      
-      // Формируем имя файла с адресом
       const date = new Date().toLocaleDateString('ru-RU');
       const addressPart = options?.address ? options.address.substring(0, 30).replace(/[^а-яА-Яa-zA-Z0-9\s]/g, '') : 'объект';
       const fileExtension = options?.format || 'xlsx';
-      a.download = `КП_${addressPart}_${date}.${fileExtension}`;
-      
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
+
+      if (options?.format === 'pdf') {
+        const data = await response.json();
+        const a = document.createElement('a');
+        a.href = data.url;
+        a.download = `КП_${addressPart}_${date}.pdf`;
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } else {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `КП_${addressPart}_${date}.${fileExtension}`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      }
     } catch (error) {
       console.error('Error downloading Excel:', error);
       alert('Не удалось создать файл Excel. Попробуйте снова.');
