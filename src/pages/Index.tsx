@@ -202,12 +202,15 @@ export default function Index({ favorites, toggleFavorite, cart, addToCart, remo
 
       if (options?.format === 'pdf') {
         const data = await response.json();
+        const pdfResponse = await fetch(data.url);
+        const pdfBlob = await pdfResponse.blob();
+        const blobUrl = window.URL.createObjectURL(pdfBlob);
         const a = document.createElement('a');
-        a.href = data.url;
+        a.href = blobUrl;
         a.download = `КП_${addressPart}_${date}.pdf`;
-        a.target = '_blank';
         document.body.appendChild(a);
         a.click();
+        window.URL.revokeObjectURL(blobUrl);
         document.body.removeChild(a);
       } else {
         const blob = await response.blob();
